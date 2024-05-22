@@ -1,5 +1,6 @@
 package br.edu.ifsp.hotelsync.application.controller;
 
+import br.edu.ifsp.hotelsync.domain.usecases.product.create.CreateProductUseCase;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
