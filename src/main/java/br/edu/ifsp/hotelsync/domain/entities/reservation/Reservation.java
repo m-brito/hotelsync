@@ -18,6 +18,8 @@ public class Reservation {
     private List<Guest> guests = new ArrayList<>();
     private List<Product> consumedProducts = new ArrayList<>();
     private Payment payment;
+    private boolean isActive = true;
+
 
     public Reservation(Long id, LocalDate checkInDate, LocalDate checkOutDate, Guest owner, Room room, ReservationStatus reservationStatus) {
         this.id = id;
@@ -37,6 +39,18 @@ public class Reservation {
     }
 
 
+
+    public void deactivate(){
+        isActive = false;
+    }
+
+    public void activate(){
+        isActive = true;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
 
     public LocalDate getCheckInDate() {
         return checkInDate;

@@ -11,6 +11,8 @@ public class Guest {
     private Cpf cpf;
     private Address address;
     private BankData bankData;
+    private boolean isActive = true;
+
 
     public Guest(Long id, String name, String pronouns, LocalDate birthdate, Phone phone, Cpf cpf, Address address, BankData bankData) {
         this.id = id;
@@ -31,6 +33,18 @@ public class Guest {
         this.cpf = cpf;
         this.address = address;
         this.bankData = bankData;
+    }
+
+    public void deactivate(){
+        isActive = false;
+    }
+
+    public void activate(){
+        isActive = true;
+    }
+
+    public boolean isActive() {
+        return isActive;
     }
 
     public String getName() {
