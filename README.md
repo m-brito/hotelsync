@@ -23,9 +23,6 @@ HotelSync is a hotel management system designed to simplify and streamline the o
 ## Use
 To use HotelSync, follow the on-screen instructions to register guests, rooms and perform other operations. Use the reports generated for analysis and decision-making.
 
-## Contribution
-Contributions are welcome. To contribute, please fork the repository, make your changes and send a pull request.
-
 ## License
 This project is licensed under the MIT License. See the `LICENSE` file for more details.
 
