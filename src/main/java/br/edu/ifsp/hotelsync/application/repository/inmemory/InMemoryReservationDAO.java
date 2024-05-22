@@ -1,6 +1,8 @@
 package br.edu.ifsp.hotelsync.application.repository.inmemory;
 
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
+import br.edu.ifsp.hotelsync.domain.entities.reservation.ReservationStatus;
+import br.edu.ifsp.hotelsync.domain.entities.room.RoomStatus;
 import br.edu.ifsp.hotelsync.domain.persistence.dao.ReservationDAO;
 
 import java.sql.ResultSet;
@@ -42,5 +44,43 @@ public class InMemoryReservationDAO implements ReservationDAO {
     @Override
     public Reservation resultSetToEntity(ResultSet resultSet) throws SQLException {
         return null;
+    }
+
+    @Override
+    public boolean cancelReservation(Long reservationId) {
+        Optional<Reservation> reservationOptional = findOneByKey(reservationId);
+        if (reservationOptional.isPresent()) {
+            Reservation reservation = reservationOptional.get();
+            reservation.setReservationStatus(ReservationStatus.CANCELED);
+            update(reservation);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean checkIn(Long reservationId) {
+        Optional<Reservation> reservationOptional = findOneByKey(reservationId);
+        if (reservationOptional.isPresent()) {
+            Reservation reservation = reservationOptional.get();
+            reservation.setCheckInDate();
+            reservation.getRoom().setRoomStatus(RoomStatus.RESERVED);
+            update(reservation);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean checkOut(Long reservationId) {
+        Optional<Reservation> reservationOptional = findOneByKey(reservationId);
+        if (reservationOptional.isPresent()) {
+            Reservation reservation = reservationOptional.get();
+            reservation.setCheckOutDate();
+            reservation.getRoom().setRoomStatus(RoomStatus.AVAILABLE);
+            update(reservation);
+            return true;
+        }
+        return false;
     }
 }

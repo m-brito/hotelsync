@@ -10,11 +10,11 @@ public interface DAO <K, T>{
 
     void update(T type);
 
-    Optional<T> findOneByKey(K key);
+    Optional<T> findOneByKey(K id);
 
     Map<K, T> findAll();
 
-    void deleteByKey(K key);
+    void deleteByKey(K id);
 
     T resultSetToEntity(ResultSet resultSet) throws SQLException;
 }

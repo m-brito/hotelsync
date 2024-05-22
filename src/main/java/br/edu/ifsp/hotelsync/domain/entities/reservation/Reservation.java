@@ -42,16 +42,16 @@ public class Reservation {
         return checkInDate;
     }
 
-    public void setCheckInDate(LocalDate checkInDate) {
-        this.checkInDate = checkInDate;
+    public void setCheckInDate() {
+        this.checkInDate = LocalDate.now();
     }
 
     public LocalDate getCheckOutDate() {
         return checkOutDate;
     }
 
-    public void setCheckOutDate(LocalDate checkOutDate) {
-        this.checkOutDate = checkOutDate;
+    public void setCheckOutDate() {
+        this.checkOutDate = LocalDate.now();
     }
 
     public Guest getOwner() {
