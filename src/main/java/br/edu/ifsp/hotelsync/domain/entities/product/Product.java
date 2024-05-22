@@ -4,6 +4,8 @@ public class Product {
     private Long id;
     private String description;
     private double price;
+    private boolean isActive = true;
+
 
     public Product(Long id, String description, double price) {
         this.id = id;
@@ -11,7 +13,22 @@ public class Product {
         this.price = price;
     }
 
+    public Product(String description, double price) {
+        this.description = description;
+        this.price = price;
+    }
 
+    public void deactivate(){
+        isActive = false;
+    }
+
+    public void activate(){
+        isActive = true;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
 
     public String getDescription() {
         return description;

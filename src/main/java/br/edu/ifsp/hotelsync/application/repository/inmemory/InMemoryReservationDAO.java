@@ -16,9 +16,10 @@ public class InMemoryReservationDAO implements ReservationDAO {
     private static long id = 0;
 
     @Override
-    public void save(Reservation reservation) {
+    public Long save(Reservation reservation) {
         reservations.put(++id, reservation);
         reservation.setId(id);
+        return id;
     }
 
     @Override
@@ -29,6 +30,11 @@ public class InMemoryReservationDAO implements ReservationDAO {
     @Override
     public Optional<Reservation> findOneByKey(Long id) {
         return Optional.ofNullable(reservations.get(id));
+    }
+
+    @Override
+    public boolean existsByKey(Long id) {
+        return reservations.containsKey(id);
     }
 
     @Override

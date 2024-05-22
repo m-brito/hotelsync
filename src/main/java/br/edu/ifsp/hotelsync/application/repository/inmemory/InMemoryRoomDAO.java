@@ -9,13 +9,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class InRoomDAO implements RoomDAO {
+public class InMemoryRoomDAO implements RoomDAO {
     private static final Map<Long, Room> rooms = new HashMap<>();
     private static long id = 0;
 
     @Override
-    public void save(Room room) {
+    public Long save(Room room) {
         rooms.put(++id, room);
+        return id;
     }
 
     @Override
@@ -26,6 +27,11 @@ public class InRoomDAO implements RoomDAO {
     @Override
     public Optional<Room> findOneByKey(Long id) {
         return Optional.ofNullable(rooms.get(id));
+    }
+
+    @Override
+    public boolean existsByKey(Long id) {
+        return rooms.containsKey(id);
     }
 
     @Override

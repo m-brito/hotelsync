@@ -9,6 +9,7 @@ public class Room {
     private String description;
     private RoomStatus roomStatus;
     private double area;
+    private boolean isActive = true;
 
     public Room(Long id, int number, int numberOfBeds, String typeOfBed, RoomCategory roomCategory, String description, RoomStatus roomStatus, double area) {
         this.id = id;
@@ -29,6 +30,18 @@ public class Room {
         this.description = description;
         this.roomStatus = roomStatus;
         this.area = area;
+    }
+
+    public void deactivate(){
+        isActive = false;
+    }
+
+    public void activate(){
+        isActive = true;
+    }
+
+    public boolean isActive() {
+        return isActive;
     }
 
     public int getNumber() {

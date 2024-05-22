@@ -6,11 +6,13 @@ import java.util.Map;
 import java.util.Optional;
 
 public interface DAO <K, T>{
-    void save(T type);
+    K save(T type);
 
     void update(T type);
 
     Optional<T> findOneByKey(K id);
+
+    boolean existsByKey(K id);
 
     Map<K, T> findAll();
 
