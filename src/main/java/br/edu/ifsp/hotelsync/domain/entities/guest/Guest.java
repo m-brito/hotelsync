@@ -88,4 +88,20 @@ public class Guest {
     public void setCreditData(BankData bankData) {
         this.bankData = bankData;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public BankData getBankData() {
+        return bankData;
+    }
+
+    public void setBankData(BankData bankData) {
+        this.bankData = bankData;
+    }
 }
