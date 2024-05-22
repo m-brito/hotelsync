@@ -14,9 +14,10 @@ public class InMemoryGuestDAO implements GuestDAO {
     private static long id = 0;
 
     @Override
-    public void save(Guest guest) {
+    public Long save(Guest guest) {
         guests.put(++id, guest);
         guest.setId(id);
+        return id;
     }
 
     @Override
@@ -27,6 +28,11 @@ public class InMemoryGuestDAO implements GuestDAO {
     @Override
     public Optional<Guest> findOneByKey(Long id) {
         return Optional.ofNullable(guests.get(id));
+    }
+
+    @Override
+    public boolean existsByKey(Long id) {
+        return guests.containsKey(id);
     }
 
     @Override

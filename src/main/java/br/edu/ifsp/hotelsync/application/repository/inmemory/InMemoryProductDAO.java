@@ -10,33 +10,39 @@ import java.util.Map;
 import java.util.Optional;
 
 public class InMemoryProductDAO implements ProductDAO {
-    private static final Map<Long, Product> db = new HashMap<>();
+    private static final Map<Long, Product> products = new HashMap<>();
     private static long id = 0;
 
     @Override
-    public void save(Product product) {
-        db.put(++id, product);
+    public Long save(Product product) {
+        products.put(++id, product);
         product.setId(id);
+        return id;
     }
 
     @Override
     public void update(Product product) {
-        db.put(product.getId(), product);
+        products.put(product.getId(), product);
     }
 
     @Override
     public Optional<Product> findOneByKey(Long id) {
-        return Optional.ofNullable(db.get(id));
+        return Optional.ofNullable(products.get(id));
+    }
+
+    @Override
+    public boolean existsByKey(Long id) {
+        return products.containsKey(id);
     }
 
     @Override
     public Map<Long, Product> findAll() {
-        return Map.copyOf(db);
+        return Map.copyOf(products);
     }
 
     @Override
     public void deleteByKey(Long id) {
-        db.remove(id);
+        products.remove(id);
     }
 
     @Override
