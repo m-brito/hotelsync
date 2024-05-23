@@ -26,4 +26,4 @@ To use HotelSync, follow the on-screen instructions to register guests, rooms an
 ## License
 This project is licensed under the MIT License. See the `LICENSE` file for more details.
 
-by @m-brito, @gabrmanh, @Vinicius64, @lunicarus and @vmacena
+by @gabrmanh, @lunicarus, @m-brito, @Vinicius64 and @vmacena
