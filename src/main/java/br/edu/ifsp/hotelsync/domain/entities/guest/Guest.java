@@ -1,5 +1,8 @@
 package br.edu.ifsp.hotelsync.domain.entities.guest;
 
+import br.edu.ifsp.hotelsync.domain.entities.product.ProductInputRequestValidator;
+import br.edu.ifsp.hotelsync.domain.usecases.utils.Notification;
+
 import java.time.LocalDate;
 
 public class Guest {
@@ -22,6 +25,7 @@ public class Guest {
         this.cpf = cpf;
         this.address = address;
         this.bankData = bankData;
+        validate();
     }
 
     public Guest(String name, String pronouns, LocalDate birthdate, Phone phone, Cpf cpf, Address address, BankData bankData) {
@@ -32,6 +36,7 @@ public class Guest {
         this.cpf = cpf;
         this.address = address;
         this.bankData = bankData;
+        validate();
     }
 
     public Guest(Long id, String name, String pronouns, LocalDate birthdate, Phone phone, Cpf cpf, Address address) {
@@ -42,6 +47,15 @@ public class Guest {
         this.phone = phone;
         this.cpf = cpf;
         this.address = address;
+        validate();
+    }
+
+    private void validate() {
+        GuestInputRequestValidator validator = new GuestInputRequestValidator();
+        Notification notification = validator.validate(this);
+
+        if (notification.hasErrors())
+            throw new IllegalArgumentException(notification.getEerrorMessage());
     }
 
     public void deactivate(){
