@@ -18,13 +18,11 @@ public class DeleteProductUseCaseImpl implements DeleteProductUseCase {
     public void deleteById(RequestModel request) {
         Long id = request.id();
 
-        if(!repository.existsByKey(id))
-            throw new NoSuchElementException("Product of id " + id + " not found");
-
-        Product product = repository.findOneByKey(id).get();
+        Product product = repository.findOneByKey(id).orElseThrow(
+                () -> new NoSuchElementException("Product of id " + id + " not found")
+        );
 
         product.deactivate();
-
         repository.update(product);
     }
 }
