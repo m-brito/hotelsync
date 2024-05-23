@@ -1,7 +1,5 @@
 package br.edu.ifsp.hotelsync.domain.usecases.guest.update;
 
-import br.edu.ifsp.hotelsync.domain.usecases.product.update.UpdateProductUseCase;
-
 import java.time.LocalDate;
 
 public interface UpdateGuestUseCase {
