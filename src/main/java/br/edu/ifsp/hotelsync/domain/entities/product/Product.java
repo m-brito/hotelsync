@@ -1,5 +1,7 @@
 package br.edu.ifsp.hotelsync.domain.entities.product;
 
+import br.edu.ifsp.hotelsync.domain.usecases.utils.Notification;
+
 public class Product {
     private Long id;
     private String description;
@@ -11,11 +13,21 @@ public class Product {
         this.id = id;
         this.description = description;
         this.price = price;
+        validate();
     }
 
     public Product(String description, double price) {
         this.description = description;
         this.price = price;
+        validate();
+    }
+
+    private void validate() {
+        ProductInputRequestValidator validator = new ProductInputRequestValidator();
+        Notification notification = validator.validate(this);
+
+        if (notification.hasErrors())
+            throw new IllegalArgumentException(notification.getEerrorMessage());
     }
 
     public void deactivate(){
