@@ -21,7 +21,8 @@ public interface CreateGuestUseCase {
             String agency,
             String cardDueDate,
             String cardOwner,
-            String cardNumber) {}
+            String cardNumber
+    ) {}
 
     Long createGuest(RequestModel requestModel);
 }

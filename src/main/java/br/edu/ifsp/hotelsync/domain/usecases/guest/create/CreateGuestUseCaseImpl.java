@@ -6,6 +6,7 @@ import br.edu.ifsp.hotelsync.domain.persistence.dao.GuestDAO;
 public class CreateGuestUseCaseImpl implements CreateGuestUseCase {
     private final GuestDAO repository;
 
+
     public CreateGuestUseCaseImpl(GuestDAO repository) {
         this.repository = repository;
     }

@@ -34,6 +34,16 @@ public class Guest {
         this.bankData = bankData;
     }
 
+    public Guest(Long id, String name, String pronouns, LocalDate birthdate, Phone phone, Cpf cpf, Address address) {
+        this.id = id;
+        this.name = name;
+        this.pronouns = pronouns;
+        this.birthdate = birthdate;
+        this.phone = phone;
+        this.cpf = cpf;
+        this.address = address;
+    }
+
     public void deactivate(){
         isActive = false;
     }
