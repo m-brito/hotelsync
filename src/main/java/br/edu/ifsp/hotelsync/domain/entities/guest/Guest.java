@@ -13,7 +13,6 @@ public class Guest {
     private BankData bankData;
     private boolean isActive = true;
 
-
     public Guest(Long id, String name, String pronouns, LocalDate birthdate, Phone phone, Cpf cpf, Address address, BankData bankData) {
         this.id = id;
         this.name = name;
