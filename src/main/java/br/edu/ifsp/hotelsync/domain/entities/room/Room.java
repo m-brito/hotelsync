@@ -1,5 +1,7 @@
 package br.edu.ifsp.hotelsync.domain.entities.room;
 
+import br.edu.ifsp.hotelsync.domain.usecases.utils.Notification;
+
 public class Room {
     private Long id;
     private int number;
@@ -20,6 +22,7 @@ public class Room {
         this.description = description;
         this.roomStatus = roomStatus;
         this.area = area;
+        validate();
     }
 
     public Room(int number, int numberOfBeds, String typeOfBed, RoomCategory roomCategory, String description, RoomStatus roomStatus, double area) {
@@ -30,6 +33,15 @@ public class Room {
         this.description = description;
         this.roomStatus = roomStatus;
         this.area = area;
+        validate();
+    }
+
+    private void validate() {
+        RoomInputRequestValidator validator = new RoomInputRequestValidator();
+        Notification notification = validator.validate(this);
+
+        if (notification.hasErrors())
+            throw new IllegalArgumentException(notification.getEerrorMessage());
     }
 
     public void deactivate(){
