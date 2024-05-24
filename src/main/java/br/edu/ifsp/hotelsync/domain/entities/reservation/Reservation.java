@@ -2,7 +2,6 @@ package br.edu.ifsp.hotelsync.domain.entities.reservation;
 
 import br.edu.ifsp.hotelsync.domain.entities.guest.Guest;
 import br.edu.ifsp.hotelsync.domain.entities.product.Product;
-import br.edu.ifsp.hotelsync.domain.entities.product.ProductInputRequestValidator;
 import br.edu.ifsp.hotelsync.domain.entities.room.Room;
 import br.edu.ifsp.hotelsync.domain.usecases.utils.Notification;
 
