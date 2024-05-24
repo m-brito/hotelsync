@@ -2,7 +2,9 @@ package br.edu.ifsp.hotelsync.domain.entities.reservation;
 
 import br.edu.ifsp.hotelsync.domain.entities.guest.Guest;
 import br.edu.ifsp.hotelsync.domain.entities.product.Product;
+import br.edu.ifsp.hotelsync.domain.entities.product.ProductInputRequestValidator;
 import br.edu.ifsp.hotelsync.domain.entities.room.Room;
+import br.edu.ifsp.hotelsync.domain.usecases.utils.Notification;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -28,17 +30,26 @@ public class Reservation {
         this.owner = owner;
         this.room = room;
         this.reservationStatus = reservationStatus;
+        validate();
     }
 
-    public Reservation(LocalDate checkInDate, LocalDate checkOutDate, Guest owner, Room room, ReservationStatus reservationStatus) {
+    public Reservation(LocalDate checkInDate, LocalDate checkOutDate, Guest owner, Room room, ReservationStatus reservationStatus, Payment payment) {
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.owner = owner;
         this.room = room;
         this.reservationStatus = reservationStatus;
+        this.payment = payment;
+        validate();
     }
 
+    private void validate() {
+        ReservationInputRequestValidator validator = new ReservationInputRequestValidator();
+        Notification notification = validator.validate(this);
 
+        if (notification.hasErrors())
+            throw new IllegalArgumentException(notification.getEerrorMessage());
+    }
 
     public void deactivate(){
         isActive = false;
@@ -98,6 +109,14 @@ public class Reservation {
 
     public void setReservationStatus(ReservationStatus reservationStatus) {
         this.reservationStatus = reservationStatus;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 
     public List<Guest> getGuests() {
