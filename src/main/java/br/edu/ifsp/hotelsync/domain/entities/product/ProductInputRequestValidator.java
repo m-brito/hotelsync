@@ -1,6 +1,5 @@
 package br.edu.ifsp.hotelsync.domain.entities.product;
 
-import br.edu.ifsp.hotelsync.domain.entities.product.Product;
 import br.edu.ifsp.hotelsync.domain.usecases.utils.Notification;
 import br.edu.ifsp.hotelsync.domain.usecases.utils.Validator;
 

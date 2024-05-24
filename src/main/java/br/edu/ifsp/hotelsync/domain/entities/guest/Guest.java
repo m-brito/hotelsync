@@ -1,6 +1,5 @@
 package br.edu.ifsp.hotelsync.domain.entities.guest;
 
-import br.edu.ifsp.hotelsync.domain.entities.product.ProductInputRequestValidator;
 import br.edu.ifsp.hotelsync.domain.usecases.utils.Notification;
 
 import java.time.LocalDate;
