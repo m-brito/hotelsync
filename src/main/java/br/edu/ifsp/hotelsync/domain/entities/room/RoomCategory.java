@@ -13,6 +13,14 @@ public enum RoomCategory {
         this.basePrice = basePrice;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public double getBasePrice() {
+        return basePrice;
+    }
+
     @Override
     public String toString() {
         return description;
