@@ -57,7 +57,7 @@ public class InMemoryReservationDAO implements ReservationDAO {
         Optional<Reservation> reservationOptional = findOneByKey(reservationId);
         if (reservationOptional.isPresent()) {
             Reservation reservation = reservationOptional.get();
-            reservation.setReservationStatus(ReservationStatus.CANCELED);
+            reservation.setReservationStatus(ReservationStatus.CANCELLED);
             update(reservation);
             return true;
         }
@@ -70,7 +70,7 @@ public class InMemoryReservationDAO implements ReservationDAO {
         if (reservationOptional.isPresent()) {
             Reservation reservation = reservationOptional.get();
             reservation.setCheckInDate();
-            reservation.getRoom().setRoomStatus(RoomStatus.RESERVED);
+            reservation.getRoom().setRoomStatus(RoomStatus.OCCUPIED);
             update(reservation);
             return true;
         }

@@ -8,38 +8,60 @@ import br.edu.ifsp.hotelsync.domain.usecases.utils.Notification;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Reservation {
     private Long id;
+    private final LocalDate startDate;
     private LocalDate checkInDate;
+    private final LocalDate endDate;
     private LocalDate checkOutDate;
     private Guest owner;
     private Room room;
-    private ReservationStatus reservationStatus;
+    private ReservationStatus reservationStatus = ReservationStatus.RESERVED;
     private List<Guest> guests = new ArrayList<>();
     private List<Product> consumedProducts = new ArrayList<>();
     private Payment payment;
-    private boolean isActive = true;
 
-
-    public Reservation(Long id, LocalDate checkInDate, LocalDate checkOutDate, Guest owner, Room room, ReservationStatus reservationStatus) {
+    public Reservation(Long id, LocalDate startDate, LocalDate checkInDate, LocalDate endDate, LocalDate checkOutDate, Guest owner, Room room, ReservationStatus reservationStatus, List<Guest> guests, List<Product> consumedProducts, Payment payment) {
         this.id = id;
+        this.startDate = startDate;
         this.checkInDate = checkInDate;
+        this.endDate = endDate;
         this.checkOutDate = checkOutDate;
         this.owner = owner;
         this.room = room;
         this.reservationStatus = reservationStatus;
+        this.guests = guests;
+        this.consumedProducts = consumedProducts;
+        this.payment = payment;
         validate();
     }
 
-    public Reservation(LocalDate checkInDate, LocalDate checkOutDate, Guest owner, Room room, ReservationStatus reservationStatus, Payment payment) {
-        this.checkInDate = checkInDate;
-        this.checkOutDate = checkOutDate;
+    public Reservation(LocalDate startDate, LocalDate checkInDate, LocalDate endDate, LocalDate checkOutDate, Guest owner, Room room, ReservationStatus reservationStatus, List<Guest> guests, List<Product> consumedProducts, Payment payment) {
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.owner = owner;
         this.room = room;
-        this.reservationStatus = reservationStatus;
-        this.payment = payment;
         validate();
+    }
+
+    public void checkIn(){
+        checkInDate = LocalDate.now();
+        room.turnOccupied();
+        reservationStatus = ReservationStatus.ACTIVE;
+    }
+
+    public void checkOut(String paymentMethod){
+        checkOutDate = LocalDate.now();
+        room.turnAvailable();
+        payment = new Payment(calculateTotalToPay(), checkOutDate, paymentMethod);
+        reservationStatus = ReservationStatus.FINISHED;
+    }
+
+    public void cancelReservation(){
+        room.turnAvailable();
+        reservationStatus = ReservationStatus.CANCELLED;
     }
 
     private void validate() {
@@ -50,40 +72,50 @@ public class Reservation {
             throw new IllegalArgumentException(notification.getEerrorMessage());
     }
 
-    public void deactivate(){
-        isActive = false;
+    private double calculateTotalToPay(){
+        double productTotalCost =
+                consumedProducts
+                        .stream()
+                        .mapToDouble(Product::getPrice)
+                        .sum();
+        return room.getRoomCategory().getBasePrice() + productTotalCost;
     }
 
-    public void activate(){
-        isActive = true;
+    public void addGuest(Guest guest){
+        if(!guests.contains(guest))
+            guests.add(guest);
     }
 
-    public boolean isActive() {
-        return isActive;
+    public void removeGuest(Guest guest){
+        guests.remove(guest);
+    }
+
+    public void addProduct(Product product){
+        consumedProducts.add(product);
+    }
+
+    public void removeProduct(Product product){
+        consumedProducts.remove(product);
     }
 
     public LocalDate getCheckInDate() {
         return checkInDate;
     }
 
-    public void setCheckInDate() {
-        this.checkInDate = LocalDate.now();
-    }
-
     public LocalDate getCheckOutDate() {
         return checkOutDate;
     }
 
-    public void setCheckOutDate() {
-        this.checkOutDate = LocalDate.now();
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
     }
 
     public Guest getOwner() {
         return owner;
-    }
-
-    public void setOwner(Guest owner) {
-        this.owner = owner;
     }
 
     public Room getRoom() {
@@ -102,20 +134,8 @@ public class Reservation {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setReservationStatus(ReservationStatus reservationStatus) {
-        this.reservationStatus = reservationStatus;
-    }
-
     public Payment getPayment() {
         return payment;
-    }
-
-    public void setPayment(Payment payment) {
-        this.payment = payment;
     }
 
     public List<Guest> getGuests() {
