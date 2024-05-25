@@ -8,7 +8,6 @@ import br.edu.ifsp.hotelsync.domain.usecases.utils.Notification;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Reservation {
     private Long id;
@@ -16,7 +15,7 @@ public class Reservation {
     private LocalDate checkInDate;
     private final LocalDate endDate;
     private LocalDate checkOutDate;
-    private Guest owner;
+    private final Guest owner;
     private Room room;
     private ReservationStatus reservationStatus = ReservationStatus.RESERVED;
     private List<Guest> guests = new ArrayList<>();
@@ -132,6 +131,10 @@ public class Reservation {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Payment getPayment() {
