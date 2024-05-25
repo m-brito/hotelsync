@@ -3,6 +3,7 @@ package br.edu.ifsp.hotelsync.domain.entities.guest;
 import br.edu.ifsp.hotelsync.domain.usecases.utils.Notification;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Guest {
     private Long id;
@@ -139,5 +140,18 @@ public class Guest {
 
     public void setBankData(BankData bankData) {
         this.bankData = bankData;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Guest guest = (Guest) o;
+        return Objects.equals(cpf, guest.cpf);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cpf);
     }
 }
