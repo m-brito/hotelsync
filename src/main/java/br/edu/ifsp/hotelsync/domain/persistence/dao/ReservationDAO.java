@@ -8,5 +8,5 @@ public interface ReservationDAO extends DAO<Long, Reservation> {
 
     boolean checkIn(Long reservationId);
 
-    boolean checkOut(Long reservationId);
+    boolean checkOut(Long reservationId, String paymentMethod);
 }

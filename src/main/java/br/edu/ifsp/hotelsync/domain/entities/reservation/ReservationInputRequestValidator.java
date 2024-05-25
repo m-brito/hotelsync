@@ -12,11 +12,11 @@ public class ReservationInputRequestValidator extends Validator<Reservation> {
             notification.addError("Reservation is null");
             return notification;
         }
-        if (reservation.getCheckInDate() == null) {
-            notification.addError("Check-in date is null");
+        if (reservation.getStartDate() == null) {
+            notification.addError("Start date is null");
         }
-        if (reservation.getCheckOutDate() == null) {
-            notification.addError("Check-out date is null");
+        if (reservation.getEndDate() == null) {
+            notification.addError("End date is null");
         }
         if (reservation.getOwner() == null) {
             notification.addError("Owner is null");
@@ -24,12 +24,7 @@ public class ReservationInputRequestValidator extends Validator<Reservation> {
         if (reservation.getRoom() == null) {
             notification.addError("Room is null");
         }
-        if (reservation.getReservationStatus() == null) {
-            notification.addError("Reservation status is null");
-        }
-        if (reservation.getPayment() == null) {
-            notification.addError("Payment is null");
-        }
+
 
         return notification;
     }
