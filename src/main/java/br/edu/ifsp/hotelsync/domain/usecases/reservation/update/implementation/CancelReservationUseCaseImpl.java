@@ -1,11 +1,13 @@
-package br.edu.ifsp.hotelsync.domain.usecases.reservation.update;
+package br.edu.ifsp.hotelsync.domain.usecases.reservation.update.implementation;
 
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
 import br.edu.ifsp.hotelsync.domain.persistence.dao.ReservationDAO;
+import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.CancelReservationUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.CheckInUseCase;
 
 import java.util.NoSuchElementException;
 
-public class CancelReservationUseCaseImpl implements CancelReservationUseCase{
+public class CancelReservationUseCaseImpl implements CancelReservationUseCase {
 
     private final ReservationDAO repository;
 

@@ -8,6 +8,7 @@ import br.edu.ifsp.hotelsync.domain.usecases.utils.Notification;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class Reservation {
     private Long id;
@@ -19,10 +20,10 @@ public class Reservation {
     private Room room;
     private ReservationStatus reservationStatus = ReservationStatus.RESERVED;
     private List<Guest> guests = new ArrayList<>();
-    private List<Product> consumedProducts = new ArrayList<>();
+    private List<ConsumedProduct> consumedProducts = new ArrayList<>();
     private Payment payment;
 
-    public Reservation(Long id, LocalDate startDate, LocalDate checkInDate, LocalDate endDate, LocalDate checkOutDate, Guest owner, Room room, ReservationStatus reservationStatus, List<Guest> guests, List<Product> consumedProducts, Payment payment) {
+    public Reservation(Long id, LocalDate startDate, LocalDate checkInDate, LocalDate endDate, LocalDate checkOutDate, Guest owner, Room room, ReservationStatus reservationStatus, List<Guest> guests, List<ConsumedProduct> consumedProducts, Payment payment) {
         this.id = id;
         this.startDate = startDate;
         this.checkInDate = checkInDate;
@@ -75,7 +76,8 @@ public class Reservation {
         double productTotalCost =
                 consumedProducts
                         .stream()
-                        .mapToDouble(Product::getPrice)
+                        .mapToDouble(consumedProduct ->
+                                consumedProduct.getProduct().getPrice() * consumedProduct.getQuantity())
                         .sum();
         return room.getRoomCategory().getBasePrice() + productTotalCost;
     }
@@ -89,12 +91,16 @@ public class Reservation {
         guests.remove(guest);
     }
 
-    public void addProduct(Product product){
+    public void addProduct(ConsumedProduct product){
         consumedProducts.add(product);
     }
 
-    public void removeProduct(Product product){
-        consumedProducts.remove(product);
+    public void removeProduct(ConsumedProduct product){
+        if(consumedProducts.contains(product))
+            consumedProducts.remove(product);
+        else throw new NoSuchElementException(
+                "Product of id " + product.getProduct().getId() + " not found in reservation"
+        );
     }
 
     public LocalDate getCheckInDate() {
@@ -146,8 +152,8 @@ public class Reservation {
         return returnedGuests;
     }
 
-    public List<Product> getConsumedProducts() {
-        List<Product> returnedConsumedProducts = new ArrayList<>(consumedProducts);
+    public List<ConsumedProduct> getConsumedProducts() {
+        List<ConsumedProduct> returnedConsumedProducts = new ArrayList<>(consumedProducts);
         return returnedConsumedProducts;
     }
 }
