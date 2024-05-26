@@ -19,10 +19,10 @@ public class Reservation {
     private Room room;
     private ReservationStatus reservationStatus = ReservationStatus.RESERVED;
     private List<Guest> guests = new ArrayList<>();
-    private List<Product> consumedProducts = new ArrayList<>();
+    private List<ConsumedProduct> consumedProducts = new ArrayList<>();
     private Payment payment;
 
-    public Reservation(Long id, LocalDate startDate, LocalDate checkInDate, LocalDate endDate, LocalDate checkOutDate, Guest owner, Room room, ReservationStatus reservationStatus, List<Guest> guests, List<Product> consumedProducts, Payment payment) {
+    public Reservation(Long id, LocalDate startDate, LocalDate checkInDate, LocalDate endDate, LocalDate checkOutDate, Guest owner, Room room, ReservationStatus reservationStatus, List<Guest> guests, List<ConsumedProduct> consumedProducts, Payment payment) {
         this.id = id;
         this.startDate = startDate;
         this.checkInDate = checkInDate;
@@ -75,7 +75,8 @@ public class Reservation {
         double productTotalCost =
                 consumedProducts
                         .stream()
-                        .mapToDouble(Product::getPrice)
+                        .mapToDouble(consumedProduct ->
+                                consumedProduct.getProduct().getPrice() * consumedProduct.getQuantity())
                         .sum();
         return room.getRoomCategory().getBasePrice() + productTotalCost;
     }
@@ -89,11 +90,11 @@ public class Reservation {
         guests.remove(guest);
     }
 
-    public void addProduct(Product product){
+    public void addProduct(ConsumedProduct product){
         consumedProducts.add(product);
     }
 
-    public void removeProduct(Product product){
+    public void removeProduct(ConsumedProduct product){
         consumedProducts.remove(product);
     }
 
@@ -146,8 +147,8 @@ public class Reservation {
         return returnedGuests;
     }
 
-    public List<Product> getConsumedProducts() {
-        List<Product> returnedConsumedProducts = new ArrayList<>(consumedProducts);
+    public List<ConsumedProduct> getConsumedProducts() {
+        List<ConsumedProduct> returnedConsumedProducts = new ArrayList<>(consumedProducts);
         return returnedConsumedProducts;
     }
 }
