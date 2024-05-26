@@ -8,6 +8,7 @@ import br.edu.ifsp.hotelsync.domain.usecases.utils.Notification;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class Reservation {
     private Long id;
@@ -95,7 +96,11 @@ public class Reservation {
     }
 
     public void removeProduct(ConsumedProduct product){
-        consumedProducts.remove(product);
+        if(consumedProducts.contains(product))
+            consumedProducts.remove(product);
+        else throw new NoSuchElementException(
+                "Product of id " + product.getProduct().getId() + " not found in reservation"
+        );
     }
 
     public LocalDate getCheckInDate() {
