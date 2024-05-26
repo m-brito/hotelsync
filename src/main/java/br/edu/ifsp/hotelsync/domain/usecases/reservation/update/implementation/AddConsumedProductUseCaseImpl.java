@@ -21,11 +21,14 @@ public class AddConsumedProductUseCaseImpl implements AddConsumedProductUseCase 
 
     @Override
     public void addConsumedProduct(RequestModel request) {
-        Reservation reservation = reservationRepository.findOneByKey(request.idReservation()).orElseThrow(
-                () -> new NoSuchElementException("Reservation of id " + request.idReservation() + " not found")
+        Long idReservation = request.idReservation();
+        Reservation reservation = reservationRepository.findOneByKey(idReservation).orElseThrow(
+                () -> new NoSuchElementException("Reservation of id " + idReservation + " not found")
         );
-        Product product = productRepository.findOneByKey(request.idProduct()).orElseThrow(
-                () -> new NoSuchElementException("Product of id " + request.idProduct() + " not found")
+
+        Long idProduct = request.idProduct();
+        Product product = productRepository.findOneByKey(idProduct).orElseThrow(
+                () -> new NoSuchElementException("Product of id " + idProduct + " not found")
         );
 
         ConsumedProduct consumedProduct = new ConsumedProduct(product, request.quantity());
