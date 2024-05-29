@@ -20,17 +20,17 @@ public class AddNewGuestUseCaseImpl implements AddNewGuestUseCase {
     }
 
     @Override
-    public void addNewGuest(Long idGuest, Long idReservation) {
-        Optional<Guest> guest = guestRepository.findOneByKey(idGuest);
+    public void addNewGuest(RequestModel request) {
+        Optional<Guest> guest = guestRepository.findOneByKey(request.idGuest());
         if(guest.isEmpty())
-            throw new NoSuchElementException("Guest of id " + idReservation + " not found");
+            throw new NoSuchElementException("Guest of id " + request.idReservation() + " not found");
 
-        Optional<Reservation> reservation = reservationRepository.findOneByKey(idReservation);
+        Optional<Reservation> reservation = reservationRepository.findOneByKey(request.idReservation());
         if(reservation.isEmpty())
-            throw new NoSuchElementException("Reservation of id " + idReservation + " not found");
+            throw new NoSuchElementException("Reservation of id " + request.idReservation() + " not found");
 
         if(reservation.get().getGuests().contains(guest.get()))
-            throw new NoSuchElementException("Guest " + idReservation + " Already exists in this reservation");
+            throw new NoSuchElementException("Guest " + request.idReservation() + " Already exists in this reservation");
 
         reservation.get().addGuest(guest.get());
     }
