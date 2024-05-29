@@ -5,6 +5,7 @@ import br.edu.ifsp.hotelsync.domain.entities.product.Product;
 import br.edu.ifsp.hotelsync.domain.entities.room.Room;
 import br.edu.ifsp.hotelsync.domain.usecases.utils.Notification;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,17 @@ public class Reservation {
     private List<ConsumedProduct> consumedProducts = new ArrayList<>();
     private Payment payment;
 
-    public Reservation(Long id, LocalDate startDate, LocalDate checkInDate, LocalDate endDate, LocalDate checkOutDate, Guest owner, Room room, ReservationStatus reservationStatus, List<Guest> guests, List<ConsumedProduct> consumedProducts, Payment payment) {
+    public Reservation(Long id,
+                       LocalDate startDate,
+                       LocalDate checkInDate,
+                       LocalDate endDate,
+                       LocalDate checkOutDate,
+                       Guest owner,
+                       Room room,
+                       ReservationStatus reservationStatus,
+                       List<Guest> guests,
+                       List<ConsumedProduct> consumedProducts,
+                       Payment payment) {
         this.id = id;
         this.startDate = startDate;
         this.checkInDate = checkInDate;
@@ -38,11 +49,16 @@ public class Reservation {
         validate();
     }
 
-    public Reservation(LocalDate startDate, LocalDate checkInDate, LocalDate endDate, LocalDate checkOutDate, Guest owner, Room room, ReservationStatus reservationStatus, List<Guest> guests, List<Product> consumedProducts, Payment payment) {
+    public Reservation(LocalDate startDate,
+                       LocalDate endDate,
+                       Guest owner,
+                       Room room,
+                       Payment payment) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.owner = owner;
         this.room = room;
+        this.payment = payment;
         validate();
     }
 
@@ -79,7 +95,9 @@ public class Reservation {
                         .mapToDouble(consumedProduct ->
                                 consumedProduct.getProduct().getPrice() * consumedProduct.getQuantity())
                         .sum();
-        return room.getRoomCategory().getBasePrice() + productTotalCost;
+        final double roomValue = room.getRoomCategory().getBasePrice();
+        final int totalDays = (int) Duration.between(this.startDate, this.endDate).toDays();
+        return (roomValue * totalDays) + productTotalCost;
     }
 
     public void addGuest(Guest guest){
@@ -148,12 +166,10 @@ public class Reservation {
     }
 
     public List<Guest> getGuests() {
-        List<Guest> returnedGuests = new ArrayList<>(guests);
-        return returnedGuests;
+        return new ArrayList<>(guests);
     }
 
     public List<ConsumedProduct> getConsumedProducts() {
-        List<ConsumedProduct> returnedConsumedProducts = new ArrayList<>(consumedProducts);
-        return returnedConsumedProducts;
+        return new ArrayList<>(consumedProducts);
     }
 }
