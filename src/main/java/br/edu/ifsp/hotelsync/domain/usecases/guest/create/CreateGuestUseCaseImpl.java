@@ -13,12 +13,20 @@ public class CreateGuestUseCaseImpl implements CreateGuestUseCase {
     }
 
     @Override
-    public Long createGuest(RequestModel request) {
+    public Long createOwner(OwnerRequestModel request) {
         Phone phone = new Phone(request.phone());
         Cpf cpf = new Cpf(request.cpf());
         Address address = new Address(request.road(), request.city(), request.state(), request.cep(), request.district(), request.complement());
-        Guest guest = new Guest(request.name(), request.pronouns(), request.birthdate(), phone, cpf, address);
+        Guest guest = Guest.createOwner(request.name(), request.pronouns(), request.birthdate(), phone, cpf, address);
 
+        return guestRepository.save(guest);
+    }
+
+
+    @Override
+    public Long createGuest(GuestRequestModel request) {
+        Cpf cpf = new Cpf(request.cpf());
+        Guest guest = Guest.createGuest(request.name(), request.birthdate(), cpf);
         return guestRepository.save(guest);
     }
 }
