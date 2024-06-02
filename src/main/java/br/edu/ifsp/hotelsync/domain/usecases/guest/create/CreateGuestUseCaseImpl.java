@@ -1,7 +1,6 @@
 package br.edu.ifsp.hotelsync.domain.usecases.guest.create;
 
 import br.edu.ifsp.hotelsync.domain.entities.guest.*;
-import br.edu.ifsp.hotelsync.domain.persistence.dao.BankDataDAO;
 import br.edu.ifsp.hotelsync.domain.persistence.dao.GuestDAO;
 
 public class CreateGuestUseCaseImpl implements CreateGuestUseCase {

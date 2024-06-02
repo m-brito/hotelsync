@@ -36,7 +36,7 @@ public class Guest {
         this.phone = phone;
         this.cpf = cpf;
         this.address = address;
-        validadeOwner();
+        validateOwner();
     }
 
     public Guest(Long id, String name, String pronouns, LocalDate birthdate, Phone phone, Cpf cpf, Address address) {
@@ -47,15 +47,15 @@ public class Guest {
         this.phone = phone;
         this.cpf = cpf;
         this.address = address;
-        validadeOwner();
+        validateOwner();
     }
 
-    private void validadeOwner() {
+    private void validateOwner() {
         OwnerInputRequestValidator validator = new OwnerInputRequestValidator();
         Notification notification = validator.validate(this);
 
         if (notification.hasErrors())
-            throw new IllegalArgumentException(notification.getEerrorMessage());
+            throw new IllegalArgumentException(notification.getErrorMessage());
     }
 
     private void validateGuest(){
@@ -63,7 +63,7 @@ public class Guest {
         Notification notification = validator.validate(this);
 
         if (notification.hasErrors())
-            throw new IllegalArgumentException(notification.getEerrorMessage());
+            throw new IllegalArgumentException(notification.getErrorMessage());
     }
 
     public void deactivate(){
