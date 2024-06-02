@@ -2,14 +2,12 @@ package br.edu.ifsp.hotelsync.domain.entities.guest;
 
 import java.util.Objects;
 
-public class Cpf {
-    private final String value;
+public record Cpf(String value) {
 
-    public Cpf(String value) {
+    public Cpf {
         if (!isValid(value)) {
             throw new IllegalArgumentException("Invalid CPF");
         }
-        this.value = value;
     }
 
     public String getValue() {
