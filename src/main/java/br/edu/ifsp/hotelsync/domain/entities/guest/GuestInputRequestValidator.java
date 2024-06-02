@@ -11,6 +11,7 @@ public class GuestInputRequestValidator extends Validator<Guest> {
     public Notification validate(Guest guest) {
 
         Notification notification = new Notification();
+
         if(guest == null) {
             notification.addError("Guest is null");
             return notification;
@@ -19,14 +20,19 @@ public class GuestInputRequestValidator extends Validator<Guest> {
             notification.addError("Name is null or empty");
         if(guest.getName().length() > 20)
             notification.addError("Name may not exceed 20 characters in size");
-        if(Validator.isNullOrEmpty(guest.getPronouns()))
-            notification.addError("Pronouns is null or empty");
+
         if(guest.getBirthdate() == null)
             notification.addError("Birthdate is null");
-        if(Period.between(guest.getBirthdate(), LocalDate.now()).getYears() < 18)
-            notification.addError("The Guest must not be under the age of 18");
-        if(guest.getBankData() == null)
-            notification.addError("Bank data is null");
+        if(Period.between(guest.getBirthdate(), LocalDate.now()).getYears() < 0)
+            notification.addError(" Guest age must be greater than or equal to 0");
+        if(Period.between(guest.getBirthdate(), LocalDate.now()).getYears() > 140)
+            notification.addError(" Reservation Owner age can't be higher than human lifespan");
+
+        if(guest.getCpf() == null)
+            notification.addError(" Reservation Owners must register CPF ");
+        if(guest.getCpf().getValue().length() != 11)
+            notification.addError("CPF must be 11 characters in length");
+
         return notification;
     }
 }
