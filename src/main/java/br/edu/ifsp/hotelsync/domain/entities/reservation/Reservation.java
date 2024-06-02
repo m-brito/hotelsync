@@ -1,7 +1,6 @@
 package br.edu.ifsp.hotelsync.domain.entities.reservation;
 
 import br.edu.ifsp.hotelsync.domain.entities.guest.Guest;
-import br.edu.ifsp.hotelsync.domain.entities.product.Product;
 import br.edu.ifsp.hotelsync.domain.entities.room.Room;
 import br.edu.ifsp.hotelsync.domain.usecases.utils.Notification;
 
@@ -85,7 +84,7 @@ public class Reservation {
         Notification notification = validator.validate(this);
 
         if (notification.hasErrors())
-            throw new IllegalArgumentException(notification.getEerrorMessage());
+            throw new IllegalArgumentException(notification.getErrorMessage());
     }
 
     private double calculateTotalToPay(){

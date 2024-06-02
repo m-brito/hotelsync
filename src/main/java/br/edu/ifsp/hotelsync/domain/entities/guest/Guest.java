@@ -13,30 +13,30 @@ public class Guest {
     private Phone phone;
     private Cpf cpf;
     private Address address;
-    private BankData bankData;
     private boolean isActive = true;
 
-    public Guest(Long id, String name, String pronouns, LocalDate birthdate, Phone phone, Cpf cpf, Address address, BankData bankData) {
-        this.id = id;
+    public Guest(String name,
+                 LocalDate birthdate,
+                 Cpf cpf) {
         this.name = name;
-        this.pronouns = pronouns;
         this.birthdate = birthdate;
-        this.phone = phone;
         this.cpf = cpf;
-        this.address = address;
-        this.bankData = bankData;
-        validate();
+        validateGuest();
     }
 
-    public Guest(String name, String pronouns, LocalDate birthdate, Phone phone, Cpf cpf, Address address, BankData bankData) {
+    public Guest(String name,
+                 String pronouns,
+                 LocalDate birthdate,
+                 Phone phone,
+                 Cpf cpf,
+                 Address address) {
         this.name = name;
         this.pronouns = pronouns;
         this.birthdate = birthdate;
         this.phone = phone;
         this.cpf = cpf;
         this.address = address;
-        this.bankData = bankData;
-        validate();
+        validateOwner();
     }
 
     public Guest(Long id, String name, String pronouns, LocalDate birthdate, Phone phone, Cpf cpf, Address address) {
@@ -47,15 +47,23 @@ public class Guest {
         this.phone = phone;
         this.cpf = cpf;
         this.address = address;
-        validate();
+        validateOwner();
     }
 
-    private void validate() {
+    private void validateOwner() {
+        OwnerInputRequestValidator validator = new OwnerInputRequestValidator();
+        Notification notification = validator.validate(this);
+
+        if (notification.hasErrors())
+            throw new IllegalArgumentException(notification.getErrorMessage());
+    }
+
+    private void validateGuest(){
         GuestInputRequestValidator validator = new GuestInputRequestValidator();
         Notification notification = validator.validate(this);
 
         if (notification.hasErrors())
-            throw new IllegalArgumentException(notification.getEerrorMessage());
+            throw new IllegalArgumentException(notification.getErrorMessage());
     }
 
     public void deactivate(){
@@ -118,14 +126,6 @@ public class Guest {
         this.address = address;
     }
 
-    public BankData getCreditData() {
-        return bankData;
-    }
-
-    public void setCreditData(BankData bankData) {
-        this.bankData = bankData;
-    }
-
     public Long getId() {
         return id;
     }
@@ -134,13 +134,6 @@ public class Guest {
         this.id = id;
     }
 
-    public BankData getBankData() {
-        return bankData;
-    }
-
-    public void setBankData(BankData bankData) {
-        this.bankData = bankData;
-    }
 
     @Override
     public boolean equals(Object o) {

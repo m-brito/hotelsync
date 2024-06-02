@@ -40,7 +40,7 @@ public class Room {
         Notification notification = validator.validate(this);
 
         if (notification.hasErrors())
-            throw new IllegalArgumentException(notification.getEerrorMessage());
+            throw new IllegalArgumentException(notification.getErrorMessage());
     }
 
 
