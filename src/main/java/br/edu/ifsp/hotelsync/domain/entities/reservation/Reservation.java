@@ -84,7 +84,7 @@ public class Reservation {
         Notification notification = validator.validate(this);
 
         if (notification.hasErrors())
-            throw new IllegalArgumentException(notification.getEerrorMessage());
+            throw new IllegalArgumentException(notification.getErrorMessage());
     }
 
     private double calculateTotalToPay(){
