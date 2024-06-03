@@ -21,6 +21,6 @@ public class CheckOutUseCaseImpl implements CheckOutUseCase {
         );
         String paymentMethod = reservation.getPayment().getMethod();
         reservation.checkOut(paymentMethod);
-        repository.checkOut(id,paymentMethod);
+        repository.update(reservation);
     }
 }

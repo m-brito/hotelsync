@@ -50,39 +50,4 @@ public class InMemoryReservationDao implements ReservationDao {
         return null;
     }
 
-    @Override
-    public boolean cancelReservation(Long reservationId) {
-        Optional<Reservation> reservationOptional = findOneByKey(reservationId);
-        if (reservationOptional.isPresent()) {
-            Reservation reservation = reservationOptional.get();
-            reservation.cancelReservation();
-            update(reservation);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean checkIn(Long reservationId) {
-        Optional<Reservation> reservationOptional = findOneByKey(reservationId);
-        if (reservationOptional.isPresent()) {
-            Reservation reservation = reservationOptional.get();
-            reservation.checkIn();
-            update(reservation);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean checkOut(Long reservationId, String paymentMethod) {
-        Optional<Reservation> reservationOptional = findOneByKey(reservationId);
-        if (reservationOptional.isPresent()) {
-            Reservation reservation = reservationOptional.get();
-            reservation.checkOut(paymentMethod);
-            update(reservation);
-            return true;
-        }
-        return false;
-    }
 }

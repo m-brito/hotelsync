@@ -21,6 +21,6 @@ public class CancelReservationUseCaseImpl implements CancelReservationUseCase {
                 () -> new NoSuchElementException("Reservation of id " + id + " not found")
         );
         reservation.cancelReservation();
-        repository.cancelReservation(id);
+        repository.update(reservation);
     }
 }

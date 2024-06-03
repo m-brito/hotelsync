@@ -20,7 +20,7 @@ public class CheckInUseCaseImpl implements CheckInUseCase {
                 () -> new NoSuchElementException("Reservation of id " + id + " not found")
         );
         reservation.checkIn();
-        repository.checkIn(id);
+        repository.update(reservation);
 
     }
 }
