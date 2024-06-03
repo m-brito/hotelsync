@@ -1,15 +1,15 @@
 package br.edu.ifsp.hotelsync.domain.usecases.product.update;
 
 import br.edu.ifsp.hotelsync.domain.entities.product.Product;
-import br.edu.ifsp.hotelsync.domain.persistence.dao.ProductDAO;
+import br.edu.ifsp.hotelsync.domain.persistence.dao.ProductDao;
 
 import java.util.NoSuchElementException;
 
 public class UpdateProductUseCaseImpl implements UpdateProductUseCase {
 
-    private final ProductDAO repository;
+    private final ProductDao repository;
 
-    public UpdateProductUseCaseImpl(ProductDAO repository) {
+    public UpdateProductUseCaseImpl(ProductDao repository) {
         this.repository = repository;
     }
 

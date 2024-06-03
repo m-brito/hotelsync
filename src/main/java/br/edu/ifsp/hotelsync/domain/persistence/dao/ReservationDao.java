@@ -1,9 +1,9 @@
 package br.edu.ifsp.hotelsync.domain.persistence.dao;
 
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
-import br.edu.ifsp.hotelsync.domain.persistence.util.DAO;
+import br.edu.ifsp.hotelsync.domain.persistence.util.Dao;
 
-public interface ReservationDAO extends DAO<Long, Reservation> {
+public interface ReservationDao extends Dao<Long, Reservation> {
     boolean cancelReservation(Long reservationId);
 
     boolean checkIn(Long reservationId);

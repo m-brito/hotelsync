@@ -1,14 +1,14 @@
 package br.edu.ifsp.hotelsync.domain.usecases.product.find;
 
 import br.edu.ifsp.hotelsync.domain.entities.product.Product;
-import br.edu.ifsp.hotelsync.domain.persistence.dao.ProductDAO;
+import br.edu.ifsp.hotelsync.domain.persistence.dao.ProductDao;
 
 import java.util.NoSuchElementException;
 
 public class FindOneProductUseCaseImpl implements FindOneProductUseCase {
-    private final ProductDAO repository;
+    private final ProductDao repository;
 
-    public FindOneProductUseCaseImpl(ProductDAO repository) {
+    public FindOneProductUseCaseImpl(ProductDao repository) {
         this.repository = repository;
     }
 

@@ -1,14 +1,14 @@
 package br.edu.ifsp.hotelsync.domain.usecases.guest.find;
 
 import br.edu.ifsp.hotelsync.domain.entities.guest.Guest;
-import br.edu.ifsp.hotelsync.domain.persistence.dao.GuestDAO;
+import br.edu.ifsp.hotelsync.domain.persistence.dao.GuestDao;
 
 import java.util.NoSuchElementException;
 
 public class FindOneGuestUseCaseImpl implements FindOneGuestUseCase{
-    private final GuestDAO repository;
+    private final GuestDao repository;
 
-    public FindOneGuestUseCaseImpl(GuestDAO repository) {
+    public FindOneGuestUseCaseImpl(GuestDao repository) {
         this.repository = repository;
     }
 

@@ -1,7 +1,7 @@
 package br.edu.ifsp.hotelsync.application.repository.inmemory;
 
 import br.edu.ifsp.hotelsync.domain.entities.room.Room;
-import br.edu.ifsp.hotelsync.domain.persistence.dao.RoomDAO;
+import br.edu.ifsp.hotelsync.domain.persistence.dao.RoomDao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class InMemoryRoomDAO implements RoomDAO {
+public class InMemoryRoomDao implements RoomDao {
     private static final Map<Long, Room> rooms = new HashMap<>();
     private static long id = 0;
 

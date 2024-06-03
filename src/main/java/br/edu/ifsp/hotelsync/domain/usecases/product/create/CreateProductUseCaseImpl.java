@@ -1,13 +1,13 @@
 package br.edu.ifsp.hotelsync.domain.usecases.product.create;
 
 import br.edu.ifsp.hotelsync.domain.entities.product.Product;
-import br.edu.ifsp.hotelsync.domain.persistence.dao.ProductDAO;
+import br.edu.ifsp.hotelsync.domain.persistence.dao.ProductDao;
 
 public class CreateProductUseCaseImpl implements CreateProductUseCase{
 
-    private final ProductDAO repository;
+    private final ProductDao repository;
 
-    public CreateProductUseCaseImpl(ProductDAO repository) {
+    public CreateProductUseCaseImpl(ProductDao repository) {
         this.repository = repository;
     }
 

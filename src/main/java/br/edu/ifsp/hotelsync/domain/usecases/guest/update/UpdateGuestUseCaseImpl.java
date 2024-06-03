@@ -4,14 +4,14 @@ import br.edu.ifsp.hotelsync.domain.entities.guest.Address;
 import br.edu.ifsp.hotelsync.domain.entities.guest.Cpf;
 import br.edu.ifsp.hotelsync.domain.entities.guest.Guest;
 import br.edu.ifsp.hotelsync.domain.entities.guest.Phone;
-import br.edu.ifsp.hotelsync.domain.persistence.dao.GuestDAO;
+import br.edu.ifsp.hotelsync.domain.persistence.dao.GuestDao;
 
 import java.util.NoSuchElementException;
 
 public class UpdateGuestUseCaseImpl implements UpdateGuestUseCase {
-    private final GuestDAO repository;
+    private final GuestDao repository;
 
-    public UpdateGuestUseCaseImpl(GuestDAO repository) {
+    public UpdateGuestUseCaseImpl(GuestDao repository) {
         this.repository = repository;
     }
 

@@ -1,7 +1,7 @@
 package br.edu.ifsp.hotelsync.application.repository.inmemory;
 
 import br.edu.ifsp.hotelsync.domain.entities.product.Product;
-import br.edu.ifsp.hotelsync.domain.persistence.dao.ProductDAO;
+import br.edu.ifsp.hotelsync.domain.persistence.dao.ProductDao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class InMemoryProductDAO implements ProductDAO {
+public class InMemoryProductDao implements ProductDao {
     private static final Map<Long, Product> products = new HashMap<>();
     private static long id = 0;
 

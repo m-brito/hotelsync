@@ -1,13 +1,13 @@
 package br.edu.ifsp.hotelsync.domain.usecases.guest.create;
 
 import br.edu.ifsp.hotelsync.domain.entities.guest.*;
-import br.edu.ifsp.hotelsync.domain.persistence.dao.GuestDAO;
+import br.edu.ifsp.hotelsync.domain.persistence.dao.GuestDao;
 
 public class CreateGuestUseCaseImpl implements CreateGuestUseCase {
-    private final GuestDAO guestRepository;
+    private final GuestDao guestRepository;
 
 
-    public CreateGuestUseCaseImpl(GuestDAO guestRepository) {
+    public CreateGuestUseCaseImpl(GuestDao guestRepository) {
         this.guestRepository = guestRepository;
 
     }
