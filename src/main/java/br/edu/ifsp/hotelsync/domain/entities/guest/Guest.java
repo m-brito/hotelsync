@@ -18,7 +18,7 @@ public class Guest {
         return new Guest(name, birthdate, cpf);
     }
 
-    public static Guest createGuestFromRepo(Long id, String name, LocalDate birthdate, Cpf cpf){
+    public static Guest createGuestWithId(Long id, String name, LocalDate birthdate, Cpf cpf){
         return new Guest(id, name, birthdate, cpf);
     }
 
@@ -27,7 +27,7 @@ public class Guest {
         return new Guest(name, pronouns, birthdate, phone, cpf, address);
     }
 
-    public static Guest createOwnerFromRepo(Long id, String name, String pronouns, LocalDate birthdate, Phone phone, Cpf cpf,
+    public static Guest createOwnerWithId(Long id, String name, String pronouns, LocalDate birthdate, Phone phone, Cpf cpf,
                                      Address address) {
         return new Guest(id, name, pronouns, birthdate, phone, cpf, address);
     }
@@ -44,6 +44,7 @@ public class Guest {
         this.name = name;
         this.birthdate = birthdate;
         this.cpf = cpf;
+        validateGuest();
     }
 
     private Guest(String name, String pronouns, LocalDate birthdate, Phone phone, Cpf cpf,
@@ -66,6 +67,7 @@ public class Guest {
         this.phone = phone;
         this.cpf = cpf;
         this.address = address;
+        validateOwner();
     }
 
     private void validateOwner() {

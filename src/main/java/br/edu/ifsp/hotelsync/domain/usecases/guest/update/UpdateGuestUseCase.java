@@ -3,7 +3,7 @@ package br.edu.ifsp.hotelsync.domain.usecases.guest.update;
 import java.time.LocalDate;
 
 public interface UpdateGuestUseCase {
-    record RequestModel(
+    record OwnerRequestModel(
             Long id,
             String name,
             String pronouns,
@@ -25,5 +25,13 @@ public interface UpdateGuestUseCase {
             String cardNumber
     ) {}
 
-    void updateGuest(RequestModel requestModel);
+    record GuestRequestModel(
+            Long id,
+            String name,
+            LocalDate birthdate,
+            String cpf
+    ){}
+
+    void updateOwner(OwnerRequestModel requestModel);
+    void updateGuest(GuestRequestModel requestModel);
 }

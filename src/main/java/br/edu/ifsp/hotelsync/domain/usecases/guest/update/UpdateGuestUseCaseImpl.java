@@ -16,14 +16,25 @@ public class UpdateGuestUseCaseImpl implements UpdateGuestUseCase {
     }
 
     @Override
-    public void updateGuest(RequestModel request) {
+    public void updateOwner(OwnerRequestModel request) {
         if(!repository.existsByKey(request.id()))
             throw new NoSuchElementException("Guest of id " + request.id() + " not found");
 
         Phone phone = new Phone(request.phone());
         Cpf cpf = new Cpf(request.cpf());
         Address address = new Address(request.road(), request.city(), request.state(), request.cep(), request.district(), request.complement());
-        Guest guest = new Guest(request.id(), request.name(), request.pronouns(), request.birthdate(), phone, cpf, address);
+        Guest guest = Guest.createOwnerWithId(request.id(), request.name(), request.pronouns(), request.birthdate(), phone, cpf, address);
+
+        repository.update(guest);
+    }
+
+    @Override
+    public void updateGuest(GuestRequestModel request) {
+        if(!repository.existsByKey(request.id()))
+            throw new NoSuchElementException("Guest of id " + request.id() + " not found");
+
+        Cpf cpf = new Cpf(request.cpf());
+        Guest guest = Guest.createGuestWithId(request.id(), request.name(), request.birthdate(), cpf);
 
         repository.update(guest);
     }
