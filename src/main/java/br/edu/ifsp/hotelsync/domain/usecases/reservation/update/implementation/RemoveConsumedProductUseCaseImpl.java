@@ -3,18 +3,18 @@ package br.edu.ifsp.hotelsync.domain.usecases.reservation.update.implementation;
 import br.edu.ifsp.hotelsync.domain.entities.product.Product;
 import br.edu.ifsp.hotelsync.domain.entities.reservation.ConsumedProduct;
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
-import br.edu.ifsp.hotelsync.domain.persistence.dao.ProductDAO;
-import br.edu.ifsp.hotelsync.domain.persistence.dao.ReservationDAO;
+import br.edu.ifsp.hotelsync.domain.persistence.dao.ProductDao;
+import br.edu.ifsp.hotelsync.domain.persistence.dao.ReservationDao;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.RemoveConsumedProductUseCase;
 
 import java.util.NoSuchElementException;
 
 public class RemoveConsumedProductUseCaseImpl implements RemoveConsumedProductUseCase {
 
-    private final ProductDAO productRepository;
-    private final ReservationDAO reservationRepository;
+    private final ProductDao productRepository;
+    private final ReservationDao reservationRepository;
 
-    public RemoveConsumedProductUseCaseImpl(ProductDAO productRepository, ReservationDAO reservationRepository) {
+    public RemoveConsumedProductUseCaseImpl(ProductDao productRepository, ReservationDao reservationRepository) {
         this.productRepository = productRepository;
         this.reservationRepository = reservationRepository;
     }

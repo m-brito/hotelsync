@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.Optional;
 
-public interface DAO <K, T>{
+public interface Dao<K, T>{
     K save(T type);
 
     void update(T type);

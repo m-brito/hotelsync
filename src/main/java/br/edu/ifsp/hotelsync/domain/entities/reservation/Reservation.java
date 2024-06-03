@@ -23,7 +23,21 @@ public class Reservation {
     private List<ConsumedProduct> consumedProducts = new ArrayList<>();
     private Payment payment;
 
-    public Reservation(Long id,
+    public static Reservation createCompleteReservation(Long id, LocalDate startDate, LocalDate checkInDate, LocalDate endDate,
+                                                 LocalDate checkOutDate, Guest owner,
+                                                 Room room, ReservationStatus reservationStatus,
+                                                 List<Guest> guests, List<ConsumedProduct> consumedProducts,
+                                                 Payment payment){
+        return new Reservation(id, startDate, checkInDate, endDate, checkOutDate, owner, room,
+                reservationStatus, guests, consumedProducts, payment);
+    }
+
+    public static Reservation createReservation(LocalDate startDate, LocalDate endDate,
+                                         Guest owner, Room room, Payment payment){
+        return new Reservation(startDate, endDate, owner, room, payment);
+    }
+
+    private Reservation(Long id,
                        LocalDate startDate,
                        LocalDate checkInDate,
                        LocalDate endDate,
@@ -48,7 +62,7 @@ public class Reservation {
         validate();
     }
 
-    public Reservation(LocalDate startDate,
+    private Reservation(LocalDate startDate,
                        LocalDate endDate,
                        Guest owner,
                        Room room,

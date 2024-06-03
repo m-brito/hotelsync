@@ -1,15 +1,15 @@
 package br.edu.ifsp.hotelsync.domain.usecases.guest.find;
 
 import br.edu.ifsp.hotelsync.domain.entities.guest.Guest;
-import br.edu.ifsp.hotelsync.domain.persistence.dao.GuestDAO;
+import br.edu.ifsp.hotelsync.domain.persistence.dao.GuestDao;
 
 import java.util.Map;
 
 public class FindAllGuestUseCaseImpl implements FindAllGuestUseCase{
 
-    private final GuestDAO repository;
+    private final GuestDao repository;
 
-    public FindAllGuestUseCaseImpl(GuestDAO repository) {
+    public FindAllGuestUseCaseImpl(GuestDao repository) {
         this.repository = repository;
     }
 

@@ -12,8 +12,15 @@ public class Room {
     private RoomStatus roomStatus;
     private double area;
 
-    public Room(Long id, int number, int numberOfBeds, String typeOfBed, RoomCategory roomCategory, String description, RoomStatus roomStatus, double area) {
-        this.id = id;
+    public static Room createRoom(int number, int numberOfBeds, String typeOfBed, RoomCategory roomCategory, String description, RoomStatus roomStatus, double area) {
+        return new Room(number, numberOfBeds, typeOfBed, roomCategory, description, roomStatus, area);
+    }
+
+    public static Room createRoomWithId(Long id, int number, int numberOfBeds, String typeOfBed, RoomCategory roomCategory, String description, RoomStatus roomStatus, double area) {
+        return new Room(id, number, numberOfBeds, typeOfBed, roomCategory, description, roomStatus, area);
+    }
+
+    private Room(int number, int numberOfBeds, String typeOfBed, RoomCategory roomCategory, String description, RoomStatus roomStatus, double area) {
         this.number = number;
         this.numberOfBeds = numberOfBeds;
         this.typeOfBed = typeOfBed;
@@ -24,7 +31,8 @@ public class Room {
         validate();
     }
 
-    public Room(int number, int numberOfBeds, String typeOfBed, RoomCategory roomCategory, String description, RoomStatus roomStatus, double area) {
+    private Room(Long id, int number, int numberOfBeds, String typeOfBed, RoomCategory roomCategory, String description, RoomStatus roomStatus, double area) {
+        this.id = id;
         this.number = number;
         this.numberOfBeds = numberOfBeds;
         this.typeOfBed = typeOfBed;

@@ -1,7 +1,7 @@
 package br.edu.ifsp.hotelsync.application.repository.inmemory;
 
 import br.edu.ifsp.hotelsync.domain.entities.guest.Guest;
-import br.edu.ifsp.hotelsync.domain.persistence.dao.GuestDAO;
+import br.edu.ifsp.hotelsync.domain.persistence.dao.GuestDao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class InMemoryGuestDAO implements GuestDAO {
+public class InMemoryGuestDao implements GuestDao {
     private static final Map<Long, Guest> guests = new HashMap<>();
     private static long id = 0;
 

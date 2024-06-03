@@ -1,18 +1,16 @@
 package br.edu.ifsp.hotelsync.domain.usecases.reservation.find;
 
-import br.edu.ifsp.hotelsync.domain.entities.product.Product;
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
 
-import br.edu.ifsp.hotelsync.domain.persistence.dao.ReservationDAO;
-import br.edu.ifsp.hotelsync.domain.usecases.product.find.FindOneProductUseCase;
+import br.edu.ifsp.hotelsync.domain.persistence.dao.ReservationDao;
 
 import java.util.NoSuchElementException;
 
 public class FindOneUseCaseImpl implements FindOneReservationUseCase{
 
-    private final ReservationDAO repository;
+    private final ReservationDao repository;
 
-    public FindOneUseCaseImpl(ReservationDAO repository) {
+    public FindOneUseCaseImpl(ReservationDao repository) {
         this.repository = repository;
     }
 

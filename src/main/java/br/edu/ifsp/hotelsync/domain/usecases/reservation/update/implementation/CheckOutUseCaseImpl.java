@@ -1,16 +1,16 @@
 package br.edu.ifsp.hotelsync.domain.usecases.reservation.update.implementation;
 
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
-import br.edu.ifsp.hotelsync.domain.persistence.dao.ReservationDAO;
+import br.edu.ifsp.hotelsync.domain.persistence.dao.ReservationDao;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.CheckOutUseCase;
 
 import java.util.NoSuchElementException;
 
 public class CheckOutUseCaseImpl implements CheckOutUseCase {
 
-    private final ReservationDAO repository;
+    private final ReservationDao repository;
 
-    public CheckOutUseCaseImpl(ReservationDAO repository) {this.repository = repository;}
+    public CheckOutUseCaseImpl(ReservationDao repository) {this.repository = repository;}
 
     @Override
     public void doCheckOut(RequestModel request) {
@@ -21,6 +21,6 @@ public class CheckOutUseCaseImpl implements CheckOutUseCase {
         );
         String paymentMethod = reservation.getPayment().getMethod();
         reservation.checkOut(paymentMethod);
-        repository.checkOut(id,paymentMethod);
+        repository.update(reservation);
     }
 }

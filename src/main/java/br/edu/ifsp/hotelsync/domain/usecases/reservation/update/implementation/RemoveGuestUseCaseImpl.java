@@ -2,25 +2,25 @@ package br.edu.ifsp.hotelsync.domain.usecases.reservation.update.implementation;
 
 import br.edu.ifsp.hotelsync.domain.entities.guest.Guest;
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
-import br.edu.ifsp.hotelsync.domain.persistence.dao.GuestDAO;
-import br.edu.ifsp.hotelsync.domain.persistence.dao.ReservationDAO;
-import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.AddNewGuestUseCase;
+import br.edu.ifsp.hotelsync.domain.persistence.dao.GuestDao;
+import br.edu.ifsp.hotelsync.domain.persistence.dao.ReservationDao;
+import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.RemoveGuestUseCase;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-public class AddNewGuestUseCaseImpl implements AddNewGuestUseCase {
+public class RemoveGuestUseCaseImpl implements RemoveGuestUseCase {
 
-    private final GuestDAO  guestRepository;
-    private final ReservationDAO reservationRepository;
+    private final GuestDao guestRepository;
+    private final ReservationDao reservationRepository;
 
-    public AddNewGuestUseCaseImpl(GuestDAO guestRepository, ReservationDAO reservationRepository) {
+    public RemoveGuestUseCaseImpl(GuestDao guestRepository, ReservationDao reservationRepository) {
         this.guestRepository = guestRepository;
         this.reservationRepository = reservationRepository;
     }
 
     @Override
-    public void addNewGuest(RequestModel request) {
+    public void removeGuest(RequestModel request) {
         Optional<Guest> guest = guestRepository.findOneByKey(request.idGuest());
         if(guest.isEmpty())
             throw new NoSuchElementException("Guest of id " + request.idReservation() + " not found");
@@ -29,9 +29,9 @@ public class AddNewGuestUseCaseImpl implements AddNewGuestUseCase {
         if(reservation.isEmpty())
             throw new NoSuchElementException("Reservation of id " + request.idReservation() + " not found");
 
-        if(reservation.get().getGuests().contains(guest.get()))
-            throw new NoSuchElementException("Guest " + request.idReservation() + " Already exists in this reservation");
+        if(!reservation.get().getGuests().contains(guest.get()))
+            throw new NoSuchElementException("Guest " + request.idReservation() + " not present in this reservation");
 
-        reservation.get().addGuest(guest.get());
+        reservation.get().removeGuest(guest.get());
     }
 }

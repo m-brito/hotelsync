@@ -3,7 +3,7 @@ package br.edu.ifsp.hotelsync.domain.usecases.guest.create;
 import java.time.LocalDate;
 
 public interface CreateGuestUseCase {
-    record RequestModel(
+    record OwnerRequestModel(
             String name,
             String pronouns,
             LocalDate birthdate,
@@ -15,7 +15,6 @@ public interface CreateGuestUseCase {
             String cep,
             String district,
             String complement,
-            boolean isActive,
             String bank,
             String account,
             String agency,
@@ -24,5 +23,13 @@ public interface CreateGuestUseCase {
             String cardNumber
     ) {}
 
-    Long createGuest(RequestModel requestModel);
+    record GuestRequestModel(
+            String name,
+            LocalDate birthdate,
+            String cpf
+    ){}
+
+    Long createOwner(OwnerRequestModel requestModel);
+
+    Long createGuest(GuestRequestModel requestModel);
 }

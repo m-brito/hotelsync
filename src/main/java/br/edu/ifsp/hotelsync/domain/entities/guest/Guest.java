@@ -11,24 +11,43 @@ public class Guest {
     private String pronouns;
     private LocalDate birthdate;
     private Phone phone;
-    private Cpf cpf;
+    private final Cpf cpf;
     private Address address;
-    private boolean isActive = true;
 
-    public Guest(String name,
-                 LocalDate birthdate,
-                 Cpf cpf) {
+    public static Guest createGuest(String name, LocalDate birthdate, Cpf cpf) {
+        return new Guest(name, birthdate, cpf);
+    }
+
+    public static Guest createGuestWithId(Long id, String name, LocalDate birthdate, Cpf cpf){
+        return new Guest(id, name, birthdate, cpf);
+    }
+
+    public static Guest createOwner(String name, String pronouns, LocalDate birthdate, Phone phone, Cpf cpf,
+                             Address address) {
+        return new Guest(name, pronouns, birthdate, phone, cpf, address);
+    }
+
+    public static Guest createOwnerWithId(Long id, String name, String pronouns, LocalDate birthdate, Phone phone, Cpf cpf,
+                                     Address address) {
+        return new Guest(id, name, pronouns, birthdate, phone, cpf, address);
+    }
+
+    private Guest(String name, LocalDate birthdate, Cpf cpf) {
         this.name = name;
         this.birthdate = birthdate;
         this.cpf = cpf;
         validateGuest();
     }
 
-    public Guest(String name,
-                 String pronouns,
-                 LocalDate birthdate,
-                 Phone phone,
-                 Cpf cpf,
+    private Guest(Long id, String name, LocalDate birthdate, Cpf cpf) {
+        this.id = id;
+        this.name = name;
+        this.birthdate = birthdate;
+        this.cpf = cpf;
+        validateGuest();
+    }
+
+    private Guest(String name, String pronouns, LocalDate birthdate, Phone phone, Cpf cpf,
                  Address address) {
         this.name = name;
         this.pronouns = pronouns;
@@ -39,7 +58,8 @@ public class Guest {
         validateOwner();
     }
 
-    public Guest(Long id, String name, String pronouns, LocalDate birthdate, Phone phone, Cpf cpf, Address address) {
+    private Guest(Long id, String name, String pronouns, LocalDate birthdate, Phone phone, Cpf cpf,
+                  Address address) {
         this.id = id;
         this.name = name;
         this.pronouns = pronouns;
@@ -64,18 +84,6 @@ public class Guest {
 
         if (notification.hasErrors())
             throw new IllegalArgumentException(notification.getErrorMessage());
-    }
-
-    public void deactivate(){
-        isActive = false;
-    }
-
-    public void activate(){
-        isActive = true;
-    }
-
-    public boolean isActive() {
-        return isActive;
     }
 
     public String getName() {
@@ -112,10 +120,6 @@ public class Guest {
 
     public Cpf getCpf() {
         return cpf;
-    }
-
-    public void setCpf(Cpf cpf) {
-        this.cpf = cpf;
     }
 
     public Address getAddress() {

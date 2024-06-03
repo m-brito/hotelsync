@@ -1,19 +1,19 @@
 package br.edu.ifsp.hotelsync.domain.usecases.reservation.create;
 
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
-import br.edu.ifsp.hotelsync.domain.persistence.dao.ReservationDAO;
+import br.edu.ifsp.hotelsync.domain.persistence.dao.ReservationDao;
 
 public class CreateReservationUseCaseImpl implements CreateReservationUseCase{
 
-    private final ReservationDAO repository;
+    private final ReservationDao repository;
 
-    public CreateReservationUseCaseImpl(ReservationDAO repository){
+    public CreateReservationUseCaseImpl(ReservationDao repository){
         this.repository = repository;
     }
 
     @Override
     public void createReservation(RequestModel request) {
-        Reservation reservation = new Reservation(
+        Reservation reservation = Reservation.createReservation(
                 request.startDate(),
                 request.endDate(),
                 request.owner(),

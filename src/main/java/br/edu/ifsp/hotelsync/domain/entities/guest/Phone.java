@@ -2,14 +2,12 @@ package br.edu.ifsp.hotelsync.domain.entities.guest;
 
 import java.util.Objects;
 
-public class Phone {
-    private final String value;
+public record Phone(String value) {
 
-    public Phone(String value) {
+    public Phone {
         if (!isValid(value)) {
             throw new IllegalArgumentException("Invalid phone number");
         }
-        this.value = value;
     }
 
     public String getValue() {
