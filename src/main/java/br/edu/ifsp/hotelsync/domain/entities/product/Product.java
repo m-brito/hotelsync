@@ -11,14 +11,22 @@ public class Product {
     private boolean isActive = true;
 
 
-    public Product(Long id, String description, double price) {
+    public static Product createProduct(String description, double price){
+        return new Product(description, price);
+    }
+
+    public static Product createProductWithId(Long id, String description, double price){
+        return new Product(id, description, price);
+    }
+
+    private Product(Long id, String description, double price) {
         this.id = id;
         this.description = description;
         this.price = price;
         validate();
     }
 
-    public Product(String description, double price) {
+    private Product(String description, double price) {
         this.description = description;
         this.price = price;
         validate();

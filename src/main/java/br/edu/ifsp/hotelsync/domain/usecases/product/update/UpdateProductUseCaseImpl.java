@@ -18,7 +18,7 @@ public class UpdateProductUseCaseImpl implements UpdateProductUseCase {
         if(!repository.existsByKey(requestModel.id()))
             throw new NoSuchElementException("Product of id " + requestModel.id() + " not found");
 
-        Product product = new Product(requestModel.id(), requestModel.description(), requestModel.price());
+        Product product = Product.createProductWithId(requestModel.id(), requestModel.description(), requestModel.price());
         repository.update(product);
     }
 }
