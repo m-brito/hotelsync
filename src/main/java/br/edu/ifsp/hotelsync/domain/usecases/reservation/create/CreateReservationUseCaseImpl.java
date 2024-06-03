@@ -13,7 +13,7 @@ public class CreateReservationUseCaseImpl implements CreateReservationUseCase{
 
     @Override
     public void createReservation(RequestModel request) {
-        Reservation reservation = new Reservation(
+        Reservation reservation = Reservation.createReservation(
                 request.startDate(),
                 request.endDate(),
                 request.owner(),
