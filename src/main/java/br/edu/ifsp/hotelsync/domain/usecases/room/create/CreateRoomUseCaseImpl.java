@@ -13,7 +13,7 @@ public class CreateRoomUseCaseImpl implements CreateRoomUseCase {
 
     @Override
     public void createRoom(RequestModel requestModel) {
-        Room room = new Room(requestModel.number(), requestModel.numberOfBeds(), requestModel.typeOfBed(),
+        Room room = Room.createRoom(requestModel.number(), requestModel.numberOfBeds(), requestModel.typeOfBed(),
                 requestModel.roomCategory(), requestModel.description(),
                 requestModel.roomStatus(), requestModel.area());
         repository.save(room);

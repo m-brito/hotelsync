@@ -18,7 +18,7 @@ public class UpdateRoomUseCaseImpl implements UpdateRoomUseCase{
         if (!repository.existsByKey(requestModel.id()))
             throw new NoSuchElementException("Room of id " + requestModel.id() + " not found");
 
-        Room room = new Room(requestModel.id(), requestModel.number(), requestModel.numberOfBeds(), requestModel.typeOfBed(), requestModel.roomCategory(), requestModel.description(), requestModel.roomStatus(), requestModel.area());
+        Room room = Room.createRoomWithId(requestModel.id(), requestModel.number(), requestModel.numberOfBeds(), requestModel.typeOfBed(), requestModel.roomCategory(), requestModel.description(), requestModel.roomStatus(), requestModel.area());
         repository.update(room);
     }
 }
