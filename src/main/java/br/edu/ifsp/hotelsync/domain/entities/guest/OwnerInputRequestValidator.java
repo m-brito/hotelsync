@@ -30,14 +30,10 @@ public class OwnerInputRequestValidator extends Validator<Guest> {
             notification.addError(" Reservation Owner age can't be higher than human lifespan");
         if(guest.getCpf() == null)
             notification.addError(" Reservation Owners must register CPF ");
-        if(guest.getCpf().getValue().length() != 11)
-            notification.addError("CPF must be 11 characters in length");
         if(guest.getAddress() == null)
             notification.addError(" Reservation Owners must register address");
         if(guest.getPhone() == null)
             notification.addError(" Reservation Owners must register phone");
-        if(guest.getPhone().getValue().length() > 14 || guest.getPhone().getValue().length() < 10)
-            notification.addError(" Reservation Owners must register a valid phone number");
         return notification;
     }
 }
