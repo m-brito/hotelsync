@@ -13,10 +13,6 @@ public class CreateReservationUseCaseImpl implements CreateReservationUseCase{
 
     @Override
     public void createReservation(RequestModel request) {
-        if (request.checkInDate().isBefore(request.startDate()) || request.endDate().isBefore(request.startDate())) {
-            throw new IllegalArgumentException("Check-in date and end date must be after start date");
-        }
-
         Reservation reservation = Reservation.createReservation(
                 request.startDate(),
                 request.endDate(),
