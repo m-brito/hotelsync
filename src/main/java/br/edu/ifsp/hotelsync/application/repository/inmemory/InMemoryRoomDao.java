@@ -48,4 +48,9 @@ public class InMemoryRoomDao implements RoomDao {
     public Room resultSetToEntity(ResultSet resultSet) throws SQLException {
         return null;
     }
+
+    @Override
+    public int getTotalRooms() {
+        return rooms.size();
+    }
 }

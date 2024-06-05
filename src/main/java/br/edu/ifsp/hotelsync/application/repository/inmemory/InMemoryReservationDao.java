@@ -1,11 +1,13 @@
 package br.edu.ifsp.hotelsync.application.repository.inmemory;
 
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
+import br.edu.ifsp.hotelsync.domain.entities.reservation.ReservationStatus;
 import br.edu.ifsp.hotelsync.domain.persistence.dao.ReservationDao;
 import br.edu.ifsp.hotelsync.domain.usecases.reports.records.CheckInReport;
 import br.edu.ifsp.hotelsync.domain.usecases.reports.records.CheckOutReport;
 import br.edu.ifsp.hotelsync.domain.usecases.reports.records.DailyOccupationReport;
 import br.edu.ifsp.hotelsync.domain.usecases.reports.records.FinancialReport;
+import br.edu.ifsp.hotelsync.domain.persistence.dao.RoomDao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -56,25 +58,74 @@ public class InMemoryReservationDao implements ReservationDao {
     }
 
     @Override
-    public DailyOccupationReport getDailyOccupationReport(LocalDate initialDate, LocalDate finalDate) {
-//        Map.copyOf(reservations).entrySet().stream().filter(
-//                e -> !e.getValue().getCheckInDate().isBefore(initialDate) &&
-//                        !e.getValue().getCheckOutDate().isAfter(finalDate));
-        return null;
+    public DailyOccupationReport getDailyOccupationReport(LocalDate initialDate, LocalDate finalDate,
+                                                          RoomDao roomRepository) {
+        Map<LocalDate, Double> reports = new HashMap<>();
+        int totalRooms = roomRepository.getTotalRooms();
+
+        for (LocalDate date = initialDate; !date.isAfter(finalDate); date = date.plusDays(1)) {
+
+            LocalDate currentDate = date;
+            int occupiedRooms = (int) Map.copyOf(reservations).values().stream()
+                    .filter(reservation -> !currentDate.isBefore(reservation.getCheckInDate()) &&
+                            !currentDate.isAfter(reservation.getCheckOutDate()))
+                    .count();
+
+            double occupiedPercentage = (double) (occupiedRooms * 100) / totalRooms;
+
+            reports.put(date, occupiedPercentage);
+        }
+
+        return new DailyOccupationReport(reports);
     }
 
     @Override
     public CheckInReport getCheckInReport(LocalDate initialDate, LocalDate finalDate) {
-        return null;
+        Map<LocalDate, Integer> reports = new HashMap<>();
+
+        for (LocalDate date = initialDate; !date.isAfter(finalDate); date = date.plusDays(1)) {
+            LocalDate currentDate = date;
+            int counter = (int) Map.copyOf(reservations).values().stream()
+                    .filter(reservation -> reservation.getCheckInDate().equals(currentDate))
+                    .count();
+
+            reports.put(date, counter);
+        }
+
+        return new CheckInReport(reports);
     }
 
     @Override
     public CheckOutReport getCheckOutReport(LocalDate initialDate, LocalDate finalDate) {
-        return null;
+        Map<LocalDate, Integer> reports = new HashMap<>();
+
+        for (LocalDate date = initialDate; !date.isAfter(finalDate); date = date.plusDays(1)) {
+            LocalDate currentDate = date;
+            int counter = (int) Map.copyOf(reservations).values().stream()
+                    .filter(reservation -> reservation.getCheckOutDate().equals(currentDate))
+                    .count();
+
+            reports.put(date, counter);
+        }
+
+        return new CheckOutReport(reports);
     }
 
     @Override
     public FinancialReport getFinancialReport(LocalDate initialDate, LocalDate finalDate) {
-        return null;
+        Map<LocalDate, Double> reports = new HashMap<>();
+
+        for (LocalDate date = initialDate; !date.isAfter(finalDate); date = date.plusDays(1)) {
+            LocalDate currentDate = date;
+            double dailyTotal = Map.copyOf(reservations).values().stream()
+                    .filter(reservation -> reservation.getCheckOutDate().equals(currentDate) &&
+                            reservation.getReservationStatus() == ReservationStatus.FINISHED)
+                    .mapToDouble(reservation -> reservation.getPayment().getValue())
+                    .sum();
+
+            reports.put(date, dailyTotal);
+        }
+
+        return new FinancialReport(reports);
     }
 }

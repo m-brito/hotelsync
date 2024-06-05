@@ -10,7 +10,7 @@ import br.edu.ifsp.hotelsync.domain.usecases.reports.records.FinancialReport;
 import java.time.LocalDate;
 
 public interface ReservationDao extends Dao<Long, Reservation> {
-    DailyOccupationReport getDailyOccupationReport(LocalDate initialDate, LocalDate finalDate);
+    DailyOccupationReport getDailyOccupationReport(LocalDate initialDate, LocalDate finalDate, RoomDao roomRepository);
 
     CheckInReport getCheckInReport(LocalDate initialDate, LocalDate finalDate);
 
