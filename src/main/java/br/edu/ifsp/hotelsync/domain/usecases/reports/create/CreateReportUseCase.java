@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 public interface CreateReportUseCase {
 
-    record RequestModel(LocalDate initialDate, LocalDate finalDate, Exporter exportTo){}
+    record RequestModel(LocalDate initialDate, LocalDate finalDate){}
 
     Exportable createReport(RequestModel request);
 
