@@ -81,6 +81,7 @@ class ProductUseCaseImplTest {
         }
 
         @Test
+        @DisplayName("should successfully find a product")
         public void findValid(){
             long id = 10L;
             when(repository.findOneByKey(id)).thenReturn(createProduct(id));
@@ -89,6 +90,7 @@ class ProductUseCaseImplTest {
         }
 
         @Test
+        @DisplayName("should fail to find non existent product")
         public void findInvalid(){
             long id = 10L;
             when(repository.findOneByKey(id)).thenReturn(Optional.empty());

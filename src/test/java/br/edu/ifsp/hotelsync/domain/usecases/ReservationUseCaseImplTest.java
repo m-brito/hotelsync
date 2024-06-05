@@ -146,6 +146,7 @@ class ReservationUseCaseImplTest {
         }
 
         @Test
+        @DisplayName("should successfully find reservation")
         public void findValid(){
             long id = 10L;
             when(repository.findOneByKey(id)).thenReturn(createReservation(id));
@@ -154,6 +155,7 @@ class ReservationUseCaseImplTest {
         }
 
         @Test
+        @DisplayName("should fail to find reservation that does not exist")
         public void findInvalid(){
             long id = 10L;
             when(repository.findOneByKey(id)).thenReturn(Optional.empty());
