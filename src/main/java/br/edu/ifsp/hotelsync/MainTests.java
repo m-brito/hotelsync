@@ -9,13 +9,10 @@ import br.edu.ifsp.hotelsync.domain.entities.guest.Cpf;
 import br.edu.ifsp.hotelsync.domain.entities.guest.Guest;
 import br.edu.ifsp.hotelsync.domain.entities.guest.Phone;
 import br.edu.ifsp.hotelsync.domain.entities.product.Product;
-import br.edu.ifsp.hotelsync.domain.entities.report.exporter.Exporter;
-import br.edu.ifsp.hotelsync.domain.entities.report.exporter.PdfExporterImpl;
 import br.edu.ifsp.hotelsync.domain.entities.report.formatter.Formatter;
 import br.edu.ifsp.hotelsync.domain.entities.report.formatter.SimpleTextFormatter;
 import br.edu.ifsp.hotelsync.domain.entities.report.records.DailyOccupationReport;
 import br.edu.ifsp.hotelsync.domain.entities.report.records.Exportable;
-import br.edu.ifsp.hotelsync.domain.entities.report.records.FinancialReport;
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Payment;
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
 import br.edu.ifsp.hotelsync.domain.entities.room.Room;
@@ -137,7 +134,7 @@ public class MainTests {
         checkInUseCase.doCheckIn(new CheckInUseCase.RequestModel(reservation1.getId()));
         addConsumedProductUseCase.addConsumedProduct(new AddConsumedProductUseCase.RequestModel(reservation1.getId(), product1.getId(), 5));
 
-        checkOutUseCase.doCheckOut(new CheckOutUseCase.RequestModel(reservation1.getId()));
+        checkOutUseCase.doCheckOut(new CheckOutUseCase.RequestModel(reservation1.getId(), "Card"));
 
         Exportable dataToExport = createDailyOccupationReportUseCase.createReport(
                 new CreateReportUseCase.RequestModel(

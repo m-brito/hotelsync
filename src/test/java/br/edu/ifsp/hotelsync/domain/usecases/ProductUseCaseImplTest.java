@@ -150,7 +150,7 @@ class ProductUseCaseImplTest {
                     -20.0
             );
 
-            sut.updateProduct(request);
+            assertThrows(NoSuchElementException.class, () -> sut.updateProduct(request));
             verify(repository, never()).update(any());
         }
     }
