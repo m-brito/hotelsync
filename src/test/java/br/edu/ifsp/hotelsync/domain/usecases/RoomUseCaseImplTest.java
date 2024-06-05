@@ -8,6 +8,8 @@ import br.edu.ifsp.hotelsync.domain.usecases.room.create.CreateRoomUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.room.create.CreateRoomUseCaseImpl;
 import br.edu.ifsp.hotelsync.domain.usecases.room.find.FindOneRoomUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.room.find.FindOneRoomUseCaseImpl;
+import br.edu.ifsp.hotelsync.domain.usecases.room.update.UpdateRoomUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.room.update.UpdateRoomUseCaseImpl;
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -91,6 +93,7 @@ class RoomUseCaseImplTest {
         }
 
         @Test
+        @DisplayName("should find a room")
         public void findValid(){
             long id = 10L;
             when(repository.findOneByKey(id)).thenReturn(createRoom(id));
@@ -99,12 +102,64 @@ class RoomUseCaseImplTest {
         }
 
         @Test
+        @DisplayName("should not find nonexistent room")
         public void findInvalid(){
             long id = 10L;
             when(repository.findOneByKey(id)).thenReturn(Optional.empty());
 
             assertThrows(NoSuchElementException.class, () -> sut.findRoom(id));
         }
+    }
+
+    @Nested
+    @DisplayName("Update Use Case")
+    class UpdateUseCase{
+        public UpdateRoomUseCase sut;
+
+        @BeforeEach
+        public void setUp(){
+            sut = new UpdateRoomUseCaseImpl(repository);
+        }
+
+        @Test
+        @DisplayName("should update existing room")
+        public void updateValid(){
+            long id = 10L;
+            when(repository.existsByKey(id)).thenReturn(true);
+
+            UpdateRoomUseCase.RequestModel request = new UpdateRoomUseCase.RequestModel(
+                    id,
+                    20,
+                    1,
+                    "King",
+                    RoomCategory.STANDARD,
+                    "Real",
+                    RoomStatus.AVAILABLE,
+                    20L);
+
+            sut.updateRoom(request);
+            verify(repository).update(any());
+        }
+
+        @Test
+        @DisplayName("should not update room that doesn't exist")
+        public void updateNotFound(){
+            long id = 10L;
+            when(repository.existsByKey(id)).thenReturn(false);
+
+            UpdateRoomUseCase.RequestModel request = new UpdateRoomUseCase.RequestModel(
+                    id,
+                    20,
+                    1,
+                    "King",
+                    RoomCategory.STANDARD,
+                    "Real",
+                    RoomStatus.AVAILABLE,
+                    20L);
+
+            assertThrows(NoSuchElementException.class, () -> sut.updateRoom(request));
+        }
+
     }
 
 
