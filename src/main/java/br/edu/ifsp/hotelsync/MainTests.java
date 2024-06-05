@@ -65,9 +65,7 @@ public class MainTests {
         AddConsumedProductUseCaseImpl addConsumedProductUseCase = new AddConsumedProductUseCaseImpl(productDao, reservationDao);
         PdfExportUseCaseImpl pdfExport = new PdfExportUseCaseImpl();
 
-        Exporter exporterPdf = new PdfExporterImpl("relatorio.pdf");
         Formatter<LocalDate, Double, DailyOccupationReport> simpleFormatter = new SimpleTextFormatter<>();
-        Formatter<LocalDate, Double, FinancialReport> simpleFormatter2 = new SimpleTextFormatter<>();
 
 
         Room room1 = Room.createRoom(1, 2, "King", RoomCategory.EXECUTIVE, "Quarto executivo", RoomStatus.AVAILABLE, 15);
@@ -154,15 +152,9 @@ public class MainTests {
                         LocalDate.of(2024, 6, 11)
                 )
         );
-
-        Exportable dataToExport2 = createFinancialReportUseCase.createReport(
-                new CreateReportUseCase.RequestModel(
-                        LocalDate.of(2024, 6, 1),
-                        LocalDate.of(2024, 6, 11)
-                )
-        );
         PdfExportUseCase.RequestModel request = new PdfExportUseCase.RequestModel(dataToExport, simpleFormatter, "relatorio.pdf");
         pdfExport.exportPdf(request);
+
 
     }
 }
