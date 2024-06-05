@@ -4,7 +4,6 @@ import br.edu.ifsp.hotelsync.domain.entities.guest.Guest;
 import br.edu.ifsp.hotelsync.domain.entities.room.Room;
 import br.edu.ifsp.hotelsync.domain.usecases.utils.Notification;
 
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;

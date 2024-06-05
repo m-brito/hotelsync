@@ -1,6 +1,5 @@
 package br.edu.ifsp.hotelsync.domain.usecases.reports.create;
 
-import br.edu.ifsp.hotelsync.domain.entities.report.records.Exportable;
 import br.edu.ifsp.hotelsync.domain.entities.report.records.FinancialReport;
 import br.edu.ifsp.hotelsync.domain.persistence.dao.ReservationDao;
 
