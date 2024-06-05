@@ -1,6 +1,7 @@
 package br.edu.ifsp.hotelsync.domain.usecases.reports.create;
 
 import br.edu.ifsp.hotelsync.domain.entities.report.records.Exportable;
+import br.edu.ifsp.hotelsync.domain.entities.report.records.FinancialReport;
 import br.edu.ifsp.hotelsync.domain.persistence.dao.ReservationDao;
 
 public class CreateFinancialReportUseCase implements CreateReportUseCase {
@@ -12,7 +13,7 @@ public class CreateFinancialReportUseCase implements CreateReportUseCase {
     }
 
     @Override
-    public Exportable createReport(RequestModel request) {
+    public FinancialReport createReport(RequestModel request) {
         return reservationRepository.getFinancialReport(request.initialDate(), request.finalDate());
     }
 }
