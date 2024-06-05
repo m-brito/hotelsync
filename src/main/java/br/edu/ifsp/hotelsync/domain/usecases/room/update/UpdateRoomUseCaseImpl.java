@@ -4,6 +4,7 @@ import br.edu.ifsp.hotelsync.domain.entities.room.Room;
 import br.edu.ifsp.hotelsync.domain.persistence.dao.RoomDao;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 public class UpdateRoomUseCaseImpl implements UpdateRoomUseCase{
 
@@ -12,6 +13,7 @@ public class UpdateRoomUseCaseImpl implements UpdateRoomUseCase{
     public UpdateRoomUseCaseImpl(RoomDao repository) {
         this.repository = repository;
     }
+
 
     @Override
     public void updateRoom(RequestModel requestModel) {

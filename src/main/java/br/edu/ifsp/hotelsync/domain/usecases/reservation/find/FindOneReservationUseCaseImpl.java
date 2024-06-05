@@ -6,11 +6,11 @@ import br.edu.ifsp.hotelsync.domain.persistence.dao.ReservationDao;
 
 import java.util.NoSuchElementException;
 
-public class FindOneUseCaseImpl implements FindOneReservationUseCase{
+public class FindOneReservationUseCaseImpl implements FindOneReservationUseCase{
 
     private final ReservationDao repository;
 
-    public FindOneUseCaseImpl(ReservationDao repository) {
+    public FindOneReservationUseCaseImpl(ReservationDao repository) {
         this.repository = repository;
     }
 
