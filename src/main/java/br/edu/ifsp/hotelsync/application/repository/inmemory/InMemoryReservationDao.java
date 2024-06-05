@@ -64,11 +64,16 @@ public class InMemoryReservationDao implements ReservationDao {
         int totalRooms = roomRepository.getTotalRooms();
 
         for (LocalDate date = initialDate; !date.isAfter(finalDate); date = date.plusDays(1)) {
-
             LocalDate currentDate = date;
             int occupiedRooms = (int) Map.copyOf(reservations).values().stream()
-                    .filter(reservation -> !currentDate.isBefore(reservation.getCheckInDate())
-                            && !currentDate.isAfter(reservation.getCheckOutDate()))
+                    .filter(reservation -> {
+                        LocalDate checkInDate = reservation.getCheckInDate();
+                        LocalDate checkOutDate = reservation.getCheckOutDate();
+                        if (checkInDate == null || checkOutDate == null) {
+                            return false;
+                        }
+                        return !currentDate.isBefore(checkInDate) && !currentDate.isAfter(checkOutDate);
+                    })
                     .count();
 
             double occupiedPercentage = (double) (occupiedRooms * 100) / totalRooms;
@@ -78,6 +83,7 @@ public class InMemoryReservationDao implements ReservationDao {
 
         return new DailyOccupationReport(reports);
     }
+
 
     @Override
     public CheckInReport getCheckInReport(LocalDate initialDate, LocalDate finalDate) {
