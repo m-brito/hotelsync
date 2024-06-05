@@ -14,13 +14,7 @@ public interface CreateGuestUseCase {
             String state,
             String cep,
             String district,
-            String complement,
-            String bank,
-            String account,
-            String agency,
-            String cardDueDate,
-            String cardOwner,
-            String cardNumber
+            String complement
     ) {}
 
     record GuestRequestModel(
