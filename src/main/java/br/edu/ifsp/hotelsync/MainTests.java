@@ -15,6 +15,7 @@ import br.edu.ifsp.hotelsync.domain.entities.report.formatter.Formatter;
 import br.edu.ifsp.hotelsync.domain.entities.report.formatter.SimpleTextFormatter;
 import br.edu.ifsp.hotelsync.domain.entities.report.records.DailyOccupationReport;
 import br.edu.ifsp.hotelsync.domain.entities.report.records.Exportable;
+import br.edu.ifsp.hotelsync.domain.entities.report.records.FinancialReport;
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Payment;
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
 import br.edu.ifsp.hotelsync.domain.entities.room.Room;
@@ -29,11 +30,14 @@ import br.edu.ifsp.hotelsync.domain.usecases.guest.create.CreateGuestUseCaseImpl
 import br.edu.ifsp.hotelsync.domain.usecases.product.create.CreateProductUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.product.create.CreateProductUseCaseImpl;
 import br.edu.ifsp.hotelsync.domain.usecases.reports.create.CreateDailyOccupationReportUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.reports.create.CreateFinancialReportUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reports.create.CreateReportUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.create.CreateReservationUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.create.CreateReservationUseCaseImpl;
+import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.implementation.AddConsumedProductUseCaseImpl;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.implementation.CheckInUseCaseImpl;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.implementation.CheckOutUseCaseImpl;
+import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.AddConsumedProductUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.CheckInUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.CheckOutUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.room.create.CreateRoomUseCase;
@@ -55,9 +59,13 @@ public class MainTests {
         CreateDailyOccupationReportUseCase createDailyOccupationReportUseCase = new CreateDailyOccupationReportUseCase(roomDao, reservationDao);
         CheckInUseCaseImpl checkInUseCase = new CheckInUseCaseImpl(reservationDao);
         CheckOutUseCaseImpl checkOutUseCase = new CheckOutUseCaseImpl(reservationDao);
+        CreateFinancialReportUseCase createFinancialReportUseCase = new CreateFinancialReportUseCase(reservationDao);
+        AddConsumedProductUseCaseImpl addConsumedProductUseCase = new AddConsumedProductUseCaseImpl(productDao, reservationDao);
 
         Exporter exporterPdf = new PdfExporterImpl("relatorio.pdf");
         Formatter<LocalDate, Double, DailyOccupationReport> simpleFormatter = new SimpleTextFormatter<>();
+        Formatter<LocalDate, Double, FinancialReport> simpleFormatter2 = new SimpleTextFormatter<>();
+
 
         Room room1 = Room.createRoom(1, 2, "King", RoomCategory.EXECUTIVE, "Quarto executivo", RoomStatus.AVAILABLE, 15);
         createRoomUseCase.createRoom(
@@ -73,12 +81,12 @@ public class MainTests {
         );
 
         Product product1 = Product.createProduct("Coca-Cola", 12.50);
-        createProductUseCase.createProduct(
+        product1.setId(createProductUseCase.createProduct(
                 new CreateProductUseCase.RequestModel(
                         product1.getDescription(),
                         product1.getPrice()
                 )
-        );
+        ));
 
         Guest owner1 = Guest.createOwner(
                 "Mauricio",
@@ -118,7 +126,7 @@ public class MainTests {
                 room1,
                 payment1
         );
-        createReservationUseCase.createReservation(
+        reservation1.setId(createReservationUseCase.createReservation(
                 new CreateReservationUseCase.RequestModel(
                         reservation1.getStartDate(),
                         reservation1.getCheckInDate(),
@@ -129,11 +137,12 @@ public class MainTests {
                         reservation1.getReservationStatus(),
                         reservation1.getGuests(),
                         reservation1.getConsumedProducts(),
-                        reservation1.getPayment()
+                        reservation1.getPayment())
                 )
         );
-        System.out.println(reservation1.getId());
         checkInUseCase.doCheckIn(new CheckInUseCase.RequestModel(reservation1.getId()));
+        addConsumedProductUseCase.addConsumedProduct(new AddConsumedProductUseCase.RequestModel(reservation1.getId(), product1.getId(), 5));
+
         checkOutUseCase.doCheckOut(new CheckOutUseCase.RequestModel(reservation1.getId()));
 
         Exportable dataToExport = createDailyOccupationReportUseCase.createReport(
@@ -143,6 +152,13 @@ public class MainTests {
                 )
         );
 
-        exporterPdf.export(dataToExport, simpleFormatter);
+        Exportable dataToExport2 = createFinancialReportUseCase.createReport(
+                new CreateReportUseCase.RequestModel(
+                        LocalDate.of(2024, 6, 1),
+                        LocalDate.of(2024, 6, 11)
+                )
+        );
+
+        exporterPdf.export(dataToExport2, simpleFormatter2);
     }
 }
