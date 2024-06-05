@@ -33,8 +33,8 @@ public class Reservation {
     }
 
     public static Reservation createReservation(LocalDate startDate, LocalDate endDate,
-                                         Guest owner, Room room, Payment payment){
-        return new Reservation(startDate, endDate, owner, room, payment);
+                                         Guest owner, Room room){
+        return new Reservation(startDate, endDate, owner, room);
     }
 
     private Reservation(Long id,
@@ -65,13 +65,11 @@ public class Reservation {
     private Reservation(LocalDate startDate,
                        LocalDate endDate,
                        Guest owner,
-                       Room room,
-                       Payment payment) {
+                       Room room) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.owner = owner;
         this.room = room;
-        this.payment = payment;
         validate();
     }
 

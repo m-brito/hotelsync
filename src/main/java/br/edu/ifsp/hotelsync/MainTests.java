@@ -32,6 +32,8 @@ import br.edu.ifsp.hotelsync.domain.usecases.product.create.CreateProductUseCase
 import br.edu.ifsp.hotelsync.domain.usecases.reports.create.CreateDailyOccupationReportUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reports.create.CreateFinancialReportUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reports.create.CreateReportUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.reports.export.PdfExportUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.reports.export.PdfExportUseCaseImpl;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.create.CreateReservationUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.create.CreateReservationUseCaseImpl;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.implementation.AddConsumedProductUseCaseImpl;
@@ -61,10 +63,9 @@ public class MainTests {
         CheckOutUseCaseImpl checkOutUseCase = new CheckOutUseCaseImpl(reservationDao);
         CreateFinancialReportUseCase createFinancialReportUseCase = new CreateFinancialReportUseCase(reservationDao);
         AddConsumedProductUseCaseImpl addConsumedProductUseCase = new AddConsumedProductUseCaseImpl(productDao, reservationDao);
+        PdfExportUseCaseImpl pdfExport = new PdfExportUseCaseImpl();
 
-        Exporter exporterPdf = new PdfExporterImpl("relatorio.pdf");
         Formatter<LocalDate, Double, DailyOccupationReport> simpleFormatter = new SimpleTextFormatter<>();
-        Formatter<LocalDate, Double, FinancialReport> simpleFormatter2 = new SimpleTextFormatter<>();
 
 
         Room room1 = Room.createRoom(1, 2, "King", RoomCategory.EXECUTIVE, "Quarto executivo", RoomStatus.AVAILABLE, 15);
@@ -123,21 +124,14 @@ public class MainTests {
                 LocalDate.of(2024, 6, 5),
                 LocalDate.of(2024, 6, 10),
                 owner1,
-                room1,
-                payment1
+                room1
         );
         reservation1.setId(createReservationUseCase.createReservation(
                 new CreateReservationUseCase.RequestModel(
                         reservation1.getStartDate(),
-                        reservation1.getCheckInDate(),
                         reservation1.getEndDate(),
-                        reservation1.getCheckOutDate(),
                         reservation1.getOwner(),
-                        reservation1.getRoom(),
-                        reservation1.getReservationStatus(),
-                        reservation1.getGuests(),
-                        reservation1.getConsumedProducts(),
-                        reservation1.getPayment())
+                        reservation1.getRoom())
                 )
         );
         checkInUseCase.doCheckIn(new CheckInUseCase.RequestModel(reservation1.getId()));
@@ -151,14 +145,9 @@ public class MainTests {
                         LocalDate.of(2024, 6, 11)
                 )
         );
+        PdfExportUseCase.RequestModel request = new PdfExportUseCase.RequestModel(dataToExport, simpleFormatter, "relatorio.pdf");
+        pdfExport.exportPdf(request);
 
-        Exportable dataToExport2 = createFinancialReportUseCase.createReport(
-                new CreateReportUseCase.RequestModel(
-                        LocalDate.of(2024, 6, 1),
-                        LocalDate.of(2024, 6, 11)
-                )
-        );
 
-        exporterPdf.export(dataToExport2, simpleFormatter2);
     }
 }

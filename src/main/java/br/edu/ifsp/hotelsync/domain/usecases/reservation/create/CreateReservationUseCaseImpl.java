@@ -17,8 +17,7 @@ public class CreateReservationUseCaseImpl implements CreateReservationUseCase{
                 request.startDate(),
                 request.endDate(),
                 request.owner(),
-                request.room(),
-                request.payment()
+                request.room()
             );
         reservation.addGuest(reservation.getOwner());
 
