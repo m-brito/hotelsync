@@ -3,10 +3,10 @@ package br.edu.ifsp.hotelsync.application.repository.inmemory;
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
 import br.edu.ifsp.hotelsync.domain.entities.reservation.ReservationStatus;
 import br.edu.ifsp.hotelsync.domain.persistence.dao.ReservationDao;
-import br.edu.ifsp.hotelsync.domain.usecases.reports.records.CheckInReport;
-import br.edu.ifsp.hotelsync.domain.usecases.reports.records.CheckOutReport;
-import br.edu.ifsp.hotelsync.domain.usecases.reports.records.DailyOccupationReport;
-import br.edu.ifsp.hotelsync.domain.usecases.reports.records.FinancialReport;
+import br.edu.ifsp.hotelsync.domain.entities.report.records.CheckInReport;
+import br.edu.ifsp.hotelsync.domain.entities.report.records.CheckOutReport;
+import br.edu.ifsp.hotelsync.domain.entities.report.records.DailyOccupationReport;
+import br.edu.ifsp.hotelsync.domain.entities.report.records.FinancialReport;
 import br.edu.ifsp.hotelsync.domain.persistence.dao.RoomDao;
 
 import java.sql.ResultSet;
@@ -67,8 +67,8 @@ public class InMemoryReservationDao implements ReservationDao {
 
             LocalDate currentDate = date;
             int occupiedRooms = (int) Map.copyOf(reservations).values().stream()
-                    .filter(reservation -> !currentDate.isBefore(reservation.getCheckInDate()) &&
-                            !currentDate.isAfter(reservation.getCheckOutDate()))
+                    .filter(reservation -> !currentDate.isBefore(reservation.getCheckInDate())
+                            && !currentDate.isAfter(reservation.getCheckOutDate()))
                     .count();
 
             double occupiedPercentage = (double) (occupiedRooms * 100) / totalRooms;
@@ -84,6 +84,7 @@ public class InMemoryReservationDao implements ReservationDao {
         Map<LocalDate, Integer> reports = new HashMap<>();
 
         for (LocalDate date = initialDate; !date.isAfter(finalDate); date = date.plusDays(1)) {
+
             LocalDate currentDate = date;
             int counter = (int) Map.copyOf(reservations).values().stream()
                     .filter(reservation -> reservation.getCheckInDate().equals(currentDate))

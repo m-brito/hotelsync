@@ -1,9 +1,9 @@
-package br.edu.ifsp.hotelsync.domain.usecases.reports.records;
+package br.edu.ifsp.hotelsync.domain.entities.report.records;
 
 import java.time.LocalDate;
 import java.util.Map;
 
-public record CheckOutReport(Map<LocalDate, Integer> report) implements Exportable<LocalDate, Integer> {
+public record CheckInReport(Map<LocalDate, Integer> report) implements Exportable<LocalDate, Integer> {
 
     @Override
     public Map<LocalDate, Integer> getReport() {
@@ -12,6 +12,6 @@ public record CheckOutReport(Map<LocalDate, Integer> report) implements Exportab
 
     @Override
     public String getParameterName() {
-        return "Check Out Number";
+        return "Check In Number";
     }
 }

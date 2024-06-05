@@ -1,9 +1,9 @@
-package br.edu.ifsp.hotelsync.domain.usecases.reports.records;
+package br.edu.ifsp.hotelsync.domain.entities.report.records;
 
 import java.time.LocalDate;
 import java.util.Map;
 
-public record DailyOccupationReport(Map<LocalDate, Double> report) implements Exportable<LocalDate, Double> {
+public record FinancialReport(Map<LocalDate, Double> report) implements Exportable<LocalDate, Double> {
 
     @Override
     public Map<LocalDate, Double> getReport() {
@@ -12,7 +12,6 @@ public record DailyOccupationReport(Map<LocalDate, Double> report) implements Ex
 
     @Override
     public String getParameterName() {
-        return "Occupation";
+        return "Earnings";
     }
 }
-

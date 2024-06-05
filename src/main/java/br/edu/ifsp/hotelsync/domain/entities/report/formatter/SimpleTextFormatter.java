@@ -1,6 +1,6 @@
-package br.edu.ifsp.hotelsync.domain.usecases.reports.formatter;
+package br.edu.ifsp.hotelsync.domain.entities.report.formatter;
 
-import br.edu.ifsp.hotelsync.domain.usecases.reports.records.Exportable;
+import br.edu.ifsp.hotelsync.domain.entities.report.records.Exportable;
 
 public class SimpleTextFormatter<K, V, T extends Exportable<K, V>> implements Formatter<K, V, T>{
 

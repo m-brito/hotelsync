@@ -1,4 +1,4 @@
-package br.edu.ifsp.hotelsync.domain.usecases.reports.records;
+package br.edu.ifsp.hotelsync.domain.entities.report.records;
 
 import java.util.Map;
 

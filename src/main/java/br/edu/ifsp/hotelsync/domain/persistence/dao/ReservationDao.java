@@ -2,10 +2,10 @@ package br.edu.ifsp.hotelsync.domain.persistence.dao;
 
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
 import br.edu.ifsp.hotelsync.domain.persistence.util.Dao;
-import br.edu.ifsp.hotelsync.domain.usecases.reports.records.CheckInReport;
-import br.edu.ifsp.hotelsync.domain.usecases.reports.records.CheckOutReport;
-import br.edu.ifsp.hotelsync.domain.usecases.reports.records.DailyOccupationReport;
-import br.edu.ifsp.hotelsync.domain.usecases.reports.records.FinancialReport;
+import br.edu.ifsp.hotelsync.domain.entities.report.records.CheckInReport;
+import br.edu.ifsp.hotelsync.domain.entities.report.records.CheckOutReport;
+import br.edu.ifsp.hotelsync.domain.entities.report.records.DailyOccupationReport;
+import br.edu.ifsp.hotelsync.domain.entities.report.records.FinancialReport;
 
 import java.time.LocalDate;
 
