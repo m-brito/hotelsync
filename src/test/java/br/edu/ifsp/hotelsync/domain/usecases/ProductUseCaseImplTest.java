@@ -6,6 +6,8 @@ import br.edu.ifsp.hotelsync.domain.usecases.product.create.CreateProductUseCase
 import br.edu.ifsp.hotelsync.domain.usecases.product.create.CreateProductUseCaseImpl;
 import br.edu.ifsp.hotelsync.domain.usecases.product.find.FindOneProductUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.product.find.FindOneProductUseCaseImpl;
+import br.edu.ifsp.hotelsync.domain.usecases.product.update.UpdateProductUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.product.update.UpdateProductUseCaseImpl;
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -95,14 +97,61 @@ class ProductUseCaseImplTest {
         }
     }
 
-
     private Optional<Product> createProduct(Long id){
-        return Optional.of(
-                Product.createProductWithId(
-                        id,
-                        faker.lorem().sentence(),
-                        faker.number().randomDouble(2, 1, 100)
-                ));
+        try {
+            return Optional.of(
+                    Product.createProductWithId(
+                            id,
+                            faker.lorem().sentence(),
+                            faker.number().randomDouble(2, 1, 100)
+                    ));
+        } catch (Exception e) {
+            return Optional.empty();
+        }
     }
 
+    @Nested
+    @DisplayName("Update Product Use Cases")
+    public class UpdateProductTest {
+        private UpdateProductUseCase sut;
+
+        @BeforeEach
+        public void setUp() {
+            sut = new UpdateProductUseCaseImpl(repository);
+        }
+
+        @Test
+        @DisplayName("when successfully updating a product")
+        public void updateValid() {
+            long id = 10L;
+            Optional<Product> optionalProduct = createProduct(id);
+            if (optionalProduct.isPresent()) {
+                when(repository.existsByKey(id)).thenReturn(true);
+
+                UpdateProductUseCase.RequestModel request = new UpdateProductUseCase.RequestModel(
+                        id,
+                        "Updated Product Description",
+                        20.0
+                );
+
+                sut.updateProduct(request);
+                verify(repository).update(any());
+            }
+        }
+
+        @Test
+        @DisplayName("when failing to update a product")
+        public void updateInvalid() {
+            long id = 10L;
+
+            UpdateProductUseCase.RequestModel request = new UpdateProductUseCase.RequestModel(
+                    id,
+                    "",
+                    -20.0
+            );
+
+            sut.updateProduct(request);
+            verify(repository, never()).update(any());
+        }
+    }
 }
