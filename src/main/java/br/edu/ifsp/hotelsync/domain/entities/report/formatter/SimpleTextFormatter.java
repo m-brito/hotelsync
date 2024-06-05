@@ -8,8 +8,7 @@ public class SimpleTextFormatter<K, V, T extends Exportable<K, V>> implements Fo
     public String format(T report) {
         StringBuilder sb = new StringBuilder();
         sb.append(report.getClass().getSimpleName()).append("\n");
-
-        report.getReport().forEach((v, k) -> sb.append("Date: ")
+        report.getReport().forEach((k, v) -> sb.append("Date: ")
                 .append(k)
                 .append(" ")
                 .append(report.getParameterName())
