@@ -1,4 +1,4 @@
-package br.edu.ifsp.hotelsync.domain.usecases.product;
+package br.edu.ifsp.hotelsync.domain.usecases;
 
 import br.edu.ifsp.hotelsync.domain.entities.product.Product;
 import br.edu.ifsp.hotelsync.domain.persistence.dao.ProductDao;

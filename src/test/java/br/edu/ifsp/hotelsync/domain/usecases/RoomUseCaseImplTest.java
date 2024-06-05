@@ -1,4 +1,4 @@
-package br.edu.ifsp.hotelsync.domain.usecases.room;
+package br.edu.ifsp.hotelsync.domain.usecases;
 
 import br.edu.ifsp.hotelsync.domain.entities.room.Room;
 import br.edu.ifsp.hotelsync.domain.entities.room.RoomCategory;

@@ -1,4 +1,4 @@
-package br.edu.ifsp.hotelsync.domain.usecases.reservation;
+package br.edu.ifsp.hotelsync.domain.usecases;
 
 import br.edu.ifsp.hotelsync.domain.entities.guest.Guest;
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
