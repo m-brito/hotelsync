@@ -123,21 +123,14 @@ public class MainTests {
                 LocalDate.of(2024, 6, 5),
                 LocalDate.of(2024, 6, 10),
                 owner1,
-                room1,
-                payment1
+                room1
         );
         reservation1.setId(createReservationUseCase.createReservation(
                 new CreateReservationUseCase.RequestModel(
                         reservation1.getStartDate(),
-                        reservation1.getCheckInDate(),
                         reservation1.getEndDate(),
-                        reservation1.getCheckOutDate(),
                         reservation1.getOwner(),
-                        reservation1.getRoom(),
-                        reservation1.getReservationStatus(),
-                        reservation1.getGuests(),
-                        reservation1.getConsumedProducts(),
-                        reservation1.getPayment())
+                        reservation1.getRoom())
                 )
         );
         checkInUseCase.doCheckIn(new CheckInUseCase.RequestModel(reservation1.getId()));
