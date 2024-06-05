@@ -12,7 +12,7 @@ public class CreateReservationUseCaseImpl implements CreateReservationUseCase{
     }
 
     @Override
-    public void createReservation(RequestModel request) {
+    public Long createReservation(RequestModel request) {
         Reservation reservation = Reservation.createReservation(
                 request.startDate(),
                 request.endDate(),
@@ -22,6 +22,6 @@ public class CreateReservationUseCaseImpl implements CreateReservationUseCase{
             );
         reservation.addGuest(reservation.getOwner());
 
-        repository.save(reservation);
+        return repository.save(reservation);
     }
 }

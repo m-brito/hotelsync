@@ -22,5 +22,5 @@ public interface CreateReservationUseCase {
             List<ConsumedProduct> consumedProducts,
             Payment payment
             ) {}
-    void createReservation(CreateReservationUseCase.RequestModel request);
+    Long createReservation(CreateReservationUseCase.RequestModel request);
 }

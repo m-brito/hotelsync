@@ -32,6 +32,10 @@ import br.edu.ifsp.hotelsync.domain.usecases.reports.create.CreateDailyOccupatio
 import br.edu.ifsp.hotelsync.domain.usecases.reports.create.CreateReportUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.create.CreateReservationUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.create.CreateReservationUseCaseImpl;
+import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.implementation.CheckInUseCaseImpl;
+import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.implementation.CheckOutUseCaseImpl;
+import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.CheckInUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.CheckOutUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.room.create.CreateRoomUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.room.create.CreateRoomUseCaseImpl;
 
@@ -49,6 +53,8 @@ public class MainTests {
         CreateReservationUseCase createReservationUseCase = new CreateReservationUseCaseImpl(reservationDao);
         CreateRoomUseCase createRoomUseCase = new CreateRoomUseCaseImpl(roomDao);
         CreateDailyOccupationReportUseCase createDailyOccupationReportUseCase = new CreateDailyOccupationReportUseCase(roomDao, reservationDao);
+        CheckInUseCaseImpl checkInUseCase = new CheckInUseCaseImpl(reservationDao);
+        CheckOutUseCaseImpl checkOutUseCase = new CheckOutUseCaseImpl(reservationDao);
 
         Exporter exporterPdf = new PdfExporterImpl("relatorio.pdf");
         Formatter<LocalDate, Double, DailyOccupationReport> simpleFormatter = new SimpleTextFormatter<>();
@@ -126,11 +132,14 @@ public class MainTests {
                         reservation1.getPayment()
                 )
         );
+        System.out.println(reservation1.getId());
+        checkInUseCase.doCheckIn(new CheckInUseCase.RequestModel(reservation1.getId()));
+        checkOutUseCase.doCheckOut(new CheckOutUseCase.RequestModel(reservation1.getId()));
 
         Exportable dataToExport = createDailyOccupationReportUseCase.createReport(
                 new CreateReportUseCase.RequestModel(
                         LocalDate.of(2024, 6, 1),
-                        LocalDate.of(2025, 6, 11)
+                        LocalDate.of(2024, 6, 11)
                 )
         );
 
