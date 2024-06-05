@@ -76,12 +76,18 @@ public class Reservation {
     }
 
     public void checkIn(){
+        if (LocalDate.now().isBefore(LocalDate.now())) {
+            throw new IllegalStateException("Check-in cannot be done before the start date of the reservation.");
+        }
         checkInDate = LocalDate.now();
         room.turnOccupied();
         reservationStatus = ReservationStatus.ACTIVE;
     }
 
     public void checkOut(String paymentMethod){
+        if (checkInDate == null) {
+            throw new IllegalStateException("Check-out cannot be done before check-in.");
+        }
         checkOutDate = LocalDate.now();
         room.turnAvailable();
         payment = new Payment(calculateTotalToPay(), checkOutDate, paymentMethod);
