@@ -1,5 +1,6 @@
 package br.edu.ifsp.hotelsync.domain.usecases.reports.create;
 
+import br.edu.ifsp.hotelsync.domain.entities.report.records.DailyOccupationReport;
 import br.edu.ifsp.hotelsync.domain.entities.report.records.Exportable;
 import br.edu.ifsp.hotelsync.domain.persistence.dao.ReservationDao;
 import br.edu.ifsp.hotelsync.domain.persistence.dao.RoomDao;
@@ -15,7 +16,7 @@ public class CreateDailyOccupationReportUseCase implements CreateReportUseCase {
     }
 
     @Override
-    public Exportable createReport(RequestModel request) {
+    public DailyOccupationReport createReport(RequestModel request) {
         return reservationRepository.getDailyOccupationReport(
                 request.initialDate(), request.finalDate(), roomRepository);
     }
