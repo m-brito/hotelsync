@@ -3,10 +3,10 @@ package br.edu.ifsp.hotelsync.domain.usecases.reports.records;
 import java.time.LocalDate;
 import java.util.Map;
 
-public record CheckInReport(Map<LocalDate, Double> report) implements Exportable<LocalDate, Double> {
+public record CheckInReport(Map<LocalDate, Integer> report) implements Exportable<LocalDate, Integer> {
 
     @Override
-    public Map<LocalDate, Double> getReport() {
+    public Map<LocalDate, Integer> getReport() {
         return report;
     }
 
