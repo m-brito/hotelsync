@@ -4,8 +4,8 @@ import br.edu.ifsp.hotelsync.domain.entities.guest.Guest;
 import br.edu.ifsp.hotelsync.domain.entities.room.Room;
 import br.edu.ifsp.hotelsync.domain.usecases.utils.Notification;
 
-import java.time.Duration;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -101,15 +101,14 @@ public class Reservation {
             throw new IllegalArgumentException(notification.getErrorMessage());
     }
 
-    private double calculateTotalToPay(){
-        double productTotalCost =
-                consumedProducts
-                        .stream()
-                        .mapToDouble(consumedProduct ->
-                                consumedProduct.getProduct().getPrice() * consumedProduct.getQuantity())
-                        .sum();
+    private double calculateTotalToPay() {
+        double productTotalCost = consumedProducts
+                .stream()
+                .mapToDouble(consumedProduct ->
+                        consumedProduct.getProduct().getPrice() * consumedProduct.getQuantity())
+                .sum();
         final double roomValue = room.getRoomCategory().getBasePrice();
-        final int totalDays = (int) Duration.between(this.startDate, this.endDate).toDays();
+        final int totalDays = (int) ChronoUnit.DAYS.between(this.startDate, this.endDate);
         return (roomValue * totalDays) + productTotalCost;
     }
 

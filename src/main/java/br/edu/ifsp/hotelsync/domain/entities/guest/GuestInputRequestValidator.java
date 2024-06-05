@@ -30,8 +30,6 @@ public class GuestInputRequestValidator extends Validator<Guest> {
 
         if(guest.getCpf() == null)
             notification.addError(" Reservation Owners must register CPF ");
-        if(guest.getCpf().getValue().length() != 11)
-            notification.addError("CPF must be 11 characters in length");
 
         return notification;
     }
