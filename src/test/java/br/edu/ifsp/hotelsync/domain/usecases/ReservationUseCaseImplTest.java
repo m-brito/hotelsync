@@ -8,7 +8,7 @@ import br.edu.ifsp.hotelsync.domain.usecases.reservation.create.CreateReservatio
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.create.CreateReservationUseCaseImpl;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.find.FindOneReservationUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.find.FindOneReservationUseCaseImpl;
-import com.github.javafaker.Faker;
+//import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -33,57 +33,177 @@ class ReservationUseCaseImplTest {
     @Mock
     ReservationDao repository;
 
-    Faker faker = new Faker();
-
     @Nested
     @DisplayName("Create Reservation Use Case")
     class CreateReservationTest {
-
+        private LocalDate beginOfReservation;
         private CreateReservationUseCase sut;
 
         @BeforeEach
         void setUp(){
             sut = new CreateReservationUseCaseImpl(repository);
+            beginOfReservation = LocalDate.now();
+
         }
 
-        @Test
-        @DisplayName("when successfully creating a reservation")
-        public void createValid(){
-            CreateReservationUseCase.RequestModel request = new CreateReservationUseCase.RequestModel(
-                    LocalDate.now(),
-                    LocalDate.now(),
-                    LocalDate.now().plusDays(5),
-                    LocalDate.now().plusDays(5),
-                    owner,
-                    room,
-                    null,
-                    null,
-                    null,
-                    null
-            );
+        @Nested
+        @DisplayName("invalid reservation tests")
+        class ValidCreations{
 
-            sut.createReservation(request);
-            verify(repository).save(any());
+            @Test
+            @DisplayName("Reservation Without Check-In and Check-out")
+            public void createReservationWithoutCheckInAndCheckOut(){
+                CreateReservationUseCase.RequestModel request = new CreateReservationUseCase.RequestModel(
+                        beginOfReservation,
+                        null,
+                        beginOfReservation.plusDays(5),
+                        null,
+                        owner,
+                        room,
+                        null,
+                        null,
+                        null,
+                        null
+                );
+
+                sut.createReservation(request);
+                verify(repository).save(any());
+            }
+            @Test
+            @DisplayName("Reservation Without Check-out")
+            public void createReservationWithoutCheckOut(){
+                CreateReservationUseCase.RequestModel request = new CreateReservationUseCase.RequestModel(
+                        beginOfReservation,
+                        beginOfReservation,
+                        beginOfReservation.plusDays(5),
+                        null,
+                        owner,
+                        room,
+                        null,
+                        null,
+                        null,
+                        null
+                );
+
+                sut.createReservation(request);
+                verify(repository).save(any());
+            }
+            @Test
+            @DisplayName("Reservation Without Check-out")
+            public void createCompleteReservation(){
+                CreateReservationUseCase.RequestModel request = new CreateReservationUseCase.RequestModel(
+                        beginOfReservation,
+                        beginOfReservation,
+                        beginOfReservation.plusDays(5),
+                        null,
+                        owner,
+                        room,
+                        null,
+                        null,
+                        null,
+                        null
+                );
+
+                sut.createReservation(request);
+                verify(repository).save(any());
+            }
         }
 
-        @Test
-        @DisplayName("when failing to create a reservation")
-        public void createInvalid(){
-            CreateReservationUseCase.RequestModel request = new CreateReservationUseCase.RequestModel(
-                    LocalDate.now(),
-                    LocalDate.now().minusDays(5),
-                    LocalDate.now().minusDays(5),
-                    LocalDate.now().minusDays(5),
-                    owner,
-                    room,
-                    null,
-                    null,
-                    null,
-                    null
-            );
+        @Nested
+        @DisplayName("invalid reservation tests")
+        class InvalidCreations{
+            @Test
+            @DisplayName("create reservation without owner")
+            public void createReservationWithoutOwner(){
+                CreateReservationUseCase.RequestModel request = new CreateReservationUseCase.RequestModel(
+                        beginOfReservation,
+                        beginOfReservation,
+                        beginOfReservation.plusDays(5),
+                        beginOfReservation.plusDays(5),
+                        null,
+                        room,
+                        null,
+                        null,
+                        null,
+                        null
+                );
 
-            assertThrows(IllegalArgumentException.class, () -> sut.createReservation(request));
+                assertThrows(IllegalArgumentException.class, () -> sut.createReservation(request));
+            }
+            @Test
+            @DisplayName("create reservation without room")
+            public void createReservationWithoutRoom(){
+                CreateReservationUseCase.RequestModel request = new CreateReservationUseCase.RequestModel(
+                        beginOfReservation,
+                        beginOfReservation,
+                        beginOfReservation.plusDays(5),
+                        beginOfReservation.plusDays(5),
+                        owner,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                );
+
+                assertThrows(IllegalArgumentException.class, () -> sut.createReservation(request));
+            }
+            @Test
+            @DisplayName("create reservation without start date")
+            public void createReservationWithoutStartDate(){
+                CreateReservationUseCase.RequestModel request = new CreateReservationUseCase.RequestModel(
+                       null,
+                        beginOfReservation,
+                        beginOfReservation.plusDays(5),
+                        beginOfReservation.plusDays(5),
+                        owner,
+                        room,
+                        null,
+                        null,
+                        null,
+                        null
+                );
+
+                assertThrows(IllegalArgumentException.class, () -> sut.createReservation(request));
+            }
+            @Test
+            @DisplayName("create reservation without end date")
+            public void createReservationWithoutEndDate(){
+                CreateReservationUseCase.RequestModel request = new CreateReservationUseCase.RequestModel(
+                        beginOfReservation,
+                        beginOfReservation,
+                        null,
+                        beginOfReservation.plusDays(5),
+                        owner,
+                        room,
+                        null,
+                        null,
+                        null,
+                        null
+                );
+
+                assertThrows(IllegalArgumentException.class, () -> sut.createReservation(request));
+            }
+            @Test
+            @DisplayName("create reservation with check-out but no check-in")
+            public void ReservationHasCheckOutButNoCheckIn(){
+                CreateReservationUseCase.RequestModel request = new CreateReservationUseCase.RequestModel(
+                        beginOfReservation,
+                       null,
+                        beginOfReservation.plusDays(5),
+                        beginOfReservation.plusDays(5),
+                        owner,
+                        room,
+                        null,
+                        null,
+                        null,
+                        null
+                );
+
+                assertThrows(IllegalArgumentException.class, () -> sut.createReservation(request));
+            }
         }
+
 
     }
 
