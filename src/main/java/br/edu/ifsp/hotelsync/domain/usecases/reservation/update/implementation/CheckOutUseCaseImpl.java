@@ -19,8 +19,7 @@ public class CheckOutUseCaseImpl implements CheckOutUseCase {
         Reservation reservation = repository.findOneByKey(id).orElseThrow(
                 () -> new NoSuchElementException("Reservation of id " + id + " not found")
         );
-        String paymentMethod = reservation.getPayment().getMethod();
-        reservation.checkOut(paymentMethod);
+        reservation.checkOut(request.paymentMethod());
         repository.update(reservation);
     }
 }
