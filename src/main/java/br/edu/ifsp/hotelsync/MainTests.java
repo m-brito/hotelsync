@@ -59,8 +59,8 @@ public class MainTests {
         CreateReservationUseCase createReservationUseCase = new CreateReservationUseCaseImpl(reservationDao);
         CreateRoomUseCase createRoomUseCase = new CreateRoomUseCaseImpl(roomDao);
         CreateDailyOccupationReportUseCase createDailyOccupationReportUseCase = new CreateDailyOccupationReportUseCase(roomDao, reservationDao);
-        CheckInUseCaseImpl checkInUseCase = new CheckInUseCaseImpl(reservationDao);
-        CheckOutUseCaseImpl checkOutUseCase = new CheckOutUseCaseImpl(reservationDao);
+        CheckInUseCaseImpl checkInUseCase = new CheckInUseCaseImpl(reservationDao, roomDao);
+        CheckOutUseCaseImpl checkOutUseCase = new CheckOutUseCaseImpl(reservationDao, roomDao);
         CreateFinancialReportUseCase createFinancialReportUseCase = new CreateFinancialReportUseCase(reservationDao);
         AddConsumedProductUseCaseImpl addConsumedProductUseCase = new AddConsumedProductUseCaseImpl(productDao, reservationDao);
         PdfExportUseCaseImpl pdfExport = new PdfExportUseCaseImpl();
