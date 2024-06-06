@@ -9,6 +9,7 @@ import br.edu.ifsp.hotelsync.domain.entities.guest.Cpf;
 import br.edu.ifsp.hotelsync.domain.entities.guest.Guest;
 import br.edu.ifsp.hotelsync.domain.entities.guest.Phone;
 import br.edu.ifsp.hotelsync.domain.entities.product.Product;
+import br.edu.ifsp.hotelsync.domain.entities.report.exporter.TerminalExporter;
 import br.edu.ifsp.hotelsync.domain.entities.report.formatter.Formatter;
 import br.edu.ifsp.hotelsync.domain.entities.report.formatter.SimpleTextFormatter;
 import br.edu.ifsp.hotelsync.domain.entities.report.records.DailyOccupationReport;
@@ -29,8 +30,10 @@ import br.edu.ifsp.hotelsync.domain.usecases.product.create.CreateProductUseCase
 import br.edu.ifsp.hotelsync.domain.usecases.reports.create.CreateDailyOccupationReportUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reports.create.CreateFinancialReportUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reports.create.CreateReportUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.reports.export.ExportReportUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reports.export.PdfExportUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reports.export.PdfExportUseCaseImpl;
+import br.edu.ifsp.hotelsync.domain.usecases.reports.export.TerminalExportReportUseCaseImpl;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.create.CreateReservationUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.create.CreateReservationUseCaseImpl;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.implementation.AddConsumedProductUseCaseImpl;
@@ -61,6 +64,7 @@ public class MainTests {
         CreateFinancialReportUseCase createFinancialReportUseCase = new CreateFinancialReportUseCase(reservationDao);
         AddConsumedProductUseCaseImpl addConsumedProductUseCase = new AddConsumedProductUseCaseImpl(productDao, reservationDao);
         PdfExportUseCaseImpl pdfExport = new PdfExportUseCaseImpl();
+        TerminalExporter terminalExporter = new TerminalExporter();
 
         Formatter<LocalDate, Double, DailyOccupationReport> simpleFormatter = new SimpleTextFormatter<>();
 
@@ -143,6 +147,7 @@ public class MainTests {
                 )
         );
         PdfExportUseCase.RequestModel request = new PdfExportUseCase.RequestModel(dataToExport, simpleFormatter, "relatorio.pdf");
+//        terminalExporter.export(dataToExport, simpleFormatter);
         pdfExport.exportPdf(request);
 
 

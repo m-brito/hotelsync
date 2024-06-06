@@ -74,7 +74,7 @@ public class Reservation {
     }
 
     public void checkIn(){
-        if (LocalDate.now().isBefore(LocalDate.now())) {
+        if (!LocalDate.now().isAfter(startDate)) {
             throw new IllegalStateException("Check-in cannot be done before the start date of the reservation.");
         }
         checkInDate = LocalDate.now();

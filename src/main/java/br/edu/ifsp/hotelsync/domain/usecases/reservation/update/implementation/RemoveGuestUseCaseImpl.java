@@ -33,5 +33,6 @@ public class RemoveGuestUseCaseImpl implements RemoveGuestUseCase {
             throw new NoSuchElementException("Guest " + request.idReservation() + " not present in this reservation");
 
         reservation.get().removeGuest(guest.get());
+        reservationRepository.update(reservation.get());
     }
 }
