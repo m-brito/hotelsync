@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Application extends javafx.application.Application {
+public class Home extends javafx.application.Application {
     private static Scene scene;
     private static Object controller;
 
@@ -30,7 +30,7 @@ public class Application extends javafx.application.Application {
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource(fxml + ".fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Home.class.getResource(fxml + ".fxml"));
         Parent parent = fxmlLoader.load();
         controller = fxmlLoader.getController();
         return parent;
