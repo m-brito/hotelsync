@@ -13,6 +13,10 @@ public class Application extends javafx.application.Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("home.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 600);        stage.setTitle("HotelSync");
         stage.getIcons().add(new Image("file:src/main/resources/br/edu/ifsp/hotelsync/application/view/icon.png"));
+        stage.setMinWidth(1068);
+        stage.setMinHeight(666);
+
+
 
         stage.setScene(scene);
         stage.show();

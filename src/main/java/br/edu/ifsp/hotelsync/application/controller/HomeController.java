@@ -3,13 +3,17 @@ package br.edu.ifsp.hotelsync.application.controller;
 import br.edu.ifsp.hotelsync.domain.entities.product.Product;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,48 +22,43 @@ import java.util.ResourceBundle;
 
 public class HomeController implements Initializable {
     @FXML
-    private Label welcomeText;
+    private Button btnCustomers;
 
     @FXML
-    private TableView<Product> productsTable;
+    private Button btnMenus;
 
     @FXML
-    private TableColumn<Product, Long> idColumn;
+    private Button btnOrders;
 
     @FXML
-    private TableColumn<Product, String> descriptionColumn;
+    private Button btnOverview;
 
     @FXML
-    private TableColumn<Product, Double> priceColumn;
+    private Button btnPackages;
 
-    private ObservableList<Product> products;
+    @FXML
+    private Button btnSettings;
+
+    @FXML
+    private Button btnSignout;
+
+    @FXML
+    private VBox pnItems;
+
+    @FXML
+    private Pane pnlOverview;
+
+    @FXML
+    private TableView tableView;
+
+
+    @FXML
+    void handleClicks(ActionEvent event) {
+
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        products = FXCollections.observableArrayList();
-        productsTable.setItems(products);
+
     }
-
-    @FXML
-    protected void onCreateProductClick() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/br/edu/ifsp/hotelsync/application/view/create_product.fxml"));
-            Scene createProductScene = new Scene(fxmlLoader.load(), 800, 600); // Definindo o tamanho da cena para 800x600
-
-            Stage stage = (Stage) welcomeText.getScene().getWindow();
-            stage.setScene(createProductScene);
-        } catch (IOException e) {
-          //adicionar exceção
-        }
-    }
-
-    @FXML
-    protected void onFindProductClick() {
-    }
-
-    @FXML
-    protected void onUpdateProductClick() {
-    }
-
-
 }
