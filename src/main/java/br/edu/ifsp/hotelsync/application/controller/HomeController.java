@@ -1,5 +1,6 @@
 package br.edu.ifsp.hotelsync.application.controller;
 
+import br.edu.ifsp.hotelsync.application.view.Home;
 import br.edu.ifsp.hotelsync.domain.entities.product.Product;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -60,5 +61,9 @@ public class HomeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+    }
+
+    public void handleReservationPage(ActionEvent actionEvent) throws IOException {
+        Home.setRoot("create_product");
     }
 }
