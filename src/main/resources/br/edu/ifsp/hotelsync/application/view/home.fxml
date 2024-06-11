@@ -14,7 +14,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="1068.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.hotelsync.application.controller.HomeController">   <children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="1068.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.hotelsync.application.controller.HomeController">
+   <children>
       <VBox prefHeight="666.0" prefWidth="264.0" style="-fx-background-color: #181818;">
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="668.0" prefWidth="264.0" style="-fx-background-color: #181818;">
@@ -48,7 +49,7 @@
                         <Insets left="50.0" />
                      </padding>
                   </Button>
-                  <Button id="reservationButton" fx:id="btnOrders" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #181818;" stylesheets="@css/home.css" text="Reservation">
+                  <Button fx:id="btnOrders" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #181818;" stylesheets="@css/home.css" text="Reservation">
                      <graphic>
                         <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -60,7 +61,7 @@
                         <Insets left="50.0" />
                      </padding>
                   </Button>
-                  <Button id="productButton" fx:id="btnCustomers" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #181818;" stylesheets="@css/home.css" text="Product">
+                  <Button fx:id="btnCustomers" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #181818;" stylesheets="@css/home.css" text="Product">
                      <graphic>
                         <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -72,7 +73,7 @@
                         <Insets left="50.0" />
                      </padding>
                   </Button>
-                  <Button id="guestButton" fx:id="btnMenus" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #181818;" stylesheets="@css/home.css" text="Guest">
+                  <Button fx:id="btnMenus" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #181818;" stylesheets="@css/home.css" text="Guest">
                      <graphic>
                         <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -141,13 +142,13 @@
                      </padding>
                      <children>
                         <TableView prefHeight="356.0" prefWidth="734.0" style="-fx-background-color: #181818;">
-                          <columns>
-                            <TableColumn prefWidth="108.0" text="Room" />
-                            <TableColumn prefWidth="190.0" text="Owner" />
+                           <columns>
+                              <TableColumn prefWidth="108.0" text="Room" />
+                              <TableColumn prefWidth="190.0" text="Owner" />
                               <TableColumn minWidth="0.0" prefWidth="148.0" text="Check-In" />
                               <TableColumn prefWidth="136.0" text="Exit Date" />
                               <TableColumn prefWidth="151.0" text="Check-Out" />
-                          </columns>
+                           </columns>
                         </TableView>
                      </children>
                   </VBox>
