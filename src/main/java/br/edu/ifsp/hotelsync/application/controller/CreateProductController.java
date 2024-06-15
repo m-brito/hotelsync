@@ -3,25 +3,44 @@ package br.edu.ifsp.hotelsync.application.controller;
 import br.edu.ifsp.hotelsync.domain.entities.product.Product;
 import br.edu.ifsp.hotelsync.domain.usecases.product.create.CreateProductUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.product.create.CreateProductUseCaseImpl;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class CreateProductController {
     @FXML
-    private TextField descriptionField;
+    public Button btnOverview;
+    @FXML
+    public Button btnPackages;
+    @FXML
+    public Button btnCustomers;
+    @FXML
+    public Button btnMenus;
+    @FXML
+    public Button btnOrders;
+    @FXML
+    public Button btnSettings;
+    @FXML
+    public Button btnSignout;
+    @FXML
+    public Pane pnlOverview;
 
+    @FXML
+    private TextField descriptionField;
     @FXML
     private TextField priceField;
 
-    private CreateProductUseCase createProductUseCase;
 
+    private CreateProductUseCase createProductUseCase;
     public CreateProductController() {
     }
 
@@ -54,5 +73,8 @@ public class CreateProductController {
                 }
             }
         });
+    }
+
+    public void handleClicks(ActionEvent actionEvent) {
     }
 }
