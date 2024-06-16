@@ -1,4 +1,4 @@
-package br.edu.ifsp.hotelsync.application.controller;
+package br.edu.ifsp.hotelsync.application.controller.addControllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
