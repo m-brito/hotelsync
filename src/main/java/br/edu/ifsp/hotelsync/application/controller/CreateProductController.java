@@ -1,8 +1,8 @@
 package br.edu.ifsp.hotelsync.application.controller;
 
-import br.edu.ifsp.hotelsync.domain.entities.product.Product;
+
 import br.edu.ifsp.hotelsync.domain.usecases.product.create.CreateProductUseCase;
-import br.edu.ifsp.hotelsync.domain.usecases.product.create.CreateProductUseCaseImpl;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
