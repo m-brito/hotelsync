@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="1068.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.hotelsync.application.controller.HomeController">
+    <VBox prefHeight="666.0" prefWidth="264.0" style="-fx-background-color: #181818;">
+        <VBox alignment="TOP_CENTER" prefHeight="668.0" prefWidth="264.0" style="-fx-background-color: #181818;">
+            <Label text="HotelSync" textFill="#eda420">
+                <font>
+                    <Font name="Comic Sans MS" size="24.0" />
+                </font>
+            </Label>
+            <ImageView fitHeight="73.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
+                <VBox.margin>
+                    <Insets bottom="10.0" top="50.0" />
+                </VBox.margin>
+                <Image url="@icon.png" />
+            </ImageView>
+            <Label text="Welcome to HotelSync System" textFill="#e7e5e5">
+                <VBox.margin>
+                    <Insets bottom="20.0" />
+                </VBox.margin>
+            </Label>
+            <Button fx:id="btnOverview" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #181818;" stylesheets="@css/home.css" text="Overview" textFill="#e7e5e5">
+                <opaqueInsets>
+                    <Insets />
+                </opaqueInsets>
+                <VBox.margin>
+                    <Insets />
+                </VBox.margin>
+                <padding>
+                    <Insets left="50.0" />
+                </padding>
+            </Button>
+            <Button fx:id="btnOrders" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #181818;" stylesheets="@css/home.css" text="Reservation">
+                <graphic>
+                    <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@images/reservation.png" />
+                    </ImageView>
+                </graphic>
+                <padding>
+                    <Insets left="50.0" />
+                </padding>
+            </Button>
+            <Button fx:id="btnCustomers" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleReservationPage" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #181818;" stylesheets="@css/home.css" text="Product">
+                <graphic>
+                    <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@images/product.png" />
+                    </ImageView>
+                </graphic>
+                <padding>
+                    <Insets left="50.0" />
+                </padding>
+            </Button>
+            <Button fx:id="btnMenus" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #181818;" stylesheets="@css/home.css" text="Guest">
+                <graphic>
+                    <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@images/guest.png" />
+                    </ImageView>
+                </graphic>
+                <padding>
+                    <Insets left="50.0" />
+                </padding>
+            </Button>
+            <Button fx:id="btnPackages" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #181818;" stylesheets="@css/home.css" text="Room">
+                <graphic>
+                    <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@images/room.png" />
+                    </ImageView>
+                </graphic>
+                <padding>
+                    <Insets left="50.0" />
+                </padding>
+            </Button>
+            <Button fx:id="btnSettings" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #181818;" stylesheets="@css/home.css" text="Report">
+                <graphic>
+                    <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@images/report.png" />
+                    </ImageView>
+                </graphic>
+                <padding>
+                    <Insets left="50.0" />
+                </padding>
+            </Button>
+            <Button fx:id="btnSignout" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #181818;" stylesheets="@css/home.css" text="Exit">
+                <graphic>
+                    <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@images/shutdown.png" />
+                    </ImageView>
+                </graphic>
+                <padding>
+                    <Insets left="50.0" />
+                </padding>
+            </Button>
+            <Label prefHeight="167.0" prefWidth="145.0" text="By GLMVV TechSolutions" textFill="WHITE" />
+        </VBox>
+    </VBox>
+    <Pane fx:id="pnlOverview" layoutX="264.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;">
+        <TextField layoutX="590.0" layoutY="47.0" prefHeight="27.0" prefWidth="183.0" promptText="Search Reservations" style="-fx-background-color: #FFFFFF; -fx-border-color: #EDA420; -fx-border-radius: 2em;" />
+        <Label layoutX="57.0" layoutY="25.0" text="Products" textFill="#eda420">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <ScrollPane layoutX="14.0" layoutY="232.0" prefHeight="272.0" prefWidth="408.0" stylesheets="@css/home.css">
+            <VBox fx:id="pnItems" prefHeight="270.0" prefWidth="406.0" spacing="5.0" style="-fx-background-color: #02030A;">
+                <padding>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                </padding>
+                <TableView prefHeight="308.0" prefWidth="735.0" style="-fx-background-color: #181818;">
+                    <columns>
+                        <TableColumn prefWidth="293.0" text="Description" />
+                        <TableColumn prefWidth="102.0" text="Price" />
+                    </columns>
+                </TableView>
+            </VBox>
+        </ScrollPane>
+        <ImageView fitHeight="17.0" fitWidth="16.0" layoutX="749.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@images/search.png" />
+        </ImageView>
+    </Pane>
+</AnchorPane>
