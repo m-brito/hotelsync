@@ -100,7 +100,6 @@
         </VBox>
     </VBox>
     <Pane fx:id="pnlOverview" layoutX="264.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;">
-        <TextField layoutX="590.0" layoutY="47.0" prefHeight="27.0" prefWidth="183.0" promptText="Search Reservations" style="-fx-background-color: #FFFFFF; -fx-border-color: #EDA420; -fx-border-radius: 2em;" />
         <Label layoutX="57.0" layoutY="25.0" text="Products" textFill="#eda420">
             <font>
                 <Font size="24.0" />
@@ -119,8 +118,5 @@
                 </TableView>
             </VBox>
         </ScrollPane>
-        <ImageView fitHeight="17.0" fitWidth="16.0" layoutX="749.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
-            <Image url="@../images/search.png" />
-        </ImageView>
     </Pane>
 </AnchorPane>
