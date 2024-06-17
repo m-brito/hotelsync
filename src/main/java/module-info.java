@@ -13,4 +13,6 @@ module br.edu.ifsp.hotelsync {
     opens br.edu.ifsp.hotelsync.application.controller.entitiesControllers to javafx.fxml;
     exports br.edu.ifsp.hotelsync.application.controller;
     opens br.edu.ifsp.hotelsync.application.controller to javafx.fxml;
+    exports br.edu.ifsp.hotelsync.application.view.entitiesViews;
+    opens br.edu.ifsp.hotelsync.application.view.entitiesViews to javafx.fxml;
 }

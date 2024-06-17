@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="1068.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.hotelsync.application.controller.HomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="1068.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.hotelsync.application.controller.HomeController">
     <VBox prefHeight="666.0" prefWidth="264.0" style="-fx-background-color: #181818;">
         <VBox alignment="TOP_CENTER" prefHeight="668.0" prefWidth="264.0" style="-fx-background-color: #181818;">
             <Label text="HotelSync" textFill="#eda420">
@@ -100,21 +108,21 @@
         </VBox>
     </VBox>
     <Pane fx:id="pnlOverview" layoutX="264.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;">
-        <TextField layoutX="590.0" layoutY="47.0" prefHeight="27.0" prefWidth="183.0" promptText="Search Reservations" style="-fx-background-color: #FFFFFF; -fx-border-color: #EDA420; -fx-border-radius: 2em;" />
+        <TextField layoutX="590.0" layoutY="47.0" prefHeight="27.0" prefWidth="183.0" promptText="Search Product" style="-fx-background-color: #FFFFFF; -fx-border-color: #EDA420; -fx-border-radius: 2em;" />
         <Label layoutX="57.0" layoutY="25.0" text="Products" textFill="#eda420">
             <font>
                 <Font size="24.0" />
             </font>
         </Label>
-        <ScrollPane layoutX="14.0" layoutY="232.0" prefHeight="272.0" prefWidth="408.0" stylesheets="@../css/home.css">
-            <VBox fx:id="pnItems" prefHeight="270.0" prefWidth="406.0" spacing="5.0" style="-fx-background-color: #02030A;">
+        <ScrollPane layoutX="14.0" layoutY="232.0" prefHeight="320.0" prefWidth="746.0" stylesheets="@../css/home.css">
+            <VBox fx:id="pnItems" prefHeight="318.0" prefWidth="744.0" spacing="5.0" style="-fx-background-color: #02030A;">
                 <padding>
                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                 </padding>
                 <TableView prefHeight="308.0" prefWidth="735.0" style="-fx-background-color: #181818;">
                     <columns>
-                        <TableColumn prefWidth="293.0" text="Description" />
-                        <TableColumn prefWidth="102.0" text="Price" />
+                        <TableColumn prefWidth="607.0" text="Description" />
+                        <TableColumn minWidth="0.0" prefWidth="126.0" text="Price" />
                     </columns>
                 </TableView>
             </VBox>

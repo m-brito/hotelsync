@@ -13,14 +13,14 @@
             <VBox.margin>
                <Insets bottom="10.0" top="50.0" />
             </VBox.margin>
-            <Image url="@../images/icon.png" />
+            <Image url="@../../images/icon.png" />
          </ImageView>
          <Label text="Welcome to HotelSync System" textFill="#e7e5e5">
             <VBox.margin>
                <Insets bottom="20.0" />
             </VBox.margin>
          </Label>
-         <Button fx:id="btnOverview" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #181818;" stylesheets="@../css/home.css" text="Overview" textFill="#e7e5e5">
+         <Button fx:id="btnOverview" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Overview" textFill="#e7e5e5">
             <opaqueInsets>
                <Insets />
             </opaqueInsets>
@@ -31,30 +31,30 @@
                <Insets left="50.0" />
             </padding>
          </Button>
-         <Button id="reservationButton" fx:id="btnOrders" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #181818;" stylesheets="@../css/home.css" text="Reservation">
+         <Button id="reservationButton" fx:id="btnOrders" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Reservation">
             <graphic>
                <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/reservation.png" />
+                  <Image url="@../../images/reservation.png" />
                </ImageView>
             </graphic>
             <padding>
                <Insets left="50.0" />
             </padding>
          </Button>
-         <Button id="productButton" fx:id="btnCustomers" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #181818;" stylesheets="@../css/home.css" text="Product">
+         <Button id="productButton" fx:id="btnCustomers" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Product">
             <graphic>
                <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/product.png" />
+                  <Image url="@../../images/product.png" />
                </ImageView>
             </graphic>
             <padding>
                <Insets left="50.0" />
             </padding>
          </Button>
-         <Button id="guestButton" fx:id="btnMenus" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #181818;" stylesheets="@../css/home.css" text="Guest">
+         <Button id="guestButton" fx:id="btnMenus" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Guest">
             <graphic>
                <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/guest.png" />
+                  <Image url="@../../images/guest.png" />
                </ImageView>
             </graphic>
             <padding>
@@ -62,10 +62,10 @@
             </padding>
          </Button>
          <Button id="roomButton" fx:id="btnPackages" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false"
-                 prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #181818;" stylesheets="@../css/home.css" text="Room">
+                 prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Room">
             <graphic>
                <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/room.png" />
+                  <Image url="@../../images/room.png" />
                </ImageView>
             </graphic>
             <padding>
@@ -74,10 +74,10 @@
          </Button>
          <Button id="reportButton" fx:id="btnSettings" alignment="BASELINE_LEFT" graphicTextGap="22.0"
                  mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #181818;"
-                 stylesheets="@../css/home.css" text="Report">
+                 stylesheets="@../../css/home.css" text="Report">
             <graphic>
                <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../images/report.png" />
+                  <Image url="@../../images/report.png" />
                </ImageView>
             </graphic>
             <padding>
@@ -86,10 +86,10 @@
          </Button>
          <Button id="exitButton" fx:id="btnSignout" alignment="BASELINE_LEFT" graphicTextGap="22.0"
                  mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #181818;"
-                 stylesheets="@../css/home.css" text="Exit">
+                 stylesheets="@../../css/home.css" text="Exit">
             <graphic>
                <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../css/home.css" />
+                  <Image url="@../../css/home.css" />
                </ImageView>
             </graphic>
             <padding>
