@@ -27,7 +27,7 @@ public class RemoveConsumedProductUseCaseImpl implements RemoveConsumedProductUs
 
         Long idProduct = request.idProduct();
         Product product = productRepository.findOneByKey(idProduct).orElseThrow(
-                () -> new NoSuchElementException("Product of id " + idProduct + " not found")
+                () -> new NoSuchElementException("CreateProduct of id " + idProduct + " not found")
         );
 
         ConsumedProduct consumedProduct = new ConsumedProduct(product, request.quantity());

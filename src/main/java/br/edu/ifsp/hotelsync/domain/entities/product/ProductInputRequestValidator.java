@@ -10,7 +10,7 @@ public class ProductInputRequestValidator extends Validator<Product> {
     public Notification validate(Product product) {
         Notification notification = new Notification();
         if(product == null) {
-            notification.addError("Product is null");
+            notification.addError("CreateProduct is null");
             return notification;
         }
         if(Validator.isNullOrEmpty(product.getDescription()))

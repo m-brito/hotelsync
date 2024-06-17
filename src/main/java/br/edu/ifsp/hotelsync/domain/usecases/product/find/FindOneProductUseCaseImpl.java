@@ -15,7 +15,7 @@ public class FindOneProductUseCaseImpl implements FindOneProductUseCase {
     @Override
     public Product findOneById(RequestModel request) {
         return repository.findOneByKey(request.id()).orElseThrow(
-                () -> new NoSuchElementException("Product of id " + request.id() + " not found")
+                () -> new NoSuchElementException("CreateProduct of id " + request.id() + " not found")
         );
     }
 }
