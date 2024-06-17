@@ -133,7 +133,7 @@ public class Reservation {
         if(consumedProducts.contains(product))
             consumedProducts.remove(product);
         else throw new NoSuchElementException(
-                "Product of id " + product.getProduct().getId() + " not found in reservation"
+                "CreateProduct of id " + product.getProduct().getId() + " not found in reservation"
         );
     }
 
