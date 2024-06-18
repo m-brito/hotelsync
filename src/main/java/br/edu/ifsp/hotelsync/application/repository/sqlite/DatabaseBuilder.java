@@ -30,7 +30,7 @@ public class DatabaseBuilder {
     private String getDatabaseCreationScript() {
         return """
             CREATE TABLE Guest (
-                id INT PRIMARY KEY AUTOINCREMENT,
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name VARCHAR(255),
                 pronouns VARCHAR(255),
                 birthdate DATE,
@@ -45,7 +45,7 @@ public class DatabaseBuilder {
             );
 
             CREATE TABLE Room (
-                id INT PRIMARY KEY AUTOINCREMENT,
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
                 number INT,
                 numberOfBeds INT,
                 typeOfBed VARCHAR(255),
@@ -56,14 +56,14 @@ public class DatabaseBuilder {
             );
 
             CREATE TABLE Product (
-                id INT PRIMARY KEY AUTOINCREMENT,
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
                 description TEXT,
                 price FLOAT,
                 isActive BOOLEAN
             );
 
             CREATE TABLE Reservation (
-                id INT PRIMARY KEY AUTOINCREMENT,
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
                 startDate DATE,
                 checkInDate DATE,
                 endDate DATE,
@@ -94,7 +94,7 @@ public class DatabaseBuilder {
                 PRIMARY KEY(reservationId, productId),
                 FOREIGN KEY(reservationId) REFERENCES Reservation(id),
                 FOREIGN KEY(productId) REFERENCES Product(id)
-            );   
+            );
         """;
     }
 }
