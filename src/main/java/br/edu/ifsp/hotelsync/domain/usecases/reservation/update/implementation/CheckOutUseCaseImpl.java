@@ -1,5 +1,6 @@
 package br.edu.ifsp.hotelsync.domain.usecases.reservation.update.implementation;
 
+import br.edu.ifsp.hotelsync.domain.entities.reservation.Payment;
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
 import br.edu.ifsp.hotelsync.domain.persistence.dao.ReservationDao;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.CheckOutUseCase;
@@ -19,8 +20,8 @@ public class CheckOutUseCaseImpl implements CheckOutUseCase {
         Reservation reservation = repository.findOneByKey(id).orElseThrow(
                 () -> new NoSuchElementException("Reservation of id " + id + " not found")
         );
-        String paymentMethod = reservation.getPayment().getMethod();
-        reservation.checkOut(paymentMethod);
+        Payment paymentMethod = reservation.getPayment();
+        reservation.checkOut(paymentMethod.name());
         repository.update(reservation);
     }
 }

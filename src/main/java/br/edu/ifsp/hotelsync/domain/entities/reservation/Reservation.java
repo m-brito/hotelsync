@@ -88,9 +88,11 @@ public class Reservation {
         }
         checkOutDate = LocalDate.now();
         room.turnAvailable();
-        payment = new Payment(calculateTotalToPay(), checkOutDate, paymentMethod);
+        payment = Payment.valueOf(paymentMethod.toUpperCase());
         reservationStatus = ReservationStatus.FINISHED;
     }
+
+
 
     public void cancelReservation(){
         room.turnAvailable();
