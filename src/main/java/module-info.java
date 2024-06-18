@@ -3,6 +3,7 @@ module br.edu.ifsp.hotelsync {
     requires javafx.fxml;
     requires java.sql;
     requires itextpdf;
+    requires sqlite.jdbc;
 
     opens br.edu.ifsp.hotelsync.application.view to javafx.fxml;
     opens br.edu.ifsp.hotelsync.application.controller to javafx.fxml;
