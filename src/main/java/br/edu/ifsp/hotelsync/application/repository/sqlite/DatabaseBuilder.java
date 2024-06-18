@@ -47,7 +47,8 @@ public class DatabaseBuilder {
             CREATE TABLE Room (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 number INT,
-                numberOfBed INT,
+                numberOfBeds INT,
+                typeOfBed VARCHAR(255),
                 roomCategory VARCHAR(255),
                 description TEXT,
                 roomStatus VARCHAR(255),
@@ -63,34 +64,36 @@ public class DatabaseBuilder {
 
             CREATE TABLE Reservation (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                roomId INT,
-                ownerId INT,
-                reservationStatus VARCHAR(255),
-                checkoutDate DATE,
-                endDate DATE,
                 startDate DATE,
+                checkInDate DATE,
+                endDate DATE,
+                checkOutDate DATE,
+                reservationStatus VARCHAR(255),
                 paymentValue FLOAT,
                 paymentDate DATE,
                 paymentMethod VARCHAR(255),
-                FOREIGN KEY (roomId) REFERENCES Room(id),
-                FOREIGN KEY (ownerId) REFERENCES Guest(id)
+                roomId INT,
+                ownerId INT,
+                FOREIGN KEY(roomId) REFERENCES Room(id),
+                FOREIGN KEY(ownerId) REFERENCES Guest(id)
             );
 
             CREATE TABLE GuestReservation (
                 guestId INT,
                 reservationId INT,
-                PRIMARY KEY (guestId, reservationId),
-                FOREIGN KEY (guestId) REFERENCES Guest(id),
-                FOREIGN KEY (reservationId) REFERENCES Reservation(id)
+                PRIMARY KEY(guestId, reservationId),
+                FOREIGN KEY(guestId) REFERENCES Guest(id),
+                FOREIGN KEY(reservationId) REFERENCES Reservation(id)
             );
 
             CREATE TABLE ConsumedProduct (
                 reservationId INT,
                 productId INT,
+                quantity INT,
                 price FLOAT,
-                PRIMARY KEY (reservationId, productId),
-                FOREIGN KEY (reservationId) REFERENCES Reservation(id),
-                FOREIGN KEY (productId) REFERENCES Product(id)
+                PRIMARY KEY(reservationId, productId),
+                FOREIGN KEY(reservationId) REFERENCES Reservation(id),
+                FOREIGN KEY(productId) REFERENCES Product(id)
             );
         """;
     }

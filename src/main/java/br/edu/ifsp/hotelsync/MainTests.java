@@ -50,7 +50,7 @@ import java.time.LocalDate;
 
 public class MainTests {
     public static void main(String[] args) {
-        GuestDao guestDao = new InMemoryGuestDao();
+        GuestDao guestDao = new SqliteGuestDao();
         ProductDao productDao = new InMemoryProductDao();
         ReservationDao reservationDao = new InMemoryReservationDao();
         RoomDao roomDao = new InMemoryRoomDao();
@@ -148,8 +148,8 @@ public class MainTests {
                 )
         );
         PdfExportUseCase.RequestModel request = new PdfExportUseCase.RequestModel(dataToExport, simpleFormatter, "relatorio.pdf");
-//        terminalExporter.export(dataToExport, simpleFormatter);
-        pdfExport.exportPdf(request);
+        terminalExporter.export(dataToExport, simpleFormatter);
+//        pdfExport.exportPdf(request);
 
 
     }
