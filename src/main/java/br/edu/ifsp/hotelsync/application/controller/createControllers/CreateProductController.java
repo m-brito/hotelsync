@@ -15,22 +15,19 @@ public class CreateProductController {
     private Button addProductBtn;
 
     @FXML
-    private Button btnCustomers;
+    private Button btnGuest;
 
     @FXML
-    private Button btnMenus;
+    private Button btnProduct;
 
     @FXML
-    private Button btnOrders;
+    private Button btnReport;
 
     @FXML
-    private Button btnOverview;
+    private Button btnReservation;
 
     @FXML
-    private Button btnPackages;
-
-    @FXML
-    private Button btnSettings;
+    private Button btnRoom;
 
     @FXML
     private Button btnSignout;
