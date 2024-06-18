@@ -31,7 +31,8 @@ public class DatabaseBuilder {
         return """
             CREATE TABLE Guest (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                pronoun VARCHAR(255),
+                name VARCHAR(255),
+                pronouns VARCHAR(255),
                 birthdate DATE,
                 phone VARCHAR(255),
                 cpf VARCHAR(255),
