@@ -4,6 +4,7 @@ import br.edu.ifsp.hotelsync.application.repository.inmemory.InMemoryGuestDao;
 import br.edu.ifsp.hotelsync.application.repository.inmemory.InMemoryProductDao;
 import br.edu.ifsp.hotelsync.application.repository.inmemory.InMemoryReservationDao;
 import br.edu.ifsp.hotelsync.application.repository.inmemory.InMemoryRoomDao;
+import br.edu.ifsp.hotelsync.application.repository.sqlite.dao.SqliteGuestDao;
 import br.edu.ifsp.hotelsync.domain.entities.guest.Address;
 import br.edu.ifsp.hotelsync.domain.entities.guest.Cpf;
 import br.edu.ifsp.hotelsync.domain.entities.guest.Guest;
@@ -123,7 +124,7 @@ public class MainTests {
         Payment payment1 = new Payment(20, LocalDate.of(2024, 6, 10), "Debito");
         Reservation reservation1 = Reservation.createReservation(
                 LocalDate.of(2024, 6, 5),
-                LocalDate.of(2024, 6, 10),
+                LocalDate.of(2024, 7, 10),
                 owner1,
                 room1
         );
@@ -143,7 +144,7 @@ public class MainTests {
         Exportable dataToExport = createDailyOccupationReportUseCase.createReport(
                 new CreateReportUseCase.RequestModel(
                         LocalDate.of(2024, 6, 1),
-                        LocalDate.of(2024, 6, 11)
+                        LocalDate.of(2024, 7, 11)
                 )
         );
         PdfExportUseCase.RequestModel request = new PdfExportUseCase.RequestModel(dataToExport, simpleFormatter, "relatorio.pdf");
