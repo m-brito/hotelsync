@@ -23,8 +23,8 @@ public class SqliteGuestDao implements GuestDao {
             stmt.setString(1, guest.getName());
             stmt.setString(2, guest.getPronouns());
             stmt.setObject(3, guest.getBirthdate());
-            stmt.setString(4, guest.getPhone().toString());
-            stmt.setString(5, guest.getCpf().toString());
+            stmt.setString(4, guest.getPhone().getValue());
+            stmt.setString(5, guest.getCpf().getValue());
             stmt.setString(6, guest.getAddress().getRoad());
             stmt.setString(7, guest.getAddress().getCity());
             stmt.setString(8, guest.getAddress().getState());
