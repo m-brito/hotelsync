@@ -5,6 +5,7 @@ import br.edu.ifsp.hotelsync.application.repository.inmemory.InMemoryProductDao;
 import br.edu.ifsp.hotelsync.application.repository.inmemory.InMemoryReservationDao;
 import br.edu.ifsp.hotelsync.application.repository.inmemory.InMemoryRoomDao;
 import br.edu.ifsp.hotelsync.application.repository.sqlite.DatabaseBuilder;
+import br.edu.ifsp.hotelsync.application.repository.sqlite.dao.SqliteGuestDao;
 import br.edu.ifsp.hotelsync.application.view.HelloApplication;
 import br.edu.ifsp.hotelsync.domain.persistence.dao.GuestDao;
 import br.edu.ifsp.hotelsync.domain.persistence.dao.ProductDao;
@@ -87,7 +88,7 @@ public class Main {
     }
 
     private static void configureInjection() {
-        GuestDao guestDao = new InMemoryGuestDao();
+        GuestDao guestDao = new SqliteGuestDao();
 
         createGuestUseCase = new CreateGuestUseCaseImpl(guestDao);
         findAllGuestUseCase = new FindAllGuestUseCaseImpl(guestDao);
