@@ -1,6 +1,7 @@
-package br.edu.ifsp.hotelsync.application.controller.addControllers;
+package br.edu.ifsp.hotelsync.application.controller.createControllers;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -9,29 +10,56 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class AddGuestController {
-    public Pane pnlOverview;
-    public TextField nameField;
-    public DatePicker birthDateDataPicker;
-    public TextField cpfValueField;
-    public Button btnOverview;
-    public Button btnOrders;
-    public Button btnCustomers;
-    public Button btnMenus;
-    public Button btnPackages;
-    public Button btnSettings;
-    public Button btnSignout;
-    public Button registerButton;
-    public Button cancelButton;
-    public TextField reservationOwnerField;
+public class CreateGuestController {
+    @FXML
+    private DatePicker birthDateDataPicker;
 
-    public void handleClicks(ActionEvent actionEvent) {
+    @FXML
+    private Button btnCustomers;
 
-    }
+    @FXML
+    private Button btnMenus;
 
-    public void onAddGuestClick(ActionEvent actionEvent) {
-        
-    }
+    @FXML
+    private Button btnOrders;
+
+    @FXML
+    private Button btnOverview;
+
+    @FXML
+    private Button btnPackages;
+
+    @FXML
+    private Button btnSettings;
+
+    @FXML
+    private Button btnSignout;
+
+    @FXML
+    private Button cancelButton;
+
+    @FXML
+    private TextField cpfValueField;
+
+    @FXML
+    private TextField nameField;
+
+    @FXML
+    private Pane pnlOverview;
+
+    @FXML
+    private Button registerButton;
+
+    @FXML
+    private TextField reservationOwnerField;
+
+    @FXML
+    public void handleClicks(ActionEvent actionEvent) { }
+
+    @FXML
+    public void onAddGuestClick(ActionEvent actionEvent) { }
+
+    @FXML
     public void onCancelAddGuestClick(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Cancel Creation");
