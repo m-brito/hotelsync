@@ -148,8 +148,8 @@ public class MainTests {
                 )
         );
         PdfExportUseCase.RequestModel request = new PdfExportUseCase.RequestModel(dataToExport, simpleFormatter, "relatorio.pdf");
-//        terminalExporter.export(dataToExport, simpleFormatter);
-        pdfExport.exportPdf(request);
+        terminalExporter.export(dataToExport, simpleFormatter);
+//        pdfExport.exportPdf(request);
 
 
     }
