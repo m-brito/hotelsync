@@ -123,7 +123,6 @@ public class MainTests {
                 )
         );
 
-        Payment payment1 = Payment.DEBIT;
         Reservation reservation1 = Reservation.createReservation(
                 LocalDate.of(2024, 6, 5),
                 LocalDate.of(2024, 7, 10),
@@ -143,7 +142,7 @@ public class MainTests {
         checkInUseCase.doCheckIn(new CheckInUseCase.RequestModel(reservation1.getId()));
         addConsumedProductUseCase.addConsumedProduct(new AddConsumedProductUseCase.RequestModel(reservation1.getId(), product1.getId(), 5));
 
-        checkOutUseCase.doCheckOut(new CheckOutUseCase.RequestModel(reservation1.getId(), "Card"));
+        checkOutUseCase.doCheckOut(new CheckOutUseCase.RequestModel(reservation1.getId(), Payment.DEBIT));
 
         Exportable dataToExport = createDailyOccupationReportUseCase.createReport(
                 new CreateReportUseCase.RequestModel(
