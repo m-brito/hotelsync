@@ -5,6 +5,7 @@ import br.edu.ifsp.hotelsync.application.repository.inmemory.InMemoryProductDao;
 import br.edu.ifsp.hotelsync.application.repository.inmemory.InMemoryReservationDao;
 import br.edu.ifsp.hotelsync.application.repository.inmemory.InMemoryRoomDao;
 import br.edu.ifsp.hotelsync.application.repository.sqlite.dao.SqliteGuestDao;
+import br.edu.ifsp.hotelsync.application.repository.sqlite.dao.SqliteRoomDao;
 import br.edu.ifsp.hotelsync.domain.entities.guest.Address;
 import br.edu.ifsp.hotelsync.domain.entities.guest.Cpf;
 import br.edu.ifsp.hotelsync.domain.entities.guest.Guest;
@@ -53,7 +54,7 @@ public class MainTests {
         GuestDao guestDao = new SqliteGuestDao();
         ProductDao productDao = new InMemoryProductDao();
         ReservationDao reservationDao = new InMemoryReservationDao();
-        RoomDao roomDao = new InMemoryRoomDao();
+        RoomDao roomDao = new SqliteRoomDao();
 
         CreateGuestUseCase createGuestUseCase = new CreateGuestUseCaseImpl(guestDao);
         CreateProductUseCase createProductUseCase = new CreateProductUseCaseImpl(productDao);
@@ -71,7 +72,7 @@ public class MainTests {
 
 
         Room room1 = Room.createRoom(1, 2, "King", RoomCategory.EXECUTIVE, "Quarto executivo", RoomStatus.AVAILABLE, 15);
-        createRoomUseCase.createRoom(
+        room1.setId(createRoomUseCase.createRoom(
                 new CreateRoomUseCase.RequestModel(
                         room1.getNumber(),
                         room1.getNumberOfBeds(),
@@ -81,7 +82,7 @@ public class MainTests {
                         room1.getDescription(),
                         room1.getArea()
                 )
-        );
+        ));
 
         Product product1 = Product.createProduct("Coca-Cola", 12.50);
         product1.setId(createProductUseCase.createProduct(

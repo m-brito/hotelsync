@@ -12,5 +12,5 @@ public interface CreateRoomUseCase {
                         String description,
                         double area) {}
 
-    void createRoom(RequestModel requestModel);
+    Long createRoom(RequestModel requestModel);
 }
