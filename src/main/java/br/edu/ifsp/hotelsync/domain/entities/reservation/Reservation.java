@@ -87,13 +87,13 @@ public class Reservation {
             throw new IllegalStateException("Check-in cannot be done after or on the end date of the reservation");
     }
 
-    public void checkOut(String paymentMethod){
+    public void checkOut(Payment paymentMethod){
         if (checkInDate == null) {
             throw new IllegalStateException("Check-out cannot be done before check-in.");
         }
         checkOutDate = LocalDate.now();
         room.turnAvailable();
-        payment = Payment.valueOf(paymentMethod.toUpperCase());
+        payment = paymentMethod;
         reservationStatus = ReservationStatus.FINISHED;
     }
 

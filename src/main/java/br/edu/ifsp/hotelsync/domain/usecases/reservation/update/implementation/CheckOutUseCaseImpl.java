@@ -28,8 +28,7 @@ public class CheckOutUseCaseImpl implements CheckOutUseCase {
                 () -> new NoSuchElementException("Reservation of id " + id + " not found")
         );
 
-        Payment paymentMethod = reservation.getPayment();
-        reservation.checkOut(paymentMethod.name());
+        reservation.checkOut(request.paymentMethod());
         Room room = reservation.getRoom();
         roomRepository.update(room);
         repository.update(reservation);
