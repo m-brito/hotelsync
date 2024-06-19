@@ -127,8 +127,7 @@ public class InMemoryReservationDao implements ReservationDao {
             double dailyTotal = Map.copyOf(reservations).values().stream()
                     .filter(reservation -> reservation.getCheckOutDate().equals(currentDate) &&
                             reservation.getReservationStatus() == ReservationStatus.FINISHED)
-                    .mapToDouble(reservation -> reservation.getPayment().getValue())
-                    .sum();
+                    .count();
 
             reports.put(date, dailyTotal);
         }

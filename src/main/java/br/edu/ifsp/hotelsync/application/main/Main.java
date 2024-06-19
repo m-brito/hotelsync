@@ -6,7 +6,7 @@ import br.edu.ifsp.hotelsync.application.repository.inmemory.InMemoryReservation
 import br.edu.ifsp.hotelsync.application.repository.inmemory.InMemoryRoomDao;
 import br.edu.ifsp.hotelsync.application.repository.sqlite.DatabaseBuilder;
 import br.edu.ifsp.hotelsync.application.repository.sqlite.dao.SqliteGuestDao;
-import br.edu.ifsp.hotelsync.application.view.HelloApplication;
+import br.edu.ifsp.hotelsync.application.view.Home;
 import br.edu.ifsp.hotelsync.domain.persistence.dao.GuestDao;
 import br.edu.ifsp.hotelsync.domain.persistence.dao.ProductDao;
 import br.edu.ifsp.hotelsync.domain.persistence.dao.ReservationDao;
@@ -79,7 +79,7 @@ public class Main {
     public static void main(String[] args) {
         configureInjection();
         setupDatabase();
-        HelloApplication.main(args);
+        Home.main(args);
     }
 
     private static void setupDatabase() {
