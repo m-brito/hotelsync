@@ -38,7 +38,6 @@ public class SqliteRoomDao implements RoomDao {
 
     @Override
     public void update(Room room) {
-        System.out.println(room);
         String sql = "UPDATE Room SET number = ?, numberOfBeds = ?, typeOfBed = ?, roomCategory = ?, description = ?, roomStatus = ?, area = ? WHERE id = ?";
         try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
             stmt.setInt(1, room.getNumber());
