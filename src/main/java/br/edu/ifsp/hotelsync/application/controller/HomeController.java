@@ -1,13 +1,11 @@
 package br.edu.ifsp.hotelsync.application.controller;
 
-import br.edu.ifsp.hotelsync.application.view.Home;
-import javafx.application.Platform;
+import br.edu.ifsp.hotelsync.application.util.exitHandler.ExitHandler;
+import br.edu.ifsp.hotelsync.application.util.navigationHandler.NavigationHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -17,7 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class HomeController implements Initializable {
+public class HomeController {
 
     @FXML
     private AnchorPane bakcground;
@@ -49,54 +47,40 @@ public class HomeController implements Initializable {
     @FXML
     private Pane pnlOverview;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
+   @FXML
+    public void initialize() {
     }
+
+    private final ExitHandler exitHandler = new ExitHandler();
+    private final NavigationHandler navHandler = new NavigationHandler();
 
     @FXML
     void handleExit(ActionEvent event) {
-        Alert alert = new Alert(Alert
-                .AlertType
-                .CONFIRMATION,
-                "Do you really want to leave?",
-                ButtonType.YES,
-                ButtonType.NO);
-        alert.setTitle("Departure Confirmation");
-        alert.setHeaderText("Bye! \uD83D\uDC4B");
-        alert.showAndWait();
-
-        if (alert.getResult() == ButtonType.YES) {
-            Platform.exit();
-        }
+        exitHandler.handleExit(event);
     }
 
     @FXML
     void handleGuestPage(ActionEvent event) throws IOException{
-        Home.setRoot("views/entitiesViews/guest");
+        navHandler.navigateToGuestPage();
     }
 
     @FXML
     void handleProductPage(ActionEvent actionEvent) throws IOException {
-        Home.setRoot("views/entitiesViews/product");
+        navHandler.navigateToProductPage();
     }
 
     @FXML
     void handleReportPage(ActionEvent event) throws IOException {
-        Home.setRoot("views/useCasesViews/reportViews/generateReports");
-
+        navHandler.navigateToReportPage();
     }
 
     @FXML
     void handleReservationPage(ActionEvent event) throws IOException {
-        Home.setRoot("views/entitiesViews/reservation");
-
+        navHandler.navigateToReservationPage();
     }
 
     @FXML
     void handleRoomPage(ActionEvent event) throws IOException {
-        Home.setRoot("views/entitiesViews/room");
+        navHandler.navigateToRoomPage();
     }
-
-
 }

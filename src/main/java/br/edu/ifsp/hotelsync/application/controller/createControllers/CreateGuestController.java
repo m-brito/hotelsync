@@ -1,36 +1,35 @@
 package br.edu.ifsp.hotelsync.application.controller.createControllers;
 
+import br.edu.ifsp.hotelsync.application.util.exitHandler.ExitHandler;
+import br.edu.ifsp.hotelsync.application.util.navigationHandler.NavigationHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class CreateGuestController {
+
     @FXML
     private DatePicker birthDateDataPicker;
 
     @FXML
-    private Button btnCustomers;
+    private Button btnGuest;
 
     @FXML
-    private Button btnMenus;
+    private Button btnProduct;
 
     @FXML
-    private Button btnOrders;
+    private Button btnReport;
 
     @FXML
-    private Button btnOverview;
+    private Button btnReservation;
 
     @FXML
-    private Button btnPackages;
-
-    @FXML
-    private Button btnSettings;
+    private Button btnRoom;
 
     @FXML
     private Button btnSignout;
@@ -53,31 +52,50 @@ public class CreateGuestController {
     @FXML
     private TextField reservationOwnerField;
 
-    @FXML
-    public void handleClicks(ActionEvent actionEvent) { }
+    private final ExitHandler exitHandler = new ExitHandler();
+    private final NavigationHandler navHandler = new NavigationHandler();
 
     @FXML
-    public void onAddGuestClick(ActionEvent actionEvent) { }
+    void handleExit(ActionEvent event) {
+        exitHandler.handleExit(event);
+    }
 
     @FXML
-    public void onCancelAddGuestClick(ActionEvent actionEvent) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Cancel Creation");
-        alert.setHeaderText("Are you sure you want to cancel reservation owner creation?");
-        alert.setContentText("If you cancel, all unsaved changes will be lost.");
+    void handleGuestPage() throws IOException {
+        navHandler.navigateToGuestPage();
+    }
 
-        alert.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.OK) {
-                try {
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/br/edu/ifsp/hotelsync/application/view/home.fxml"));
-                    Scene homeScene = new Scene(fxmlLoader.load(), 800, 600);
+    @FXML
+    void handleProductPage(ActionEvent event) {
+    }
 
-                    Stage stage = (Stage) nameField.getScene().getWindow();
-                    stage.setScene(homeScene);
-                } catch (IOException e) {
-                    //criar excecao
-                }
-            }
-        });
+    @FXML
+    void handleReportPage(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleReservationPage(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleRoomPage(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onAddGuestClick(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onCancelAddGuestClick(ActionEvent event) {
+
+    }
+
+    @FXML
+    public void onCreateGuestClick(ActionEvent actionEvent) throws IOException {
+        navHandler.handleCreateGuest();
     }
 }

@@ -150,7 +150,7 @@
                   <Image url="@../../images/search.png" />
                </image>
             </ImageView>
-            <Button id="createRoomButton" fx:id="createRoomButton" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="14.0" layoutY="178.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="169.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Create Room">
+            <Button id="createRoomButton" fx:id="createRoomButton" onAction="#onCreateRoomClick" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="14.0" layoutY="178.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="169.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Create Room">
                <padding>
                   <Insets left="50.0" />
                </padding>
