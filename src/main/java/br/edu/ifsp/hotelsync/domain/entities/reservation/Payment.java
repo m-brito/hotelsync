@@ -1,18 +1,22 @@
 package br.edu.ifsp.hotelsync.domain.entities.reservation;
 
-import java.time.LocalDate;
+public enum Payment {
+    CASH("Cash"),
+    CREDIT_CARD("Credit Card"),
+    DEBIT("Debit");
 
-public record Payment(double value, LocalDate date, String method) {
+    private final String description;
 
-    public double getValue() {
-        return value;
+    Payment(String description) {
+        this.description = description;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public String getDescription() {
+        return description;
     }
 
-    public String getMethod() {
-        return method;
+    @Override
+    public String toString() {
+        return description;
     }
 }

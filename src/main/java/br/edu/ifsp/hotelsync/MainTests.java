@@ -121,13 +121,16 @@ public class MainTests {
                         owner1.getAddress().complement()
                 )
         );
-        Payment payment1 = new Payment(20, LocalDate.of(2024, 6, 10), "Debito");
+
+        Payment payment1 = Payment.DEBIT;
         Reservation reservation1 = Reservation.createReservation(
                 LocalDate.of(2024, 6, 5),
                 LocalDate.of(2024, 7, 10),
                 owner1,
                 room1
         );
+
+
         reservation1.setId(createReservationUseCase.createReservation(
                 new CreateReservationUseCase.RequestModel(
                         reservation1.getStartDate(),

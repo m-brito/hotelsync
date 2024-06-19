@@ -93,9 +93,11 @@ public class Reservation {
         }
         checkOutDate = LocalDate.now();
         room.turnAvailable();
-        payment = new Payment(calculateTotalToPay(), checkOutDate, paymentMethod);
+        payment = Payment.valueOf(paymentMethod.toUpperCase());
         reservationStatus = ReservationStatus.FINISHED;
     }
+
+
 
     public void cancelReservation(){
         room.turnAvailable();
@@ -138,7 +140,7 @@ public class Reservation {
         if(consumedProducts.contains(product))
             consumedProducts.remove(product);
         else throw new NoSuchElementException(
-                "Product of id " + product.getProduct().getId() + " not found in reservation"
+                "CreateProduct of id " + product.getProduct().getId() + " not found in reservation"
         );
     }
 
