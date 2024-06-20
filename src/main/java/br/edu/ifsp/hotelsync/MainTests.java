@@ -5,6 +5,7 @@ import br.edu.ifsp.hotelsync.application.repository.inmemory.InMemoryProductDao;
 import br.edu.ifsp.hotelsync.application.repository.inmemory.InMemoryReservationDao;
 import br.edu.ifsp.hotelsync.application.repository.inmemory.InMemoryRoomDao;
 import br.edu.ifsp.hotelsync.application.repository.sqlite.dao.SqliteGuestDao;
+import br.edu.ifsp.hotelsync.application.repository.sqlite.dao.SqliteProductDao;
 import br.edu.ifsp.hotelsync.application.repository.sqlite.dao.SqliteRoomDao;
 import br.edu.ifsp.hotelsync.domain.entities.guest.Address;
 import br.edu.ifsp.hotelsync.domain.entities.guest.Cpf;
@@ -52,7 +53,7 @@ import java.time.LocalDate;
 public class MainTests {
     public static void main(String[] args) {
         GuestDao guestDao = new SqliteGuestDao();
-        ProductDao productDao = new InMemoryProductDao();
+        ProductDao productDao = new SqliteProductDao();
         ReservationDao reservationDao = new InMemoryReservationDao();
         RoomDao roomDao = new SqliteRoomDao();
 
