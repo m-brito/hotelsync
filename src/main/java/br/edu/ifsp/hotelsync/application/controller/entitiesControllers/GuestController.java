@@ -1,5 +1,7 @@
 package br.edu.ifsp.hotelsync.application.controller.entitiesControllers;
 
+import br.edu.ifsp.hotelsync.application.util.ExitHandler;
+import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
 import br.edu.ifsp.hotelsync.application.view.Home;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -47,21 +49,12 @@ public class GuestController {
     @FXML
     private Button updateGuestButton;
 
+    private final NavigationHandler navHandler = new NavigationHandler();
+    private final ExitHandler exitHandler = new ExitHandler();
+
     @FXML
     void handleExit(ActionEvent event) {
-        Alert alert = new Alert(Alert
-                .AlertType
-                .CONFIRMATION,
-                "Do you really want to leave?",
-                ButtonType.YES,
-                ButtonType.NO);
-        alert.setTitle("Departure Confirmation");
-        alert.setHeaderText("Bye! \uD83D\uDC4B");
-        alert.showAndWait();
-
-        if (alert.getResult() == ButtonType.YES) {
-            Platform.exit();
-        }
+        exitHandler.handleExit(event);
     }
 
     @FXML
@@ -92,5 +85,8 @@ public class GuestController {
     }
 
 
-
+    @FXML
+    public void handleCreateGuest(ActionEvent actionEvent) throws IOException {
+        navHandler.handleCreateGuest();
+    }
 }

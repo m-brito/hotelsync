@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="1068.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.hotelsync.application.controller.entitiesControllers.RoomController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="1068.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.hotelsync.application.controller.entitiesControllers.GuestController">
    <children>
       <VBox prefHeight="666.0" prefWidth="264.0" style="-fx-background-color: #181818;">
          <children>
@@ -149,7 +149,7 @@
                   <Image url="@../../images/search.png" />
                </image>
             </ImageView>
-            <Button id="createRoomButton" fx:id="createGuestButton" onAction="#onCreateGuestClick" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="14.0" layoutY="178.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="169.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Create Guest">
+            <Button id="createRoomButton" fx:id="createGuestButton" onAction="#handleCreateGuest" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="14.0" layoutY="178.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="169.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Create Guest">
                <padding>
                   <Insets left="50.0" />
                </padding>
