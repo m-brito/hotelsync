@@ -149,7 +149,7 @@
                   <Image url="@../../images/search.png" />
                </image>
             </ImageView>
-            <Button id="createRoomButton" fx:id="createGuestButton" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="14.0" layoutY="178.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="169.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Create Guest">
+            <Button id="createRoomButton" fx:id="createGuestButton" onAction="#onCreateGuestClick" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="14.0" layoutY="178.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="169.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Create Guest">
                <padding>
                   <Insets left="50.0" />
                </padding>
