@@ -19,6 +19,18 @@ public class Product {
         return new Product(id, description, price);
     }
 
+    public static Product createCompleteProduct(Long id, String description, double price, boolean isActive){
+        return new Product(id, description, price, isActive);
+    }
+
+    public Product(Long id, String description, double price, boolean isActive) {
+        this.id = id;
+        this.description = description;
+        this.price = price;
+        this.isActive = isActive;
+        validate();
+    }
+
     private Product(Long id, String description, double price) {
         this.id = id;
         this.description = description;
