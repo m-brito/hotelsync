@@ -7,10 +7,7 @@ import br.edu.ifsp.hotelsync.application.repository.inmemory.InMemoryRoomDao;
 import br.edu.ifsp.hotelsync.application.repository.sqlite.dao.SqliteGuestDao;
 import br.edu.ifsp.hotelsync.application.repository.sqlite.dao.SqliteProductDao;
 import br.edu.ifsp.hotelsync.application.repository.sqlite.dao.SqliteRoomDao;
-import br.edu.ifsp.hotelsync.domain.entities.guest.Address;
-import br.edu.ifsp.hotelsync.domain.entities.guest.Cpf;
-import br.edu.ifsp.hotelsync.domain.entities.guest.Guest;
-import br.edu.ifsp.hotelsync.domain.entities.guest.Phone;
+import br.edu.ifsp.hotelsync.domain.entities.guest.*;
 import br.edu.ifsp.hotelsync.domain.entities.product.Product;
 import br.edu.ifsp.hotelsync.domain.entities.report.exporter.TerminalExporter;
 import br.edu.ifsp.hotelsync.domain.entities.report.formatter.Formatter;
@@ -102,7 +99,7 @@ public class MainTests {
                 new Address(
                         "Rua Joaquim Pereira",
                         "São Carlos",
-                        null,
+                        State.SAO_PAULO,
                         "13123-012",
                         "São Paulo",
                         "Oficina do Jao"
