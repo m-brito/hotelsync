@@ -1,10 +1,7 @@
 package br.edu.ifsp.hotelsync.application.repository.sqlite.dao;
 
 import br.edu.ifsp.hotelsync.application.repository.sqlite.ConnectionFactory;
-import br.edu.ifsp.hotelsync.domain.entities.guest.Address;
-import br.edu.ifsp.hotelsync.domain.entities.guest.Cpf;
-import br.edu.ifsp.hotelsync.domain.entities.guest.Guest;
-import br.edu.ifsp.hotelsync.domain.entities.guest.Phone;
+import br.edu.ifsp.hotelsync.domain.entities.guest.*;
 import br.edu.ifsp.hotelsync.domain.persistence.dao.GuestDao;
 
 import java.sql.PreparedStatement;
@@ -27,7 +24,7 @@ public class SqliteGuestDao implements GuestDao {
             stmt.setString(5, guest.getCpf().getValue());
             stmt.setString(6, guest.getAddress().getRoad());
             stmt.setString(7, guest.getAddress().getCity());
-            stmt.setString(8, guest.getAddress().getState());
+            stmt.setString(8, guest.getAddress().getState().name());
             stmt.setString(9, guest.getAddress().getCep());
             stmt.setString(10, guest.getAddress().getDistrict());
             stmt.setString(11, guest.getAddress().getComplement());
@@ -55,7 +52,7 @@ public class SqliteGuestDao implements GuestDao {
             stmt.setString(5, guest.getCpf().toString());
             stmt.setString(6, guest.getAddress().getRoad());
             stmt.setString(7, guest.getAddress().getCity());
-            stmt.setString(8, guest.getAddress().getState());
+            stmt.setString(8, guest.getAddress().getState().name());
             stmt.setString(9, guest.getAddress().getCep());
             stmt.setString(10, guest.getAddress().getDistrict());
             stmt.setString(11, guest.getAddress().getComplement());
@@ -143,7 +140,7 @@ public class SqliteGuestDao implements GuestDao {
         String district  = resultSet.getString("district");
         String complement  = resultSet.getString("complement");
 
-        Address address = new Address(road, city, state, cep, district, complement);
+        Address address = new Address(road, city, State.valueOf(state), cep, district, complement);
 
         return Guest.createOwnerWithId(id, name, pronouns, birthdate, new Phone(phone), new Cpf(cpf), address);
     }
