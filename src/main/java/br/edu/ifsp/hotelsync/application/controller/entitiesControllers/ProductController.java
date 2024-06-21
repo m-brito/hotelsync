@@ -1,22 +1,14 @@
 package br.edu.ifsp.hotelsync.application.controller.entitiesControllers;
 
-import br.edu.ifsp.hotelsync.application.util.exitHandler.ExitHandler;
-import br.edu.ifsp.hotelsync.application.util.navigationHandler.NavigationHandler;
-import br.edu.ifsp.hotelsync.application.view.Home;
-import javafx.application.Platform;
+import br.edu.ifsp.hotelsync.application.util.ExitHandler;
+import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class ProductController {
     @FXML
@@ -63,8 +55,11 @@ public class ProductController {
     public void initialize() {
     }
 
-    private final ExitHandler exitHandler = new ExitHandler();
-    private final NavigationHandler navHandler = new NavigationHandler();
+    private final ExitHandler exitHandler =
+            new ExitHandler();
+
+    private final NavigationHandler navHandler =
+            new NavigationHandler();
 
     @FXML
     void handleExit(ActionEvent event) {

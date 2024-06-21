@@ -1,9 +1,6 @@
 package br.edu.ifsp.hotelsync.domain.usecases.guest.update;
 
-import br.edu.ifsp.hotelsync.domain.entities.guest.Address;
-import br.edu.ifsp.hotelsync.domain.entities.guest.Cpf;
-import br.edu.ifsp.hotelsync.domain.entities.guest.Guest;
-import br.edu.ifsp.hotelsync.domain.entities.guest.Phone;
+import br.edu.ifsp.hotelsync.domain.entities.guest.*;
 import br.edu.ifsp.hotelsync.domain.persistence.dao.GuestDao;
 
 import java.util.NoSuchElementException;
@@ -22,7 +19,7 @@ public class UpdateGuestUseCaseImpl implements UpdateGuestUseCase {
 
         Phone phone = new Phone(request.phone());
         Cpf cpf = new Cpf(request.cpf());
-        Address address = new Address(request.road(), request.city(), request.state(), request.cep(), request.district(), request.complement());
+        Address address = new Address(request.road(), request.city(), State.valueOf(request.state()), request.cep(), request.district(), request.complement());
         Guest guest = Guest.createOwnerWithId(request.id(), request.name(), request.pronouns(), request.birthdate(), phone, cpf, address);
 
         repository.update(guest);

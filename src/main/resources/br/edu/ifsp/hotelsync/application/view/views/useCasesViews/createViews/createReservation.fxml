@@ -135,7 +135,7 @@
             <DatePicker fx:id="checkInDate" layoutX="218.0" layoutY="123.0" promptText="Check-In" />
             <DatePicker fx:id="endDate" layoutX="400.0" layoutY="123.0" promptText="End Date" />
             <DatePicker fx:id="checkOutDate" layoutX="583.0" layoutY="123.0" promptText="Check-Out " />
-            <ComboBox fx:id="ownerReservationCombo" layoutX="33.0" layoutY="166.0" prefHeight="25.0" prefWidth="174.0" promptText="SSN Owner" />
+            <ComboBox fx:id="ownerReservationCombo" layoutX="33.0" layoutY="166.0" prefHeight="25.0" prefWidth="174.0" promptText="Owner" />
             <ComboBox fx:id="roomReservationCombo" layoutX="218.0" layoutY="166.0" prefHeight="25.0" prefWidth="174.0" promptText="Room" />
             <Button id="createRoomButton" fx:id="addGuestBtn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="33.0" layoutY="222.0" mnemonicParsing="false" onAction="#handleAddGuest" prefHeight="42.0" prefWidth="117.0" style="-fx-background-color: #181818;" stylesheets="@../../../css/home.css" text="Add Guest">
                <padding>

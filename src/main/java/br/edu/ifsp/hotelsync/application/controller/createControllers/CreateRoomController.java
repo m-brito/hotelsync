@@ -1,11 +1,9 @@
 package br.edu.ifsp.hotelsync.application.controller.createControllers;
 
-import br.edu.ifsp.hotelsync.application.util.exitHandler.ExitHandler;
-import br.edu.ifsp.hotelsync.application.util.navigationHandler.NavigationHandler;
-import br.edu.ifsp.hotelsync.domain.entities.room.Room;
+import br.edu.ifsp.hotelsync.application.util.ExitHandler;
+import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
 import br.edu.ifsp.hotelsync.domain.entities.room.RoomCategory;
 import br.edu.ifsp.hotelsync.domain.entities.room.RoomStatus;
-import br.edu.ifsp.hotelsync.domain.persistence.dao.RoomDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -64,13 +62,21 @@ public class CreateRoomController {
     @FXML
     private TextField typeOfBedField;
 
-    private final ExitHandler exitHandler = new ExitHandler();
-    private final NavigationHandler navHandler = new NavigationHandler();
+    private final ExitHandler exitHandler =
+            new ExitHandler();
+
+    private final NavigationHandler navHandler =
+            new NavigationHandler();
 
     @FXML
     public void initialize() {
-        roomCategoryCombo.getItems().setAll(RoomCategory.values());
-        roomStatusCombo.getItems().setAll(RoomStatus.values());
+        roomCategoryCombo.
+                getItems().
+                setAll(RoomCategory.values());
+
+        roomStatusCombo.
+                getItems().
+                setAll(RoomStatus.values());
     }
 
     @FXML
@@ -111,6 +117,5 @@ public class CreateRoomController {
     void handleRoomPage(ActionEvent event) throws IOException {
         navHandler.navigateToRoomPage();
     }
-
 }
 

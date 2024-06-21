@@ -94,7 +94,7 @@ public class MainTests {
         ));
 
         Guest owner1 = Guest.createOwner(
-                "Mauricio",
+                "Lucio",
                 "Ele",
                 LocalDate.of(2003, 6, 11),
                 new Phone("(11) 91234-1234"),
@@ -102,7 +102,7 @@ public class MainTests {
                 new Address(
                         "Rua Joaquim Pereira",
                         "São Carlos",
-                        "São Paulo",
+                        null,
                         "13123-012",
                         "São Paulo",
                         "Oficina do Jao"

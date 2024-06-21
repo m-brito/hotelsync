@@ -147,6 +147,12 @@ public class Guest {
         return Objects.equals(cpf, guest.cpf);
     }
 
+
+    @Override
+    public String toString() {
+        return getName();
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(cpf);

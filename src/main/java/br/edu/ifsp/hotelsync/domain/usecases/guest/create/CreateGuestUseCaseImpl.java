@@ -16,7 +16,7 @@ public class CreateGuestUseCaseImpl implements CreateGuestUseCase {
     public Long createOwner(OwnerRequestModel request) {
         Phone phone = new Phone(request.phone());
         Cpf cpf = new Cpf(request.cpf());
-        Address address = new Address(request.road(), request.city(), request.state(), request.cep(), request.district(), request.complement());
+        Address address = new Address(request.road(), request.city(), State.valueOf(String.valueOf(request.state())), request.cep(), request.district(), request.complement());
         Guest guest = Guest.createOwner(request.name(), request.pronouns(), request.birthdate(), phone, cpf, address);
 
         return guestRepository.save(guest);
