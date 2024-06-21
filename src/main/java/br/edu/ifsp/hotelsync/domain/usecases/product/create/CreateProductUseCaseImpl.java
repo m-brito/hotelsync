@@ -12,6 +12,11 @@ public class CreateProductUseCaseImpl implements CreateProductUseCase{
     }
 
     @Override
+    public void execute(Product newProduct) {
+        repository.save(newProduct);
+    }
+
+    @Override
     public Long createProduct(RequestModel request) {
         Product product = Product.createProduct(request.description(), request.price());
 

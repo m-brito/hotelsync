@@ -1,11 +1,11 @@
 package br.edu.ifsp.hotelsync.domain.entities.guest;
 
 public record Address(String road,
-        String city,
-        String state,
-        String cep,
-        String district,
-        String complement) {
+                      String city,
+                      State state,
+                      String cep,
+                      String district,
+                      String complement) {
 
     public String getRoad() {
         return road;
@@ -15,7 +15,7 @@ public record Address(String road,
         return city;
     }
 
-    public String getState() {
+    public State getState() {
         return state;
     }
 
