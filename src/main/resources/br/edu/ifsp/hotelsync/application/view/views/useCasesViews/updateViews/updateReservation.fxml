@@ -1,14 +1,163 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="br.edu.ifsp.hotelsync.application.view.updateViews.UpdateReservation"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="1068.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.hotelsync.application.controller.createControllers.CreateReservationController">
+   <children>
+      <VBox prefHeight="666.0" prefWidth="264.0" style="-fx-background-color: #181818;">
+         <children>
+            <VBox alignment="TOP_CENTER" prefHeight="668.0" prefWidth="264.0" style="-fx-background-color: #181818;">
+               <children>
+                  <Label text="HotelSync" textFill="#eda420">
+                     <font>
+                        <Font name="Comic Sans MS" size="24.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="73.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="50.0" />
+                     </VBox.margin>
+                     <image>
+                        <Image url="@../../../images/icon.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Welcome to HotelSync System" textFill="#e7e5e5">
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Button fx:id="btnReservation" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleReservationPage" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #181818;" stylesheets="@../../../css/home.css" text="Reservation">
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/reservation.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="btnProduct" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleProductPage" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #181818;" stylesheets="@../../../css/home.css" text="Product">
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/product.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="btnGuest" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleGuestPage" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #181818;" stylesheets="@../../../css/home.css" text="Guest">
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/guest.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="btnRoom" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleRoomPage" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #181818;" stylesheets="@../../../css/home.css" text="Room">
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/room.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="btnReport" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleReportPage" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #181818;" stylesheets="@../../../css/home.css" text="Report">
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/report.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="btnSignout" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #181818;" stylesheets="@../../../css/home.css" text="Exit">
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/shutdown.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
+                  </Button>
+                  <Label prefHeight="167.0" prefWidth="145.0" text="By GLMVV TechSolutions" textFill="WHITE" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <Pane fx:id="pnlOverview" layoutX="264.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;">
+         <children>
+            <Label layoutX="57.0" layoutY="25.0" text="Update Reservation" textFill="#eda420">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Button id="createRoomButton" fx:id="createReservationButtonUpdate" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="33.0" layoutY="496.0" mnemonicParsing="false" onAction="#handleCreateReservation" prefHeight="42.0" prefWidth="169.0" style="-fx-background-color: #181818;" stylesheets="@../../../css/home.css" text="Create Reservation">
+               <padding>
+                  <Insets left="35.0" />
+               </padding>
+            </Button>
+            <Button id="updateRoomButton" fx:id="cancelReservationBtnUpdate" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="209.0" layoutY="496.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="75.0" style="-fx-background-color: #181818;" stylesheets="@../../../css/home.css" text="Cancel">
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </Button>
+            <DatePicker fx:id="startDateUpdate" layoutX="33.0" layoutY="123.0" promptText="Start Date" />
+            <DatePicker fx:id="checkInDateUpdate" layoutX="218.0" layoutY="123.0" promptText="Check-In" />
+            <DatePicker fx:id="endDateUpdate" layoutX="400.0" layoutY="123.0" promptText="End Date" />
+            <DatePicker fx:id="checkOutDateUpdate" layoutX="583.0" layoutY="123.0" promptText="Check-Out " />
+            <ComboBox fx:id="ownerReservationComboUpdate" layoutX="33.0" layoutY="166.0" prefHeight="25.0" prefWidth="174.0" promptText="Owner" />
+            <ComboBox fx:id="roomReservationComboUpdate" layoutX="218.0" layoutY="166.0" prefHeight="25.0" prefWidth="174.0" promptText="Room" />
+            <Button id="createRoomButton" fx:id="addGuestBtnUpdate" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="33.0" layoutY="222.0" mnemonicParsing="false" onAction="#handleAddGuest" prefHeight="42.0" prefWidth="117.0" style="-fx-background-color: #181818;" stylesheets="@../../../css/home.css" text="Add Guest">
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+            </Button>
+            <TextField fx:id="nameField" layoutX="33.0" layoutY="288.0" prefHeight="25.0" prefWidth="174.0" promptText="Name" visible="false" />
+            <TextField fx:id="pronounsField" layoutX="218.0" layoutY="288.0" prefHeight="25.0" prefWidth="174.0" promptText="Pronouns" visible="false" />
+            <DatePicker fx:id="birthdatePicker" layoutX="583.0" layoutY="288.0" promptText="Birthdate" visible="false" />
+            <TextField fx:id="ssnField" layoutX="400.0" layoutY="288.0" prefHeight="25.0" prefWidth="174.0" promptText="SSN" visible="false" />
+            <Button id="createRoomButton" fx:id="doneAddGuestBtnUpdate" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="33.0" layoutY="359.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="67.0" style="-fx-background-color: #181818;" stylesheets="@../../../css/home.css" text="Done">
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </Button>
+            <Button id="createRoomButton" fx:id="cancelAddGuestBtnUpdate" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="106.0" layoutY="359.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="67.0" style="-fx-background-color: #181818;" stylesheets="@../../../css/home.css" text="Cancel">
+               <padding>
+                  <Insets left="17.0" />
+               </padding>
+            </Button>
+            <ComboBox fx:id="methodPaymentComboUpdate" layoutX="400.0" layoutY="166.0" prefHeight="25.0" prefWidth="174.0" promptText="Method Payment" />
+         </children>
+      </Pane>
+   </children>
 </AnchorPane>
