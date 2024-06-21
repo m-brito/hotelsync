@@ -1,10 +1,9 @@
 package br.edu.ifsp.hotelsync.application.controller;
 
-import br.edu.ifsp.hotelsync.application.util.exitHandler.ExitHandler;
-import br.edu.ifsp.hotelsync.application.util.navigationHandler.NavigationHandler;
+import br.edu.ifsp.hotelsync.application.util.ExitHandler;
+import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -12,8 +11,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class HomeController {
 
@@ -51,8 +48,11 @@ public class HomeController {
     public void initialize() {
     }
 
-    private final ExitHandler exitHandler = new ExitHandler();
-    private final NavigationHandler navHandler = new NavigationHandler();
+    private final ExitHandler exitHandler =
+            new ExitHandler();
+
+    private final NavigationHandler navHandler =
+            new NavigationHandler();
 
     @FXML
     void handleExit(ActionEvent event) {

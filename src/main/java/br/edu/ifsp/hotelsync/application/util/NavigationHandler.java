@@ -1,11 +1,10 @@
-package br.edu.ifsp.hotelsync.application.util.navigationHandler;
+package br.edu.ifsp.hotelsync.application.util;
 
 import br.edu.ifsp.hotelsync.application.view.Home;
-import javafx.event.ActionEvent;
 
 import java.io.IOException;
 
-public class NavigationHandler implements INavigationHandler {
+public class NavigationHandler {
 
     public void navigateToGuestPage() throws IOException {
         Home.setRoot("views/entitiesViews/guest");

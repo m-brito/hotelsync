@@ -1,5 +1,7 @@
 package br.edu.ifsp.hotelsync.domain.usecases.guest.create;
 
+import br.edu.ifsp.hotelsync.domain.entities.guest.State;
+
 import java.time.LocalDate;
 
 public interface CreateGuestUseCase {
@@ -11,7 +13,7 @@ public interface CreateGuestUseCase {
             String cpf,
             String road,
             String city,
-            String state,
+            State state,
             String cep,
             String district,
             String complement

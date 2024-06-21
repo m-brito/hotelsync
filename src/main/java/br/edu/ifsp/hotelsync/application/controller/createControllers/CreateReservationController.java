@@ -1,13 +1,18 @@
 package br.edu.ifsp.hotelsync.application.controller.createControllers;
 
-import br.edu.ifsp.hotelsync.application.view.Home;
+import br.edu.ifsp.hotelsync.application.repository.sqlite.dao.SqliteGuestDao;
+import br.edu.ifsp.hotelsync.application.util.ExitHandler;
+import br.edu.ifsp.hotelsync.application.util.reservation.MethodPaymentComboSetup;
+import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
+import br.edu.ifsp.hotelsync.application.util.reservation.OwnerReservationComboSetup;
+import br.edu.ifsp.hotelsync.domain.entities.guest.Guest;
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Payment;
-import javafx.application.Platform;
+import br.edu.ifsp.hotelsync.domain.entities.room.Room;
+import br.edu.ifsp.hotelsync.domain.usecases.guest.find.FindAllGuestUseCaseImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
-import javafx.util.Callback;
 
 import java.io.IOException;
 
@@ -64,7 +69,7 @@ public class CreateReservationController {
     private TextField nameField;
 
     @FXML
-    private ComboBox<?> ownerReservationCombo;
+    private ComboBox<Guest> ownerReservationCombo;
 
     @FXML
     private Pane pnlOverview;
@@ -73,7 +78,7 @@ public class CreateReservationController {
     private TextField pronounsField;
 
     @FXML
-    private ComboBox<?> roomReservationCombo;
+    private ComboBox<Room> roomReservationCombo;
 
     @FXML
     private TextField ssnField;
@@ -81,74 +86,68 @@ public class CreateReservationController {
     @FXML
     private DatePicker startDate;
 
+    private final ExitHandler exitHandler =
+            new ExitHandler();
+
+    private final NavigationHandler navHandler =
+            new NavigationHandler();
+
     @FXML
     public void initialize() {
-        methodPaymentCombo.getItems().addAll(Payment.values());
-        methodPaymentCombo.setCellFactory(param -> new ListCell<>() {
-            @Override
-            protected void updateItem(Payment item, boolean empty) {
-                super.updateItem(item, empty);
-                setText((item == null || empty) ? null : item.toString());
-            }
-        });
-        methodPaymentCombo.setButtonCell(methodPaymentCombo.getCellFactory().call(null));
+        new MethodPaymentComboSetup(methodPaymentCombo).setup();
+
+        new OwnerReservationComboSetup(ownerReservationCombo,
+                new FindAllGuestUseCaseImpl(
+                        new SqliteGuestDao())).setup();
     }
 
     @FXML
     void handleExit(ActionEvent event) {
-        Alert alert = new Alert(Alert
-                .AlertType
-                .CONFIRMATION,
-                "Do you really want to leave?",
-                ButtonType.YES,
-                ButtonType.NO);
-        alert.setTitle("Departure Confirmation");
-        alert.setHeaderText("Bye! \uD83D\uDC4B");
-        alert.showAndWait();
-
-        if (alert.getResult() == ButtonType.YES) {
-            Platform.exit();
-        }
+        exitHandler.handleExit(event);
     }
 
     @FXML
     void handleGuestPage(ActionEvent event) throws IOException {
-        Home.setRoot("views/entitiesViews/guest");
+        navHandler.navigateToGuestPage();
     }
 
     @FXML
     void handleProductPage(ActionEvent actionEvent) throws IOException {
-        Home.setRoot("views/entitiesViews/product");
+        navHandler.navigateToProductPage();
     }
 
     @FXML
     void handleReportPage(ActionEvent event) throws IOException {
-        Home.setRoot("views/useCasesViews/reportViews/generateReports");
+        navHandler.navigateToReportPage();
 
     }
 
     @FXML
     void handleReservationPage(ActionEvent event) throws IOException {
-        Home.setRoot("views/entitiesViews/reservation");
+        navHandler.navigateToReservationPage();
 
     }
 
     @FXML
     void handleRoomPage(ActionEvent event) throws IOException {
-        Home.setRoot("views/entitiesViews/room");
+        navHandler.navigateToRoomPage();
     }
 
 
     @FXML
     void handleCreateReservation(ActionEvent event) throws IOException {
-        Home.setRoot("views/useCasesViews/createViews/createReservation");
+        navHandler.handleCreateReservation();
     }
 
     @FXML
     void handleAddGuest(ActionEvent event) {
-        nameField.setVisible(true);
-        pronounsField.setVisible(true);
-        ssnField.setVisible(true);
-        birthdatePicker.setVisible(true);
+        nameField.
+                setVisible(true);
+        pronounsField.
+                setVisible(true);
+        ssnField.
+                setVisible(true);
+        birthdatePicker.
+                setVisible(true);
     }
 }
