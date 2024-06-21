@@ -1,21 +1,22 @@
-package br.edu.ifsp.hotelsync.application.controller.entitiesControllers;
+package br.edu.ifsp.hotelsync.application.controller.updateControllers;
 
 import br.edu.ifsp.hotelsync.application.util.ExitHandler;
 import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
-import br.edu.ifsp.hotelsync.application.view.Home;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
-public class GuestController {
+public class UpdateProductController {
+    @FXML
+    private Button addProductBtnUpdate;
+
     @FXML
     private Button btnGuest;
 
@@ -35,7 +36,13 @@ public class GuestController {
     private Button btnSignout;
 
     @FXML
-    private Button createGuestButton;
+    private Button cancelProductBtnUpdate;
+
+    @FXML
+    private TableColumn<?, ?> descriptionColumn;
+
+    @FXML
+    private TextField descriptionFieldUpdate;
 
     @FXML
     private VBox pnItems;
@@ -44,17 +51,37 @@ public class GuestController {
     private Pane pnlOverview;
 
     @FXML
-    private TextField searchGuest;
+    private TableColumn<?, ?> priceColumn;
 
     @FXML
-    private Button updateGuestButton;
+    private TextField priceFieldUpdate;
 
-    private final NavigationHandler navHandler = new NavigationHandler();
-    private final ExitHandler exitHandler = new ExitHandler();
+    @FXML
+    private TableView<?> productsTable;
+
+    private final NavigationHandler navHandler =
+            new NavigationHandler();
+
+    private final ExitHandler exitHandler =
+            new ExitHandler();
+
+    @FXML
+    public void initialize() {
+    }
 
     @FXML
     void handleExit(ActionEvent event) {
         exitHandler.handleExit(event);
+    }
+
+    @FXML
+    void handleAddProduct(ActionEvent event) throws IOException {
+        navHandler.navigateToProductPage();
+    }
+
+    @FXML
+    void handleCancelProduct(ActionEvent event) throws IOException  {
+        navHandler.navigateToProductPage();
     }
 
     @FXML
@@ -63,7 +90,7 @@ public class GuestController {
     }
 
     @FXML
-    void handleProductPage(ActionEvent actionEvent) throws IOException {
+    void handleProductPage(ActionEvent event) throws IOException {
         navHandler.navigateToProductPage();
     }
 
@@ -81,11 +108,6 @@ public class GuestController {
     void handleRoomPage(ActionEvent event) throws IOException {
         navHandler.navigateToRoomPage();
     }
-
-
-
-    @FXML
-    public void handleCreateGuest(ActionEvent actionEvent) throws IOException {
-        navHandler.handleCreateGuest();
-    }
 }
+
+

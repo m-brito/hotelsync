@@ -1,21 +1,22 @@
-package br.edu.ifsp.hotelsync.application.controller.entitiesControllers;
+package br.edu.ifsp.hotelsync.application.controller.updateControllers;
 
 import br.edu.ifsp.hotelsync.application.util.ExitHandler;
 import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
-import br.edu.ifsp.hotelsync.application.view.Home;
-import javafx.application.Platform;
+import br.edu.ifsp.hotelsync.domain.entities.guest.State;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
-public class GuestController {
+public class UpdateGuestController {
+    @FXML
+    private DatePicker birthDateGuestPickerUpdate;
+
     @FXML
     private Button btnGuest;
 
@@ -35,22 +36,51 @@ public class GuestController {
     private Button btnSignout;
 
     @FXML
-    private Button createGuestButton;
+    private Button cancelGuestBtnUpdate;
 
     @FXML
-    private VBox pnItems;
+    private TextField cepGuestFieldUpdate;
+
+    @FXML
+    private TextField cityGuestFieldUpdate;
+
+    @FXML
+    private TextField complementFieldUpdate;
+
+    @FXML
+    private TextField cpfFieldUpdate;
+
+    @FXML
+    private TextField districtFieldUpdate;
+
+    @FXML
+    private TextField nameFieldUpdate;
+
+    @FXML
+    private TextField phoneFieldUpdate;
 
     @FXML
     private Pane pnlOverview;
 
     @FXML
-    private TextField searchGuest;
+    private TextField pronounsGuestFieldUpdate;
 
     @FXML
-    private Button updateGuestButton;
+    private Button saveGuestBtnUpdate;
 
-    private final NavigationHandler navHandler = new NavigationHandler();
-    private final ExitHandler exitHandler = new ExitHandler();
+    @FXML
+    private ComboBox<State> stateGuestComboUpdate;
+
+    private final ExitHandler exitHandler =
+            new ExitHandler();
+
+    private final NavigationHandler navHandler =
+            new NavigationHandler();
+
+    @FXML
+    public void initialize() {
+        stateGuestComboUpdate.getItems().addAll(State.values());
+    }
 
     @FXML
     void handleExit(ActionEvent event) {
@@ -63,7 +93,7 @@ public class GuestController {
     }
 
     @FXML
-    void handleProductPage(ActionEvent actionEvent) throws IOException {
+    void handleProductPage(ActionEvent event)  throws IOException {
         navHandler.navigateToProductPage();
     }
 
@@ -82,10 +112,6 @@ public class GuestController {
         navHandler.navigateToRoomPage();
     }
 
-
-
-    @FXML
-    public void handleCreateGuest(ActionEvent actionEvent) throws IOException {
-        navHandler.handleCreateGuest();
-    }
 }
+
+
