@@ -24,7 +24,8 @@ public class SqliteGuestDao implements GuestDao {
             stmt.setString(5, guest.getCpf().getValue());
             stmt.setString(6, guest.getAddress().getRoad());
             stmt.setString(7, guest.getAddress().getCity());
-            stmt.setString(8, guest.getAddress().getState().name());            stmt.setString(9, guest.getAddress().getCep());
+            stmt.setString(8, guest.getAddress().getState().name());
+            stmt.setString(9, guest.getAddress().getCep());
             stmt.setString(10, guest.getAddress().getDistrict());
             stmt.setString(11, guest.getAddress().getComplement());
             stmt.execute();
@@ -51,7 +52,8 @@ public class SqliteGuestDao implements GuestDao {
             stmt.setString(5, guest.getCpf().toString());
             stmt.setString(6, guest.getAddress().getRoad());
             stmt.setString(7, guest.getAddress().getCity());
-            stmt.setString(8, guest.getAddress().getState().name());            stmt.setString(9, guest.getAddress().getCep());
+            stmt.setString(8, guest.getAddress().getState().name());
+            stmt.setString(9, guest.getAddress().getCep());
             stmt.setString(10, guest.getAddress().getDistrict());
             stmt.setString(11, guest.getAddress().getComplement());
             stmt.setLong(12, guest.getId());
