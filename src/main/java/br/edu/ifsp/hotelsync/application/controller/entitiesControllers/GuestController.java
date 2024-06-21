@@ -81,7 +81,7 @@ public class GuestController {
     void handleRoomPage(ActionEvent event) throws IOException {
         navHandler.navigateToRoomPage();
     }
-
+    
     @FXML
     public void handleCreateGuest(ActionEvent actionEvent) throws IOException {
         navHandler.handleCreateGuest();
