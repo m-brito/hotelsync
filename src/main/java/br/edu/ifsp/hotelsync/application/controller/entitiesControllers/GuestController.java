@@ -1,21 +1,27 @@
 package br.edu.ifsp.hotelsync.application.controller.entitiesControllers;
 
+import br.edu.ifsp.hotelsync.application.controller.tableControllers.GuestTableController;
 import br.edu.ifsp.hotelsync.application.util.ExitHandler;
 import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
 import br.edu.ifsp.hotelsync.application.view.Home;
+import br.edu.ifsp.hotelsync.domain.entities.guest.Guest;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class GuestController {
+    @FXML
+    private TableColumn<Guest, String> addressColumn;
+
+    @FXML
+    private TableColumn<Guest, LocalDate> birthdateColumn;
+
     @FXML
     private Button btnGuest;
 
@@ -35,7 +41,16 @@ public class GuestController {
     private Button btnSignout;
 
     @FXML
+    private TableColumn<Guest, String> cpfColumn;
+
+    @FXML
     private Button createGuestButton;
+
+    @FXML
+    private TableColumn<Guest, String> nameColumn;
+
+    @FXML
+    private TableColumn<Guest, String> phoneColumn;
 
     @FXML
     private VBox pnItems;
@@ -44,13 +59,36 @@ public class GuestController {
     private Pane pnlOverview;
 
     @FXML
+    private TableColumn<Guest, String> pronounsColumn;
+
+    @FXML
     private TextField searchGuest;
+
+    @FXML
+    private TableView <Guest> tableGuest;
 
     @FXML
     private Button updateGuestButton;
 
-    private final NavigationHandler navHandler = new NavigationHandler();
-    private final ExitHandler exitHandler = new ExitHandler();
+    private final NavigationHandler navHandler =
+            new NavigationHandler();
+
+    private final ExitHandler exitHandler =
+            new ExitHandler();
+
+
+    @FXML
+    public void initialize() {
+        GuestTableController guestTableHandler = new GuestTableController(
+                nameColumn,
+                pronounsColumn,
+                birthdateColumn,
+                phoneColumn,
+                cpfColumn,
+                addressColumn,
+                tableGuest);
+        guestTableHandler.populateTable();
+    }
 
     @FXML
     void handleExit(ActionEvent event) {
