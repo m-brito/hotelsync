@@ -11,6 +11,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.time.LocalDate;
 import java.util.Map;
 
+import static br.edu.ifsp.hotelsync.application.main.Main.findAllGuestUseCase;
+
 public class GuestTableController {
 
     private final TableColumn<Guest, String> nameColumn;
@@ -42,8 +44,7 @@ public class GuestTableController {
         cpfColumn.setCellValueFactory(new PropertyValueFactory<>("cpf"));
         addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
 
-        SqliteGuestDao guestDao = new SqliteGuestDao();
-        Map<Long, Guest> guests = guestDao.findAll();
+        Map<Long, Guest> guests = findAllGuestUseCase.findAll();
         ObservableList<Guest> guestList = FXCollections.observableArrayList(guests.values());
         tableGuest.setItems(guestList);
     }
