@@ -44,9 +44,6 @@ public class CreateProductController {
     private Button cancelProductBtn;
 
     @FXML
-    private TableColumn<Product, String> descriptionColumn;
-
-    @FXML
     private TextField descriptionField;
 
     @FXML
@@ -56,13 +53,7 @@ public class CreateProductController {
     private Pane pnlOverview;
 
     @FXML
-    private TableColumn<Product, Double> priceColumn;
-
-    @FXML
     private TextField priceField;
-
-    @FXML
-    private TableView<Product> productsTable;
 
     private final ExitHandler exitHandler =
             new ExitHandler();
@@ -70,17 +61,9 @@ public class CreateProductController {
     private final NavigationHandler navHandler =
             new NavigationHandler();
 
-    private ProductTableController productTableController;
-
-
     @FXML
     public void initialize() {
-        ProductTableController productTableController =
-                new ProductTableController(
-                        productsTable,
-                        descriptionColumn,
-                        priceColumn);
-        productTableController.initialize();
+
     }
 
     @FXML

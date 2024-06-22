@@ -36,9 +36,6 @@ public class ProductController {
     private TableColumn<?, ?> descriptionColumn;
 
     @FXML
-    private VBox pnItems;
-
-    @FXML
     private Pane pnlOverview;
 
     @FXML
@@ -46,6 +43,9 @@ public class ProductController {
 
     @FXML
     private TextField searchProduct;
+
+    @FXML
+    private TableView<?> tableProduct;
 
     @FXML
     private Button updateProductButton;
@@ -94,5 +94,8 @@ public class ProductController {
     @FXML
     void handleCreateProduct(ActionEvent event) throws IOException {
         navHandler.handleCreateProduct();
+    }
+
+    public void handleUpdateProduct(ActionEvent actionEvent) {
     }
 }

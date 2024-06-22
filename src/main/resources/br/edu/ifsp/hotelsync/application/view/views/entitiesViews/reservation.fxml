@@ -125,25 +125,18 @@
             </Label>
             <ScrollPane layoutX="14.0" layoutY="232.0" prefHeight="320.0" prefWidth="746.0" stylesheets="@../../css/home.css">
                <content>
-                  <VBox fx:id="pnItems" prefHeight="328.0" prefWidth="744.0" spacing="5.0" style="-fx-background-color: #02030A;">
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                     <children>
-                        <TableView prefHeight="314.0" prefWidth="655.0" style="-fx-background-color: #181818;">
-                           <columns>
-                              <TableColumn prefWidth="102.0" text="Start Date" />
-                              <TableColumn prefWidth="99.0" text="Check-In" />
-                              <TableColumn minWidth="0.0" prefWidth="99.0" text="End Date" />
-                              <TableColumn prefWidth="94.0" text="Check-Out " />
-                              <TableColumn prefWidth="121.0" text="Owner" />
-                              <TableColumn prefWidth="103.0" text="Room" />
-                              <TableColumn minWidth="0.0" prefWidth="94.0" text="Status" />
-                              <TableColumn prefWidth="96.0" resizable="false" text="Payment Method" />
-                           </columns>
-                        </TableView>
-                     </children>
-                  </VBox>
+                  <TableView fx:id="tableReservation" prefHeight="314.0" prefWidth="747.0" style="-fx-background-color: #181818;">
+                     <columns>
+                        <TableColumn prefWidth="102.0" text="Start Date" />
+                        <TableColumn prefWidth="99.0" text="Check-In" />
+                        <TableColumn minWidth="0.0" prefWidth="99.0" text="End Date" />
+                        <TableColumn prefWidth="94.0" text="Check-Out " />
+                        <TableColumn prefWidth="121.0" text="Owner" />
+                        <TableColumn prefWidth="103.0" text="Room" />
+                        <TableColumn minWidth="0.0" prefWidth="94.0" text="Status" />
+                        <TableColumn prefWidth="96.0" resizable="false" text="Payment Method" />
+                     </columns>
+                  </TableView>
                </content>
             </ScrollPane>
             <ImageView fitHeight="17.0" fitWidth="16.0" layoutX="749.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
@@ -151,12 +144,12 @@
                   <Image url="@../../images/search.png" />
                </image>
             </ImageView>
-            <Button id="createRoomButton" fx:id="createReservationButton" onAction="#handleCreateReservation" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="14.0" layoutY="178.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Create Reservation">
+            <Button id="createRoomButton" fx:id="createReservationButton" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="14.0" layoutY="178.0" mnemonicParsing="false" onAction="#handleCreateReservation" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Create Reservation">
                <padding>
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button id="createRoomButton" fx:id="updateReservationButton" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="227.0" layoutY="178.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Update Reservation">
+            <Button id="createRoomButton" fx:id="updateReservationButton" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="227.0" layoutY="178.0" mnemonicParsing="false" onAction="#handleUpdateReservation" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Update Reservation">
                <padding>
                   <Insets left="50.0" />
                </padding>
