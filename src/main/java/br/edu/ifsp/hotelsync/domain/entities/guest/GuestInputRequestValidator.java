@@ -20,16 +20,14 @@ public class GuestInputRequestValidator extends Validator<Guest> {
             notification.addError("Name is null or empty");
         if(guest.getName().length() > 20)
             notification.addError("Name may not exceed 20 characters in size");
-
         if(guest.getBirthdate() == null)
             notification.addError("Birthdate is null");
-        if(Period.between(guest.getBirthdate(), LocalDate.now()).getYears() < 0)
-            notification.addError(" Guest age must be greater than or equal to 0");
-        if(Period.between(guest.getBirthdate(), LocalDate.now()).getYears() > 140)
-            notification.addError(" Reservation Owner age can't be higher than human lifespan");
-
+        if(guest.getBirthdate() != null && Period.between(guest.getBirthdate(), LocalDate.now()).getYears() < 0)
+            notification.addError("Guest age must be greater than or equal to 0");
+        if(guest.getBirthdate() != null && Period.between(guest.getBirthdate(), LocalDate.now()).getYears() > 140)
+            notification.addError("Reservation Owner age can't be higher than human lifespan");
         if(guest.getCpf() == null)
-            notification.addError(" Reservation Owners must register CPF ");
+            notification.addError("Reservation Owners must register CPF ");
 
         return notification;
     }

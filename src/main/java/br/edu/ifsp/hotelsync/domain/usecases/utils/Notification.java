@@ -37,6 +37,6 @@ public class Notification {
     public String getErrorMessage() {
         return errors.stream()
                 .map(e -> e.message)
-                .collect(Collectors.joining(" ,"));
+                .collect(Collectors.joining("\n"));
     }
 }

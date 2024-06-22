@@ -1,11 +1,12 @@
 package br.edu.ifsp.hotelsync.application.controller.entitiesControllers;
 
+import br.edu.ifsp.hotelsync.application.controller.createControllers.CreateGuestController;
 import br.edu.ifsp.hotelsync.application.controller.tableControllers.GuestTableController;
 import br.edu.ifsp.hotelsync.application.util.ExitHandler;
 import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
+import br.edu.ifsp.hotelsync.application.util.UIMode;
 import br.edu.ifsp.hotelsync.application.view.Home;
 import br.edu.ifsp.hotelsync.domain.entities.guest.Guest;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -125,6 +126,16 @@ public class GuestController {
         navHandler.handleCreateGuest();
     }
 
-    public void handleUpdateGuest(ActionEvent actionEvent) {
+    public void handleUpdateGuest(ActionEvent actionEvent) throws IOException {
+        showGuestInMode(UIMode.UPDATE);
+    }
+
+    private void showGuestInMode(UIMode mode) throws IOException {
+        Guest selectedItem = tableGuest.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            navHandler.handleCreateGuest();
+            CreateGuestController controller = (CreateGuestController) Home.getController();
+            controller.setEntity(selectedItem, mode);
+        }
     }
 }
