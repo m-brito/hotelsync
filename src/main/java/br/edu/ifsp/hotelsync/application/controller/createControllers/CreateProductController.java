@@ -121,6 +121,7 @@ public class CreateProductController {
     public void handleAddProduct(ActionEvent actionEvent) {
     }
 
-    public void handleCancelProduct(ActionEvent actionEvent) {
+    public void handleCancelProduct(ActionEvent actionEvent) throws IOException {
+        navHandler.navigateToProductPage();
     }
 }
