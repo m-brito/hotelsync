@@ -1,6 +1,6 @@
-package br.edu.ifsp.hotelsync.application.controller.entitiesControllers;
+package br.edu.ifsp.hotelsync.application.controller.managementControllers;
 
-import br.edu.ifsp.hotelsync.application.controller.createControllers.CreateGuestController;
+import br.edu.ifsp.hotelsync.application.controller.GuestController;
 import br.edu.ifsp.hotelsync.application.controller.tableControllers.GuestTableController;
 import br.edu.ifsp.hotelsync.application.util.ExitHandler;
 import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
@@ -16,10 +16,7 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class GuestController {
-    @FXML
-    private TableColumn<Guest, String> addressColumn;
-
+public class GuestManagementController {
     @FXML
     private TableColumn<Guest, LocalDate> birthdateColumn;
 
@@ -42,10 +39,22 @@ public class GuestController {
     private Button btnSignout;
 
     @FXML
+    private TableColumn<Guest, String> cepColumn;
+
+    @FXML
+    private TableColumn<Guest, String> cityColumn;
+
+    @FXML
+    private TableColumn<Guest, String> complementColumn;
+
+    @FXML
     private TableColumn<Guest, String> cpfColumn;
 
     @FXML
     private Button createGuestButton;
+
+    @FXML
+    private TableColumn<Guest, String> districtColumn;
 
     @FXML
     private TableColumn<Guest, String> nameColumn;
@@ -54,19 +63,22 @@ public class GuestController {
     private TableColumn<Guest, String> phoneColumn;
 
     @FXML
-    private VBox pnItems;
-
-    @FXML
     private Pane pnlOverview;
 
     @FXML
     private TableColumn<Guest, String> pronounsColumn;
 
     @FXML
+    private TableColumn<Guest, String> roadColumn;
+
+    @FXML
     private TextField searchGuest;
 
     @FXML
-    private TableView <Guest> tableGuest;
+    private TableColumn<Guest, String> stateColumn;
+
+    @FXML
+    private TableView<Guest> tableGuest;
 
     @FXML
     private Button updateGuestButton;
@@ -86,7 +98,12 @@ public class GuestController {
                 birthdateColumn,
                 phoneColumn,
                 cpfColumn,
-                addressColumn,
+                roadColumn,
+                cityColumn,
+                stateColumn,
+                cepColumn,
+                districtColumn,
+                complementColumn,
                 tableGuest);
         guestTableHandler.populateTable();
     }
@@ -134,7 +151,7 @@ public class GuestController {
         Guest selectedItem = tableGuest.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
             navHandler.handleCreateGuest();
-            CreateGuestController controller = (CreateGuestController) Home.getController();
+            GuestController controller = (GuestController) Home.getController();
             controller.setEntity(selectedItem, mode);
         }
     }

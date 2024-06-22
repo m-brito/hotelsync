@@ -21,7 +21,7 @@ import java.time.LocalDate;
 import static br.edu.ifsp.hotelsync.application.main.Main.createGuestUseCase;
 import static br.edu.ifsp.hotelsync.application.main.Main.updateGuestUseCase;
 
-public class CreateGuestController {
+public class GuestController {
 
     @FXML
     private DatePicker birthDateGuestPicker;
