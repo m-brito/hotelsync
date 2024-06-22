@@ -41,4 +41,8 @@ public class NavigationHandler {
     public void navigateToCreateRoomPage() throws IOException {
         Home.setRoot("views/useCasesViews/createViews/createRoom");
     }
+
+    public void navigateToHomePage() throws IOException{
+        Home.setRoot("home");
+    }
 }
