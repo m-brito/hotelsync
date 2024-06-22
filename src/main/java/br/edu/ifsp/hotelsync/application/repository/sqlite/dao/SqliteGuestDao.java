@@ -113,6 +113,24 @@ public class SqliteGuestDao implements GuestDao {
     }
 
     @Override
+    public List<Guest> findAllByIdReservation(Long id) {
+        List<Guest> guests = new ArrayList<>();
+        String sql = "SELECT g.* FROM Guest g JOIN GuestReservation gr ON g.id = gr.guestId WHERE gr.reservationId = ?";
+
+        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
+            stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Guest guest = resultSetToEntity(rs);
+                guests.add(guest);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return guests;
+    }
+
+    @Override
     public void deleteByKey(Long id) {
         String sql = "DELETE FROM Guest WHERE id = ?";
         try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
