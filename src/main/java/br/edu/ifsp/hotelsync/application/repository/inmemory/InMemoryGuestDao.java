@@ -6,6 +6,7 @@ import br.edu.ifsp.hotelsync.domain.persistence.dao.GuestDao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -48,5 +49,10 @@ public class InMemoryGuestDao implements GuestDao {
     @Override
     public Guest resultSetToEntity(ResultSet resultSet) throws SQLException {
         return null;
+    }
+
+    @Override
+    public List<Guest> findAllByIdReservation(Long id) {
+        return List.of();
     }
 }
