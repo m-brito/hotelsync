@@ -1,6 +1,5 @@
 package br.edu.ifsp.hotelsync.application.controller.createControllers;
 
-import br.edu.ifsp.hotelsync.application.controller.FormController;
 import br.edu.ifsp.hotelsync.application.util.ExitHandler;
 import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
 import br.edu.ifsp.hotelsync.application.util.UIMode;
@@ -22,7 +21,7 @@ import java.time.LocalDate;
 import static br.edu.ifsp.hotelsync.application.main.Main.createGuestUseCase;
 import static br.edu.ifsp.hotelsync.application.main.Main.updateGuestUseCase;
 
-public class CreateGuestController implements FormController<Guest> {
+public class CreateGuestController {
 
     @FXML
     private DatePicker birthDateGuestPicker;
