@@ -84,8 +84,8 @@ public class CreateRoomController {
     }
 
     @FXML
-    void handleCancelRoom(ActionEvent event) {
-
+    void handleCancelRoom(ActionEvent event) throws IOException {
+        navHandler.navigateToRoomPage();
     }
 
     @FXML
