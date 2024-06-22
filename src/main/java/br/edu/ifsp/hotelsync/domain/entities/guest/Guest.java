@@ -11,7 +11,7 @@ public class Guest {
     private String pronouns;
     private LocalDate birthdate;
     private Phone phone;
-    private final Cpf cpf;
+    private Cpf cpf;
     private Address address;
 
     public static Guest createGuest(String name, LocalDate birthdate, Cpf cpf) {
@@ -122,6 +122,10 @@ public class Guest {
         return cpf;
     }
 
+    public void setCpf(Cpf cpf) {
+        this.cpf = cpf;
+    }
+
     public Address getAddress() {
         return address;
     }
@@ -138,6 +142,9 @@ public class Guest {
         this.id = id;
     }
 
+    public void setAddress(Cpf cpf) {
+        this.cpf = cpf;
+    }
 
     @Override
     public boolean equals(Object o) {
