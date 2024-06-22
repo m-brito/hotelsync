@@ -45,4 +45,21 @@ public class NavigationHandler {
     public void navigateToHomePage() throws IOException{
         Home.setRoot("home");
     }
+
+    public void navigateToUpdateRoomPage() throws IOException {
+        Home.setRoot("views/useCasesViews/updateViews/updateRoom");
+    }
+
+    public void navigateToUpdateGuestPage() throws IOException {
+        Home.setRoot("views/useCasesViews/updateViews/updateGuest");
+    }
+
+    public void navigateToUpdateProductPage() throws IOException {
+        Home.setRoot("views/useCasesViews/updateViews/updateProduct");
+    }
+
+    public void navigateToUpdateReservationPage() throws IOException {
+        Home.setRoot("views/useCasesViews/updateViews/updateReservation");
+    }
+
 }
