@@ -96,21 +96,23 @@ public class CreateGuestController {
     }
 
     @FXML
-    void handleProductPage(ActionEvent event) {
+    void handleProductPage(ActionEvent event) throws IOException {
+        navHandler.navigateToProductPage();
     }
 
     @FXML
-    void handleReportPage(ActionEvent event) {
-
+    void handleReportPage(ActionEvent event) throws IOException {
+        navHandler.navigateToReportPage();
     }
 
     @FXML
-    void handleReservationPage(ActionEvent event) {
-
+    void handleReservationPage(ActionEvent event) throws IOException {
+        navHandler.navigateToReservationPage();
     }
 
     @FXML
-    void handleRoomPage(ActionEvent event) {
+    void handleRoomPage(ActionEvent event) throws IOException {
+        navHandler.navigateToRoomPage();
 
     }
 
@@ -120,7 +122,7 @@ public class CreateGuestController {
     }
 
     @FXML
-    void onCancelAddGuestClick(ActionEvent event) {
-
+    void onCancelAddGuestClick(ActionEvent event) throws IOException {
+        navHandler.navigateToGuestPage();
     }
 }
