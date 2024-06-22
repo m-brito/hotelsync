@@ -126,7 +126,7 @@
                   <Insets left="35.0" />
                </padding>
             </Button>
-            <Button id="updateRoomButton" fx:id="cancelReservationBtn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="209.0" layoutY="496.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="75.0" style="-fx-background-color: #181818;" stylesheets="@../../../css/home.css" text="Cancel">
+            <Button id="updateRoomButton" fx:id="cancelReservationBtn" onAction="#handleCancelAddGuestBtn"  alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="209.0" layoutY="496.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="75.0" style="-fx-background-color: #181818;" stylesheets="@../../../css/home.css" text="Cancel">
                <padding>
                   <Insets left="20.0" />
                </padding>
@@ -151,7 +151,7 @@
                   <Insets left="20.0" />
                </padding>
             </Button>
-            <Button id="createRoomButton" fx:id="cancelAddGuestBtn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="106.0" layoutY="359.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="67.0" style="-fx-background-color: #181818;" stylesheets="@../../../css/home.css" text="Cancel">
+            <Button id="createRoomButton" fx:id="cancelAddGuestBtn"  alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="106.0" layoutY="359.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="67.0" style="-fx-background-color: #181818;" stylesheets="@../../../css/home.css" text="Cancel">
                <padding>
                   <Insets left="17.0" />
                </padding>

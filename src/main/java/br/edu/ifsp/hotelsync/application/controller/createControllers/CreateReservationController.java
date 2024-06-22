@@ -150,4 +150,9 @@ public class CreateReservationController {
         birthdatePicker.
                 setVisible(true);
     }
+
+    @FXML
+    void handleCancelAddGuestBtn(ActionEvent event) throws IOException {
+        navHandler.navigateToReservationPage();
+    }
 }
