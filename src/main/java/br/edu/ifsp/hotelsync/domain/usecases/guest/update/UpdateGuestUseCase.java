@@ -15,14 +15,7 @@ public interface UpdateGuestUseCase {
             String state,
             String cep,
             String district,
-            String complement,
-            boolean isActive,
-            String bank,
-            String account,
-            String agency,
-            String cardDueDate,
-            String cardOwner,
-            String cardNumber
+            String complement
     ) {}
 
     record GuestRequestModel(
