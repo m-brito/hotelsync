@@ -18,16 +18,19 @@ public class SqliteGuestDao implements GuestDao {
 
         try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
             stmt.setString(1, guest.getName());
-            stmt.setString(2, guest.getPronouns());
+            stmt.setString(2, guest.getPronouns() != null ? guest.getPronouns() : null);
             stmt.setObject(3, guest.getBirthdate());
-            stmt.setString(4, guest.getPhone().getValue());
+            stmt.setString(4, guest.getPhone() != null ? guest.getPhone().getValue() : null);
             stmt.setString(5, guest.getCpf().getValue());
-            stmt.setString(6, guest.getAddress().getRoad());
-            stmt.setString(7, guest.getAddress().getCity());
-            stmt.setString(8, guest.getAddress().getState().name());
-            stmt.setString(9, guest.getAddress().getCep());
-            stmt.setString(10, guest.getAddress().getDistrict());
-            stmt.setString(11, guest.getAddress().getComplement());
+
+            Address address = guest.getAddress();
+            stmt.setString(6, address != null ? address.getRoad() : null);
+            stmt.setString(7, address != null ? address.getCity() : null);
+            stmt.setString(8, address != null && address.getState() != null ? address.getState().name() : null);
+            stmt.setString(9, address != null ? address.getCep() : null);
+            stmt.setString(10, address != null ? address.getDistrict() : null);
+            stmt.setString(11, address != null ? address.getComplement() : null);
+
             stmt.execute();
 
             ResultSet resultSet = stmt.getGeneratedKeys();
@@ -46,22 +49,26 @@ public class SqliteGuestDao implements GuestDao {
 
         try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
             stmt.setString(1, guest.getName());
-            stmt.setString(2, guest.getPronouns());
+            stmt.setString(2, guest.getPronouns() != null ? guest.getPronouns() : null);
             stmt.setObject(3, guest.getBirthdate());
-            stmt.setString(4, guest.getPhone().toString());
-            stmt.setString(5, guest.getCpf().toString());
-            stmt.setString(6, guest.getAddress().getRoad());
-            stmt.setString(7, guest.getAddress().getCity());
-            stmt.setString(8, guest.getAddress().getState().name());
-            stmt.setString(9, guest.getAddress().getCep());
-            stmt.setString(10, guest.getAddress().getDistrict());
-            stmt.setString(11, guest.getAddress().getComplement());
+            stmt.setString(4, guest.getPhone() != null ? guest.getPhone().getValue() : null);
+            stmt.setString(5, guest.getCpf().getValue());
+
+            Address address = guest.getAddress();
+            stmt.setString(6, address != null ? address.getRoad() : null);
+            stmt.setString(7, address != null ? address.getCity() : null);
+            stmt.setString(8, address != null && address.getState() != null ? address.getState().name() : null);
+            stmt.setString(9, address != null ? address.getCep() : null);
+            stmt.setString(10, address != null ? address.getDistrict() : null);
+            stmt.setString(11, address != null ? address.getComplement() : null);
+
             stmt.setLong(12, guest.getId());
             stmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
     @Override
     public Optional<Guest> findOneByKey(Long id) {
@@ -146,8 +153,7 @@ public class SqliteGuestDao implements GuestDao {
         long id = resultSet.getLong("id");
         String name = resultSet.getString("name");
         String pronouns = resultSet.getString("pronouns");
-        String stringBirthdate = resultSet.getString("birthdate");
-        LocalDate birthdate = LocalDate.parse(stringBirthdate);
+        LocalDate birthdate = resultSet.getString("birthdate") != null ? LocalDate.parse(resultSet.getString("birthdate")) : null;
         String phone = resultSet.getString("phone");
         String cpf = resultSet.getString("cpf");
 
@@ -155,11 +161,18 @@ public class SqliteGuestDao implements GuestDao {
         String city = resultSet.getString("city");
         String state = resultSet.getString("state");
         String cep = resultSet.getString("cep");
-        String district  = resultSet.getString("district");
-        String complement  = resultSet.getString("complement");
+        String district = resultSet.getString("district");
+        String complement = resultSet.getString("complement");
 
-        Address address = new Address(road, city, State.valueOf(state), cep, district, complement);
+        State stateEnum = state != null ? State.valueOf(state) : null;
 
-        return Guest.createOwnerWithId(id, name, pronouns, birthdate, new Phone(phone), new Cpf(cpf), address);
+        Address address = new Address(road, city, stateEnum, cep, district, complement);
+
+        if(pronouns != null && phone != null) {
+            return Guest.createOwnerWithId(id, name, pronouns, birthdate, new Phone(phone), new Cpf(cpf), address);
+        } else {
+            return Guest.createGuestWithId(id, name, birthdate, new Cpf(cpf));
+        }
     }
+
 }
