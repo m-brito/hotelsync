@@ -1,11 +1,13 @@
 package br.edu.ifsp.hotelsync.application.repository.inmemory;
 
 import br.edu.ifsp.hotelsync.domain.entities.product.Product;
+import br.edu.ifsp.hotelsync.domain.entities.reservation.ConsumedProduct;
 import br.edu.ifsp.hotelsync.domain.persistence.dao.ProductDao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -48,5 +50,10 @@ public class InMemoryProductDao implements ProductDao {
     @Override
     public Product resultSetToEntity(ResultSet resultSet) throws SQLException {
         return null;
+    }
+
+    @Override
+    public List<ConsumedProduct> findAllByIdReservation(Long id) {
+        return List.of();
     }
 }
