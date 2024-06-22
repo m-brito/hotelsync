@@ -112,7 +112,7 @@ public class Reservation {
             throw new IllegalArgumentException(notification.getErrorMessage());
     }
 
-    private double calculateTotalToPay() {
+    public double calculateTotalToPay() {
         double productTotalCost = consumedProducts
                 .stream()
                 .mapToDouble(consumedProduct ->

@@ -6,6 +6,7 @@ import br.edu.ifsp.hotelsync.application.repository.inmemory.InMemoryReservation
 import br.edu.ifsp.hotelsync.application.repository.inmemory.InMemoryRoomDao;
 import br.edu.ifsp.hotelsync.application.repository.sqlite.dao.SqliteGuestDao;
 import br.edu.ifsp.hotelsync.application.repository.sqlite.dao.SqliteProductDao;
+import br.edu.ifsp.hotelsync.application.repository.sqlite.dao.SqliteReservationDao;
 import br.edu.ifsp.hotelsync.application.repository.sqlite.dao.SqliteRoomDao;
 import br.edu.ifsp.hotelsync.domain.entities.guest.*;
 import br.edu.ifsp.hotelsync.domain.entities.product.Product;
@@ -36,10 +37,14 @@ import br.edu.ifsp.hotelsync.domain.usecases.reports.export.PdfExportUseCaseImpl
 import br.edu.ifsp.hotelsync.domain.usecases.reports.export.TerminalExportReportUseCaseImpl;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.create.CreateReservationUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.create.CreateReservationUseCaseImpl;
+import br.edu.ifsp.hotelsync.domain.usecases.reservation.find.FindAllReservationUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.reservation.find.FindAllReservationUseCaseImpl;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.implementation.AddConsumedProductUseCaseImpl;
+import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.implementation.AddGuestUseCaseImpl;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.implementation.CheckInUseCaseImpl;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.implementation.CheckOutUseCaseImpl;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.AddConsumedProductUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.AddGuestUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.CheckInUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.CheckOutUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.room.create.CreateRoomUseCase;
@@ -51,7 +56,7 @@ public class MainTests {
     public static void main(String[] args) {
         GuestDao guestDao = new SqliteGuestDao();
         ProductDao productDao = new SqliteProductDao();
-        ReservationDao reservationDao = new InMemoryReservationDao();
+        ReservationDao reservationDao = new SqliteReservationDao();
         RoomDao roomDao = new SqliteRoomDao();
 
         CreateGuestUseCase createGuestUseCase = new CreateGuestUseCaseImpl(guestDao);
@@ -62,9 +67,11 @@ public class MainTests {
         CheckInUseCaseImpl checkInUseCase = new CheckInUseCaseImpl(reservationDao, roomDao);
         CheckOutUseCaseImpl checkOutUseCase = new CheckOutUseCaseImpl(reservationDao, roomDao);
         CreateFinancialReportUseCase createFinancialReportUseCase = new CreateFinancialReportUseCase(reservationDao);
-        AddConsumedProductUseCaseImpl addConsumedProductUseCase = new AddConsumedProductUseCaseImpl(productDao, reservationDao);
+        AddConsumedProductUseCase addConsumedProductUseCase = new AddConsumedProductUseCaseImpl(productDao, reservationDao);
+        AddGuestUseCase addGuestUseCase = new AddGuestUseCaseImpl(guestDao, reservationDao);
         PdfExportUseCaseImpl pdfExport = new PdfExportUseCaseImpl();
         TerminalExporter terminalExporter = new TerminalExporter();
+        FindAllReservationUseCase findAllReservationUseCase = new FindAllReservationUseCaseImpl(reservationDao);
 
         Formatter<LocalDate, Double, DailyOccupationReport> simpleFormatter = new SimpleTextFormatter<>();
 
@@ -72,13 +79,13 @@ public class MainTests {
         Room room1 = Room.createRoom(1, 2, "King", RoomCategory.EXECUTIVE, "Quarto executivo", RoomStatus.AVAILABLE, 15);
         room1.setId(createRoomUseCase.createRoom(
                 new CreateRoomUseCase.RequestModel(
-                        room1.getNumber(),
-                        room1.getNumberOfBeds(),
-                        room1.getTypeOfBed(),
-                        room1.getRoomCategory(),
-                        room1.getRoomStatus(),
-                        room1.getDescription(),
-                        room1.getArea()
+                        1,
+                        2,
+                        "King",
+                        RoomCategory.EXECUTIVE,
+                        RoomStatus.AVAILABLE,
+                        "Quarto executivo",
+                        15
                 )
         ));
 
@@ -105,7 +112,7 @@ public class MainTests {
                         "Oficina do Jao"
                 )
         );
-        createGuestUseCase.createOwner(
+        owner1.setId(createGuestUseCase.createOwner(
                 new CreateGuestUseCase.OwnerRequestModel(
                         owner1.getName(),
                         owner1.getPronouns(),
@@ -119,7 +126,7 @@ public class MainTests {
                         owner1.getAddress().district(),
                         owner1.getAddress().complement()
                 )
-        );
+        ));
 
         Reservation reservation1 = Reservation.createReservation(
                 LocalDate.of(2024, 6, 5),
@@ -137,6 +144,8 @@ public class MainTests {
                         reservation1.getRoom())
                 )
         );
+        addGuestUseCase.addGuest(new AddGuestUseCase.RequestModel(owner1.getId(), reservation1.getId()));
+
         checkInUseCase.doCheckIn(new CheckInUseCase.RequestModel(reservation1.getId()));
         addConsumedProductUseCase.addConsumedProduct(new AddConsumedProductUseCase.RequestModel(reservation1.getId(), product1.getId(), 5));
 
@@ -151,6 +160,8 @@ public class MainTests {
         PdfExportUseCase.RequestModel request = new PdfExportUseCase.RequestModel(dataToExport, simpleFormatter, "relatorio.pdf");
         terminalExporter.export(dataToExport, simpleFormatter);
 //        pdfExport.exportPdf(request);
+
+        System.out.println(findAllReservationUseCase.findAll());
 
 
     }

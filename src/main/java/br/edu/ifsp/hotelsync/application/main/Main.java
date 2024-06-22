@@ -7,6 +7,7 @@ import br.edu.ifsp.hotelsync.application.repository.inmemory.InMemoryRoomDao;
 import br.edu.ifsp.hotelsync.application.repository.sqlite.DatabaseBuilder;
 import br.edu.ifsp.hotelsync.application.repository.sqlite.dao.SqliteGuestDao;
 import br.edu.ifsp.hotelsync.application.repository.sqlite.dao.SqliteProductDao;
+import br.edu.ifsp.hotelsync.application.repository.sqlite.dao.SqliteReservationDao;
 import br.edu.ifsp.hotelsync.application.repository.sqlite.dao.SqliteRoomDao;
 import br.edu.ifsp.hotelsync.application.view.Home;
 import br.edu.ifsp.hotelsync.domain.persistence.dao.GuestDao;
@@ -108,7 +109,7 @@ public class Main {
         findOneProductUseCase = new FindOneProductUseCaseImpl(productDao);
         updateProductUseCase = new UpdateProductUseCaseImpl(productDao);
 
-        ReservationDao reservationDao = new InMemoryReservationDao();
+        ReservationDao reservationDao = new SqliteReservationDao();
         createReservationUseCase = new CreateReservationUseCaseImpl(reservationDao);
         findAllReservationUseCase = new FindAllReservationUseCaseImpl(reservationDao);
         findOneReservationUseCase = new FindOneReservationUseCaseImpl(reservationDao);
