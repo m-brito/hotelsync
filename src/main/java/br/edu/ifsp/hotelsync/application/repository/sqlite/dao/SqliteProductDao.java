@@ -2,14 +2,13 @@ package br.edu.ifsp.hotelsync.application.repository.sqlite.dao;
 
 import br.edu.ifsp.hotelsync.application.repository.sqlite.ConnectionFactory;
 import br.edu.ifsp.hotelsync.domain.entities.product.Product;
+import br.edu.ifsp.hotelsync.domain.entities.reservation.ConsumedProduct;
 import br.edu.ifsp.hotelsync.domain.persistence.dao.ProductDao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class SqliteProductDao implements ProductDao {
 
@@ -96,6 +95,26 @@ public class SqliteProductDao implements ProductDao {
         }
         return products;
     }
+
+    @Override
+    public List<ConsumedProduct> findAllByIdReservation(Long id) {
+        List<ConsumedProduct> consumedProducts = new ArrayList<>();
+        String sql = "SELECT p.*, cp.quantity FROM Product p JOIN ConsumedProduct cp ON p.id = cp.productId WHERE cp.reservationId = ?";
+
+        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
+            stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Product product = resultSetToEntity(rs);
+                int quantity = rs.getInt("quantity");
+                consumedProducts.add(new ConsumedProduct(product, quantity));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return consumedProducts;
+    }
+
 
     @Override
     public void deleteByKey(Long id) {
