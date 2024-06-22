@@ -5,6 +5,7 @@ import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -34,16 +35,13 @@ public class ReservationController {
     private Button createReservationButton;
 
     @FXML
-    private VBox pnItems;
-
-    @FXML
     private Pane pnlOverview;
 
     @FXML
     private TextField searchReservation;
 
     @FXML
-    private Button updateReservationButton;
+    private TableView<?> tableReservation;
 
     @FXML
     public void initialize() {
@@ -88,5 +86,8 @@ public class ReservationController {
     @FXML
     void handleCreateReservation(ActionEvent event) throws IOException {
         navHandler.handleCreateReservation();
+    }
+
+    public void handleUpdateReservation(ActionEvent actionEvent) {
     }
 }

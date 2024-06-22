@@ -2,9 +2,11 @@ package br.edu.ifsp.hotelsync.application.controller.entitiesControllers;
 
 import br.edu.ifsp.hotelsync.application.util.ExitHandler;
 import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
+import br.edu.ifsp.hotelsync.domain.entities.room.Room;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -34,13 +36,13 @@ public class RoomController {
     private Button createRoomButton;
 
     @FXML
-    private VBox pnItems;
-
-    @FXML
     private Pane pnlOverview;
 
     @FXML
     private TextField searchRoom;
+
+    @FXML
+    private TableView<Room> tableRoom;
 
     @FXML
     private Button updateRoomButton;
@@ -88,5 +90,8 @@ public class RoomController {
     @FXML
     void onCreateRoomClick(ActionEvent event) throws IOException {
         navHandler.navigateToCreateRoomPage();
+    }
+
+    public void handleUpdateRoom(ActionEvent actionEvent) {
     }
 }

@@ -125,23 +125,16 @@
             </Label>
             <ScrollPane layoutX="14.0" layoutY="232.0" prefHeight="320.0" prefWidth="746.0" stylesheets="@../../css/home.css">
                <content>
-                  <VBox fx:id="pnItems" prefHeight="320.0" prefWidth="744.0" spacing="5.0" style="-fx-background-color: #02030A;">
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                     <children>
-                        <TableView fx:id="tableGuest" prefHeight="314.0" prefWidth="655.0">
-                           <columns>
-                              <TableColumn fx:id="nameColumn" prefWidth="127.0" text="Name" />
-                              <TableColumn fx:id="pronounsColumn" prefWidth="125.0" text="Pronouns" />
-                              <TableColumn fx:id="birthdateColumn" minWidth="0.0" prefWidth="122.0" text="Birthdate" />
-                              <TableColumn fx:id="phoneColumn" prefWidth="115.0" text="Phone" />
-                              <TableColumn fx:id="cpfColumn" prefWidth="116.0" text="CPF" />
-                              <TableColumn fx:id="addressColumn" prefWidth="128.0" text="Address" />
-                           </columns>
-                        </TableView>
-                     </children>
-                  </VBox>
+                  <TableView fx:id="tableGuest" prefHeight="314.0" prefWidth="754.0" style="-fx-background-color: #181818;">
+                     <columns>
+                        <TableColumn fx:id="nameColumn" prefWidth="127.0" text="Name" />
+                        <TableColumn fx:id="pronounsColumn" prefWidth="125.0" text="Pronouns" />
+                        <TableColumn fx:id="birthdateColumn" minWidth="0.0" prefWidth="122.0" text="Birthdate" />
+                        <TableColumn fx:id="phoneColumn" prefWidth="115.0" text="Phone" />
+                        <TableColumn fx:id="cpfColumn" prefWidth="116.0" text="CPF" />
+                        <TableColumn fx:id="addressColumn" prefWidth="128.0" text="Address" />
+                     </columns>
+                  </TableView>
                </content>
             </ScrollPane>
             <ImageView fitHeight="17.0" fitWidth="16.0" layoutX="749.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
@@ -154,7 +147,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button id="updateRoomButton" fx:id="updateGuestButton" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="190.0" layoutY="178.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="169.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Update Guest">
+            <Button id="updateRoomButton" fx:id="updateGuestButton" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="190.0" layoutY="178.0" mnemonicParsing="false" onAction="#handleUpdateGuest" prefHeight="42.0" prefWidth="169.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Update Guest">
                <padding>
                   <Insets left="50.0" />
                </padding>

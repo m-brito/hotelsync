@@ -125,24 +125,17 @@
             </Label>
             <ScrollPane layoutX="14.0" layoutY="232.0" prefHeight="320.0" prefWidth="746.0" stylesheets="@../../css/home.css">
                <content>
-                  <VBox fx:id="pnItems" prefHeight="328.0" prefWidth="744.0" spacing="5.0" style="-fx-background-color: #02030A;">
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                     <children>
-                        <TableView prefHeight="314.0" prefWidth="655.0" style="-fx-background-color: #181818;">
-                           <columns>
-                              <TableColumn prefWidth="62.0" text="Number" />
-                              <TableColumn text="Nº Beds" />
-                              <TableColumn minWidth="0.0" prefWidth="139.0" text="Type of Beds" />
-                              <TableColumn prefWidth="122.0" text="Category" />
-                              <TableColumn prefWidth="112.0" text="Description" />
-                              <TableColumn prefWidth="103.0" text="Status" />
-                              <TableColumn minWidth="0.0" prefWidth="115.0" text="Area" />
-                           </columns>
-                        </TableView>
-                     </children>
-                  </VBox>
+                  <TableView fx:id="tableRoom" prefHeight="314.0" prefWidth="749.0" style="-fx-background-color: #181818;">
+                     <columns>
+                        <TableColumn prefWidth="62.0" text="Number" />
+                        <TableColumn text="Nº Beds" />
+                        <TableColumn minWidth="0.0" prefWidth="139.0" text="Type of Beds" />
+                        <TableColumn prefWidth="122.0" text="Category" />
+                        <TableColumn prefWidth="112.0" text="Description" />
+                        <TableColumn prefWidth="103.0" text="Status" />
+                        <TableColumn minWidth="0.0" prefWidth="115.0" text="Area" />
+                     </columns>
+                  </TableView>
                </content>
             </ScrollPane>
             <ImageView fitHeight="17.0" fitWidth="16.0" layoutX="749.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
@@ -150,12 +143,12 @@
                   <Image url="@../../images/search.png" />
                </image>
             </ImageView>
-            <Button id="createRoomButton" fx:id="createRoomButton" onAction="#onCreateRoomClick" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="14.0" layoutY="178.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="169.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Create Room">
+            <Button id="createRoomButton" fx:id="createRoomButton" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="14.0" layoutY="178.0" mnemonicParsing="false" onAction="#onCreateRoomClick" prefHeight="42.0" prefWidth="169.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Create Room">
                <padding>
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button id="updateRoomButton" fx:id="updateRoomButton" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="190.0" layoutY="178.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="169.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Update Room">
+            <Button id="updateRoomButton" fx:id="updateRoomButton" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="190.0" layoutY="178.0" mnemonicParsing="false" onAction="#handleUpdateRoom" prefHeight="42.0" prefWidth="169.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Update Room">
                <padding>
                   <Insets left="50.0" />
                </padding>

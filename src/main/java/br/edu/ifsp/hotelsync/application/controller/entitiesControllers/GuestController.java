@@ -124,4 +124,7 @@ public class GuestController {
     public void handleCreateGuest(ActionEvent actionEvent) throws IOException {
         navHandler.handleCreateGuest();
     }
+
+    public void handleUpdateGuest(ActionEvent actionEvent) {
+    }
 }
