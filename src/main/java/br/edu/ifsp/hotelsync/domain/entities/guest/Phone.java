@@ -30,4 +30,9 @@ public record Phone(String value) {
     public int hashCode() {
         return Objects.hashCode(value);
     }
+
+    @Override
+    public String toString() {
+        return value;
+    }
 }
