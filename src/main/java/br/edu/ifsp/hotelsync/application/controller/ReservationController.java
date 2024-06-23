@@ -1,4 +1,4 @@
-package br.edu.ifsp.hotelsync.application.controller.createControllers;
+package br.edu.ifsp.hotelsync.application.controller;
 
 import br.edu.ifsp.hotelsync.application.repository.sqlite.dao.SqliteGuestDao;
 import br.edu.ifsp.hotelsync.application.util.ExitHandler;
@@ -16,7 +16,7 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
-public class CreateReservationController {
+public class ReservationController {
     @FXML
     private Button addGuestBtn;
 

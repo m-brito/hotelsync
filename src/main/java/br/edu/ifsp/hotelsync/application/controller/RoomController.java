@@ -1,26 +1,24 @@
-package br.edu.ifsp.hotelsync.application.controller.createControllers;
+package br.edu.ifsp.hotelsync.application.controller;
 
-import br.edu.ifsp.hotelsync.application.controller.tableControllers.ProductTableController;
-import br.edu.ifsp.hotelsync.application.main.Main;
 import br.edu.ifsp.hotelsync.application.util.ExitHandler;
 import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
-import br.edu.ifsp.hotelsync.domain.entities.product.Product;
+import br.edu.ifsp.hotelsync.domain.entities.room.RoomCategory;
+import br.edu.ifsp.hotelsync.domain.entities.room.RoomStatus;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
 import java.io.IOException;
-import java.util.List;
 
-public class CreateProductController {
-
+public class RoomController {
     @FXML
     private Button addProductBtn;
+
+    @FXML
+    private TextField areaRoomField;
 
     @FXML
     private Button btnGuest;
@@ -44,16 +42,25 @@ public class CreateProductController {
     private Button cancelProductBtn;
 
     @FXML
-    private TextField descriptionField;
+    private TextField descriptionRoomField;
 
     @FXML
-    private VBox pnItems;
+    private TextField numberOfBedsField;
+
+    @FXML
+    private TextField numberRoomField;
 
     @FXML
     private Pane pnlOverview;
 
     @FXML
-    private TextField priceField;
+    private ComboBox<RoomCategory> roomCategoryCombo;
+
+    @FXML
+    private ComboBox<RoomStatus> roomStatusCombo;
+
+    @FXML
+    private TextField typeOfBedField;
 
     private final ExitHandler exitHandler =
             new ExitHandler();
@@ -63,7 +70,22 @@ public class CreateProductController {
 
     @FXML
     public void initialize() {
+        roomCategoryCombo.
+                getItems().
+                setAll(RoomCategory.values());
 
+        roomStatusCombo.
+                getItems().
+                setAll(RoomStatus.values());
+    }
+
+    @FXML
+    public void handleAddRoom(ActionEvent event) {
+    }
+
+    @FXML
+    void handleCancelRoom(ActionEvent event) throws IOException {
+        navHandler.navigateToRoomPage();
     }
 
     @FXML
@@ -77,7 +99,7 @@ public class CreateProductController {
     }
 
     @FXML
-    void handleProductPage(ActionEvent actionEvent) throws IOException {
+    void handleProductPage(ActionEvent event) throws IOException {
         navHandler.navigateToProductPage();
     }
 
@@ -95,16 +117,5 @@ public class CreateProductController {
     void handleRoomPage(ActionEvent event) throws IOException {
         navHandler.navigateToRoomPage();
     }
-
-    @FXML
-    void handleCreateProduct(ActionEvent event) throws IOException {
-        navHandler.handleCreateProduct();
-    }
-
-    public void handleAddProduct(ActionEvent actionEvent) {
-    }
-
-    public void handleCancelProduct(ActionEvent actionEvent) throws IOException {
-        navHandler.navigateToProductPage();
-    }
 }
+

@@ -1,4 +1,4 @@
-package br.edu.ifsp.hotelsync.application.controller.entitiesControllers;
+package br.edu.ifsp.hotelsync.application.controller.managementControllers;
 
 import br.edu.ifsp.hotelsync.application.util.ExitHandler;
 import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
@@ -9,11 +9,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
-public class RoomController {
+public class RoomManagementController {
     @FXML
     private Button btnGuest;
 

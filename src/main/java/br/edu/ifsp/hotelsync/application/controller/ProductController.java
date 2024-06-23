@@ -1,15 +1,21 @@
-package br.edu.ifsp.hotelsync.application.controller.entitiesControllers;
+package br.edu.ifsp.hotelsync.application.controller;
 
 import br.edu.ifsp.hotelsync.application.util.ExitHandler;
 import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
-public class ReportController {
+public class ProductController {
+
+    @FXML
+    private Button addProductBtn;
+
     @FXML
     private Button btnGuest;
 
@@ -29,23 +35,19 @@ public class ReportController {
     private Button btnSignout;
 
     @FXML
-    private Button checkInButton;
+    private Button cancelProductBtn;
 
     @FXML
-    private Button checkOutButton;
+    private TextField descriptionField;
 
     @FXML
-    private Button dailyOcuppationButton;
-
-    @FXML
-    private Button financialButton;
+    private VBox pnItems;
 
     @FXML
     private Pane pnlOverview;
 
     @FXML
-    public void initialize() {
-    }
+    private TextField priceField;
 
     private final ExitHandler exitHandler =
             new ExitHandler();
@@ -54,12 +56,17 @@ public class ReportController {
             new NavigationHandler();
 
     @FXML
+    public void initialize() {
+
+    }
+
+    @FXML
     void handleExit(ActionEvent event) {
         exitHandler.handleExit(event);
     }
 
     @FXML
-    void handleGuestPage(ActionEvent event) throws IOException{
+    void handleGuestPage(ActionEvent event) throws IOException {
         navHandler.navigateToGuestPage();
     }
 
@@ -81,5 +88,17 @@ public class ReportController {
     @FXML
     void handleRoomPage(ActionEvent event) throws IOException {
         navHandler.navigateToRoomPage();
+    }
+
+    @FXML
+    void handleCreateProduct(ActionEvent event) throws IOException {
+        navHandler.handleCreateProduct();
+    }
+
+    public void handleAddProduct(ActionEvent actionEvent) {
+    }
+
+    public void handleCancelProduct(ActionEvent actionEvent) throws IOException {
+        navHandler.navigateToProductPage();
     }
 }

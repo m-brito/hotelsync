@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="1068.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.hotelsync.application.controller.entitiesControllers.GuestController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="1068.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.hotelsync.application.controller.managementControllers.GuestManagementController">
    <children>
       <VBox prefHeight="666.0" prefWidth="264.0" style="-fx-background-color: #181818;">
          <children>
@@ -142,6 +142,7 @@
                   <TableView fx:id="tableGuest" prefHeight="328.0" prefWidth="759.0" style="-fx-background-color: #181818;">
                     <columns>
                       <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
+                        <TableColumn fx:id="pronounsColumn" prefWidth="75.0" text="Pronouns" />
                       <TableColumn fx:id="birthdateColumn" prefWidth="75.0" text="Birthdate" />
                         <TableColumn fx:id="phoneColumn" prefWidth="75.0" text="Phone" />
                         <TableColumn fx:id="cpfColumn" prefWidth="75.0" text="CPF" />

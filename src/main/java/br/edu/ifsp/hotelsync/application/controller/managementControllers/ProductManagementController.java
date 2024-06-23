@@ -1,18 +1,15 @@
-package br.edu.ifsp.hotelsync.application.controller.entitiesControllers;
+package br.edu.ifsp.hotelsync.application.controller.managementControllers;
 
 import br.edu.ifsp.hotelsync.application.util.ExitHandler;
 import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
-public class ReservationController {
+public class ProductManagementController {
     @FXML
     private Button btnGuest;
 
@@ -32,16 +29,26 @@ public class ReservationController {
     private Button btnSignout;
 
     @FXML
-    private Button createReservationButton;
+    private Button createProductButton;
+
+    @FXML
+    private TableColumn<?, ?> descriptionColumn;
 
     @FXML
     private Pane pnlOverview;
 
     @FXML
-    private TextField searchReservation;
+    private TableColumn<?, ?> priceColumn;
 
     @FXML
-    private TableView<?> tableReservation;
+    private TextField searchProduct;
+
+    @FXML
+    private TableView<?> tableProduct;
+
+    @FXML
+    private Button updateProductButton;
+
 
     @FXML
     public void initialize() {
@@ -84,10 +91,10 @@ public class ReservationController {
     }
 
     @FXML
-    void handleCreateReservation(ActionEvent event) throws IOException {
-        navHandler.handleCreateReservation();
+    void handleCreateProduct(ActionEvent event) throws IOException {
+        navHandler.handleCreateProduct();
     }
 
-    public void handleUpdateReservation(ActionEvent actionEvent) {
+    public void handleUpdateProduct(ActionEvent actionEvent) {
     }
 }
