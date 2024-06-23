@@ -127,14 +127,14 @@
                <content>
                   <TableView fx:id="tableReservation" prefHeight="314.0" prefWidth="747.0" style="-fx-background-color: #181818;">
                      <columns>
-                        <TableColumn prefWidth="102.0" text="Start Date" />
-                        <TableColumn prefWidth="99.0" text="Check-In" />
-                        <TableColumn minWidth="0.0" prefWidth="99.0" text="End Date" />
-                        <TableColumn prefWidth="94.0" text="Check-Out " />
-                        <TableColumn prefWidth="121.0" text="Owner" />
-                        <TableColumn prefWidth="103.0" text="Room" />
-                        <TableColumn minWidth="0.0" prefWidth="94.0" text="Status" />
-                        <TableColumn prefWidth="96.0" resizable="false" text="Payment Method" />
+                        <TableColumn fx:id="startDateReservationField" prefWidth="102.0" text="Start Date" />
+                        <TableColumn fx:id="checkInReservationField" prefWidth="99.0" text="Check-In" />
+                        <TableColumn fx:id="endDateReservationField" minWidth="0.0" prefWidth="99.0" text="End Date" />
+                        <TableColumn fx:id="checkOutReservationField" prefWidth="94.0" text="Check-Out " />
+                        <TableColumn fx:id="ownerReservationField" prefWidth="121.0" text="Owner" />
+                        <TableColumn fx:id="roomReservationField" prefWidth="103.0" text="Room" />
+                        <TableColumn fx:id="statusReservationField" minWidth="0.0" prefWidth="94.0" text="Status" />
+                        <TableColumn fx:id="paymentMethodReservationField" prefWidth="96.0" resizable="false" text="Payment Method" />
                      </columns>
                   </TableView>
                </content>
