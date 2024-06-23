@@ -12,7 +12,7 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
-public class RoomController {
+public class RoomManagementController {
     @FXML
     private Button btnGuest;
 
