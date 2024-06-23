@@ -115,14 +115,14 @@
       </VBox>
       <Pane fx:id="pnlOverview" layoutX="264.0" prefHeight="666.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;">
          <children>
-            <Label layoutX="57.0" layoutY="25.0" text="Create Room" textFill="#eda420">
+            <Label fx:id="viewTitle" layoutX="57.0" layoutY="25.0" text="Create Room" textFill="#eda420">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
             <TextField fx:id="numberRoomField" layoutX="45.0" layoutY="178.0" prefHeight="25.0" prefWidth="183.0" promptText="Number Room" />
             <TextField fx:id="numberOfBedsField" layoutX="240.0" layoutY="178.0" prefHeight="25.0" prefWidth="183.0" promptText="Number of Beds" />
-            <Button id="reservationButton" fx:id="addProductBtn" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="45.0" layoutY="312.0" mnemonicParsing="false" onAction="#handleAddRoom" prefHeight="42.0" prefWidth="67.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Add">
+            <Button id="reservationButton" fx:id="addProductBtn" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="45.0" layoutY="312.0" mnemonicParsing="false" onAction="#onSaveRoom" prefHeight="42.0" prefWidth="67.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Add">
                <padding>
                   <Insets left="20.0" />
                </padding>
