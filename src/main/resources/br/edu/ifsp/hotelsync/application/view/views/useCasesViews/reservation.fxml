@@ -142,7 +142,7 @@
             <TextField fx:id="nameField" layoutX="30.0" layoutY="253.0" prefHeight="25.0" prefWidth="174.0" promptText="Name" visible="false" />
             <DatePicker fx:id="birthdatePicker" layoutX="396.0" layoutY="253.0" promptText="Birthdate" visible="false" />
             <TextField fx:id="cpfField" layoutX="213.0" layoutY="253.0" prefHeight="25.0" prefWidth="174.0" promptText="CPF" visible="false" />
-            <Button id="createRoomButton" fx:id="doneAddGuestBtn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="33.0" layoutY="300.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="67.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Add" visible="false">
+            <Button id="createRoomButton" fx:id="doneAddGuestBtn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="33.0" layoutY="300.0" mnemonicParsing="false" onAction="#addGuestBtn" prefHeight="42.0" prefWidth="67.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Add" visible="false">
                <padding>
                   <Insets left="20.0" />
                </padding>
