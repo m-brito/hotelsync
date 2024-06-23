@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="1068.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.hotelsync.application.controller.ReservationController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="1068.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.hotelsync.application.controller.ReservationController">
    <children>
       <VBox prefHeight="666.0" prefWidth="264.0" style="-fx-background-color: #181818;">
          <children>
@@ -116,25 +109,25 @@
       </VBox>
       <Pane fx:id="pnlOverview" layoutX="264.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;">
          <children>
-            <Label layoutX="57.0" layoutY="25.0" text="Create Reservation" textFill="#eda420">
+            <Label fx:id="viewTitle" layoutX="57.0" layoutY="25.0" text="Create Reservation" textFill="#eda420">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button id="createRoomButton" fx:id="createReservationButton" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="33.0" layoutY="496.0" mnemonicParsing="false" onAction="#handleCreateReservation" prefHeight="42.0" prefWidth="169.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Create Reservation">
+            <Button id="createRoomButton" fx:id="createReservationButton" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="33.0" layoutY="496.0" mnemonicParsing="false" onAction="#onSaveReservation" prefHeight="42.0" prefWidth="169.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Create Reservation">
                <padding>
                   <Insets left="35.0" />
                </padding>
             </Button>
-            <Button id="updateRoomButton" fx:id="cancelReservationBtn" onAction="#handleCancelAddGuestBtn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="209.0" layoutY="496.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="75.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Cancel">
+            <Button id="updateRoomButton" fx:id="cancelReservationBtn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="209.0" layoutY="496.0" mnemonicParsing="false" onAction="#handleCancelAddGuestBtn" prefHeight="42.0" prefWidth="75.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Cancel">
                <padding>
                   <Insets left="20.0" />
                </padding>
             </Button>
             <DatePicker fx:id="startDate" layoutX="33.0" layoutY="123.0" promptText="Start Date" />
-            <DatePicker fx:id="checkInDate" layoutX="218.0" layoutY="123.0" promptText="Check-In" />
+            <DatePicker fx:id="checkInDate" disable="true" layoutX="218.0" layoutY="123.0" promptText="Check-In" />
             <DatePicker fx:id="endDate" layoutX="400.0" layoutY="123.0" promptText="End Date" />
-            <DatePicker fx:id="checkOutDate" layoutX="583.0" layoutY="123.0" promptText="Check-Out " />
+            <DatePicker fx:id="checkOutDate" disable="true" layoutX="583.0" layoutY="123.0" promptText="Check-Out " />
             <ComboBox fx:id="ownerReservationCombo" layoutX="33.0" layoutY="166.0" prefHeight="25.0" prefWidth="174.0" promptText="Owner" />
             <ComboBox fx:id="roomReservationCombo" layoutX="218.0" layoutY="166.0" prefHeight="25.0" prefWidth="174.0" promptText="Room" />
             <Button id="createRoomButton" fx:id="addGuestBtn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="33.0" layoutY="222.0" mnemonicParsing="false" onAction="#handleAddGuest" prefHeight="42.0" prefWidth="117.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Add Guest">
