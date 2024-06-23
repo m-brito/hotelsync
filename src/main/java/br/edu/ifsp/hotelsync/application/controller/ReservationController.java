@@ -5,7 +5,6 @@ import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
 import br.edu.ifsp.hotelsync.application.util.UIMode;
 import br.edu.ifsp.hotelsync.domain.entities.guest.Cpf;
 import br.edu.ifsp.hotelsync.domain.entities.guest.Guest;
-import br.edu.ifsp.hotelsync.domain.entities.product.Product;
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
 import br.edu.ifsp.hotelsync.domain.entities.room.Room;
 import br.edu.ifsp.hotelsync.domain.usecases.guest.create.CreateGuestUseCase;
@@ -19,7 +18,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
-
+import javafx.scene.shape.Line;
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -61,7 +60,13 @@ public class ReservationController {
     private Button createReservationButton;
 
     @FXML
+    private Line separator;
+
+    @FXML
     private Button doneAddGuestBtn;
+
+    @FXML
+    private Button doneAddProductBtn;
 
     @FXML
     private DatePicker endDate;
@@ -73,6 +78,9 @@ public class ReservationController {
     private ComboBox<Guest> ownerReservationCombo;
 
     @FXML
+    private ComboBox<Guest> productReservationCombo;
+
+    @FXML
     private Pane pnlOverview;
 
     @FXML
@@ -82,7 +90,13 @@ public class ReservationController {
     private TextField cpfField;
 
     @FXML
+    private TextField quantityField;
+
+    @FXML
     private DatePicker startDate;
+
+    @FXML
+    private Label viewSubtitle2;
 
     @FXML
     private Label viewSubtitle;
@@ -163,6 +177,12 @@ public class ReservationController {
         viewSubtitle.setVisible(true);
         tableGuest.setVisible(true);
         doneAddGuestBtn.setVisible(true);
+        viewSubtitle2.setVisible(true);
+        productReservationCombo.setVisible(true);
+        quantityField.setVisible(true);
+        doneAddProductBtn.setVisible(true);
+        separator.setVisible(true);
+
         bindTableViewToItemsList();
         bindColumnsToValuesSources();
         populateTable();
