@@ -88,6 +88,9 @@ public class ReservationManagementController {
     private TableColumn<Reservation, String> paymentMethodReservationField;
 
     @FXML
+    private TableColumn<Reservation, String> totalReservationField;
+
+    @FXML
     private TableView<Reservation> tableReservation;
 
     private ObservableList<Reservation> tableData;
@@ -124,11 +127,17 @@ public class ReservationManagementController {
                 new SimpleStringProperty(
                         cell.getValue().getPayment() != null ?
                                 cell.getValue().getPayment().toString() : null));
+        totalReservationField.setCellValueFactory(cell -> new SimpleStringProperty(
+                String.format("R$ %.2f", cell.getValue().calculateTotalToPay())));
     }
 
 
     private void showProductInMode(UIMode mode) throws IOException {
         Reservation selectedItem = tableReservation.getSelectionModel().getSelectedItem();
+        if(selectedItem.getCheckOutDate() != null || LocalDate.now().isAfter(selectedItem.getEndDate())){
+            AlertHelper.showErrorAlert("Error Dialog", "Reservation Error", "This reservation is already checked out or expired.");
+            return;
+        }
         if (selectedItem != null) {
             navHandler.navigateToReservationPage();
             ReservationController controller = (ReservationController) Home.getController();
@@ -209,11 +218,6 @@ public class ReservationManagementController {
 
             result.ifPresent(paymentAndDate -> {
                 try {
-                    String paymentMethod = paymentAndDate.getKey();
-                    selectedItem.setPayment(Payment.fromDescription(paymentMethod));
-                    selectedItem.setCheckOutDate(LocalDate.parse(paymentAndDate.getValue()));
-                    selectedItem.setReservationStatus(ReservationStatus.FINISHED);
-
                     CheckOutUseCase.RequestModel requestModel =
                             new CheckOutUseCase.RequestModel(
                                     selectedItem.getId(),

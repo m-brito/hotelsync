@@ -104,8 +104,8 @@ public class SqliteGuestDao implements GuestDao {
 
     @Override
     public Map<Long, Guest> findAll() {
-        String sql = "SELECT * FROM Guest";
-        Map<Long, Guest> guests = new HashMap<>();
+        String sql = "SELECT * FROM Guest order by district desc";
+        Map<Long, Guest> guests = new LinkedHashMap<>();
 
         try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
             ResultSet rs = stmt.executeQuery();

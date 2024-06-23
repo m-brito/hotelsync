@@ -147,6 +147,7 @@
                   <TableColumn fx:id="roomReservationField" prefWidth="103.0" text="Room" />
                   <TableColumn fx:id="statusReservationField" minWidth="0.0" prefWidth="94.0" text="Status" />
                   <TableColumn fx:id="paymentMethodReservationField" prefWidth="96.0" resizable="false" text="Payment Method" />
+                  <TableColumn fx:id="totalReservationField" prefWidth="75.0" text="Total" />
                </columns>
             </TableView>
             <Button id="createRoomButton" fx:id="checkInBtn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="389.0" layoutY="211.0" mnemonicParsing="false" onAction="#handleCheckIn" prefHeight="42.0" prefWidth="117.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Check-In">

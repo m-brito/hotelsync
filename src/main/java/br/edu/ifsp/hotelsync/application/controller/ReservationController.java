@@ -11,6 +11,7 @@ import br.edu.ifsp.hotelsync.domain.entities.room.Room;
 import br.edu.ifsp.hotelsync.domain.usecases.guest.create.CreateGuestUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.create.CreateReservationUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.find.FindOneReservationUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.AddConsumedProductUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.AddGuestUseCase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,7 +20,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
-
+import javafx.scene.shape.Line;
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -61,7 +62,13 @@ public class ReservationController {
     private Button createReservationButton;
 
     @FXML
+    private Line separator;
+
+    @FXML
     private Button doneAddGuestBtn;
+
+    @FXML
+    private Button doneAddProductBtn;
 
     @FXML
     private DatePicker endDate;
@@ -73,6 +80,9 @@ public class ReservationController {
     private ComboBox<Guest> ownerReservationCombo;
 
     @FXML
+    private ComboBox<Product> productReservationCombo;
+
+    @FXML
     private Pane pnlOverview;
 
     @FXML
@@ -82,7 +92,13 @@ public class ReservationController {
     private TextField cpfField;
 
     @FXML
+    private TextField quantityField;
+
+    @FXML
     private DatePicker startDate;
+
+    @FXML
+    private Label viewSubtitle2;
 
     @FXML
     private Label viewSubtitle;
@@ -117,6 +133,7 @@ public class ReservationController {
     public void initialize() {
         ownerReservationCombo.getItems().addAll(findAllGuestUseCase.findAll().values());
         roomReservationCombo.getItems().addAll(findAllAvailableRoomUseCase.findAllAvailable().values());
+        productReservationCombo.getItems().addAll(findAllProductUseCase.findAll().values());
     }
 
     public void setEntity(Reservation reservation, UIMode mode) {
@@ -163,6 +180,12 @@ public class ReservationController {
         viewSubtitle.setVisible(true);
         tableGuest.setVisible(true);
         doneAddGuestBtn.setVisible(true);
+        viewSubtitle2.setVisible(true);
+        productReservationCombo.setVisible(true);
+        quantityField.setVisible(true);
+        doneAddProductBtn.setVisible(true);
+        separator.setVisible(true);
+
         bindTableViewToItemsList();
         bindColumnsToValuesSources();
         populateTable();
@@ -294,5 +317,18 @@ public class ReservationController {
 
     public void addGuestBtn(ActionEvent actionEvent) {
         addGuest();
+    }
+
+    public void addProductBtn(ActionEvent actionEvent) {
+        try{
+            Product product = productReservationCombo.getValue();
+            if(product == null) throw new IllegalArgumentException("Product not selected");
+            int quantity = Integer.parseInt(quantityField.getText());
+            addConsumedProductUseCase.addConsumedProduct(new AddConsumedProductUseCase.RequestModel(reservation.getId(), product.getId(), quantity));
+            productReservationCombo.setValue(null);
+            quantityField.clear();
+        } catch (Exception e) {
+            showErrorAlert(e.getMessage());
+        }
     }
 }
