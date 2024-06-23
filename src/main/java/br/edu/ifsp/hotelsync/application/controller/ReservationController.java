@@ -3,10 +3,15 @@ package br.edu.ifsp.hotelsync.application.controller;
 import br.edu.ifsp.hotelsync.application.util.ExitHandler;
 import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
 import br.edu.ifsp.hotelsync.application.util.UIMode;
+import br.edu.ifsp.hotelsync.domain.entities.guest.Cpf;
 import br.edu.ifsp.hotelsync.domain.entities.guest.Guest;
+import br.edu.ifsp.hotelsync.domain.entities.product.Product;
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
 import br.edu.ifsp.hotelsync.domain.entities.room.Room;
+import br.edu.ifsp.hotelsync.domain.usecases.guest.create.CreateGuestUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.create.CreateReservationUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.reservation.find.FindOneReservationUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.AddGuestUseCase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -100,6 +105,7 @@ public class ReservationController {
     private ObservableList<Guest> tableData;
 
     private Reservation reservation;
+    private Guest guest;
 
     private final ExitHandler exitHandler =
             new ExitHandler();
@@ -174,7 +180,15 @@ public class ReservationController {
     }
 
     private void populateTable() {
+        reservation = findOneReservationUseCase.findOneById(new FindOneReservationUseCase.RequestModel(reservation.getId()));
         tableGuest.setItems(FXCollections.observableArrayList(reservation.getGuests()));
+    }
+
+    private void getGuestToView() {
+        String name = nameField.getText();
+        LocalDate birthdate = birthdatePicker.getValue();
+        Cpf cpf = new Cpf(cpfField.getText());
+        guest = Guest.createGuest(name, birthdate, cpf);
     }
 
     private void getEntityToView() {
@@ -212,6 +226,23 @@ public class ReservationController {
             }
 
             navHandler.navigateToReservationManagementPage();
+        } catch (Exception e) {
+            showErrorAlert(e.getMessage());
+        }
+    }
+
+    private void addGuest() {
+        try {
+            getGuestToView();
+            if(guest == null) return;
+            guest.setId(createGuestUseCase.createGuest(new CreateGuestUseCase.GuestRequestModel(
+                    guest.getName(),
+                    guest.getBirthdate(),
+                    guest.getCpf().toString()
+            )));
+            addGuestUseCase.addGuest(new AddGuestUseCase.RequestModel(guest.getId(), reservation.getId()));
+            tableData.add(guest);
+            populateTable();
         } catch (Exception e) {
             showErrorAlert(e.getMessage());
         }
@@ -262,6 +293,6 @@ public class ReservationController {
     }
 
     public void addGuestBtn(ActionEvent actionEvent) {
-
+        addGuest();
     }
 }
