@@ -74,6 +74,7 @@ public class Reservation {
     }
 
     public void checkIn(){
+        if(this.checkInDate != null || this.checkOutDate != null) throw new IllegalStateException("Check-in has already been done.");
         validateDate();
         checkInDate = LocalDate.now();
         room.turnOccupied();
@@ -88,9 +89,8 @@ public class Reservation {
     }
 
     public void checkOut(Payment paymentMethod){
-        if (checkInDate == null) {
-            throw new IllegalStateException("Check-out cannot be done before check-in.");
-        }
+        if (checkInDate == null) throw new IllegalStateException("Check-out cannot be done before check-in.");
+        if(this.checkOutDate != null) throw new IllegalStateException("Check-out has already been done.");
         checkOutDate = LocalDate.now();
         room.turnAvailable();
         payment = paymentMethod;
@@ -196,18 +196,5 @@ public class Reservation {
 
     public List<ConsumedProduct> getConsumedProducts() {
         return new ArrayList<>(consumedProducts);
-    }
-
-    public void setCheckInDate(LocalDate checkInDate) {
-    }
-
-    public void setReservationStatus(ReservationStatus reservationStatus) {
-    }
-
-    public void setPayment(Payment payment) {
-    }
-
-    public void setCheckOutDate(LocalDate parse) {
-
     }
 }
