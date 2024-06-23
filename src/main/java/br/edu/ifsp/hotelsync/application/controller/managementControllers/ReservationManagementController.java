@@ -2,6 +2,10 @@ package br.edu.ifsp.hotelsync.application.controller.managementControllers;
 
 import br.edu.ifsp.hotelsync.application.util.ExitHandler;
 import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
+import br.edu.ifsp.hotelsync.domain.entities.product.Product;
+import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -40,21 +44,26 @@ public class ReservationManagementController {
     private TextField searchReservation;
 
     @FXML
-    private TableView<?> tableReservation;
+    private TableView<Reservation> tableReservation;
+
+    private ObservableList<Reservation> tableData;
 
     @FXML
     public void initialize() {
+        bindTableViewToItemsList();
     }
 
-    private final ExitHandler exitHandler =
-            new ExitHandler();
+    private void bindTableViewToItemsList() {
+        tableData = FXCollections.observableArrayList();
+        tableReservation.setItems(tableData);
+    }
 
     private final NavigationHandler navHandler =
             new NavigationHandler();
 
     @FXML
     void handleExit(ActionEvent event) {
-        exitHandler.handleExit(event);
+        new ExitHandler().handleExit(event);
     }
 
     @FXML
