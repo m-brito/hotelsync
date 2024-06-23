@@ -2,29 +2,32 @@ package br.edu.ifsp.hotelsync.application.controller.managementControllers;
 
 import br.edu.ifsp.hotelsync.application.controller.ProductController;
 import br.edu.ifsp.hotelsync.application.controller.ReservationController;
-import br.edu.ifsp.hotelsync.application.util.ExitHandler;
-import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
-import br.edu.ifsp.hotelsync.application.util.UIMode;
+import br.edu.ifsp.hotelsync.application.main.Main;
+import br.edu.ifsp.hotelsync.application.util.*;
 import br.edu.ifsp.hotelsync.application.view.Home;
 import br.edu.ifsp.hotelsync.domain.entities.product.Product;
+import br.edu.ifsp.hotelsync.domain.entities.reservation.Payment;
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
+import br.edu.ifsp.hotelsync.domain.entities.reservation.ReservationStatus;
+import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.CheckInUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.CheckOutUseCase;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.util.Pair;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Map;
+import java.util.Optional;
 
-import static br.edu.ifsp.hotelsync.application.main.Main.findAllProductUseCase;
-import static br.edu.ifsp.hotelsync.application.main.Main.findAllReservationUseCase;
+import static br.edu.ifsp.hotelsync.application.main.Main.*;
 
 public class ReservationManagementController {
     @FXML
@@ -180,4 +183,52 @@ public class ReservationManagementController {
     public void handleUpdateReservation(ActionEvent actionEvent) throws IOException {
         showProductInMode(UIMode.UPDATE);
     }
+
+    @FXML
+    public void handleCheckIn() {
+        Reservation selectedItem = tableReservation.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            try {
+                checkInUseCase.doCheckIn(new CheckInUseCase.RequestModel(selectedItem.getId()));
+                populateTable();
+            } catch (IllegalStateException e) {
+                AlertHelper.showErrorAlert(
+                        "Error Dialog",
+                        "Check-in Error",
+                        e.getMessage());
+            }
+        }
+    }
+
+    @FXML
+    public void handleCheckOut() {
+        Reservation selectedItem = tableReservation.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            CheckOutDialog dialog = new CheckOutDialog();
+            Optional<Pair<String, String>> result = dialog.showAndWait();
+
+            result.ifPresent(paymentAndDate -> {
+                try {
+                    String paymentMethod = paymentAndDate.getKey();
+                    selectedItem.setPayment(Payment.fromDescription(paymentMethod));
+                    selectedItem.setCheckOutDate(LocalDate.parse(paymentAndDate.getValue()));
+                    selectedItem.setReservationStatus(ReservationStatus.FINISHED);
+
+                    CheckOutUseCase.RequestModel requestModel =
+                            new CheckOutUseCase.RequestModel(
+                                    selectedItem.getId(),
+                                    Payment.
+                                            fromDescription(paymentAndDate.
+                                                    getKey()));
+
+                   checkOutUseCase.doCheckOut(requestModel);
+
+                    populateTable();
+                } catch (IllegalStateException e) {
+                    AlertHelper.showErrorAlert("Error Dialog", "Check-out Error", e.getMessage());
+                }
+            });
+        }
+    }
 }
+

@@ -1,9 +1,6 @@
 package br.edu.ifsp.hotelsync.application.main;
 
-import br.edu.ifsp.hotelsync.application.repository.inmemory.InMemoryGuestDao;
-import br.edu.ifsp.hotelsync.application.repository.inmemory.InMemoryProductDao;
-import br.edu.ifsp.hotelsync.application.repository.inmemory.InMemoryReservationDao;
-import br.edu.ifsp.hotelsync.application.repository.inmemory.InMemoryRoomDao;
+
 import br.edu.ifsp.hotelsync.application.repository.sqlite.DatabaseBuilder;
 import br.edu.ifsp.hotelsync.application.repository.sqlite.dao.SqliteGuestDao;
 import br.edu.ifsp.hotelsync.application.repository.sqlite.dao.SqliteProductDao;

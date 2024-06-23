@@ -19,4 +19,13 @@ public enum Payment {
     public String toString() {
         return description;
     }
+
+    public static Payment fromDescription(String description) {
+        for (Payment payment : values()) {
+            if (payment.description.equals(description)) {
+                return payment;
+            }
+        }
+        throw new IllegalArgumentException("No enum constant with description " + description);
+    }
 }
