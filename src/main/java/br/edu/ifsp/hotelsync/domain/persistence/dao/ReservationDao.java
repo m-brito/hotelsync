@@ -20,8 +20,4 @@ public interface ReservationDao extends Dao<Long, Reservation> {
 
     FinancialReport getFinancialReport(LocalDate initialDate, LocalDate finalDate);
 
-    void updateCheckIn(Reservation reservation);
-
-    void updateCheckOut(Reservation reservation);
-
 }
