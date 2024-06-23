@@ -7,9 +7,12 @@ import br.edu.ifsp.hotelsync.domain.entities.guest.Guest;
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
 import br.edu.ifsp.hotelsync.domain.entities.room.Room;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.create.CreateReservationUseCase;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -94,6 +97,8 @@ public class ReservationController {
     @FXML
     private TableColumn<Guest, Double> cpfColumn;
 
+    private ObservableList<Guest> tableData;
+
     private Reservation reservation;
 
     private final ExitHandler exitHandler =
@@ -148,6 +153,24 @@ public class ReservationController {
         viewSubtitle.setVisible(true);
         tableGuest.setVisible(true);
         doneAddGuestBtn.setVisible(true);
+        bindTableViewToItemsList();
+        bindColumnsToValuesSources();
+        populateTable();
+    }
+
+    private void bindTableViewToItemsList() {
+        tableData = FXCollections.observableArrayList();
+        tableGuest.setItems(tableData);
+    }
+
+    private void bindColumnsToValuesSources() {
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        birthdateColumn.setCellValueFactory(new PropertyValueFactory<>("birthdate"));
+        cpfColumn.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+    }
+
+    private void populateTable() {
+        tableGuest.setItems(FXCollections.observableArrayList(reservation.getGuests()));
     }
 
     private void getEntityToView() {
