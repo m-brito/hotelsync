@@ -2,12 +2,17 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="1068.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.hotelsync.application.controller.managementControllers.ReportManagementController">
@@ -118,26 +123,52 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button id="createRoomButton" fx:id="checkInButton" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="14.0" layoutY="199.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="192.0" style="-fx-background-color: #181818;" stylesheets="@../../../css/home.css" text="Check-In Report">
-               <padding>
-                  <Insets left="50.0" />
-               </padding>
-            </Button>
-            <Button id="createRoomButton" fx:id="checkOutButton" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="14.0" layoutY="253.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="192.0" style="-fx-background-color: #181818;" stylesheets="@../../../css/home.css" text="Check-Out Report">
-               <padding>
-                  <Insets left="50.0" />
-               </padding>
-            </Button>
-            <Button id="createRoomButton" fx:id="dailyOcuppationButton" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="14.0" layoutY="306.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="192.0" style="-fx-background-color: #181818;" stylesheets="@../../../css/home.css" text="Daily Occupation Report">
+            <Button id="createRoomButton" fx:id="checkInButton" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="14.0" layoutY="535.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="162.0" style="-fx-background-color: #181818;" stylesheets="@../../../css/home.css" text="Check-In Report">
                <padding>
                   <Insets left="35.0" />
                </padding>
             </Button>
-            <Button id="createRoomButton" fx:id="financialButton" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="14.0" layoutY="359.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="192.0" style="-fx-background-color: #181818;" stylesheets="@../../../css/home.css" text="Financial Report">
+            <Button id="createRoomButton" fx:id="checkOutButton" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="187.0" layoutY="535.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="162.0" style="-fx-background-color: #181818;" stylesheets="@../../../css/home.css" text="Check-Out Report">
                <padding>
-                  <Insets left="50.0" />
+                  <Insets left="35.0" />
                </padding>
             </Button>
+            <Button id="createRoomButton" fx:id="dailyOcuppationButton" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="423.0" layoutY="535.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="201.0" style="-fx-background-color: #181818;" stylesheets="@../../../css/home.css" text="Daily Occupation Report">
+               <padding>
+                  <Insets left="35.0" />
+               </padding>
+            </Button>
+            <Button id="createRoomButton" fx:id="financialButton" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="636.0" layoutY="535.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="150.0" style="-fx-background-color: #181818;" stylesheets="@../../../css/home.css" text="Financial Report">
+               <padding>
+                  <Insets left="35.0" />
+               </padding>
+            </Button>
+            <Pane layoutX="142.0" layoutY="60.0" prefHeight="146.0" prefWidth="467.0">
+               <children>
+                  <DatePicker fx:id="startDatePicker" layoutX="7.0" layoutY="37.0" />
+                  <DatePicker fx:id="endDaePicker" layoutX="7.0" layoutY="109.0" />
+                  <Label layoutX="5.0" layoutY="20.0" text="Start Date" />
+                  <Label layoutX="7.0" layoutY="93.0" text="End Date" />
+                  <ComboBox fx:id="exportTypeCombo" layoutX="306.0" layoutY="37.0" prefWidth="150.0" promptText="Export Type" />
+                  <Button id="createRoomButton" fx:id="exportBtn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="326.0" layoutY="80.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="110.0" style="-fx-background-color: #181818;" stylesheets="@../../../css/home.css" text="Export">
+                     <padding>
+                        <Insets left="40.0" />
+                     </padding>
+                  </Button>
+                  <Line endX="-22.0" endY="80.0" layoutX="255.0" layoutY="69.0" startX="-22.0" startY="-73.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="146.0" layoutY="245.0" prefHeight="200.0" prefWidth="467.0">
+               <children>
+                  <TableView prefHeight="200.0" prefWidth="467.0">
+                    <columns>
+                      <TableColumn fx:id="dateColumn" prefWidth="228.0" text="Date" />
+                      <TableColumn fx:id="valueColumn" prefWidth="238.0" text="Value" />
+                    </columns>
+                  </TableView>
+               </children>
+            </Pane>
+            <Line endX="22.0" endY="90.0" layoutX="365.0" layoutY="497.0" startX="22.0" startY="28.0" />
          </children>
       </Pane>
    </children>
