@@ -11,6 +11,7 @@ import br.edu.ifsp.hotelsync.domain.entities.room.Room;
 import br.edu.ifsp.hotelsync.domain.usecases.guest.create.CreateGuestUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.create.CreateReservationUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.find.FindOneReservationUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.AddConsumedProductUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.AddGuestUseCase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -316,5 +317,18 @@ public class ReservationController {
 
     public void addGuestBtn(ActionEvent actionEvent) {
         addGuest();
+    }
+
+    public void addProductBtn(ActionEvent actionEvent) {
+        try{
+            Product product = productReservationCombo.getValue();
+            if(product == null) throw new IllegalArgumentException("Product not selected");
+            int quantity = Integer.parseInt(quantityField.getText());
+            addConsumedProductUseCase.addConsumedProduct(new AddConsumedProductUseCase.RequestModel(product.getId(), reservation.getId(), quantity));
+            productReservationCombo.setValue(null);
+            quantityField.clear();
+        } catch (Exception e) {
+            showErrorAlert(e.getMessage());
+        }
     }
 }
