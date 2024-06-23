@@ -137,14 +137,14 @@ public class GuestManagementController {
 
     public void populateTable() {
         Map<Long, Guest> guests = findAllGuestUseCase.findAll();
-        ObservableList<Guest> guestList = FXCollections.observableArrayList(guests.values());
-        tableGuest.setItems(guestList);
+        tableData.clear();
+        tableData.addAll(guests.values());
     }
 
     private void showGuestInMode(UIMode mode) throws IOException {
         Guest selectedItem = tableGuest.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
-            navHandler.handleCreateGuest();
+            navHandler.navigateToGuestPage();
             GuestController controller = (GuestController) Home.getController();
             controller.setEntity(selectedItem, mode);
         }
@@ -162,12 +162,12 @@ public class GuestManagementController {
 
     @FXML
     void handleGuestPage(ActionEvent event) throws IOException {
-        navHandler.navigateToGuestPage();
+        navHandler.navigateToGuestManagementPage();
     }
 
     @FXML
     void handleProductPage(ActionEvent actionEvent) throws IOException {
-        navHandler.navigateToProductPage();
+        navHandler.navigateToProductManagementPage();
     }
 
     @FXML
@@ -177,16 +177,16 @@ public class GuestManagementController {
 
     @FXML
     void handleReservationPage(ActionEvent event) throws IOException {
-        navHandler.navigateToReservationPage();
+        navHandler.navigateToReservationManagementPage();
     }
 
     @FXML
     void handleRoomPage(ActionEvent event) throws IOException {
-        navHandler.navigateToRoomPage();
+        navHandler.navigateToRoomManagementPage();
     }
 
     @FXML
     public void handleCreateGuest(ActionEvent actionEvent) throws IOException {
-        navHandler.handleCreateGuest();
+        navHandler.navigateToGuestPage();
     }
 }
