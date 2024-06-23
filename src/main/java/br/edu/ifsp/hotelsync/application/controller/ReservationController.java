@@ -136,6 +136,10 @@ public class ReservationController {
             endDate.setValue(reservation.getEndDate());
             ownerReservationCombo.setValue(reservation.getOwner());
             roomReservationCombo.setValue(reservation.getRoom());
+            startDate.setDisable(true);
+            endDate.setDisable(true);
+            ownerReservationCombo.setDisable(true);
+            roomReservationCombo.setDisable(true);
         }
     }
 
