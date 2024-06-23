@@ -4,6 +4,7 @@ import br.edu.ifsp.hotelsync.application.util.ExitHandler;
 import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
 import br.edu.ifsp.hotelsync.domain.entities.product.Product;
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -86,6 +87,19 @@ public class ReservationManagementController {
     }
 
     private void bindColumnsToValuesSources() {
+        startDateReservationField.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        checkInReservationField.setCellValueFactory(new PropertyValueFactory<>("checkInDate"));
+        endDateReservationField.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        checkOutReservationField.setCellValueFactory(new PropertyValueFactory<>("checkOutDate"));
+        ownerReservationField.setCellValueFactory(cell ->
+                new SimpleStringProperty(
+                        String.format("#%s - %s", cell.getValue().getOwner().getId(), cell.getValue().getOwner().getName())));
+        roomReservationField.setCellValueFactory(cell ->
+                new SimpleStringProperty(String.format("#%s - %s", cell.getValue().getRoom().getId(), cell.getValue().getRoom().getNumber())));
+        statusReservationField.setCellValueFactory(cell ->
+                new SimpleStringProperty(cell.getValue().getReservationStatus().name()));
+        paymentMethodReservationField.setCellValueFactory(cell ->
+                new SimpleStringProperty(cell.getValue().getPayment().toString()));
     }
 
     private final NavigationHandler navHandler =
