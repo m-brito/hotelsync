@@ -209,11 +209,6 @@ public class ReservationManagementController {
 
             result.ifPresent(paymentAndDate -> {
                 try {
-                    String paymentMethod = paymentAndDate.getKey();
-                    selectedItem.setPayment(Payment.fromDescription(paymentMethod));
-                    selectedItem.setCheckOutDate(LocalDate.parse(paymentAndDate.getValue()));
-                    selectedItem.setReservationStatus(ReservationStatus.FINISHED);
-
                     CheckOutUseCase.RequestModel requestModel =
                             new CheckOutUseCase.RequestModel(
                                     selectedItem.getId(),
