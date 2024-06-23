@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
-public class ReservationController {
+public class ReservationManagementController {
     @FXML
     private Button btnGuest;
 
