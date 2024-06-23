@@ -112,11 +112,11 @@ public class DatabaseBuilder {
     private String createConsumedProductTable() {
         return """
             CREATE TABLE ConsumedProduct (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
                 reservationId INT,
                 productId INT,
                 quantity INT,
                 price FLOAT,
-                PRIMARY KEY(reservationId, productId),
                 FOREIGN KEY(reservationId) REFERENCES Reservation(id),
                 FOREIGN KEY(productId) REFERENCES Product(id)
             );
