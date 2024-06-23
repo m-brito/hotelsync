@@ -29,9 +29,6 @@ public class AddGuestUseCaseImpl implements AddGuestUseCase {
         if(reservation.isEmpty())
             throw new NoSuchElementException("Reservation of id " + request.idReservation() + " not found");
 
-        if(reservation.get().getGuests().contains(guest.get()))
-            throw new NoSuchElementException("Guest " + request.idReservation() + " Already exists in this reservation");
-
         reservation.get().addGuest(guest.get());
         reservationRepository.update(reservation.get());
     }

@@ -2,14 +2,22 @@ package br.edu.ifsp.hotelsync.application.controller;
 
 import br.edu.ifsp.hotelsync.application.util.ExitHandler;
 import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
+import br.edu.ifsp.hotelsync.application.util.UIMode;
+import br.edu.ifsp.hotelsync.domain.entities.product.Product;
+import br.edu.ifsp.hotelsync.domain.usecases.product.create.CreateProductUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.product.update.UpdateProductUseCase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+
+import static br.edu.ifsp.hotelsync.application.main.Main.*;
 
 public class ProductController {
 
@@ -49,8 +57,10 @@ public class ProductController {
     @FXML
     private TextField priceField;
 
-    private final ExitHandler exitHandler =
-            new ExitHandler();
+    @FXML
+    private Label viewTitle;
+
+    private Product product;
 
     private final NavigationHandler navHandler =
             new NavigationHandler();
@@ -60,19 +70,78 @@ public class ProductController {
 
     }
 
+    public void setEntity(Product product, UIMode mode) {
+        if (product == null)
+            throw new IllegalArgumentException("Product can not be null.");
+
+        this.product = product;
+        setEntityIntoView();
+
+        if (mode == UIMode.VIEW)
+            configureViewMode();
+    }
+
+    private void setEntityIntoView() {
+        if (product != null) {
+            viewTitle.setText("Update Product");
+            descriptionField.setText(product.getDescription());
+            priceField.setText(String.valueOf(product.getPrice()));
+        }
+    }
+
+    private void configureViewMode() {
+        descriptionField.setDisable(true);
+        priceField.setDisable(true);
+    }
+
+    private void getEntityToView() {
+        String description = descriptionField.getText();
+        double price = Double.parseDouble(priceField.getText());
+        if(product == null) {
+            product = Product.createProduct(description, price);
+        } else {
+            product.setDescription(description);
+            product.setPrice(price);
+        }
+    }
+
+    private void showErrorAlert(String errorMessage) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Invalid Fields");
+        alert.setHeaderText("Please correct invalid fields");
+        alert.setContentText(errorMessage);
+        alert.showAndWait();
+    }
+
+    private void saveOrUpdate() {
+        try {
+            getEntityToView();
+            if (product == null) return;
+            if (product.getId() == null) {
+                createProductUseCase.createProduct(new CreateProductUseCase.RequestModel(product.getDescription(), product.getPrice()));
+            } else {
+                updateProductUseCase.updateProduct(new UpdateProductUseCase.RequestModel(product.getId(), product.getDescription(), product.getPrice()));
+            }
+
+            navHandler.navigateToProductManagementPage();
+        } catch (Exception e) {
+            showErrorAlert(e.getMessage());
+        }
+    }
+
     @FXML
     void handleExit(ActionEvent event) {
-        exitHandler.handleExit(event);
+        new ExitHandler().handleExit(event);
     }
 
     @FXML
     void handleGuestPage(ActionEvent event) throws IOException {
-        navHandler.navigateToGuestPage();
+        navHandler.navigateToGuestManagementPage();
     }
 
     @FXML
     void handleProductPage(ActionEvent actionEvent) throws IOException {
-        navHandler.navigateToProductPage();
+        navHandler.navigateToProductManagementPage();
     }
 
     @FXML
@@ -82,23 +151,20 @@ public class ProductController {
 
     @FXML
     void handleReservationPage(ActionEvent event) throws IOException {
-        navHandler.navigateToReservationPage();
+        navHandler.navigateToReservationManagementPage();
     }
 
     @FXML
     void handleRoomPage(ActionEvent event) throws IOException {
-        navHandler.navigateToRoomPage();
+        navHandler.navigateToRoomManagementPage();
     }
 
     @FXML
-    void handleCreateProduct(ActionEvent event) throws IOException {
-        navHandler.handleCreateProduct();
-    }
-
-    public void handleAddProduct(ActionEvent actionEvent) {
+    public void onSaveProduct(ActionEvent actionEvent) {
+        saveOrUpdate();
     }
 
     public void handleCancelProduct(ActionEvent actionEvent) throws IOException {
-        navHandler.navigateToProductPage();
+        navHandler.navigateToProductManagementPage();
     }
 }

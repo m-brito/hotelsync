@@ -97,46 +97,6 @@ public class GuestController {
         stateGuestCombo.getItems().setAll(State.values());
     }
 
-    @FXML
-    void handleExit(ActionEvent event) {
-        exitHandler.handleExit(event);
-    }
-
-    @FXML
-    void handleGuestPage() throws IOException {
-        navHandler.navigateToGuestPage();
-    }
-
-    @FXML
-    void handleProductPage(ActionEvent event) throws IOException {
-        navHandler.navigateToProductPage();
-    }
-
-    @FXML
-    void handleReportPage(ActionEvent event) throws IOException {
-        navHandler.navigateToReportPage();
-    }
-
-    @FXML
-    void handleReservationPage(ActionEvent event) throws IOException {
-        navHandler.navigateToReservationPage();
-    }
-
-    @FXML
-    void handleRoomPage(ActionEvent event) throws IOException {
-        navHandler.navigateToRoomPage();
-    }
-
-    @FXML
-    void onAddGuestClick(ActionEvent event) {
-        saveOrUpdate();
-    }
-
-    @FXML
-    void onCancelAddGuestClick(ActionEvent event) throws IOException {
-        navHandler.navigateToGuestPage();
-    }
-
     public void setEntity(Guest guest, UIMode mode) {
         if (guest == null)
             throw new IllegalArgumentException("Guest can not be null.");
@@ -289,9 +249,49 @@ public class GuestController {
                 }
             }
 
-            navHandler.navigateToGuestPage();
+            navHandler.navigateToGuestManagementPage();
         } catch (Exception e) {
             showErrorAlert(e.getMessage());
         }
+    }
+
+    @FXML
+    void handleExit(ActionEvent event) {
+        exitHandler.handleExit(event);
+    }
+
+    @FXML
+    void handleGuestPage() throws IOException {
+        navHandler.navigateToGuestManagementPage();
+    }
+
+    @FXML
+    void handleProductPage(ActionEvent event) throws IOException {
+        navHandler.navigateToProductManagementPage();
+    }
+
+    @FXML
+    void handleReportPage(ActionEvent event) throws IOException {
+        navHandler.navigateToReportPage();
+    }
+
+    @FXML
+    void handleReservationPage(ActionEvent event) throws IOException {
+        navHandler.navigateToReservationManagementPage();
+    }
+
+    @FXML
+    void handleRoomPage(ActionEvent event) throws IOException {
+        navHandler.navigateToRoomManagementPage();
+    }
+
+    @FXML
+    void onSaveGuestClick(ActionEvent event) {
+        saveOrUpdate();
+    }
+
+    @FXML
+    void onCancelAddGuestClick(ActionEvent event) throws IOException {
+        navHandler.navigateToGuestManagementPage();
     }
 }

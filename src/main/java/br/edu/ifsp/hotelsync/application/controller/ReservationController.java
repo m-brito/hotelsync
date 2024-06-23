@@ -1,24 +1,31 @@
 package br.edu.ifsp.hotelsync.application.controller;
 
-import br.edu.ifsp.hotelsync.application.repository.sqlite.dao.SqliteGuestDao;
 import br.edu.ifsp.hotelsync.application.util.ExitHandler;
-import br.edu.ifsp.hotelsync.application.util.reservation.MethodPaymentComboSetup;
 import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
-import br.edu.ifsp.hotelsync.application.util.reservation.OwnerReservationComboSetup;
+import br.edu.ifsp.hotelsync.application.util.UIMode;
+import br.edu.ifsp.hotelsync.domain.entities.guest.Cpf;
 import br.edu.ifsp.hotelsync.domain.entities.guest.Guest;
-import br.edu.ifsp.hotelsync.domain.entities.reservation.Payment;
+import br.edu.ifsp.hotelsync.domain.entities.product.Product;
+import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
 import br.edu.ifsp.hotelsync.domain.entities.room.Room;
-import br.edu.ifsp.hotelsync.domain.usecases.guest.find.FindAllGuestUseCaseImpl;
+import br.edu.ifsp.hotelsync.domain.usecases.guest.create.CreateGuestUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.reservation.create.CreateReservationUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.reservation.find.FindOneReservationUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.AddGuestUseCase;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.time.LocalDate;
+
+import static br.edu.ifsp.hotelsync.application.main.Main.*;
 
 public class ReservationController {
-    @FXML
-    private Button addGuestBtn;
 
     @FXML
     private DatePicker birthdatePicker;
@@ -42,9 +49,6 @@ public class ReservationController {
     private Button btnSignout;
 
     @FXML
-    private Button cancelAddGuestBtn;
-
-    @FXML
     private Button cancelReservationBtn;
 
     @FXML
@@ -63,9 +67,6 @@ public class ReservationController {
     private DatePicker endDate;
 
     @FXML
-    private ComboBox<Payment> methodPaymentCombo;
-
-    @FXML
     private TextField nameField;
 
     @FXML
@@ -75,16 +76,36 @@ public class ReservationController {
     private Pane pnlOverview;
 
     @FXML
-    private TextField pronounsField;
-
-    @FXML
     private ComboBox<Room> roomReservationCombo;
 
     @FXML
-    private TextField ssnField;
+    private TextField cpfField;
 
     @FXML
     private DatePicker startDate;
+
+    @FXML
+    private Label viewSubtitle;
+
+    @FXML
+    private Label viewTitle;
+
+    @FXML
+    private TableView<Guest> tableGuest;
+
+    @FXML
+    private TableColumn<Guest, Double> nameColumn;
+
+    @FXML
+    private TableColumn<Guest, Double> birthdateColumn;
+
+    @FXML
+    private TableColumn<Guest, Double> cpfColumn;
+
+    private ObservableList<Guest> tableData;
+
+    private Reservation reservation;
+    private Guest guest;
 
     private final ExitHandler exitHandler =
             new ExitHandler();
@@ -94,12 +115,139 @@ public class ReservationController {
 
     @FXML
     public void initialize() {
-        new MethodPaymentComboSetup(methodPaymentCombo).setup();
-
-        new OwnerReservationComboSetup(ownerReservationCombo,
-                new FindAllGuestUseCaseImpl(
-                        new SqliteGuestDao())).setup();
+        ownerReservationCombo.getItems().addAll(findAllGuestUseCase.findAll().values());
+        roomReservationCombo.getItems().addAll(findAllAvailableRoomUseCase.findAllAvailable().values());
     }
+
+    public void setEntity(Reservation reservation, UIMode mode) {
+        if (reservation == null)
+            throw new IllegalArgumentException("Reservation can not be null.");
+
+        this.reservation = reservation;
+        setEntityIntoView();
+
+        if(mode == UIMode.VIEW)
+            configureViewMode();
+
+        if(mode == UIMode.UPDATE)
+            configureUpdateMode();
+    }
+
+    private void setEntityIntoView() {
+        if (reservation != null) {
+            viewTitle.setText("Update Reservation");
+            startDate.setValue(reservation.getStartDate());
+            checkInDate.setValue(reservation.getCheckInDate());
+            checkOutDate.setValue(reservation.getCheckOutDate());
+            endDate.setValue(reservation.getEndDate());
+            ownerReservationCombo.setValue(reservation.getOwner());
+            roomReservationCombo.setValue(reservation.getRoom());
+            startDate.setDisable(true);
+            endDate.setDisable(true);
+            ownerReservationCombo.setDisable(true);
+            roomReservationCombo.setDisable(true);
+        }
+    }
+
+    private void configureViewMode() {
+        startDate.setDisable(true);
+        endDate.setDisable(true);
+        ownerReservationCombo.setDisable(true);
+        roomReservationCombo.setDisable(true);
+    }
+
+    private void configureUpdateMode() {
+        nameField.setVisible(true);
+        cpfField.setVisible(true);
+        birthdatePicker.setVisible(true);
+        viewSubtitle.setVisible(true);
+        tableGuest.setVisible(true);
+        doneAddGuestBtn.setVisible(true);
+        bindTableViewToItemsList();
+        bindColumnsToValuesSources();
+        populateTable();
+    }
+
+    private void bindTableViewToItemsList() {
+        tableData = FXCollections.observableArrayList();
+        tableGuest.setItems(tableData);
+    }
+
+    private void bindColumnsToValuesSources() {
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        birthdateColumn.setCellValueFactory(new PropertyValueFactory<>("birthdate"));
+        cpfColumn.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+    }
+
+    private void populateTable() {
+        reservation = findOneReservationUseCase.findOneById(new FindOneReservationUseCase.RequestModel(reservation.getId()));
+        tableGuest.setItems(FXCollections.observableArrayList(reservation.getGuests()));
+    }
+
+    private void getGuestToView() {
+        String name = nameField.getText();
+        LocalDate birthdate = birthdatePicker.getValue();
+        Cpf cpf = new Cpf(cpfField.getText());
+        guest = Guest.createGuest(name, birthdate, cpf);
+    }
+
+    private void getEntityToView() {
+        LocalDate start = startDate.getValue();
+        LocalDate end = endDate.getValue();
+        Guest owner = ownerReservationCombo.getValue();
+        Room room = roomReservationCombo.getValue();
+
+        if(reservation == null) {
+            reservation = Reservation.createReservation(start, end, owner, room);
+        } else {
+            reservation.setRoom(room);
+        }
+    }
+
+    private void showErrorAlert(String errorMessage) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Invalid Fields");
+        alert.setHeaderText("Please correct invalid fields");
+        alert.setContentText(errorMessage);
+        alert.showAndWait();
+    }
+
+    private void saveOrUpdate() {
+        try {
+            getEntityToView();
+            if (reservation == null) return;
+            if (reservation.getId() == null) {
+                createReservationUseCase.createReservation(
+                        new CreateReservationUseCase.RequestModel(
+                                reservation.getStartDate(),
+                                reservation.getEndDate(),
+                                reservation.getOwner(),
+                                reservation.getRoom()));
+            }
+
+            navHandler.navigateToReservationManagementPage();
+        } catch (Exception e) {
+            showErrorAlert(e.getMessage());
+        }
+    }
+
+    private void addGuest() {
+        try {
+            getGuestToView();
+            if(guest == null) return;
+            guest.setId(createGuestUseCase.createGuest(new CreateGuestUseCase.GuestRequestModel(
+                    guest.getName(),
+                    guest.getBirthdate(),
+                    guest.getCpf().toString()
+            )));
+            addGuestUseCase.addGuest(new AddGuestUseCase.RequestModel(guest.getId(), reservation.getId()));
+            tableData.add(guest);
+            populateTable();
+        } catch (Exception e) {
+            showErrorAlert(e.getMessage());
+        }
+    }
+
 
     @FXML
     void handleExit(ActionEvent event) {
@@ -108,12 +256,12 @@ public class ReservationController {
 
     @FXML
     void handleGuestPage(ActionEvent event) throws IOException {
-        navHandler.navigateToGuestPage();
+        navHandler.navigateToGuestManagementPage();
     }
 
     @FXML
     void handleProductPage(ActionEvent actionEvent) throws IOException {
-        navHandler.navigateToProductPage();
+        navHandler.navigateToProductManagementPage();
     }
 
     @FXML
@@ -124,35 +272,27 @@ public class ReservationController {
 
     @FXML
     void handleReservationPage(ActionEvent event) throws IOException {
-        navHandler.navigateToReservationPage();
+        navHandler.navigateToReservationManagementPage();
 
     }
 
     @FXML
     void handleRoomPage(ActionEvent event) throws IOException {
-        navHandler.navigateToRoomPage();
+        navHandler.navigateToRoomManagementPage();
     }
 
 
     @FXML
-    void handleCreateReservation(ActionEvent event) throws IOException {
-        navHandler.handleCreateReservation();
-    }
-
-    @FXML
-    void handleAddGuest(ActionEvent event) {
-        nameField.
-                setVisible(true);
-        pronounsField.
-                setVisible(true);
-        ssnField.
-                setVisible(true);
-        birthdatePicker.
-                setVisible(true);
+    void onSaveReservation(ActionEvent event) throws IOException {
+        saveOrUpdate();
     }
 
     @FXML
     void handleCancelAddGuestBtn(ActionEvent event) throws IOException {
-        navHandler.navigateToReservationPage();
+        navHandler.navigateToReservationManagementPage();
+    }
+
+    public void addGuestBtn(ActionEvent actionEvent) {
+        addGuest();
     }
 }

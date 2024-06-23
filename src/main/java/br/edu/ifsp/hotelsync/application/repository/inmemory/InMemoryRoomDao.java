@@ -1,6 +1,7 @@
 package br.edu.ifsp.hotelsync.application.repository.inmemory;
 
 import br.edu.ifsp.hotelsync.domain.entities.room.Room;
+import br.edu.ifsp.hotelsync.domain.entities.room.RoomStatus;
 import br.edu.ifsp.hotelsync.domain.persistence.dao.RoomDao;
 
 import java.sql.ResultSet;
@@ -8,6 +9,8 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class InMemoryRoomDao implements RoomDao {
     private static final Map<Long, Room> rooms = new HashMap<>();
@@ -38,6 +41,14 @@ public class InMemoryRoomDao implements RoomDao {
     public Map<Long, Room> findAll() {
         return Map.copyOf(rooms);
     }
+
+    @Override
+    public Map<Long, Room> findAllAvailable() {
+        return rooms.values().stream()
+                .filter(r -> r.getRoomStatus() == RoomStatus.AVAILABLE)
+                .collect(Collectors.toMap(Room::getId, Function.identity()));
+    }
+
 
     @Override
     public void deleteByKey(Long id) {

@@ -41,10 +41,7 @@ import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.implementation.*
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.*;
 import br.edu.ifsp.hotelsync.domain.usecases.room.create.CreateRoomUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.room.create.CreateRoomUseCaseImpl;
-import br.edu.ifsp.hotelsync.domain.usecases.room.find.FindAllRoomUseCase;
-import br.edu.ifsp.hotelsync.domain.usecases.room.find.FindAllRoomUseCaseImpl;
-import br.edu.ifsp.hotelsync.domain.usecases.room.find.FindOneRoomUseCase;
-import br.edu.ifsp.hotelsync.domain.usecases.room.find.FindOneRoomUseCaseImpl;
+import br.edu.ifsp.hotelsync.domain.usecases.room.find.*;
 import br.edu.ifsp.hotelsync.domain.usecases.room.update.UpdateRoomUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.room.update.UpdateRoomUseCaseImpl;
 
@@ -56,6 +53,7 @@ public class Main {
 
     public static CreateRoomUseCase createRoomUseCase;
     public static FindAllRoomUseCase findAllRoomUseCase;
+    public static FindAllAvailableRoomUseCase findAllAvailableRoomUseCase;
     public static FindOneRoomUseCase findOneRoomUseCase;
     public static UpdateRoomUseCase updateRoomUseCase;
 
@@ -100,6 +98,7 @@ public class Main {
         RoomDao roomDao = new SqliteRoomDao() ;
         createRoomUseCase = new CreateRoomUseCaseImpl(roomDao);
         findAllRoomUseCase = new FindAllRoomUseCaseImpl(roomDao);
+        findAllAvailableRoomUseCase = new FindAllAvailableRoomUseCaseImpl(roomDao);
         findOneRoomUseCase = new FindOneRoomUseCaseImpl(roomDao);
         updateRoomUseCase = new UpdateRoomUseCaseImpl(roomDao);
 

@@ -1,13 +1,23 @@
 package br.edu.ifsp.hotelsync.application.controller.managementControllers;
 
+import br.edu.ifsp.hotelsync.application.controller.ProductController;
 import br.edu.ifsp.hotelsync.application.util.ExitHandler;
 import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
+import br.edu.ifsp.hotelsync.application.util.UIMode;
+import br.edu.ifsp.hotelsync.application.view.Home;
+import br.edu.ifsp.hotelsync.domain.entities.product.Product;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.util.Map;
+
+import static br.edu.ifsp.hotelsync.application.main.Main.findAllProductUseCase;
 
 public class ProductManagementController {
     @FXML
@@ -32,47 +42,73 @@ public class ProductManagementController {
     private Button createProductButton;
 
     @FXML
-    private TableColumn<?, ?> descriptionColumn;
+    private TableColumn<Product, String> descriptionColumn;
 
     @FXML
     private Pane pnlOverview;
 
     @FXML
-    private TableColumn<?, ?> priceColumn;
+    private TableColumn<Product, Double> priceColumn;
 
     @FXML
     private TextField searchProduct;
 
     @FXML
-    private TableView<?> tableProduct;
+    private TableView<Product> tableProduct;
 
     @FXML
     private Button updateProductButton;
 
-
-    @FXML
-    public void initialize() {
-    }
-
-    private final ExitHandler exitHandler =
-            new ExitHandler();
-
     private final NavigationHandler navHandler =
             new NavigationHandler();
 
+    private ObservableList<Product> tableData;
+
+    @FXML
+    public void initialize() {
+        bindTableViewToItemsList();
+        bindColumnsToValuesSources();
+        populateTable();
+    }
+
+    private void bindTableViewToItemsList() {
+        tableData = FXCollections.observableArrayList();
+        tableProduct.setItems(tableData);
+    }
+
+    private void bindColumnsToValuesSources() {
+        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+    }
+
+    private void showProductInMode(UIMode mode) throws IOException {
+        Product selectedItem = tableProduct.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            navHandler.navigateToProductPage();
+            ProductController controller = (ProductController) Home.getController();
+            controller.setEntity(selectedItem, mode);
+        }
+    }
+
+    public void populateTable() {
+        Map<Long, Product> products = findAllProductUseCase.findAll();
+        tableData.clear();
+        tableData.addAll(products.values());
+    }
+
     @FXML
     void handleExit(ActionEvent event) {
-        exitHandler.handleExit(event);
+        new ExitHandler().handleExit(event);
     }
 
     @FXML
     void handleGuestPage(ActionEvent event) throws IOException{
-        navHandler.navigateToGuestPage();
+        navHandler.navigateToGuestManagementPage();
     }
 
     @FXML
     void handleProductPage(ActionEvent actionEvent) throws IOException {
-        navHandler.navigateToProductPage();
+        navHandler.navigateToProductManagementPage();
     }
 
     @FXML
@@ -82,19 +118,21 @@ public class ProductManagementController {
 
     @FXML
     void handleReservationPage(ActionEvent event) throws IOException {
-        navHandler.navigateToReservationPage();
+        navHandler.navigateToReservationManagementPage();
     }
 
     @FXML
     void handleRoomPage(ActionEvent event) throws IOException {
-        navHandler.navigateToRoomPage();
+        navHandler.navigateToRoomManagementPage();
     }
 
     @FXML
     void handleCreateProduct(ActionEvent event) throws IOException {
-        navHandler.handleCreateProduct();
+        navHandler.navigateToProductPage();
     }
 
-    public void handleUpdateProduct(ActionEvent actionEvent) {
+    @FXML
+    public void handleUpdateProduct(ActionEvent actionEvent) throws IOException {
+        showProductInMode(UIMode.UPDATE);
     }
 }

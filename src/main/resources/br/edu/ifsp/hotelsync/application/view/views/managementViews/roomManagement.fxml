@@ -127,13 +127,13 @@
                <content>
                   <TableView fx:id="tableRoom" prefHeight="314.0" prefWidth="749.0" style="-fx-background-color: #181818;">
                      <columns>
-                        <TableColumn prefWidth="62.0" text="Number" />
-                        <TableColumn text="Nº Beds" />
-                        <TableColumn minWidth="0.0" prefWidth="139.0" text="Type of Beds" />
-                        <TableColumn prefWidth="122.0" text="Category" />
-                        <TableColumn prefWidth="112.0" text="Description" />
-                        <TableColumn prefWidth="103.0" text="Status" />
-                        <TableColumn minWidth="0.0" prefWidth="115.0" text="Area" />
+                        <TableColumn fx:id="numberColumn" prefWidth="62.0" text="Number" />
+                        <TableColumn fx:id="numberOfBedsColumn" text="Nº Beds" />
+                        <TableColumn fx:id="typeOfBedColumn" minWidth="0.0" prefWidth="139.0" text="Type of Beds" />
+                        <TableColumn fx:id="categoryColumn" prefWidth="122.0" text="Category" />
+                        <TableColumn fx:id="descriptionColumn" prefWidth="112.0" text="Description" />
+                        <TableColumn fx:id="statusColumn" prefWidth="103.0" text="Status" />
+                        <TableColumn fx:id="areaColumn" minWidth="0.0" prefWidth="115.0" text="Area" />
                      </columns>
                   </TableView>
                </content>

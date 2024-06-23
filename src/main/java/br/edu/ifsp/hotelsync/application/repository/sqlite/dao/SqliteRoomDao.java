@@ -102,6 +102,22 @@ public class SqliteRoomDao implements RoomDao {
     }
 
     @Override
+    public Map<Long, Room> findAllAvailable() {
+        String sql = "SELECT * FROM Room WHERE roomStatus = 'AVAILABLE'";
+        Map<Long, Room> rooms = new HashMap<>();
+        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Room room = resultSetToEntity(rs);
+                rooms.put(room.getId(), room);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rooms;
+    }
+
+    @Override
     public void deleteByKey(Long id) {
         String sql = "DELETE FROM Room WHERE id = ?";
         try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
