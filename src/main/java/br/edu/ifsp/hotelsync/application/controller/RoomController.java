@@ -13,7 +13,7 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
-public class CreateRoomController {
+public class RoomController {
     @FXML
     private Button addProductBtn;
 
