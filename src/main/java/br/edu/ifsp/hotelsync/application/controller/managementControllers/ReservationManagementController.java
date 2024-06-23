@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -45,28 +46,28 @@ public class ReservationManagementController {
     private TextField searchReservation;
 
     @FXML
-    private TableColumn<Product, String> startDateReservationField;
+    private TableColumn<Reservation, String> startDateReservationField;
 
     @FXML
-    private TableColumn<Product, String> checkInReservationField;
+    private TableColumn<Reservation, String> checkInReservationField;
 
     @FXML
-    private TableColumn<Product, String> endDateReservationField;
+    private TableColumn<Reservation, String> endDateReservationField;
 
     @FXML
-    private TableColumn<Product, String> checkOutReservationField;
+    private TableColumn<Reservation, String> checkOutReservationField;
 
     @FXML
-    private TableColumn<Product, String> ownerReservationField;
+    private TableColumn<Reservation, String> ownerReservationField;
 
     @FXML
-    private TableColumn<Product, String> roomReservationField;
+    private TableColumn<Reservation, String> roomReservationField;
 
     @FXML
-    private TableColumn<Product, String> statusReservationField;
+    private TableColumn<Reservation, String> statusReservationField;
 
     @FXML
-    private TableColumn<Product, String> paymentMethodReservationField;
+    private TableColumn<Reservation, String> paymentMethodReservationField;
 
     @FXML
     private TableView<Reservation> tableReservation;
@@ -76,11 +77,15 @@ public class ReservationManagementController {
     @FXML
     public void initialize() {
         bindTableViewToItemsList();
+        bindColumnsToValuesSources();
     }
 
     private void bindTableViewToItemsList() {
         tableData = FXCollections.observableArrayList();
         tableReservation.setItems(tableData);
+    }
+
+    private void bindColumnsToValuesSources() {
     }
 
     private final NavigationHandler navHandler =
