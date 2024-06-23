@@ -1,4 +1,4 @@
-package br.edu.ifsp.hotelsync.application.controller.createControllers;
+package br.edu.ifsp.hotelsync.application.controller;
 
 import br.edu.ifsp.hotelsync.application.repository.sqlite.dao.SqliteGuestDao;
 import br.edu.ifsp.hotelsync.application.util.ExitHandler;

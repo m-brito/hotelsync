@@ -1,19 +1,15 @@
-package br.edu.ifsp.hotelsync.application.controller.entitiesControllers;
+package br.edu.ifsp.hotelsync.application.controller.managementControllers;
 
 import br.edu.ifsp.hotelsync.application.util.ExitHandler;
 import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
-import br.edu.ifsp.hotelsync.domain.entities.room.Room;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
-public class RoomController {
+public class ReportController {
     @FXML
     private Button btnGuest;
 
@@ -33,19 +29,19 @@ public class RoomController {
     private Button btnSignout;
 
     @FXML
-    private Button createRoomButton;
+    private Button checkInButton;
+
+    @FXML
+    private Button checkOutButton;
+
+    @FXML
+    private Button dailyOcuppationButton;
+
+    @FXML
+    private Button financialButton;
 
     @FXML
     private Pane pnlOverview;
-
-    @FXML
-    private TextField searchRoom;
-
-    @FXML
-    private TableView<Room> tableRoom;
-
-    @FXML
-    private Button updateRoomButton;
 
     @FXML
     public void initialize() {
@@ -85,13 +81,5 @@ public class RoomController {
     @FXML
     void handleRoomPage(ActionEvent event) throws IOException {
         navHandler.navigateToRoomPage();
-    }
-
-    @FXML
-    void onCreateRoomClick(ActionEvent event) throws IOException {
-        navHandler.navigateToCreateRoomPage();
-    }
-
-    public void handleUpdateRoom(ActionEvent actionEvent) {
     }
 }
