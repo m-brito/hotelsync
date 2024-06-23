@@ -102,14 +102,21 @@ public class ReservationManagementController {
         checkOutReservationField.setCellValueFactory(new PropertyValueFactory<>("checkOutDate"));
         ownerReservationField.setCellValueFactory(cell ->
                 new SimpleStringProperty(
-                        String.format("#%s - %s", cell.getValue().getOwner().getId(), cell.getValue().getOwner().getName())));
+                        cell.getValue().getOwner() != null ?
+                                String.format("#%s - %s", cell.getValue().getOwner().getId(), cell.getValue().getOwner().getName()) : null));
         roomReservationField.setCellValueFactory(cell ->
-                new SimpleStringProperty(String.format("#%s - %s", cell.getValue().getRoom().getId(), cell.getValue().getRoom().getNumber())));
+                new SimpleStringProperty(
+                        cell.getValue().getRoom() != null ?
+                                String.format("#%s - %s", cell.getValue().getRoom().getId(), cell.getValue().getRoom().getNumber()) : null));
+
         statusReservationField.setCellValueFactory(cell ->
                 new SimpleStringProperty(cell.getValue().getReservationStatus().name()));
         paymentMethodReservationField.setCellValueFactory(cell ->
-                new SimpleStringProperty(cell.getValue().getPayment().toString()));
+                new SimpleStringProperty(
+                        cell.getValue().getPayment() != null ?
+                                cell.getValue().getPayment().toString() : null));
     }
+
 
     private void showProductInMode(UIMode mode) throws IOException {
         Reservation selectedItem = tableReservation.getSelectionModel().getSelectedItem();
