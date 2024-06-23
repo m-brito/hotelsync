@@ -2,12 +2,10 @@ package br.edu.ifsp.hotelsync.application.controller.managementControllers;
 
 import br.edu.ifsp.hotelsync.application.util.ExitHandler;
 import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
+import br.edu.ifsp.hotelsync.domain.entities.report.exporter.Type;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -50,7 +48,7 @@ public class ReportManagementController {
     private Button exportBtn;
 
     @FXML
-    private ComboBox<?> exportTypeCombo;
+    private ComboBox<Type> exportTypeCombo;
 
     @FXML
     private Button financialButton;
@@ -65,7 +63,11 @@ public class ReportManagementController {
     private TableColumn<?, ?> valueColumn;
 
     @FXML
+    private TableView<?> tableFinancial;
+
+    @FXML
     public void initialize() {
+        exportTypeCombo.getItems().addAll(Type.values());
     }
 
     private final NavigationHandler navHandler =
