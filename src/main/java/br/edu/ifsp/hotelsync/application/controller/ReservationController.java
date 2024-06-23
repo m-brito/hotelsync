@@ -4,7 +4,6 @@ import br.edu.ifsp.hotelsync.application.util.ExitHandler;
 import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
 import br.edu.ifsp.hotelsync.application.util.UIMode;
 import br.edu.ifsp.hotelsync.domain.entities.guest.Guest;
-import br.edu.ifsp.hotelsync.domain.entities.reservation.Payment;
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
 import br.edu.ifsp.hotelsync.domain.entities.room.Room;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.create.CreateReservationUseCase;
@@ -19,8 +18,6 @@ import java.time.LocalDate;
 import static br.edu.ifsp.hotelsync.application.main.Main.*;
 
 public class ReservationController {
-    @FXML
-    private Button addGuestBtn;
 
     @FXML
     private DatePicker birthdatePicker;
@@ -44,9 +41,6 @@ public class ReservationController {
     private Button btnSignout;
 
     @FXML
-    private Button cancelAddGuestBtn;
-
-    @FXML
     private Button cancelReservationBtn;
 
     @FXML
@@ -65,9 +59,6 @@ public class ReservationController {
     private DatePicker endDate;
 
     @FXML
-    private ComboBox<Payment> methodPaymentCombo;
-
-    @FXML
     private TextField nameField;
 
     @FXML
@@ -77,19 +68,31 @@ public class ReservationController {
     private Pane pnlOverview;
 
     @FXML
-    private TextField pronounsField;
-
-    @FXML
     private ComboBox<Room> roomReservationCombo;
 
     @FXML
-    private TextField ssnField;
+    private TextField cpfField;
 
     @FXML
     private DatePicker startDate;
 
     @FXML
+    private Label viewSubtitle;
+
+    @FXML
     private Label viewTitle;
+
+    @FXML
+    private TableView<Guest> tableGuest;
+
+    @FXML
+    private TableColumn<Guest, Double> nameColumn;
+
+    @FXML
+    private TableColumn<Guest, Double> birthdateColumn;
+
+    @FXML
+    private TableColumn<Guest, Double> cpfColumn;
 
     private Reservation reservation;
 
@@ -101,7 +104,6 @@ public class ReservationController {
 
     @FXML
     public void initialize() {
-        methodPaymentCombo.getItems().addAll(Payment.values());
         ownerReservationCombo.getItems().addAll(findAllGuestUseCase.findAll().values());
         roomReservationCombo.getItems().addAll(findAllAvailableRoomUseCase.findAllAvailable().values());
     }
@@ -113,8 +115,11 @@ public class ReservationController {
         this.reservation = reservation;
         setEntityIntoView();
 
-        if (mode == UIMode.VIEW)
+        if(mode == UIMode.VIEW)
             configureViewMode();
+
+        if(mode == UIMode.UPDATE)
+            configureUpdateMode();
     }
 
     private void setEntityIntoView() {
@@ -126,7 +131,6 @@ public class ReservationController {
             endDate.setValue(reservation.getEndDate());
             ownerReservationCombo.setValue(reservation.getOwner());
             roomReservationCombo.setValue(reservation.getRoom());
-            methodPaymentCombo.setValue(reservation.getPayment());
         }
     }
 
@@ -135,7 +139,15 @@ public class ReservationController {
         endDate.setDisable(true);
         ownerReservationCombo.setDisable(true);
         roomReservationCombo.setDisable(true);
-        methodPaymentCombo.setDisable(true);
+    }
+
+    private void configureUpdateMode() {
+        nameField.setVisible(true);
+        cpfField.setVisible(true);
+        birthdatePicker.setVisible(true);
+        viewSubtitle.setVisible(true);
+        tableGuest.setVisible(true);
+        doneAddGuestBtn.setVisible(true);
     }
 
     private void getEntityToView() {
@@ -143,7 +155,6 @@ public class ReservationController {
         LocalDate end = endDate.getValue();
         Guest owner = ownerReservationCombo.getValue();
         Room room = roomReservationCombo.getValue();
-        Payment payment = methodPaymentCombo.getValue();
 
         if(reservation == null) {
             reservation = Reservation.createReservation(start, end, owner, room);
@@ -219,19 +230,11 @@ public class ReservationController {
     }
 
     @FXML
-    void handleAddGuest(ActionEvent event) {
-        nameField.
-                setVisible(true);
-        pronounsField.
-                setVisible(true);
-        ssnField.
-                setVisible(true);
-        birthdatePicker.
-                setVisible(true);
-    }
-
-    @FXML
     void handleCancelAddGuestBtn(ActionEvent event) throws IOException {
         navHandler.navigateToReservationManagementPage();
+    }
+
+    public void addGuestBtn(ActionEvent actionEvent) {
+
     }
 }
