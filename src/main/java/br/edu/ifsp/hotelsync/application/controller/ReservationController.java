@@ -1,20 +1,22 @@
 package br.edu.ifsp.hotelsync.application.controller;
 
-import br.edu.ifsp.hotelsync.application.repository.sqlite.dao.SqliteGuestDao;
 import br.edu.ifsp.hotelsync.application.util.ExitHandler;
-import br.edu.ifsp.hotelsync.application.util.reservation.MethodPaymentComboSetup;
 import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
-import br.edu.ifsp.hotelsync.application.util.reservation.OwnerReservationComboSetup;
+import br.edu.ifsp.hotelsync.application.util.UIMode;
 import br.edu.ifsp.hotelsync.domain.entities.guest.Guest;
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Payment;
+import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
 import br.edu.ifsp.hotelsync.domain.entities.room.Room;
-import br.edu.ifsp.hotelsync.domain.usecases.guest.find.FindAllGuestUseCaseImpl;
+import br.edu.ifsp.hotelsync.domain.usecases.reservation.create.CreateReservationUseCase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.time.LocalDate;
+
+import static br.edu.ifsp.hotelsync.application.main.Main.*;
 
 public class ReservationController {
     @FXML
@@ -86,6 +88,11 @@ public class ReservationController {
     @FXML
     private DatePicker startDate;
 
+    @FXML
+    private Label viewTitle;
+
+    private Reservation reservation;
+
     private final ExitHandler exitHandler =
             new ExitHandler();
 
@@ -94,12 +101,84 @@ public class ReservationController {
 
     @FXML
     public void initialize() {
-        new MethodPaymentComboSetup(methodPaymentCombo).setup();
-
-        new OwnerReservationComboSetup(ownerReservationCombo,
-                new FindAllGuestUseCaseImpl(
-                        new SqliteGuestDao())).setup();
+        methodPaymentCombo.getItems().addAll(Payment.values());
+        ownerReservationCombo.getItems().addAll(findAllGuestUseCase.findAll().values());
+        roomReservationCombo.getItems().addAll(findAllAvailableRoomUseCase.findAllAvailable().values());
     }
+
+    public void setEntity(Reservation reservation, UIMode mode) {
+        if (reservation == null)
+            throw new IllegalArgumentException("Reservation can not be null.");
+
+        this.reservation = reservation;
+        setEntityIntoView();
+
+        if (mode == UIMode.VIEW)
+            configureViewMode();
+    }
+
+    private void setEntityIntoView() {
+        if (reservation != null) {
+            viewTitle.setText("Update Reservation");
+            startDate.setValue(reservation.getStartDate());
+            checkInDate.setValue(reservation.getCheckInDate());
+            checkOutDate.setValue(reservation.getCheckOutDate());
+            endDate.setValue(reservation.getEndDate());
+            ownerReservationCombo.setValue(reservation.getOwner());
+            roomReservationCombo.setValue(reservation.getRoom());
+            methodPaymentCombo.setValue(reservation.getPayment());
+        }
+    }
+
+    private void configureViewMode() {
+        startDate.setDisable(true);
+        endDate.setDisable(true);
+        ownerReservationCombo.setDisable(true);
+        roomReservationCombo.setDisable(true);
+        methodPaymentCombo.setDisable(true);
+    }
+
+    private void getEntityToView() {
+        LocalDate start = startDate.getValue();
+        LocalDate end = endDate.getValue();
+        Guest owner = ownerReservationCombo.getValue();
+        Room room = roomReservationCombo.getValue();
+        Payment payment = methodPaymentCombo.getValue();
+
+        if(reservation == null) {
+            reservation = Reservation.createReservation(start, end, owner, room);
+        } else {
+            reservation.setRoom(room);
+        }
+    }
+
+    private void showErrorAlert(String errorMessage) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Invalid Fields");
+        alert.setHeaderText("Please correct invalid fields");
+        alert.setContentText(errorMessage);
+        alert.showAndWait();
+    }
+
+    private void saveOrUpdate() {
+        try {
+            getEntityToView();
+            if (reservation == null) return;
+            if (reservation.getId() == null) {
+                createReservationUseCase.createReservation(
+                        new CreateReservationUseCase.RequestModel(
+                                reservation.getStartDate(),
+                                reservation.getEndDate(),
+                                reservation.getOwner(),
+                                reservation.getRoom()));
+            }
+
+            navHandler.navigateToReservationManagementPage();
+        } catch (Exception e) {
+            showErrorAlert(e.getMessage());
+        }
+    }
+
 
     @FXML
     void handleExit(ActionEvent event) {
@@ -135,8 +214,8 @@ public class ReservationController {
 
 
     @FXML
-    void handleCreateReservation(ActionEvent event) throws IOException {
-        navHandler.navigateToReservationPage();
+    void onSaveReservation(ActionEvent event) throws IOException {
+        saveOrUpdate();
     }
 
     @FXML
