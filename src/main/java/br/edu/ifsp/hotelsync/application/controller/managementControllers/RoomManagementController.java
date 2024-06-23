@@ -63,12 +63,12 @@ public class RoomManagementController {
 
     @FXML
     void handleGuestPage(ActionEvent event) throws IOException{
-        navHandler.navigateToGuestPage();
+        navHandler.navigateToGuestManagementPage();
     }
 
     @FXML
     void handleProductPage(ActionEvent actionEvent) throws IOException {
-        navHandler.navigateToProductPage();
+        navHandler.navigateToProductManagementPage();
     }
 
     @FXML
@@ -78,17 +78,17 @@ public class RoomManagementController {
 
     @FXML
     void handleReservationPage(ActionEvent event) throws IOException {
-        navHandler.navigateToReservationPage();
+        navHandler.navigateToReservationManagementPage();
     }
 
     @FXML
     void handleRoomPage(ActionEvent event) throws IOException {
-        navHandler.navigateToRoomPage();
+        navHandler.navigateToRoomManagementPage();
     }
 
     @FXML
     void onCreateRoomClick(ActionEvent event) throws IOException {
-        navHandler.navigateToCreateRoomPage();
+        navHandler.navigateToRoomPage();
     }
 
     public void handleUpdateRoom(ActionEvent actionEvent) {

@@ -112,14 +112,14 @@
       </children>
    </VBox>
    <Pane fx:id="pnlOverview" layoutX="264.0" prefHeight="666.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;">
-      <Label layoutX="57.0" layoutY="25.0" text="Add Product" textFill="#eda420">
+      <Label fx:id="viewTitle" layoutX="57.0" layoutY="25.0" text="Create Product" textFill="#eda420">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
       <TextField fx:id="descriptionField" layoutX="45.0" layoutY="178.0" prefHeight="25.0" prefWidth="183.0" promptText="Description" />
       <TextField fx:id="priceField" layoutX="45.0" layoutY="218.0" prefHeight="25.0" prefWidth="183.0" promptText="Price" />
-      <Button id="reservationButton" fx:id="addProductBtn" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="45.0" layoutY="265.0" mnemonicParsing="false" onAction="#handleAddProduct" prefHeight="42.0" prefWidth="67.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Add">
+      <Button id="reservationButton" fx:id="addProductBtn" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="45.0" layoutY="265.0" mnemonicParsing="false" onAction="#onSaveProduct" prefHeight="42.0" prefWidth="67.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Add">
          <padding>
             <Insets left="20.0" />
          </padding>

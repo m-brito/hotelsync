@@ -141,7 +141,7 @@
       <TextField fx:id="cepGuestField" layoutX="554.0" layoutY="321.0" promptText="CEP" />
       <TextField fx:id="districtField" layoutX="213.0" layoutY="358.0" promptText="District" />
       <TextField fx:id="complementField" layoutX="45.0" layoutY="358.0" promptText="Complement" />
-      <Button fx:id="saveGuestBtn" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="45.0" layoutY="419.0" mnemonicParsing="false" onAction="#onAddGuestClick" prefHeight="42.0" prefWidth="105.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Save">
+      <Button fx:id="saveGuestBtn" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="45.0" layoutY="419.0" mnemonicParsing="false" onAction="#onSaveGuestClick" prefHeight="42.0" prefWidth="105.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Save">
          <padding>
             <Insets left="40.0" />
          </padding>
