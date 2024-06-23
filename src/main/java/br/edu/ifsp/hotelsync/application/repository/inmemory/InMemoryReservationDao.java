@@ -134,4 +134,23 @@ public class InMemoryReservationDao implements ReservationDao {
 
         return new FinancialReport(reports);
     }
+
+    @Override
+    public void updateCheckIn(Reservation reservation) {
+        Reservation existingReservation = reservations.get(reservation.getId());
+        if (existingReservation != null) {
+            existingReservation.setCheckInDate(reservation.getCheckInDate());
+            existingReservation.setReservationStatus(reservation.getReservationStatus());
+        }
+    }
+
+    @Override
+    public void updateCheckOut(Reservation reservation) {
+        Reservation existingReservation = reservations.get(reservation.getId());
+        if (existingReservation != null) {
+            existingReservation.setCheckOutDate(reservation.getCheckOutDate());
+            existingReservation.setReservationStatus(reservation.getReservationStatus());
+            existingReservation.setPayment(reservation.getPayment());
+        }
+    }
 }

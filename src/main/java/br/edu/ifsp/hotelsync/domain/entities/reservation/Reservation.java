@@ -197,4 +197,17 @@ public class Reservation {
     public List<ConsumedProduct> getConsumedProducts() {
         return new ArrayList<>(consumedProducts);
     }
+
+    public void setCheckInDate(LocalDate checkInDate) {
+    }
+
+    public void setReservationStatus(ReservationStatus reservationStatus) {
+    }
+
+    public void setPayment(Payment payment) {
+    }
+
+    public void setCheckOutDate(LocalDate parse) {
+
+    }
 }

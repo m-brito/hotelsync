@@ -2,7 +2,6 @@ package br.edu.ifsp.hotelsync.application.repository.sqlite.dao;
 
 import br.edu.ifsp.hotelsync.application.repository.sqlite.ConnectionFactory;
 import br.edu.ifsp.hotelsync.domain.entities.guest.Guest;
-import br.edu.ifsp.hotelsync.domain.entities.product.Product;
 import br.edu.ifsp.hotelsync.domain.entities.report.records.CheckInReport;
 import br.edu.ifsp.hotelsync.domain.entities.report.records.CheckOutReport;
 import br.edu.ifsp.hotelsync.domain.entities.report.records.DailyOccupationReport;
@@ -326,7 +325,34 @@ public class SqliteReservationDao implements ReservationDao {
         }
     }
 
+    @Override
+    public void updateCheckIn(Reservation reservation) {
+        String sql = "UPDATE Reservation SET checkInDate = ?, reservationStatus = ? WHERE id = ?";
 
+        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
+            stmt.setString(1, reservation.getCheckInDate() != null ? reservation.getCheckInDate().format(formatter) : null);
+            stmt.setString(2, reservation.getReservationStatus().name());
+            stmt.setLong(3, reservation.getId());
+            stmt.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateCheckOut(Reservation reservation) {
+        String sql = "UPDATE Reservation SET checkOutDate = ?, reservationStatus = ?, paymentMethod = ? WHERE id = ?";
+
+        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
+            stmt.setString(1, reservation.getCheckOutDate() != null ? reservation.getCheckOutDate().format(formatter) : null);
+            stmt.setString(2, reservation.getReservationStatus().name());
+            stmt.setString(3, reservation.getPayment().name());
+            stmt.setLong(4, reservation.getId());
+            stmt.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
 

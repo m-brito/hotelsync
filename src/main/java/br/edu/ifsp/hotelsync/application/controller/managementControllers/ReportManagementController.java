@@ -5,6 +5,9 @@ import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableColumn;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -38,25 +41,38 @@ public class ReportManagementController {
     private Button dailyOcuppationButton;
 
     @FXML
+    private TableColumn<?, ?> dateColumn;
+
+    @FXML
+    private DatePicker endDaePicker;
+
+    @FXML
+    private Button exportBtn;
+
+    @FXML
+    private ComboBox<?> exportTypeCombo;
+
+    @FXML
     private Button financialButton;
 
     @FXML
     private Pane pnlOverview;
 
     @FXML
+    private DatePicker startDatePicker;
+
+    @FXML
+    private TableColumn<?, ?> valueColumn;
+
+    @FXML
     public void initialize() {
     }
-
-    private final ExitHandler exitHandler =
-            new ExitHandler();
 
     private final NavigationHandler navHandler =
             new NavigationHandler();
 
     @FXML
-    void handleExit(ActionEvent event) {
-        exitHandler.handleExit(event);
-    }
+    void handleExit(ActionEvent event) { new ExitHandler().handleExit(event); }
 
     @FXML
     void handleGuestPage(ActionEvent event) throws IOException{
