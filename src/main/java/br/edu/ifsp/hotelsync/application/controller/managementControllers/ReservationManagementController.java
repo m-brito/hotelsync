@@ -88,6 +88,9 @@ public class ReservationManagementController {
     private TableColumn<Reservation, String> paymentMethodReservationField;
 
     @FXML
+    private TableColumn<Reservation, String> totalReservationField;
+
+    @FXML
     private TableView<Reservation> tableReservation;
 
     private ObservableList<Reservation> tableData;
@@ -124,6 +127,8 @@ public class ReservationManagementController {
                 new SimpleStringProperty(
                         cell.getValue().getPayment() != null ?
                                 cell.getValue().getPayment().toString() : null));
+        totalReservationField.setCellValueFactory(cell -> new SimpleStringProperty(
+                String.format("R$ %.2f", cell.getValue().calculateTotalToPay())));
     }
 
 

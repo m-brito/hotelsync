@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="1068.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.hotelsync.application.controller.ReservationController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="1068.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.hotelsync.application.controller.ReservationController">
    <children>
       <VBox prefHeight="666.0" prefWidth="264.0" style="-fx-background-color: #181818;">
          <children>
@@ -197,7 +188,7 @@
             </Label>
             <ComboBox fx:id="productReservationCombo" layoutX="538.0" layoutY="241.0" prefHeight="25.0" prefWidth="174.0" promptText="Product" visible="false" />
             <TextField fx:id="quantityField" layoutX="537.0" layoutY="275.0" prefHeight="25.0" prefWidth="174.0" promptText="Quantity" visible="false" />
-            <Button id="createRoomButton" fx:id="doneAddProductBtn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="537.0" layoutY="308.0" mnemonicParsing="false" onAction="#addGuestBtn" prefHeight="42.0" prefWidth="174.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Add" visible="false">
+            <Button id="createRoomButton" fx:id="doneAddProductBtn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="537.0" layoutY="308.0" mnemonicParsing="false" onAction="#addProductBtn" prefHeight="42.0" prefWidth="174.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Add" visible="false">
                <padding>
                   <Insets left="20.0" />
                </padding>
