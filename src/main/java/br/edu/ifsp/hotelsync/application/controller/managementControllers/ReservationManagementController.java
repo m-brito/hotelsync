@@ -46,6 +46,12 @@ public class ReservationManagementController {
     private Button btnSignout;
 
     @FXML
+    private Button checkInBtn;
+
+    @FXML
+    private Button checkOutBtn;
+
+    @FXML
     private Button createReservationButton;
 
     @FXML
