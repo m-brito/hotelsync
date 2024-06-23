@@ -134,6 +134,10 @@ public class ReservationManagementController {
 
     private void showProductInMode(UIMode mode) throws IOException {
         Reservation selectedItem = tableReservation.getSelectionModel().getSelectedItem();
+        if(selectedItem.getCheckOutDate() != null || LocalDate.now().isAfter(selectedItem.getEndDate())){
+            AlertHelper.showErrorAlert("Error Dialog", "Reservation Error", "This reservation is already checked out or expired.");
+            return;
+        }
         if (selectedItem != null) {
             navHandler.navigateToReservationPage();
             ReservationController controller = (ReservationController) Home.getController();

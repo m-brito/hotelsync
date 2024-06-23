@@ -324,7 +324,7 @@ public class ReservationController {
             Product product = productReservationCombo.getValue();
             if(product == null) throw new IllegalArgumentException("Product not selected");
             int quantity = Integer.parseInt(quantityField.getText());
-            addConsumedProductUseCase.addConsumedProduct(new AddConsumedProductUseCase.RequestModel(product.getId(), reservation.getId(), quantity));
+            addConsumedProductUseCase.addConsumedProduct(new AddConsumedProductUseCase.RequestModel(reservation.getId(), product.getId(), quantity));
             productReservationCombo.setValue(null);
             quantityField.clear();
         } catch (Exception e) {
