@@ -126,6 +126,8 @@ public class Reservation {
     public void addGuest(Guest guest){
         if(!guests.contains(guest))
             guests.add(guest);
+        else
+            throw new IllegalArgumentException("The guest CPF "+ guest.getCpf() +" has already been added");
     }
 
     public void removeGuest(Guest guest){
