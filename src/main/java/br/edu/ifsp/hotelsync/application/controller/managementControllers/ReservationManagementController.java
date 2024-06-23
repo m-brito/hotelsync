@@ -1,7 +1,11 @@
 package br.edu.ifsp.hotelsync.application.controller.managementControllers;
 
+import br.edu.ifsp.hotelsync.application.controller.ProductController;
+import br.edu.ifsp.hotelsync.application.controller.ReservationController;
 import br.edu.ifsp.hotelsync.application.util.ExitHandler;
 import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
+import br.edu.ifsp.hotelsync.application.util.UIMode;
+import br.edu.ifsp.hotelsync.application.view.Home;
 import br.edu.ifsp.hotelsync.domain.entities.product.Product;
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
 import javafx.beans.property.SimpleStringProperty;
@@ -107,6 +111,15 @@ public class ReservationManagementController {
                 new SimpleStringProperty(cell.getValue().getPayment().toString()));
     }
 
+    private void showProductInMode(UIMode mode) throws IOException {
+        Reservation selectedItem = tableReservation.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            navHandler.navigateToReservationPage();
+            ReservationController controller = (ReservationController) Home.getController();
+            controller.setEntity(selectedItem, mode);
+        }
+    }
+
     public void populateTable() {
         Map<Long, Reservation> reservations = findAllReservationUseCase.findAll();
         tableData.clear();
@@ -151,6 +164,7 @@ public class ReservationManagementController {
         navHandler.navigateToReservationPage();
     }
 
-    public void handleUpdateReservation(ActionEvent actionEvent) {
+    public void handleUpdateReservation(ActionEvent actionEvent) throws IOException {
+        showProductInMode(UIMode.UPDATE);
     }
 }
