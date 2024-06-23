@@ -9,7 +9,7 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
-public class ReportController {
+public class ReportManagementController {
     @FXML
     private Button btnGuest;
 
