@@ -5,6 +5,7 @@ import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
 import br.edu.ifsp.hotelsync.application.util.UIMode;
 import br.edu.ifsp.hotelsync.domain.entities.guest.Cpf;
 import br.edu.ifsp.hotelsync.domain.entities.guest.Guest;
+import br.edu.ifsp.hotelsync.domain.entities.product.Product;
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
 import br.edu.ifsp.hotelsync.domain.entities.room.Room;
 import br.edu.ifsp.hotelsync.domain.usecases.guest.create.CreateGuestUseCase;
@@ -78,7 +79,7 @@ public class ReservationController {
     private ComboBox<Guest> ownerReservationCombo;
 
     @FXML
-    private ComboBox<Guest> productReservationCombo;
+    private ComboBox<Product> productReservationCombo;
 
     @FXML
     private Pane pnlOverview;
@@ -131,6 +132,7 @@ public class ReservationController {
     public void initialize() {
         ownerReservationCombo.getItems().addAll(findAllGuestUseCase.findAll().values());
         roomReservationCombo.getItems().addAll(findAllAvailableRoomUseCase.findAllAvailable().values());
+        productReservationCombo.getItems().addAll(findAllProductUseCase.findAll().values());
     }
 
     public void setEntity(Reservation reservation, UIMode mode) {
