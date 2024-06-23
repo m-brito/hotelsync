@@ -17,6 +17,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.util.Map;
+
+import static br.edu.ifsp.hotelsync.application.main.Main.findAllProductUseCase;
+import static br.edu.ifsp.hotelsync.application.main.Main.findAllReservationUseCase;
 
 public class ReservationManagementController {
     @FXML
@@ -79,6 +83,7 @@ public class ReservationManagementController {
     public void initialize() {
         bindTableViewToItemsList();
         bindColumnsToValuesSources();
+        populateTable();
     }
 
     private void bindTableViewToItemsList() {
@@ -100,6 +105,12 @@ public class ReservationManagementController {
                 new SimpleStringProperty(cell.getValue().getReservationStatus().name()));
         paymentMethodReservationField.setCellValueFactory(cell ->
                 new SimpleStringProperty(cell.getValue().getPayment().toString()));
+    }
+
+    public void populateTable() {
+        Map<Long, Reservation> reservations = findAllReservationUseCase.findAll();
+        tableData.clear();
+        tableData.addAll(reservations.values());
     }
 
     private final NavigationHandler navHandler =
