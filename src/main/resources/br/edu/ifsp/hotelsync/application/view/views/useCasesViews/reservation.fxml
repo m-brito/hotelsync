@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="1068.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.hotelsync.application.controller.ReservationController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="1068.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.hotelsync.application.controller.ReservationController">
    <children>
       <VBox prefHeight="666.0" prefWidth="264.0" style="-fx-background-color: #181818;">
          <children>
@@ -114,12 +123,12 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button id="createRoomButton" fx:id="createReservationButton" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="33.0" layoutY="496.0" mnemonicParsing="false" onAction="#onSaveReservation" prefHeight="42.0" prefWidth="169.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Create Reservation">
+            <Button id="createRoomButton" fx:id="createReservationButton" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="33.0" layoutY="533.0" mnemonicParsing="false" onAction="#onSaveReservation" prefHeight="42.0" prefWidth="169.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Create Reservation">
                <padding>
                   <Insets left="35.0" />
                </padding>
             </Button>
-            <Button id="updateRoomButton" fx:id="cancelReservationBtn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="209.0" layoutY="496.0" mnemonicParsing="false" onAction="#handleCancelAddGuestBtn" prefHeight="42.0" prefWidth="75.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Cancel">
+            <Button id="updateRoomButton" fx:id="cancelReservationBtn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="209.0" layoutY="533.0" mnemonicParsing="false" onAction="#handleCancelAddGuestBtn" prefHeight="42.0" prefWidth="75.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Cancel">
                <padding>
                   <Insets left="20.0" />
                </padding>
@@ -128,28 +137,58 @@
             <DatePicker fx:id="checkInDate" disable="true" layoutX="218.0" layoutY="123.0" promptText="Check-In" />
             <DatePicker fx:id="endDate" layoutX="400.0" layoutY="123.0" promptText="End Date" />
             <DatePicker fx:id="checkOutDate" disable="true" layoutX="583.0" layoutY="123.0" promptText="Check-Out " />
-            <ComboBox fx:id="ownerReservationCombo" layoutX="33.0" layoutY="166.0" prefHeight="25.0" prefWidth="174.0" promptText="Owner" />
-            <ComboBox fx:id="roomReservationCombo" layoutX="218.0" layoutY="166.0" prefHeight="25.0" prefWidth="174.0" promptText="Room" />
-            <Button id="createRoomButton" fx:id="addGuestBtn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="33.0" layoutY="222.0" mnemonicParsing="false" onAction="#handleAddGuest" prefHeight="42.0" prefWidth="117.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Add Guest">
-               <padding>
-                  <Insets left="30.0" />
-               </padding>
-            </Button>
-            <TextField fx:id="nameField" layoutX="33.0" layoutY="288.0" prefHeight="25.0" prefWidth="174.0" promptText="Name" visible="false" />
-            <TextField fx:id="pronounsField" layoutX="218.0" layoutY="288.0" prefHeight="25.0" prefWidth="174.0" promptText="Pronouns" visible="false" />
-            <DatePicker fx:id="birthdatePicker" layoutX="583.0" layoutY="288.0" promptText="Birthdate" visible="false" />
-            <TextField fx:id="ssnField" layoutX="400.0" layoutY="288.0" prefHeight="25.0" prefWidth="174.0" promptText="SSN" visible="false" />
-            <Button id="createRoomButton" fx:id="doneAddGuestBtn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="33.0" layoutY="359.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="67.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Done">
+            <ComboBox fx:id="ownerReservationCombo" layoutX="34.0" layoutY="172.0" prefHeight="25.0" prefWidth="174.0" promptText="Owner" />
+            <ComboBox fx:id="roomReservationCombo" layoutX="219.0" layoutY="172.0" prefHeight="25.0" prefWidth="174.0" promptText="Room" />
+            <TextField fx:id="nameField" layoutX="30.0" layoutY="253.0" prefHeight="25.0" prefWidth="174.0" promptText="Name" />
+            <DatePicker fx:id="birthdatePicker" layoutX="396.0" layoutY="253.0" promptText="Birthdate" />
+            <TextField fx:id="cpfField" layoutX="213.0" layoutY="253.0" prefHeight="25.0" prefWidth="174.0" promptText="CPF" />
+            <Button id="createRoomButton" fx:id="doneAddGuestBtn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="33.0" layoutY="300.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="67.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Add">
                <padding>
                   <Insets left="20.0" />
                </padding>
             </Button>
-            <Button id="createRoomButton" fx:id="cancelAddGuestBtn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="106.0" layoutY="359.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="67.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Cancel">
-               <padding>
-                  <Insets left="17.0" />
-               </padding>
-            </Button>
-            <ComboBox fx:id="methodPaymentCombo" layoutX="400.0" layoutY="166.0" prefHeight="25.0" prefWidth="174.0" promptText="Method Payment" />
+            <Label fx:id="viewSubtitle" layoutX="56.0" layoutY="208.0" text="Guests" textFill="#eda420">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TableView fx:id="tableGuest" layoutX="32.0" layoutY="357.0" prefHeight="160.0" prefWidth="734.0" style="-fx-background-color: #181818;">
+               <columns>
+                  <TableColumn fx:id="nameColumn" prefWidth="223.0" text="Name" />
+                  <TableColumn fx:id="birthdateColumn" prefWidth="281.0" text="Birthdate" />
+                  <TableColumn fx:id="cpfColumn" minWidth="0.0" prefWidth="229.0" text="CPF" />
+               </columns>
+            </TableView>
+            <Label layoutX="32.0" layoutY="108.0" text="Start Date">
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </Label>
+            <Label layoutX="218.0" layoutY="108.0" text="CeckIn">
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </Label>
+            <Label layoutX="399.0" layoutY="108.0" text="End Date">
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </Label>
+            <Label layoutX="583.0" layoutY="108.0" text="CehckOut">
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </Label>
+            <Label layoutX="33.0" layoutY="154.0" text="Owner">
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </Label>
+            <Label layoutX="219.0" layoutY="154.0" text="Room">
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>
