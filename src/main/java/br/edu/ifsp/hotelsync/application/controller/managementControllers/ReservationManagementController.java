@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -42,6 +43,30 @@ public class ReservationManagementController {
 
     @FXML
     private TextField searchReservation;
+
+    @FXML
+    private TableColumn<Product, String> startDateReservationField;
+
+    @FXML
+    private TableColumn<Product, String> checkInReservationField;
+
+    @FXML
+    private TableColumn<Product, String> endDateReservationField;
+
+    @FXML
+    private TableColumn<Product, String> checkOutReservationField;
+
+    @FXML
+    private TableColumn<Product, String> ownerReservationField;
+
+    @FXML
+    private TableColumn<Product, String> roomReservationField;
+
+    @FXML
+    private TableColumn<Product, String> statusReservationField;
+
+    @FXML
+    private TableColumn<Product, String> paymentMethodReservationField;
 
     @FXML
     private TableView<Reservation> tableReservation;
