@@ -7,59 +7,42 @@ import java.io.IOException;
 public class NavigationHandler {
 
     public void navigateToGuestPage() throws IOException {
-        Home.setRoot("views/entitiesViews/guest");
+        Home.setRoot("views/managementViews/guestManagement");
     }
 
     public void navigateToProductPage() throws IOException {
-        Home.setRoot("views/entitiesViews/product");
-    }
-
-    public void navigateToReportPage() throws IOException {
-        Home.setRoot("views/useCasesViews/reportViews/generateReports");
-    }
-
-    public void navigateToReservationPage() throws IOException {
-        Home.setRoot("views/entitiesViews/reservation");
+        Home.setRoot("views/managementViews/productManagement");
     }
 
     public void navigateToRoomPage() throws IOException {
-        Home.setRoot("views/entitiesViews/room");
+        Home.setRoot("views/managementViews/roomManagement");
     }
 
-    public void handleCreateReservation() throws IOException {
-        Home.setRoot("views/useCasesViews/createViews/createReservation");
-    }
-
-    public  void handleCreateProduct() throws IOException {
-        Home.setRoot("views/useCasesViews/createViews/createProduct");
+    public void navigateToReservationPage() throws IOException {
+        Home.setRoot("views/managementViews/reservationManagement");
     }
 
     public void handleCreateGuest() throws IOException {
-        Home.setRoot("views/useCasesViews/createViews/createGuest");
+        Home.setRoot("views/useCasesViews/guest");
+    }
+
+    public  void handleCreateProduct() throws IOException {
+        Home.setRoot("views/useCasesViews/product");
     }
 
     public void navigateToCreateRoomPage() throws IOException {
-        Home.setRoot("views/useCasesViews/createViews/createRoom");
+        Home.setRoot("views/useCasesViews/room");
+    }
+
+    public void handleCreateReservation() throws IOException {
+        Home.setRoot("views/useCasesViews/reservation");
     }
 
     public void navigateToHomePage() throws IOException{
         Home.setRoot("home");
     }
 
-    public void navigateToUpdateRoomPage() throws IOException {
-        Home.setRoot("views/useCasesViews/updateViews/updateRoom");
+    public void navigateToReportPage() throws IOException {
+        Home.setRoot("views/useCasesViews/reportViews/generateReports");
     }
-
-    public void navigateToUpdateGuestPage() throws IOException {
-        Home.setRoot("views/useCasesViews/updateViews/updateGuest");
-    }
-
-    public void navigateToUpdateProductPage() throws IOException {
-        Home.setRoot("views/useCasesViews/updateViews/updateProduct");
-    }
-
-    public void navigateToUpdateReservationPage() throws IOException {
-        Home.setRoot("views/useCasesViews/updateViews/updateReservation");
-    }
-
 }
