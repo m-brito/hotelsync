@@ -139,20 +139,20 @@
             <DatePicker fx:id="checkOutDate" disable="true" layoutX="583.0" layoutY="123.0" promptText="Check-Out " />
             <ComboBox fx:id="ownerReservationCombo" layoutX="34.0" layoutY="172.0" prefHeight="25.0" prefWidth="174.0" promptText="Owner" />
             <ComboBox fx:id="roomReservationCombo" layoutX="219.0" layoutY="172.0" prefHeight="25.0" prefWidth="174.0" promptText="Room" />
-            <TextField fx:id="nameField" layoutX="30.0" layoutY="253.0" prefHeight="25.0" prefWidth="174.0" promptText="Name" />
-            <DatePicker fx:id="birthdatePicker" layoutX="396.0" layoutY="253.0" promptText="Birthdate" />
-            <TextField fx:id="cpfField" layoutX="213.0" layoutY="253.0" prefHeight="25.0" prefWidth="174.0" promptText="CPF" />
-            <Button id="createRoomButton" fx:id="doneAddGuestBtn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="33.0" layoutY="300.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="67.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Add">
+            <TextField fx:id="nameField" layoutX="30.0" layoutY="253.0" prefHeight="25.0" prefWidth="174.0" promptText="Name" visible="false" />
+            <DatePicker fx:id="birthdatePicker" layoutX="396.0" layoutY="253.0" promptText="Birthdate" visible="false" />
+            <TextField fx:id="cpfField" layoutX="213.0" layoutY="253.0" prefHeight="25.0" prefWidth="174.0" promptText="CPF" visible="false" />
+            <Button id="createRoomButton" fx:id="doneAddGuestBtn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="33.0" layoutY="300.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="67.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Add" visible="false">
                <padding>
                   <Insets left="20.0" />
                </padding>
             </Button>
-            <Label fx:id="viewSubtitle" layoutX="56.0" layoutY="208.0" text="Guests" textFill="#eda420">
+            <Label fx:id="viewSubtitle" layoutX="56.0" layoutY="208.0" text="Guests" textFill="#eda420" visible="false">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <TableView fx:id="tableGuest" layoutX="32.0" layoutY="357.0" prefHeight="160.0" prefWidth="734.0" style="-fx-background-color: #181818;">
+            <TableView fx:id="tableGuest" layoutX="32.0" layoutY="357.0" prefHeight="160.0" prefWidth="734.0" style="-fx-background-color: #181818;" visible="false">
                <columns>
                   <TableColumn fx:id="nameColumn" prefWidth="223.0" text="Name" />
                   <TableColumn fx:id="birthdateColumn" prefWidth="281.0" text="Birthdate" />
