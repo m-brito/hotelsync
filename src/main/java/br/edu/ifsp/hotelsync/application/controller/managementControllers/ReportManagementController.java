@@ -4,19 +4,27 @@ import br.edu.ifsp.hotelsync.application.util.AlertHelper;
 import br.edu.ifsp.hotelsync.application.util.ExitHandler;
 import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
 import br.edu.ifsp.hotelsync.domain.entities.report.exporter.Type;
+import br.edu.ifsp.hotelsync.domain.entities.report.formatter.SimpleTextFormatter;
 import br.edu.ifsp.hotelsync.domain.entities.report.records.Exportable;
 import br.edu.ifsp.hotelsync.domain.usecases.reports.create.CreateReportUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.reports.export.PdfExportUseCase;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
 
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Map;
+import java.util.Objects;
 
 import static br.edu.ifsp.hotelsync.application.main.Main.*;
 
@@ -77,6 +85,8 @@ public class ReportManagementController {
 
     private ObservableList<Map.Entry<LocalDate, ?>> tableData;
 
+    private Exportable<LocalDate, ?> report;
+
     @FXML
     public void initialize() {
         exportTypeCombo.getItems().addAll(Type.values());
@@ -131,6 +141,7 @@ public class ReportManagementController {
             Exportable<LocalDate, Integer> report = createCheckInReport.createReport(new CreateReportUseCase.RequestModel(
                     startDatePicker.getValue(),
                     endDatePicker.getValue()));
+            this.report = report;
             tableData.clear();
             tableData.addAll(report.getReport().entrySet());
         } catch (Exception e){
@@ -144,6 +155,7 @@ public class ReportManagementController {
             Exportable<LocalDate, Integer> report = createCheckOutReport.createReport(new CreateReportUseCase.RequestModel(
                     startDatePicker.getValue(),
                     endDatePicker.getValue()));
+            this.report = report;
             tableData.clear();
             tableData.addAll(report.getReport().entrySet());
         } catch (Exception e){
@@ -157,6 +169,7 @@ public class ReportManagementController {
             Exportable<LocalDate, Double> report = createFinancialReport.createReport(new CreateReportUseCase.RequestModel(
                     startDatePicker.getValue(),
                     endDatePicker.getValue()));
+            this.report = report;
             tableData.clear();
             tableData.addAll(report.getReport().entrySet());
         } catch (Exception e){
@@ -170,9 +183,31 @@ public class ReportManagementController {
             Exportable<LocalDate, Double> report = createDailyOccupationReport.createReport(new CreateReportUseCase.RequestModel(
                     startDatePicker.getValue(),
                     endDatePicker.getValue()));
+            this.report = report;
             tableData.clear();
             tableData.addAll(report.getReport().entrySet());
         } catch (Exception e){
+            AlertHelper.showErrorAlert("Error", "Error", e.getMessage());
+        }
+    }
+
+    public void exportBtn(ActionEvent actionEvent) {
+        try{
+            if(exportTypeCombo.getValue() == null) throw new IllegalArgumentException("Please select a export type");
+            String outputPath = "report.pdf";
+            if (Objects.requireNonNull(exportTypeCombo.getValue()) == Type.PDF) pdfExportUseCase.exportPdf(new PdfExportUseCase.RequestModel(report, new SimpleTextFormatter(), outputPath));
+            pdfExportUseCase.exportPdf(new PdfExportUseCase.RequestModel(report, new SimpleTextFormatter(), outputPath));
+            File pdfFile = new File(outputPath);
+            if (pdfFile.exists()) {
+                if (Desktop.isDesktopSupported()) {
+                    Desktop.getDesktop().open(pdfFile);
+                } else {
+                    throw new IllegalStateException("The PDF file was created but the system does not support opening it.");
+                }
+            } else {
+                throw new IllegalStateException("The PDF file was not created.");
+            }
+        } catch(Exception e) {
             AlertHelper.showErrorAlert("Error", "Error", e.getMessage());
         }
     }
