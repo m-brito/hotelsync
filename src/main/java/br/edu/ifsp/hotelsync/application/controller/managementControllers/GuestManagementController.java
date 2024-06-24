@@ -1,6 +1,7 @@
 package br.edu.ifsp.hotelsync.application.controller.managementControllers;
 
 import br.edu.ifsp.hotelsync.application.controller.GuestController;
+import br.edu.ifsp.hotelsync.application.util.DateFormatter;
 import br.edu.ifsp.hotelsync.application.util.ExitHandler;
 import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
 import br.edu.ifsp.hotelsync.application.util.UIMode;
@@ -23,7 +24,7 @@ import static br.edu.ifsp.hotelsync.application.main.Main.findAllGuestUseCase;
 
 public class GuestManagementController {
     @FXML
-    private TableColumn<Guest, LocalDate> birthdateColumn;
+    private TableColumn<Guest, String> birthdateColumn;
 
     @FXML
     private Button btnGuest;
@@ -93,8 +94,11 @@ public class GuestManagementController {
     private final NavigationHandler navHandler =
             new NavigationHandler();
 
+    DateFormatter dateFormatter;
+
     @FXML
     public void initialize() {
+        dateFormatter = new DateFormatter("dd/MM/yyyy");
         bindTableViewToItemsList();
         bindColumnsToValuesSources();
         populateTable();
@@ -108,7 +112,8 @@ public class GuestManagementController {
     private void bindColumnsToValuesSources() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         pronounsColumn.setCellValueFactory(new PropertyValueFactory<>("pronouns"));
-        birthdateColumn.setCellValueFactory(new PropertyValueFactory<>("birthdate"));
+        birthdateColumn.setCellValueFactory(cell ->
+                new SimpleStringProperty(dateFormatter.format(cell.getValue().getBirthdate())));
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
         cpfColumn.setCellValueFactory(new PropertyValueFactory<>("cpf"));
         roadColumn.setCellValueFactory(cell ->
