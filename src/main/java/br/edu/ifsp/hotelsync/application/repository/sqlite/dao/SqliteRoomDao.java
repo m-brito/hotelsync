@@ -7,11 +7,15 @@ import br.edu.ifsp.hotelsync.domain.entities.room.RoomStatus;
 import br.edu.ifsp.hotelsync.domain.persistence.dao.RoomDao;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
 public class SqliteRoomDao implements RoomDao {
+
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     @Override
     public Long save(Room room) {
@@ -102,10 +106,16 @@ public class SqliteRoomDao implements RoomDao {
     }
 
     @Override
-    public Map<Long, Room> findAllAvailable() {
-        String sql = "SELECT * FROM Room WHERE roomStatus = 'AVAILABLE'";
+    public Map<Long, Room> findAllAvailable(LocalDate startDate, LocalDate endDate) {
+        String sql = "SELECT * FROM Room r INNER JOIN Reservation res ON res.roomId = r.id WHERE r.id NOT IN (SELECT roomId FROM Reservation WHERE (startDate >= ? AND startDate <=?) OR (endDate >= ? AND endDate <= ?))";
+
         Map<Long, Room> rooms = new HashMap<>();
         try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
+            stmt.setString(1, startDate.format(formatter));
+            stmt.setString(2, endDate.format(formatter));
+            stmt.setString(3, startDate.format(formatter));
+            stmt.setString(4, endDate.format(formatter));
+
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Room room = resultSetToEntity(rs);
