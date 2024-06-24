@@ -20,6 +20,7 @@ public class Home extends javafx.application.Application {
 
         stage.setMinWidth(1068);
         stage.setMinHeight(666);
+        stage.setResizable(false);
 
         stage.setScene(scene);
         stage.show();
