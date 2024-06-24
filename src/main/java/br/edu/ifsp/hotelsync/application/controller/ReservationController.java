@@ -132,7 +132,8 @@ public class ReservationController {
     @FXML
     public void initialize() {
         ownerReservationCombo.getItems().addAll(findAllGuestUseCase.findAll().values());
-        roomReservationCombo.getItems().addAll(findAllAvailableRoomUseCase.findAllAvailable().values());
+        //TODO fix this
+        //roomReservationCombo.getItems().addAll(findAllAvailableRoomUseCase.findAllAvailable().values());
         productReservationCombo.getItems().addAll(findAllProductUseCase.findAll().values());
     }
 

@@ -6,6 +6,7 @@ import br.edu.ifsp.hotelsync.domain.persistence.dao.RoomDao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -43,7 +44,7 @@ public class InMemoryRoomDao implements RoomDao {
     }
 
     @Override
-    public Map<Long, Room> findAllAvailable() {
+    public Map<Long, Room> findAllAvailable(LocalDate startDate, LocalDate endDate) {
         return rooms.values().stream()
                 .filter(r -> r.getRoomStatus() == RoomStatus.AVAILABLE)
                 .collect(Collectors.toMap(Room::getId, Function.identity()));
