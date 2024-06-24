@@ -24,6 +24,7 @@ import javafx.util.Pair;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
 
@@ -95,11 +96,15 @@ public class ReservationManagementController {
 
     private ObservableList<Reservation> tableData;
 
+    private DateFormatter dateFormatter;
+
     @FXML
     public void initialize() {
+        dateFormatter = new DateFormatter("dd/MM/yyyy");
         bindTableViewToItemsList();
         bindColumnsToValuesSources();
         populateTable();
+
     }
 
     private void bindTableViewToItemsList() {
@@ -108,10 +113,14 @@ public class ReservationManagementController {
     }
 
     private void bindColumnsToValuesSources() {
-        startDateReservationField.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-        checkInReservationField.setCellValueFactory(new PropertyValueFactory<>("checkInDate"));
-        endDateReservationField.setCellValueFactory(new PropertyValueFactory<>("endDate"));
-        checkOutReservationField.setCellValueFactory(new PropertyValueFactory<>("checkOutDate"));
+        startDateReservationField.setCellValueFactory(cell ->
+                new SimpleStringProperty(dateFormatter.format(cell.getValue().getStartDate())));
+        checkInReservationField.setCellValueFactory(cell ->
+                new SimpleStringProperty(dateFormatter.format(cell.getValue().getCheckInDate())));
+        endDateReservationField.setCellValueFactory(cell ->
+                new SimpleStringProperty(dateFormatter.format(cell.getValue().getEndDate())));
+        checkOutReservationField.setCellValueFactory(cell ->
+                new SimpleStringProperty(dateFormatter.format(cell.getValue().getCheckOutDate())));
         ownerReservationField.setCellValueFactory(cell ->
                 new SimpleStringProperty(
                         cell.getValue().getOwner() != null ?
@@ -120,7 +129,6 @@ public class ReservationManagementController {
                 new SimpleStringProperty(
                         cell.getValue().getRoom() != null ?
                                 String.format("#%s - %s", cell.getValue().getRoom().getId(), cell.getValue().getRoom().getNumber()) : null));
-
         statusReservationField.setCellValueFactory(cell ->
                 new SimpleStringProperty(cell.getValue().getReservationStatus().name()));
         paymentMethodReservationField.setCellValueFactory(cell ->
@@ -135,7 +143,9 @@ public class ReservationManagementController {
     private void showProductInMode(UIMode mode) throws IOException {
         Reservation selectedItem = tableReservation.getSelectionModel().getSelectedItem();
         if(selectedItem.getCheckOutDate() != null || LocalDate.now().isAfter(selectedItem.getEndDate())){
-            AlertHelper.showErrorAlert("Error Dialog", "Reservation Error", "This reservation is already checked out or expired.");
+            AlertHelper.showErrorAlert
+            ("Error Dialog", "Reservation Error",
+            "This reservation has already been checked out or has expired.");
             return;
         }
         if (selectedItem != null) {
@@ -190,13 +200,24 @@ public class ReservationManagementController {
     }
 
     public void handleUpdateReservation(ActionEvent actionEvent) throws IOException {
-        showProductInMode(UIMode.UPDATE);
+        Reservation selectedItem = tableReservation.getSelectionModel().getSelectedItem();
+        if (selectedItem == null) {
+            AlertHelper.showErrorAlert(
+                    "Error Dialog", "No Selection",
+                    "No Reservation Selected. Please select a Reservation in the table.");
+        } else {
+            showProductInMode(UIMode.UPDATE);
+        }
     }
 
     @FXML
     public void handleCheckIn() {
         Reservation selectedItem = tableReservation.getSelectionModel().getSelectedItem();
-        if (selectedItem != null) {
+        if (selectedItem == null) {
+            AlertHelper.showErrorAlert(
+                    "Error Dialog", "No Selection",
+                    "No Reservation Selected. Please select a Reservation in the table.");
+        } else {
             try {
                 checkInUseCase.doCheckIn(new CheckInUseCase.RequestModel(selectedItem.getId()));
                 populateTable();
@@ -212,8 +233,13 @@ public class ReservationManagementController {
     @FXML
     public void handleCheckOut() {
         Reservation selectedItem = tableReservation.getSelectionModel().getSelectedItem();
-        if (selectedItem != null) {
-            CheckOutDialog dialog = new CheckOutDialog();
+        if (selectedItem == null) {
+            AlertHelper.showErrorAlert(
+                    "Error Dialog", "No Selection",
+                    "No Reservation Selected. Please select a Reservation in the table.");
+        } else {
+            double totalReservation = selectedItem.calculateTotalToPay();
+            CheckOutDialog dialog = new CheckOutDialog(totalReservation);
             Optional<Pair<String, String>> result = dialog.showAndWait();
 
             result.ifPresent(paymentAndDate -> {
@@ -225,7 +251,7 @@ public class ReservationManagementController {
                                             fromDescription(paymentAndDate.
                                                     getKey()));
 
-                   checkOutUseCase.doCheckOut(requestModel);
+                    checkOutUseCase.doCheckOut(requestModel);
 
                     populateTable();
                 } catch (IllegalStateException e) {
