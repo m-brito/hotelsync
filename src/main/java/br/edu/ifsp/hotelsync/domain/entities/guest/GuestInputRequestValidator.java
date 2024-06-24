@@ -28,7 +28,6 @@ public class GuestInputRequestValidator extends Validator<Guest> {
             notification.addError("Reservation Owner age can't be higher than human lifespan");
         if(guest.getCpf() == null)
             notification.addError("Reservation Owners must register CPF ");
-
         return notification;
     }
 }

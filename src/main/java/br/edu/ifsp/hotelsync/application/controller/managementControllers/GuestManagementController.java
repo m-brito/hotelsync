@@ -93,10 +93,6 @@ public class GuestManagementController {
     private final NavigationHandler navHandler =
             new NavigationHandler();
 
-    private final ExitHandler exitHandler =
-            new ExitHandler();
-
-
     @FXML
     public void initialize() {
         bindTableViewToItemsList();
@@ -157,7 +153,7 @@ public class GuestManagementController {
 
     @FXML
     void handleExit(ActionEvent event) {
-        exitHandler.handleExit(event);
+        new ExitHandler().handleExit(event);
     }
 
     @FXML

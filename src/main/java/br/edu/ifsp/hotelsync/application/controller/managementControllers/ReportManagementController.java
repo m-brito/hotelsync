@@ -1,35 +1,32 @@
 package br.edu.ifsp.hotelsync.application.controller.managementControllers;
 
-import br.edu.ifsp.hotelsync.application.repository.sqlite.dao.SqliteReservationDao;
-import br.edu.ifsp.hotelsync.application.repository.sqlite.dao.SqliteRoomDao;
+import br.edu.ifsp.hotelsync.application.util.AlertHelper;
 import br.edu.ifsp.hotelsync.application.util.ExitHandler;
 import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
-import br.edu.ifsp.hotelsync.domain.entities.product.Product;
 import br.edu.ifsp.hotelsync.domain.entities.report.exporter.Type;
-import br.edu.ifsp.hotelsync.domain.entities.report.formatter.Formatter;
 import br.edu.ifsp.hotelsync.domain.entities.report.formatter.SimpleTextFormatter;
-import br.edu.ifsp.hotelsync.domain.entities.report.records.CheckInReport;
-import br.edu.ifsp.hotelsync.domain.entities.report.records.DailyOccupationReport;
 import br.edu.ifsp.hotelsync.domain.entities.report.records.Exportable;
-import br.edu.ifsp.hotelsync.domain.persistence.dao.ReservationDao;
-import br.edu.ifsp.hotelsync.domain.persistence.dao.RoomDao;
-import br.edu.ifsp.hotelsync.domain.usecases.reports.create.CreateDailyOccupationReportUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reports.create.CreateReportUseCase;
-import br.edu.ifsp.hotelsync.domain.usecases.reports.export.PdfExportUseCaseImpl;
+import br.edu.ifsp.hotelsync.domain.usecases.reports.export.PdfExportUseCase;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
 
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Map;
+import java.util.Objects;
 
-import static br.edu.ifsp.hotelsync.application.main.Main.createCheckInReport;
+import static br.edu.ifsp.hotelsync.application.main.Main.*;
 
 public class ReportManagementController {
     @FXML
@@ -60,7 +57,7 @@ public class ReportManagementController {
     private Button dailyOcuppationButton;
 
     @FXML
-    private TableColumn<Exportable, String> dateColumn;
+    private TableColumn<Map.Entry<LocalDate, ?>, String> dateColumn;
 
     @FXML
     private DatePicker endDatePicker;
@@ -81,12 +78,14 @@ public class ReportManagementController {
     private DatePicker startDatePicker;
 
     @FXML
-    private TableColumn<Exportable, String> valueColumn;
+    private TableColumn<Map.Entry<LocalDate, ?>, String> valueColumn;
 
     @FXML
-    private TableView<Exportable> tableFinancial;
+    private TableView<Map.Entry<LocalDate, ?>> tableFinancial;
 
-    private ObservableList<Exportable> tableData;
+    private ObservableList<Map.Entry<LocalDate, ?>> tableData;
+
+    private Exportable<LocalDate, ?> report;
 
     @FXML
     public void initialize() {
@@ -132,24 +131,84 @@ public class ReportManagementController {
     }
 
     private void bindColumnsToValuesSources() {
-        dateColumn.setCellValueFactory(cell -> {
-            Object cellValue = cell.getValue();
-            if (cellValue instanceof Exportable) {
-                Exportable exportable = (Exportable) cellValue;
-                String key = exportable.getReport().keySet().isEmpty() ? "" : exportable.getReport().keySet().iterator().next().toString();
-                return new SimpleStringProperty(key);
-            } else {
-                // Handle the case when cellValue is not an Exportable
-                return new SimpleStringProperty(cellValue.toString());
-            }
-        });
+        dateColumn.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getKey().toString()));
+        valueColumn.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getValue().toString()));
     }
 
     public void handleCheckInReport(ActionEvent actionEvent) {
-        Exportable report = createCheckInReport.createReport(new CreateReportUseCase.RequestModel(
-                startDatePicker.getValue(),
-                endDatePicker.getValue()));
-        tableData.clear();
-        tableData.addAll(report.getReport().values());
+        try{
+            if(startDatePicker.getValue() == null || endDatePicker.getValue() == null) throw new IllegalArgumentException("Please select a start and end date");
+            Exportable<LocalDate, Integer> report = createCheckInReport.createReport(new CreateReportUseCase.RequestModel(
+                    startDatePicker.getValue(),
+                    endDatePicker.getValue()));
+            this.report = report;
+            tableData.clear();
+            tableData.addAll(report.getReport().entrySet());
+        } catch (Exception e){
+            AlertHelper.showErrorAlert("Error", "Error", e.getMessage());
+        }
+    }
+
+    public void handleCheckOutReport(ActionEvent actionEvent) {
+        try{
+            if(startDatePicker.getValue() == null || endDatePicker.getValue() == null) throw new IllegalArgumentException("Please select a start and end date");
+            Exportable<LocalDate, Integer> report = createCheckOutReport.createReport(new CreateReportUseCase.RequestModel(
+                    startDatePicker.getValue(),
+                    endDatePicker.getValue()));
+            this.report = report;
+            tableData.clear();
+            tableData.addAll(report.getReport().entrySet());
+        } catch (Exception e){
+            AlertHelper.showErrorAlert("Error", "Error", e.getMessage());
+        }
+    }
+
+    public void handleFinancialReport(ActionEvent actionEvent) {
+        try{
+            if(startDatePicker.getValue() == null || endDatePicker.getValue() == null) throw new IllegalArgumentException("Please select a start and end date");
+            Exportable<LocalDate, Double> report = createFinancialReport.createReport(new CreateReportUseCase.RequestModel(
+                    startDatePicker.getValue(),
+                    endDatePicker.getValue()));
+            this.report = report;
+            tableData.clear();
+            tableData.addAll(report.getReport().entrySet());
+        } catch (Exception e){
+            AlertHelper.showErrorAlert("Error", "Error", e.getMessage());
+        }
+    }
+
+    public void handleDailyOcuppationReport(ActionEvent actionEvent) {
+        try{
+            if(startDatePicker.getValue() == null || endDatePicker.getValue() == null) throw new IllegalArgumentException("Please select a start and end date");
+            Exportable<LocalDate, Double> report = createDailyOccupationReport.createReport(new CreateReportUseCase.RequestModel(
+                    startDatePicker.getValue(),
+                    endDatePicker.getValue()));
+            this.report = report;
+            tableData.clear();
+            tableData.addAll(report.getReport().entrySet());
+        } catch (Exception e){
+            AlertHelper.showErrorAlert("Error", "Error", e.getMessage());
+        }
+    }
+
+    public void exportBtn(ActionEvent actionEvent) {
+        try{
+            if(exportTypeCombo.getValue() == null) throw new IllegalArgumentException("Please select a export type");
+            String outputPath = "report.pdf";
+            if (Objects.requireNonNull(exportTypeCombo.getValue()) == Type.PDF) pdfExportUseCase.exportPdf(new PdfExportUseCase.RequestModel(report, new SimpleTextFormatter(), outputPath));
+            pdfExportUseCase.exportPdf(new PdfExportUseCase.RequestModel(report, new SimpleTextFormatter(), outputPath));
+            File pdfFile = new File(outputPath);
+            if (pdfFile.exists()) {
+                if (Desktop.isDesktopSupported()) {
+                    Desktop.getDesktop().open(pdfFile);
+                } else {
+                    throw new IllegalStateException("The PDF file was created but the system does not support opening it.");
+                }
+            } else {
+                throw new IllegalStateException("The PDF file was not created.");
+            }
+        } catch(Exception e) {
+            AlertHelper.showErrorAlert("Error", "Error", e.getMessage());
+        }
     }
 }

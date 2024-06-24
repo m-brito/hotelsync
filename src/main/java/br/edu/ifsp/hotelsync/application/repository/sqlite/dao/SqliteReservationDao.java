@@ -19,10 +19,7 @@ import br.edu.ifsp.hotelsync.domain.persistence.dao.GuestDao;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class SqliteReservationDao implements ReservationDao {
 
@@ -30,14 +27,26 @@ public class SqliteReservationDao implements ReservationDao {
 
     @Override
     public DailyOccupationReport getDailyOccupationReport(LocalDate initialDate, LocalDate finalDate, RoomDao roomRepository) {
-        Map<LocalDate, Double> reports = new HashMap<>();
-        int totalRooms = roomRepository.getTotalRooms();
+        Map<LocalDate, Double> reports = new LinkedHashMap<>();
 
         for (LocalDate date = initialDate; !date.isAfter(finalDate); date = date.plusDays(1)) {
             reports.put(date, 0.0);
         }
 
-        String sql = "SELECT checkInDate, checkOutDate FROM Reservation WHERE (checkInDate BETWEEN ? AND ?) OR (checkOutDate BETWEEN ? AND ?)";
+        String sql = """
+                    SELECT date, (COUNT(*) * 100.0 / (SELECT COUNT(*) FROM Room)) AS occupancy_percentage
+                    FROM (
+                        SELECT checkInDate AS date
+                        FROM Reservation
+                        WHERE checkInDate BETWEEN ? AND ?
+                        UNION ALL
+                        SELECT checkOutDate AS date
+                        FROM Reservation
+                        WHERE checkOutDate BETWEEN ? AND ?
+                    ) AS dates
+                    GROUP BY date
+                    ORDER BY date;
+                """;
 
         try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
             stmt.setString(1, initialDate.format(formatter));
@@ -47,33 +56,27 @@ public class SqliteReservationDao implements ReservationDao {
 
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                String checkInDateString = rs.getString("checkInDate");
-                String checkOutDateString = rs.getString("checkOutDate");
+                String checkInDateString = rs.getString("date");
+                Double occupancy_percentage = Double.parseDouble(rs.getString("occupancy_percentage"));
 
-                if (checkInDateString != null && checkOutDateString != null) {
-                    LocalDate checkInDate = LocalDate.parse(checkInDateString, formatter);
-                    LocalDate checkOutDate = LocalDate.parse(checkOutDateString, formatter);
-
-                    for (LocalDate date = checkInDate; !date.isAfter(checkOutDate); date = date.plusDays(1)) {
-                        Double occupancy = reports.getOrDefault(date, 0.0);
-                        reports.put(date, occupancy + 1);
-                    }
+                if (checkInDateString != null) {
+                    LocalDate date = LocalDate.parse(checkInDateString, formatter);
+                    reports.put(date, occupancy_percentage);
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        reports.replaceAll((date, occupiedRooms) -> (occupiedRooms * 100) / totalRooms);
         return new DailyOccupationReport(reports);
     }
 
 
     @Override
     public CheckInReport getCheckInReport(LocalDate initialDate, LocalDate finalDate) {
-        Map<LocalDate, Integer> reports = new HashMap<>();
+        Map<LocalDate, Integer> reports = new LinkedHashMap<>();
 
-        String sql = "SELECT checkInDate FROM Reservation WHERE checkInDate BETWEEN ? AND ?";
+        String sql = "SELECT checkInDate, COUNT(*) as checkInCount FROM Reservation WHERE checkInDate BETWEEN ? AND ? GROUP BY checkInDate";
 
         for (LocalDate date = initialDate; !date.isAfter(finalDate); date = date.plusDays(1)) {
             reports.put(date, 0);
@@ -86,7 +89,9 @@ public class SqliteReservationDao implements ReservationDao {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 LocalDate checkInDate = LocalDate.parse(rs.getString("checkInDate"), formatter);
-                reports.put(checkInDate, reports.getOrDefault(checkInDate, 0) + 1);
+                int checkInCount = rs.getInt("checkInCount");
+
+                reports.put(checkInDate, checkInCount);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -97,7 +102,7 @@ public class SqliteReservationDao implements ReservationDao {
 
     @Override
     public CheckOutReport getCheckOutReport(LocalDate initialDate, LocalDate finalDate) {
-        Map<LocalDate, Integer> reports = new HashMap<>();
+        Map<LocalDate, Integer> reports = new LinkedHashMap<>();
 
         String sql = "SELECT checkOutDate FROM Reservation WHERE checkOutDate BETWEEN ? AND ?";
 
@@ -123,7 +128,7 @@ public class SqliteReservationDao implements ReservationDao {
 
     @Override
     public FinancialReport getFinancialReport(LocalDate initialDate, LocalDate finalDate) {
-        Map<LocalDate, Double> reports = new HashMap<>();
+        Map<LocalDate, Double> reports = new LinkedHashMap<>();
 
         String sql = "SELECT checkOutDate, paymentValue FROM Reservation WHERE checkOutDate BETWEEN ? AND ? AND reservationStatus = ?";
 
