@@ -28,6 +28,8 @@ import br.edu.ifsp.hotelsync.domain.usecases.product.find.FindOneProductUseCaseI
 import br.edu.ifsp.hotelsync.domain.usecases.product.update.UpdateProductUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.product.update.UpdateProductUseCaseImpl;
 import br.edu.ifsp.hotelsync.domain.usecases.reports.create.*;
+import br.edu.ifsp.hotelsync.domain.usecases.reports.export.PdfExportUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.reports.export.PdfExportUseCaseImpl;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.create.CreateReservationUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.create.CreateReservationUseCaseImpl;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.find.FindAllReservationUseCase;
@@ -73,6 +75,8 @@ public class Main {
     public static CreateReportUseCase createCheckOutReport;
     public static CreateReportUseCase createDailyOccupationReport;
     public static CreateReportUseCase createFinancialReport;
+
+    public static PdfExportUseCase pdfExportUseCase;
 
     public static void main(String[] args) {
         configureInjection();
@@ -120,5 +124,7 @@ public class Main {
         createCheckOutReport = new CreateCheckOutReportUseCase(reservationDao);
         createDailyOccupationReport = new CreateDailyOccupationReportUseCase(roomDao, reservationDao);
         createFinancialReport = new CreateFinancialReportUseCase(reservationDao);
+
+        pdfExportUseCase = new PdfExportUseCaseImpl();
     }
 }

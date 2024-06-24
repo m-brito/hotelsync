@@ -24,9 +24,9 @@ public class OwnerInputRequestValidator extends Validator<Guest> {
             notification.addError("Pronouns is null or empty");
         if(guest.getBirthdate() == null)
             notification.addError("Birthdate is null");
-        if(Period.between(guest.getBirthdate(), LocalDate.now()).getYears() < 18)
+        if(guest.getBirthdate() != null && Period.between(guest.getBirthdate(), LocalDate.now()).getYears() < 18)
             notification.addError(" Reservation Owners must not be under the age of 18");
-        if(Period.between(guest.getBirthdate(), LocalDate.now()).getYears() > 140)
+        if(guest.getBirthdate() != null && Period.between(guest.getBirthdate(), LocalDate.now()).getYears() > 140)
             notification.addError(" Reservation Owner age can't be higher than human lifespan");
         if(guest.getCpf() == null)
             notification.addError(" Reservation Owners must register CPF ");
@@ -34,6 +34,18 @@ public class OwnerInputRequestValidator extends Validator<Guest> {
             notification.addError(" Reservation Owners must register address");
         if(guest.getPhone() == null)
             notification.addError(" Reservation Owners must register phone");
+        if (guest.getAddress() == null)
+            notification.addError("Address is null");
+        if (Validator.isNullOrEmpty(guest.getAddress().getRoad()))
+            notification.addError("Road is null or empty");
+        if (Validator.isNullOrEmpty(guest.getAddress().getCity()))
+            notification.addError("City is null or empty");
+        if (guest.getAddress().getState() == null)
+            notification.addError("State is null");
+        if (Validator.isNullOrEmpty(guest.getAddress().getCep()))
+            notification.addError("Cep is null or empty");
+        if (Validator.isNullOrEmpty(guest.getAddress().getDistrict()))
+            notification.addError("District is null or empty");
         return notification;
     }
 }

@@ -86,8 +86,6 @@ public class GuestController {
     @FXML
     private ComboBox<State> stateGuestCombo;
 
-    private final ExitHandler exitHandler = new ExitHandler();
-
     private final NavigationHandler navHandler = new NavigationHandler();
 
     private Guest guest;
@@ -146,35 +144,28 @@ public class GuestController {
         LocalDate birthdate = birthDateGuestPicker.getValue();
         Cpf cpf = new Cpf(cpfField.getText());
 
-        if (isOwnerInputValid()) {
-            String pronouns = pronounsGuestField.getText();
-            Phone phone = new Phone(phoneField.getText());
-            Address address = new Address(
-                    roadGuestField.getText(),
-                    cityGuestField.getText(),
-                    stateGuestCombo.getValue(),
-                    cepGuestField.getText(),
-                    districtField.getText(),
-                    complementField.getText()
-            );
+        String pronouns = pronounsGuestField.getText();
+        Phone phone = new Phone(phoneField.getText());
+        Address address = new Address(
+                roadGuestField.getText(),
+                cityGuestField.getText(),
+                stateGuestCombo.getValue(),
+                cepGuestField.getText(),
+                districtField.getText(),
+                complementField.getText());
 
-            if (guest == null) {
-                guest = Guest.createOwner(name, pronouns, birthdate, phone, cpf, address);
-            } else {
-                guest.setName(name);
-                guest.setPronouns(pronouns);
-                guest.setBirthdate(birthdate);
-                guest.setPhone(phone);
-                guest.setAddress(address);
-            }
+        if(guest == null) {
+            guest = Guest.createOwner(name, pronouns, birthdate, phone, cpf, address);
+        } else if(isOwnerInputValid()) {
+            guest.setName(name);
+            guest.setPronouns(pronouns);
+            guest.setBirthdate(birthdate);
+            guest.setPhone(phone);
+            guest.setAddress(address);
         } else {
-            if (guest == null) {
-                guest = Guest.createGuest(name, birthdate, cpf);
-            } else {
-                guest.setName(name);
-                guest.setBirthdate(birthdate);
-                guest.setCpf(cpf);
-            }
+            guest.setName(name);
+            guest.setBirthdate(birthdate);
+            guest.setCpf(cpf);
         }
     }
 
@@ -204,25 +195,18 @@ public class GuestController {
             getEntityToView();
             if (guest == null) return;
             if (guest.getId() == null) {
-                if (guest.getPronouns() != null && guest.getPhone() != null && guest.getAddress() != null) {
-                    createGuestUseCase.createOwner(new CreateGuestUseCase.OwnerRequestModel(
-                            guest.getName(),
-                            guest.getPronouns(),
-                            guest.getBirthdate(),
-                            guest.getPhone().getValue(),
-                            guest.getCpf().getValue(),
-                            guest.getAddress().getRoad(),
-                            guest.getAddress().getCity(),
-                            guest.getAddress().getState(),
-                            guest.getAddress().getCep(),
-                            guest.getAddress().getDistrict(),
-                            guest.getAddress().getComplement()));
-                } else {
-                    createGuestUseCase.createGuest(new CreateGuestUseCase.GuestRequestModel(
-                            guest.getName(),
-                            guest.getBirthdate(),
-                            guest.getCpf().getValue()));
-                }
+                createGuestUseCase.createOwner(new CreateGuestUseCase.OwnerRequestModel(
+                        guest.getName(),
+                        guest.getPronouns(),
+                        guest.getBirthdate(),
+                        guest.getPhone().getValue(),
+                        guest.getCpf().getValue(),
+                        guest.getAddress().getRoad(),
+                        guest.getAddress().getCity(),
+                        guest.getAddress().getState(),
+                        guest.getAddress().getCep(),
+                        guest.getAddress().getDistrict(),
+                        guest.getAddress().getComplement()));
             } else {
                 if (guest.getPronouns() != null && guest.getPhone() != null && guest.getAddress() != null) {
                     updateGuestUseCase.updateOwner(new UpdateGuestUseCase.OwnerRequestModel(
@@ -257,7 +241,7 @@ public class GuestController {
 
     @FXML
     void handleExit(ActionEvent event) {
-        exitHandler.handleExit(event);
+        new ExitHandler().handleExit(event);
     }
 
     @FXML

@@ -18,7 +18,7 @@ HotelSync is a hotel management system designed to simplify and streamline the o
 1. Clone the project repository.
 2. Initialize the project in your preferred IDE.
 3. Configure the database according to the documentation.
-4. Run the `HelloApplication` file to start the system.
+4. Run the `Main` file to start the system.
 
 ## Use
 To use HotelSync, follow the on-screen instructions to register guests, rooms and perform other operations. Use the reports generated for analysis and decision-making.
