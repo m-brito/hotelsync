@@ -150,7 +150,7 @@
                   <Label layoutX="5.0" layoutY="20.0" text="Start Date" />
                   <Label layoutX="7.0" layoutY="93.0" text="End Date" />
                   <ComboBox fx:id="exportTypeCombo" layoutX="306.0" layoutY="37.0" prefWidth="150.0" promptText="Export Type" />
-                  <Button id="createRoomButton" fx:id="exportBtn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="326.0" layoutY="80.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="110.0" style="-fx-background-color: #181818;" stylesheets="@../../../css/home.css" text="Export">
+                  <Button id="createRoomButton" fx:id="exportBtn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="326.0" layoutY="80.0" mnemonicParsing="false" onAction="#exportBtn" prefHeight="42.0" prefWidth="110.0" style="-fx-background-color: #181818;" stylesheets="@../../../css/home.css" text="Export">
                      <padding>
                         <Insets left="40.0" />
                      </padding>
