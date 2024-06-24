@@ -1,5 +1,6 @@
 package br.edu.ifsp.hotelsync.application.controller;
 
+import br.edu.ifsp.hotelsync.application.util.DatePickerInitializer;
 import br.edu.ifsp.hotelsync.application.util.ExitHandler;
 import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
 import br.edu.ifsp.hotelsync.application.util.UIMode;
@@ -132,8 +133,14 @@ public class ReservationController {
     @FXML
     public void initialize() {
         ownerReservationCombo.getItems().addAll(findAllGuestUseCase.findAll().values());
-        roomReservationCombo.getItems().addAll(findAllAvailableRoomUseCase.findAllAvailable().values());
+        //TODO fix this
+        //roomReservationCombo.getItems().addAll(findAllAvailableRoomUseCase.findAllAvailable().values());
         productReservationCombo.getItems().addAll(findAllProductUseCase.findAll().values());
+
+        new DatePickerInitializer(startDate, startDate).disablePastDates();
+        startDate.valueProperty().addListener((observable, oldValue, newValue) -> {
+            new DatePickerInitializer(endDate, startDate).disablePastDates();
+        });
     }
 
     public void setEntity(Reservation reservation, UIMode mode) {

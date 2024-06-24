@@ -14,7 +14,7 @@ public class FindAllAvailableRoomUseCaseImpl implements FindAllAvailableRoomUseC
     }
 
     @Override
-    public Map<Long, Room> findAllAvailable() {
-        return repository.findAllAvailable();
+    public Map<Long, Room> findAllAvailable(RequestModel request) {
+        return repository.findAllAvailable(request.initialDate(), request.finalDate());
     }
 }

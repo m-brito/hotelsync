@@ -137,7 +137,7 @@ public class ReportManagementController {
 
     public void handleCheckInReport(ActionEvent actionEvent) {
         try{
-            if(startDatePicker.getValue() == null || endDatePicker.getValue() == null) throw new IllegalArgumentException("Please select a start and end date");
+            if(startDatePicker.getValue() == null || endDatePicker.getValue() == null) throw new IllegalArgumentException("Please, select a Start and End date.");
             Exportable<LocalDate, Integer> report = createCheckInReport.createReport(new CreateReportUseCase.RequestModel(
                     startDatePicker.getValue(),
                     endDatePicker.getValue()));
@@ -151,7 +151,7 @@ public class ReportManagementController {
 
     public void handleCheckOutReport(ActionEvent actionEvent) {
         try{
-            if(startDatePicker.getValue() == null || endDatePicker.getValue() == null) throw new IllegalArgumentException("Please select a start and end date");
+            if(startDatePicker.getValue() == null || endDatePicker.getValue() == null) throw new IllegalArgumentException("Please, select a Start and End date.");
             Exportable<LocalDate, Integer> report = createCheckOutReport.createReport(new CreateReportUseCase.RequestModel(
                     startDatePicker.getValue(),
                     endDatePicker.getValue()));
@@ -165,7 +165,7 @@ public class ReportManagementController {
 
     public void handleFinancialReport(ActionEvent actionEvent) {
         try{
-            if(startDatePicker.getValue() == null || endDatePicker.getValue() == null) throw new IllegalArgumentException("Please select a start and end date");
+            if(startDatePicker.getValue() == null || endDatePicker.getValue() == null) throw new IllegalArgumentException("Please, select a Start and End date.");
             Exportable<LocalDate, Double> report = createFinancialReport.createReport(new CreateReportUseCase.RequestModel(
                     startDatePicker.getValue(),
                     endDatePicker.getValue()));
@@ -179,7 +179,7 @@ public class ReportManagementController {
 
     public void handleDailyOcuppationReport(ActionEvent actionEvent) {
         try{
-            if(startDatePicker.getValue() == null || endDatePicker.getValue() == null) throw new IllegalArgumentException("Please select a start and end date");
+            if(startDatePicker.getValue() == null || endDatePicker.getValue() == null) throw new IllegalArgumentException("Please, select a Start and End date.");
             Exportable<LocalDate, Double> report = createDailyOccupationReport.createReport(new CreateReportUseCase.RequestModel(
                     startDatePicker.getValue(),
                     endDatePicker.getValue()));
@@ -193,7 +193,7 @@ public class ReportManagementController {
 
     public void exportBtn(ActionEvent actionEvent) {
         try{
-            if(exportTypeCombo.getValue() == null) throw new IllegalArgumentException("Please select a export type");
+            if(exportTypeCombo.getValue() == null) throw new IllegalArgumentException("Please, select a export type.");
             String outputPath = "report.pdf";
             if (Objects.requireNonNull(exportTypeCombo.getValue()) == Type.PDF) pdfExportUseCase.exportPdf(new PdfExportUseCase.RequestModel(report, new SimpleTextFormatter(), outputPath));
             pdfExportUseCase.exportPdf(new PdfExportUseCase.RequestModel(report, new SimpleTextFormatter(), outputPath));
@@ -202,7 +202,7 @@ public class ReportManagementController {
                 if (Desktop.isDesktopSupported()) {
                     Desktop.getDesktop().open(pdfFile);
                 } else {
-                    throw new IllegalStateException("The PDF file was created but the system does not support opening it.");
+                    throw new IllegalStateException("The PDF file was created, but the system does not support its opening.");
                 }
             } else {
                 throw new IllegalStateException("The PDF file was not created.");
