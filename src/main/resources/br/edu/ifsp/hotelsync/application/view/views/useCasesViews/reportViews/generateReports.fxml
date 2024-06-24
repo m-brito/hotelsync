@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="1068.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.hotelsync.application.controller.managementControllers.ReportManagementController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="1068.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.hotelsync.application.controller.managementControllers.ReportManagementController">
    <children>
       <VBox prefHeight="666.0" prefWidth="264.0" style="-fx-background-color: #181818;">
          <children>
@@ -115,7 +123,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button id="createRoomButton" fx:id="checkInButton" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="14.0" layoutY="535.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="162.0" style="-fx-background-color: #181818;" stylesheets="@../../../css/home.css" text="Check-In Report">
+            <Button id="createRoomButton" fx:id="checkInButton" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="14.0" layoutY="535.0" mnemonicParsing="false" onAction="#handleCheckInReport" prefHeight="42.0" prefWidth="162.0" style="-fx-background-color: #181818;" stylesheets="@../../../css/home.css" text="Check-In Report">
                <padding>
                   <Insets left="35.0" />
                </padding>
@@ -138,7 +146,7 @@
             <Pane layoutX="142.0" layoutY="60.0" prefHeight="146.0" prefWidth="467.0">
                <children>
                   <DatePicker fx:id="startDatePicker" layoutX="7.0" layoutY="37.0" />
-                  <DatePicker fx:id="endDaePicker" layoutX="7.0" layoutY="109.0" />
+                  <DatePicker fx:id="endDatePicker" layoutX="7.0" layoutY="109.0" />
                   <Label layoutX="5.0" layoutY="20.0" text="Start Date" />
                   <Label layoutX="7.0" layoutY="93.0" text="End Date" />
                   <ComboBox fx:id="exportTypeCombo" layoutX="306.0" layoutY="37.0" prefWidth="150.0" promptText="Export Type" />
