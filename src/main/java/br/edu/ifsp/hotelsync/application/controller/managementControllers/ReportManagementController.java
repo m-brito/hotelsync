@@ -1,30 +1,17 @@
 package br.edu.ifsp.hotelsync.application.controller.managementControllers;
 
-import br.edu.ifsp.hotelsync.application.repository.sqlite.dao.SqliteReservationDao;
-import br.edu.ifsp.hotelsync.application.repository.sqlite.dao.SqliteRoomDao;
 import br.edu.ifsp.hotelsync.application.util.AlertHelper;
 import br.edu.ifsp.hotelsync.application.util.ExitHandler;
 import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
-import br.edu.ifsp.hotelsync.domain.entities.product.Product;
 import br.edu.ifsp.hotelsync.domain.entities.report.exporter.Type;
-import br.edu.ifsp.hotelsync.domain.entities.report.formatter.Formatter;
-import br.edu.ifsp.hotelsync.domain.entities.report.formatter.SimpleTextFormatter;
-import br.edu.ifsp.hotelsync.domain.entities.report.records.CheckInReport;
-import br.edu.ifsp.hotelsync.domain.entities.report.records.DailyOccupationReport;
 import br.edu.ifsp.hotelsync.domain.entities.report.records.Exportable;
-import br.edu.ifsp.hotelsync.domain.persistence.dao.ReservationDao;
-import br.edu.ifsp.hotelsync.domain.persistence.dao.RoomDao;
-import br.edu.ifsp.hotelsync.domain.usecases.reports.create.CreateDailyOccupationReportUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reports.create.CreateReportUseCase;
-import br.edu.ifsp.hotelsync.domain.usecases.reports.create.ReportEntry;
-import br.edu.ifsp.hotelsync.domain.usecases.reports.export.PdfExportUseCaseImpl;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
