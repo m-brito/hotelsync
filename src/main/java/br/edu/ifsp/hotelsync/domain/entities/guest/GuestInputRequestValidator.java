@@ -28,18 +28,6 @@ public class GuestInputRequestValidator extends Validator<Guest> {
             notification.addError("Reservation Owner age can't be higher than human lifespan");
         if(guest.getCpf() == null)
             notification.addError("Reservation Owners must register CPF ");
-        if (guest.getAddress() == null)
-            notification.addError("Address is null");
-        if (Validator.isNullOrEmpty(guest.getAddress().getRoad()))
-            notification.addError("Road is null or empty");
-        if (Validator.isNullOrEmpty(guest.getAddress().getCity()))
-            notification.addError("City is null or empty");
-        if (guest.getAddress().getState() == null)
-            notification.addError("State is null");
-        if (Validator.isNullOrEmpty(guest.getAddress().getCep()))
-            notification.addError("Cep is null or empty");
-        if (Validator.isNullOrEmpty(guest.getAddress().getDistrict()))
-            notification.addError("District is null or empty");
         return notification;
     }
 }
