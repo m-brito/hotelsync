@@ -2,7 +2,10 @@ package br.edu.ifsp.hotelsync.application.util;
 
 import br.edu.ifsp.hotelsync.application.view.Home;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class NavigationHandler {
 
@@ -44,5 +47,15 @@ public class NavigationHandler {
 
     public void navigateToReportPage() throws IOException {
         Home.setRoot("views/useCasesViews/reportViews/generateReports");
+    }
+
+    public void navigateToGithubPage() {
+        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+            try {
+                Desktop.getDesktop().browse(new URI("https://github.com/m-brito/hotelsync"));
+            } catch (IOException | URISyntaxException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
