@@ -137,6 +137,7 @@ public class ReservationController {
     @FXML
     public void initialize() {
         ownerReservationCombo.getItems().addAll(findAllGuestUseCase.findAll().values());
+        productReservationCombo.getItems().addAll(findAllProductUseCase.findAll().values());
 
         disablePastDates(startDate, endDate);
 
