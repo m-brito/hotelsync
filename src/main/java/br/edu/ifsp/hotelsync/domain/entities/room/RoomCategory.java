@@ -1,9 +1,9 @@
 package br.edu.ifsp.hotelsync.domain.entities.room;
 
 public enum RoomCategory {
-    STANDARD("STANDARD", 0.0),
-    EXECUTIVE("EXECUTIVE", 0.0),
-    DELUXE("DELUXE", 0.0);
+    STANDARD("STANDARD", 200.0),
+    EXECUTIVE("EXECUTIVE", 580.0),
+    DELUXE("DELUXE", 800.0);
 
     private final String description;
     private final double basePrice;
