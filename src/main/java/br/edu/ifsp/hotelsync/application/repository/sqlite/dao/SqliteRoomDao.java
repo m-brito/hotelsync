@@ -107,7 +107,18 @@ public class SqliteRoomDao implements RoomDao {
 
     @Override
     public Map<Long, Room> findAllAvailable(LocalDate startDate, LocalDate endDate) {
-        String sql = "SELECT * FROM Room r INNER JOIN Reservation res ON res.roomId = r.id WHERE r.id NOT IN (SELECT roomId FROM Reservation WHERE (startDate >= ? AND startDate <=?) OR (endDate >= ? AND endDate <= ?))";
+        String sql = """
+                SELECT *
+                	FROM Room r
+                	WHERE r.id NOT IN (
+                		SELECT roomId
+                		FROM reservation re
+                		INNER JOIN room ro ON ro.id = re.roomId
+                			WHERE ro.roomStatus != 'AVAILABLE'
+                				AND (startDate >= ? AND startDate <=?)
+                				OR ro.roomStatus != 'AVAILABLE'
+                				AND (endDate >= ? AND endDate <= ?))
+                """;
 
         Map<Long, Room> rooms = new HashMap<>();
         try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
