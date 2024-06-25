@@ -14,10 +14,7 @@ import br.edu.ifsp.hotelsync.domain.persistence.dao.ReservationDao;
 import br.edu.ifsp.hotelsync.domain.persistence.dao.RoomDao;
 import br.edu.ifsp.hotelsync.domain.usecases.guest.create.CreateGuestUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.guest.create.CreateGuestUseCaseImpl;
-import br.edu.ifsp.hotelsync.domain.usecases.guest.find.FindAllGuestUseCase;
-import br.edu.ifsp.hotelsync.domain.usecases.guest.find.FindAllGuestUseCaseImpl;
-import br.edu.ifsp.hotelsync.domain.usecases.guest.find.FindOneGuestUseCase;
-import br.edu.ifsp.hotelsync.domain.usecases.guest.find.FindOneGuestUseCaseImpl;
+import br.edu.ifsp.hotelsync.domain.usecases.guest.find.*;
 import br.edu.ifsp.hotelsync.domain.usecases.guest.update.UpdateGuestUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.guest.update.UpdateGuestUseCaseImpl;
 import br.edu.ifsp.hotelsync.domain.usecases.product.create.CreateProductUseCase;
@@ -50,6 +47,7 @@ import java.time.LocalDate;
 public class Main {
     public static CreateGuestUseCase createGuestUseCase;
     public static FindAllGuestUseCase findAllGuestUseCase;
+    public static FindAllOwnerUseCase findAllOwnerUseCase;
     public static FindOneGuestUseCase findOneGuestUseCase;
     public static UpdateGuestUseCase updateGuestUseCase;
 
@@ -96,6 +94,7 @@ public class Main {
         GuestDao guestDao = new SqliteGuestDao();
         createGuestUseCase = new CreateGuestUseCaseImpl(guestDao);
         findAllGuestUseCase = new FindAllGuestUseCaseImpl(guestDao);
+        findAllOwnerUseCase = new FindAllOwnerUseCaseImpl(guestDao);
         findOneGuestUseCase = new FindOneGuestUseCaseImpl(guestDao);
         updateGuestUseCase = new UpdateGuestUseCaseImpl(guestDao);
 
