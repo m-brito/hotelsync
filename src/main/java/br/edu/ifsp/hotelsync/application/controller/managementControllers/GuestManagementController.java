@@ -21,6 +21,7 @@ import java.time.LocalDate;
 import java.util.Map;
 
 import static br.edu.ifsp.hotelsync.application.main.Main.findAllGuestUseCase;
+import static br.edu.ifsp.hotelsync.application.main.Main.findAllOwnerUseCase;
 
 public class GuestManagementController {
     @FXML
@@ -137,7 +138,7 @@ public class GuestManagementController {
     }
 
     public void populateTable() {
-        Map<Long, Guest> guests = findAllGuestUseCase.findAll();
+        Map<Long, Guest> guests = findAllOwnerUseCase.findAll();
         tableData.clear();
         tableData.addAll(guests.values());
     }
