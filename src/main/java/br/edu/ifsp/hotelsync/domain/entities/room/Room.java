@@ -2,6 +2,8 @@ package br.edu.ifsp.hotelsync.domain.entities.room;
 
 import br.edu.ifsp.hotelsync.domain.usecases.utils.Notification;
 
+import java.text.DecimalFormat;
+
 public class Room {
     private Long id;
     private int number;
@@ -126,6 +128,7 @@ public class Room {
 
     @Override
     public String toString() {
-        return String.valueOf(number);
+        DecimalFormat decimalFormat = new DecimalFormat("R$#,##0.00");
+        return String.format("%s - %s - Daily: %s", number, roomCategory.name(), decimalFormat.format(roomCategory.getBasePrice()));
     }
 }
