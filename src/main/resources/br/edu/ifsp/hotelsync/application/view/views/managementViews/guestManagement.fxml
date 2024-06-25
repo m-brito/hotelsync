@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="1068.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.hotelsync.application.controller.managementControllers.GuestManagementController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="1068.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifsp.hotelsync.application.controller.managementControllers.GuestManagementController">
    <children>
       <VBox prefHeight="666.0" prefWidth="264.0" style="-fx-background-color: #181818;">
          <children>
@@ -127,12 +127,12 @@
                   <Image url="@../../images/search.png" />
                </image>
             </ImageView>
-            <Button id="createRoomButton" fx:id="createGuestButton" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="21.0" layoutY="178.0" mnemonicParsing="false" onAction="#handleCreateGuest" prefHeight="42.0" prefWidth="169.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Create Owner">
+            <Button id="createRoomButton" fx:id="createGuestButton" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="21.0" layoutY="193.0" mnemonicParsing="false" onAction="#handleCreateGuest" prefHeight="42.0" prefWidth="169.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Create Owner">
                <padding>
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button id="updateRoomButton" fx:id="updateGuestButton" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="201.0" layoutY="178.0" mnemonicParsing="false" onAction="#handleUpdateGuest" prefHeight="42.0" prefWidth="169.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Update Owner">
+            <Button id="updateRoomButton" fx:id="updateGuestButton" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="204.0" layoutY="193.0" mnemonicParsing="false" onAction="#handleUpdateGuest" prefHeight="42.0" prefWidth="169.0" style="-fx-background-color: #181818;" stylesheets="@../../css/home.css" text="Update Owner">
                <padding>
                   <Insets left="50.0" />
                </padding>
