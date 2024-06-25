@@ -10,6 +10,7 @@ import br.edu.ifsp.hotelsync.domain.entities.product.Product;
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
 import br.edu.ifsp.hotelsync.domain.entities.room.Room;
 import br.edu.ifsp.hotelsync.domain.usecases.guest.create.CreateGuestUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.guest.update.UpdateGuestUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.create.CreateReservationUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.find.FindOneReservationUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.AddConsumedProductUseCase;
@@ -66,7 +67,10 @@ public class ReservationController {
     private Line separator;
 
     @FXML
-    private Button doneAddGuestBtn;
+    private Button doneSaveGuestBtn;
+
+    @FXML
+    private Button doneDetailGuestBtn;
 
     @FXML
     private Button doneAddProductBtn;
@@ -186,7 +190,8 @@ public class ReservationController {
         birthdatePicker.setVisible(true);
         viewSubtitle.setVisible(true);
         tableGuest.setVisible(true);
-        doneAddGuestBtn.setVisible(true);
+        doneSaveGuestBtn.setVisible(true);
+        doneDetailGuestBtn.setVisible(true);
         viewSubtitle2.setVisible(true);
         productReservationCombo.setVisible(true);
         quantityField.setVisible(true);
@@ -211,14 +216,23 @@ public class ReservationController {
 
     private void populateTable() {
         reservation = findOneReservationUseCase.findOneById(new FindOneReservationUseCase.RequestModel(reservation.getId()));
-        tableGuest.setItems(FXCollections.observableArrayList(reservation.getGuests()));
+        tableData.clear();
+        tableData.addAll(reservation.getGuests());
     }
 
     private void getGuestToView() {
         String name = nameField.getText();
         LocalDate birthdate = birthdatePicker.getValue();
         Cpf cpf = new Cpf(cpfField.getText());
-        guest = Guest.createGuest(name, birthdate, cpf);
+        if(guest== null){
+            guest = Guest.createGuest(name, birthdate, cpf);
+        }
+        else {
+            guest.setName(name);
+            guest.setBirthdate(birthdate);
+            guest.setCpf(cpf);
+        }
+
     }
 
     private void getEntityToView() {
@@ -261,18 +275,37 @@ public class ReservationController {
         }
     }
 
-    private void addGuest() {
+    private void clearFields() {
+        nameField.setText("");
+        cpfField.setText("");
+        birthdatePicker.setValue(null);
+    }
+
+
+    private void saveOrUpdateGuest() {
         try {
             getGuestToView();
             if(guest == null) return;
-            guest.setId(createGuestUseCase.createGuest(new CreateGuestUseCase.GuestRequestModel(
-                    guest.getName(),
-                    guest.getBirthdate(),
-                    guest.getCpf().toString()
-            )));
-            addGuestUseCase.addGuest(new AddGuestUseCase.RequestModel(guest.getId(), reservation.getId()));
-            tableData.add(guest);
+            if(guest.getId()==null){
+                long id = createGuestUseCase.createGuest(new CreateGuestUseCase.GuestRequestModel(
+                        guest.getName(),
+                        guest.getBirthdate(),
+                        guest.getCpf().toString()
+                ));
+                addGuestUseCase.addGuest(new AddGuestUseCase.RequestModel(id, reservation.getId()));
+            }
+            else {
+                updateGuestUseCase.updateGuest(new UpdateGuestUseCase.GuestRequestModel(
+                        guest.getId(),
+                        guest.getName(),
+                        guest.getBirthdate(),
+                        guest.getCpf().toString()
+                ));
+                guest = null;
+                doneSaveGuestBtn.setText("Save");
+            }
             populateTable();
+            clearFields();
         } catch (Exception e) {
             showErrorAlert(e.getMessage());
         }
@@ -321,9 +354,9 @@ public class ReservationController {
     void handleCancelAddGuestBtn(ActionEvent event) throws IOException {
         navHandler.navigateToReservationManagementPage();
     }
-
-    public void addGuestBtn(ActionEvent actionEvent) {
-        addGuest();
+    @FXML
+    public void saveGuestBtn(ActionEvent actionEvent) {
+        saveOrUpdateGuest();
     }
 
     public void addProductBtn(ActionEvent actionEvent) {
@@ -336,6 +369,20 @@ public class ReservationController {
             quantityField.clear();
         } catch (Exception e) {
             showErrorAlert(e.getMessage());
+        }
+    }
+
+    public void detailGuestBtn(ActionEvent actionEvent) {
+        Guest selectedGuest = tableGuest.getSelectionModel().getSelectedItem();
+        if (selectedGuest != null) {
+            guest = selectedGuest;
+            nameField.setText(selectedGuest.getName());
+            cpfField.setText(selectedGuest.getCpf().toString());
+            birthdatePicker.setValue(selectedGuest.getBirthdate());
+            doneSaveGuestBtn.setText("Update");
+        }
+        else {
+            showErrorAlert("No guest selected");
         }
     }
 }
