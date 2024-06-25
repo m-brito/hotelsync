@@ -96,15 +96,13 @@ public class ReservationManagementController {
 
     private ObservableList<Reservation> tableData;
 
-    private DateFormatter dateFormatter;
+    private final DateFormatter dateFormatter = new DateFormatter("dd/MM/yyyy");
 
     @FXML
     public void initialize() {
-        dateFormatter = new DateFormatter("dd/MM/yyyy");
         bindTableViewToItemsList();
         bindColumnsToValuesSources();
         populateTable();
-
     }
 
     private void bindTableViewToItemsList() {

@@ -1,6 +1,5 @@
 package br.edu.ifsp.hotelsync.application.controller;
 
-import br.edu.ifsp.hotelsync.application.util.DatePickerInitializer;
 import br.edu.ifsp.hotelsync.application.util.ExitHandler;
 import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
 import br.edu.ifsp.hotelsync.application.util.UIMode;
@@ -15,6 +14,7 @@ import br.edu.ifsp.hotelsync.domain.usecases.reservation.create.CreateReservatio
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.find.FindOneReservationUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.AddConsumedProductUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.AddGuestUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.room.find.FindAllAvailableRoomUseCase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -137,13 +137,51 @@ public class ReservationController {
     @FXML
     public void initialize() {
         ownerReservationCombo.getItems().addAll(findAllGuestUseCase.findAll().values());
-        //TODO fix this
-        //roomReservationCombo.getItems().addAll(findAllAvailableRoomUseCase.findAllAvailable().values());
-        productReservationCombo.getItems().addAll(findAllProductUseCase.findAll().values());
 
-        new DatePickerInitializer(startDate, startDate).disablePastDates();
+        disablePastDates(startDate, endDate);
+
         startDate.valueProperty().addListener((observable, oldValue, newValue) -> {
-            new DatePickerInitializer(endDate, startDate).disablePastDates();
+            endDate.setValue(null);
+            updateRoomReservationCombo();
+        });
+
+        endDate.valueProperty().addListener((observable, oldValue, newValue) -> updateRoomReservationCombo());
+    }
+
+    private void updateRoomReservationCombo() {
+        roomReservationCombo.getItems().clear();
+        LocalDate start = startDate.getValue();
+        LocalDate end = endDate.getValue();
+        if (start != null && end != null) {
+            roomReservationCombo.setDisable(false);
+            try {
+                roomReservationCombo.getItems().addAll(findAllAvailableRoomUseCase.findAllAvailable(new FindAllAvailableRoomUseCase.RequestModel(start, end)).values());
+            } catch (Exception e) {
+                showErrorAlert(e.getMessage());
+            }
+        } else {
+            roomReservationCombo.setDisable(true);
+        }
+    }
+
+    private void disablePastDates(DatePicker startDatePicker, DatePicker endDatePicker) {
+        LocalDate today = LocalDate.now();
+
+        startDatePicker.setDayCellFactory(picker -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                setDisable(empty || date.isBefore(today));
+            }
+        });
+
+        endDatePicker.setDayCellFactory(picker -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                LocalDate startDate = startDatePicker.getValue() != null ? startDatePicker.getValue().plusDays(1) : today;
+                setDisable(empty || date.isBefore(startDate));
+            }
         });
     }
 
