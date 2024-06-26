@@ -50,12 +50,6 @@ public class InMemoryRoomDao implements RoomDao {
                 .collect(Collectors.toMap(Room::getId, Function.identity()));
     }
 
-
-    @Override
-    public void deleteByKey(Long id) {
-        rooms.remove(id);
-    }
-
     @Override
     public Room resultSetToEntity(ResultSet resultSet) throws SQLException {
         return null;

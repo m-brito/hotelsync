@@ -48,11 +48,6 @@ public class InMemoryReservationDao implements ReservationDao {
     }
 
     @Override
-    public void deleteByKey(Long id) {
-        reservations.remove(id);
-    }
-
-    @Override
     public Reservation resultSetToEntity(ResultSet resultSet) throws SQLException {
         return null;
     }
