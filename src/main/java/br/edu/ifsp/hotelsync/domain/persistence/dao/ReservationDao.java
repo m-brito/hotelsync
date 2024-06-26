@@ -10,6 +10,7 @@ import br.edu.ifsp.hotelsync.domain.entities.report.records.FinancialReport;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 public interface ReservationDao extends Dao<Long, Reservation> {
     DailyOccupationReport getDailyOccupationReport(LocalDate initialDate, LocalDate finalDate, RoomDao roomRepository);
@@ -20,4 +21,5 @@ public interface ReservationDao extends Dao<Long, Reservation> {
 
     FinancialReport getFinancialReport(LocalDate initialDate, LocalDate finalDate);
 
+    Map<Long, Reservation> findAllByOwner(String name);
 }
