@@ -42,6 +42,7 @@ public class Main {
     public static CreateGuestUseCase createGuestUseCase;
     public static FindAllGuestUseCase findAllGuestUseCase;
     public static FindAllOwnerUseCase findAllOwnerUseCase;
+    public static FindAllOwnerByNameUseCase findAllOwnerByNameUseCase;
     public static FindOneGuestUseCase findOneGuestUseCase;
     public static UpdateGuestUseCase updateGuestUseCase;
 
@@ -91,6 +92,7 @@ public class Main {
         createGuestUseCase = new CreateGuestUseCaseImpl(guestDao);
         findAllGuestUseCase = new FindAllGuestUseCaseImpl(guestDao);
         findAllOwnerUseCase = new FindAllOwnerUseCaseImpl(guestDao);
+        findAllOwnerByNameUseCase = new FindAllOwnerByNameUseCaseImpl(guestDao);
         findOneGuestUseCase = new FindOneGuestUseCaseImpl(guestDao);
         updateGuestUseCase = new UpdateGuestUseCaseImpl(guestDao);
 
