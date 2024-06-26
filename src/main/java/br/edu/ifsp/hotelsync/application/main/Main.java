@@ -48,6 +48,7 @@ public class Main {
 
     public static CreateRoomUseCase createRoomUseCase;
     public static FindAllRoomUseCase findAllRoomUseCase;
+    public static FindAllRoomByNumberUseCase findAllRoomByNumberUseCase;
     public static FindAllAvailableRoomUseCase findAllAvailableRoomUseCase;
     public static FindOneRoomUseCase findOneRoomUseCase;
     public static UpdateRoomUseCase updateRoomUseCase;
@@ -99,6 +100,7 @@ public class Main {
         RoomDao roomDao = new SqliteRoomDao() ;
         createRoomUseCase = new CreateRoomUseCaseImpl(roomDao);
         findAllRoomUseCase = new FindAllRoomUseCaseImpl(roomDao);
+        findAllRoomByNumberUseCase = new FindAllRoomByNumberUseCaseImpl(roomDao);
         findAllAvailableRoomUseCase = new FindAllAvailableRoomUseCaseImpl(roomDao);
         findOneRoomUseCase = new FindOneRoomUseCaseImpl(roomDao);
         updateRoomUseCase = new UpdateRoomUseCaseImpl(roomDao);
