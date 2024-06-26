@@ -165,7 +165,7 @@
                   <Font name="System Bold" size="10.0" />
                </font>
             </Label>
-            <Label layoutX="218.0" layoutY="108.0" text="CeckIn">
+            <Label layoutX="218.0" layoutY="108.0" text="CheckIn">
                <font>
                   <Font name="System Bold" size="10.0" />
                </font>
@@ -175,7 +175,7 @@
                   <Font name="System Bold" size="10.0" />
                </font>
             </Label>
-            <Label layoutX="583.0" layoutY="108.0" text="CehckOut">
+            <Label layoutX="583.0" layoutY="108.0" text="CheckOut">
                <font>
                   <Font name="System Bold" size="10.0" />
                </font>
@@ -190,7 +190,7 @@
                   <Font name="System Bold" size="10.0" />
                </font>
             </Label>
-            <Label fx:id="viewSubtitle2" layoutX="538.0" layoutY="203.0" text="Products for consume" textFill="#eda420" visible="false">
+            <Label fx:id="viewSubtitle2" layoutX="538.0" layoutY="203.0" text="Products for consumption" textFill="#eda420" visible="false">
                <font>
                   <Font size="24.0" />
                </font>
