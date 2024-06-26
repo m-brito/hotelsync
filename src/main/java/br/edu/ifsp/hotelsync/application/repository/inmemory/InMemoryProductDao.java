@@ -43,11 +43,6 @@ public class InMemoryProductDao implements ProductDao {
     }
 
     @Override
-    public void deleteByKey(Long id) {
-        products.remove(id);
-    }
-
-    @Override
     public Product resultSetToEntity(ResultSet resultSet) throws SQLException {
         return null;
     }

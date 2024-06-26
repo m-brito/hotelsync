@@ -115,18 +115,6 @@ public class SqliteProductDao implements ProductDao {
         return consumedProducts;
     }
 
-
-    @Override
-    public void deleteByKey(Long id) {
-        String sql = "DELETE FROM Product WHERE id = ?";
-        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
-            stmt.setLong(1, id);
-            stmt.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public Product resultSetToEntity(ResultSet resultSet) throws SQLException {
         long id = resultSet.getLong("id");

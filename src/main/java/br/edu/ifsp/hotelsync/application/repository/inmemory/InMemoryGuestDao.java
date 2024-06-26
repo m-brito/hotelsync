@@ -42,11 +42,6 @@ public class InMemoryGuestDao implements GuestDao {
     }
 
     @Override
-    public void deleteByKey(Long id) {
-        guests.remove(id);
-    }
-
-    @Override
     public Guest resultSetToEntity(ResultSet resultSet) throws SQLException {
         return null;
     }

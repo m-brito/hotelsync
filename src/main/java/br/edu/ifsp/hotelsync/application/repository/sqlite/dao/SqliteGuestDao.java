@@ -155,17 +155,6 @@ public class SqliteGuestDao implements GuestDao {
     }
 
     @Override
-    public void deleteByKey(Long id) {
-        String sql = "DELETE FROM Guest WHERE id = ?";
-        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
-            stmt.setLong(1, id);
-            stmt.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
     public Guest resultSetToEntity(ResultSet resultSet) throws SQLException {
         long id = resultSet.getLong("id");
         String name = resultSet.getString("name");
