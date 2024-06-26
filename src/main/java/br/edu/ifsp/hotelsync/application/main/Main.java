@@ -19,10 +19,7 @@ import br.edu.ifsp.hotelsync.domain.usecases.guest.update.UpdateGuestUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.guest.update.UpdateGuestUseCaseImpl;
 import br.edu.ifsp.hotelsync.domain.usecases.product.create.CreateProductUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.product.create.CreateProductUseCaseImpl;
-import br.edu.ifsp.hotelsync.domain.usecases.product.find.FindAllProductUseCase;
-import br.edu.ifsp.hotelsync.domain.usecases.product.find.FindAllProductUseCaseImpl;
-import br.edu.ifsp.hotelsync.domain.usecases.product.find.FindOneProductUseCase;
-import br.edu.ifsp.hotelsync.domain.usecases.product.find.FindOneProductUseCaseImpl;
+import br.edu.ifsp.hotelsync.domain.usecases.product.find.*;
 import br.edu.ifsp.hotelsync.domain.usecases.product.update.UpdateProductUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.product.update.UpdateProductUseCaseImpl;
 import br.edu.ifsp.hotelsync.domain.usecases.reports.create.*;
@@ -56,6 +53,7 @@ public class Main {
 
     public static CreateProductUseCase createProductUseCase;
     public static FindAllProductUseCase findAllProductUseCase;
+    public static FindAllProductByNameUseCase findAllProductByNameUseCase;
     public static FindOneProductUseCase findOneProductUseCase;
     public static UpdateProductUseCase updateProductUseCase;
 
@@ -106,6 +104,7 @@ public class Main {
         ProductDao productDao = new SqliteProductDao();
         createProductUseCase = new CreateProductUseCaseImpl(productDao);
         findAllProductUseCase = new FindAllProductUseCaseImpl(productDao);
+        findAllProductByNameUseCase = new FindAllProductByNameUseCaseImpl(productDao);
         findOneProductUseCase = new FindOneProductUseCaseImpl(productDao);
         updateProductUseCase = new UpdateProductUseCaseImpl(productDao);
 
