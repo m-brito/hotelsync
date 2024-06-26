@@ -30,10 +30,7 @@ import br.edu.ifsp.hotelsync.domain.usecases.reports.export.PdfExportUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reports.export.PdfExportUseCaseImpl;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.create.CreateReservationUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.create.CreateReservationUseCaseImpl;
-import br.edu.ifsp.hotelsync.domain.usecases.reservation.find.FindAllReservationUseCase;
-import br.edu.ifsp.hotelsync.domain.usecases.reservation.find.FindAllReservationUseCaseImpl;
-import br.edu.ifsp.hotelsync.domain.usecases.reservation.find.FindOneReservationUseCase;
-import br.edu.ifsp.hotelsync.domain.usecases.reservation.find.FindOneReservationUseCaseImpl;
+import br.edu.ifsp.hotelsync.domain.usecases.reservation.find.*;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.implementation.*;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.*;
 import br.edu.ifsp.hotelsync.domain.usecases.room.create.CreateRoomUseCase;
@@ -64,6 +61,7 @@ public class Main {
 
     public static CreateReservationUseCase createReservationUseCase;
     public static FindAllReservationUseCase findAllReservationUseCase;
+    public static FindAllReservationByOwnerUseCase findAllReservationByOwnerUseCase;
     public static FindOneReservationUseCase findOneReservationUseCase;
     public static AddConsumedProductUseCase addConsumedProductUseCase;
     public static AddGuestUseCase addGuestUseCase;
@@ -114,6 +112,7 @@ public class Main {
         ReservationDao reservationDao = new SqliteReservationDao();
         createReservationUseCase = new CreateReservationUseCaseImpl(reservationDao);
         findAllReservationUseCase = new FindAllReservationUseCaseImpl(reservationDao);
+        findAllReservationByOwnerUseCase = new FindAllReservationByOwnerUseCaseImpl(reservationDao);
         findOneReservationUseCase = new FindOneReservationUseCaseImpl(reservationDao);
         addConsumedProductUseCase = new AddConsumedProductUseCaseImpl(productDao, reservationDao);
         addGuestUseCase = new AddGuestUseCaseImpl(guestDao, reservationDao);
