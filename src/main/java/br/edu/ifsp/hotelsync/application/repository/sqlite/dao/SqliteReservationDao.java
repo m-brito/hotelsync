@@ -39,10 +39,8 @@ public class SqliteReservationDao implements ReservationDao {
                         SELECT checkInDate AS date
                         FROM Reservation
                         WHERE checkInDate BETWEEN ? AND ?
-                        UNION ALL
-                        SELECT checkOutDate AS date
-                        FROM Reservation
-                        WHERE checkOutDate BETWEEN ? AND ?
+                        AND checkOutDate IS NULL
+                        OR checkInDate BETWEEN ? AND ? AND checkOutDate BETWEEN checkInDate+1 AND ?
                     ) AS dates
                     GROUP BY date
                     ORDER BY date;
@@ -53,6 +51,7 @@ public class SqliteReservationDao implements ReservationDao {
             stmt.setString(2, finalDate != null ? finalDate.format(formatter) : null);
             stmt.setString(3, initialDate.format(formatter));
             stmt.setString(4, finalDate != null ? finalDate.format(formatter) : null);
+            stmt.setString(5, finalDate != null ? finalDate.format(formatter) : null);
 
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -130,7 +129,7 @@ public class SqliteReservationDao implements ReservationDao {
     public FinancialReport getFinancialReport(LocalDate initialDate, LocalDate finalDate) {
         Map<LocalDate, Double> reports = new LinkedHashMap<>();
 
-        String sql = "SELECT checkOutDate, paymentValue FROM Reservation WHERE checkOutDate BETWEEN ? AND ? AND reservationStatus = ?";
+        String sql = "SELECT checkOutDate, SUM(paymentValue) as paymentValue FROM Reservation WHERE checkOutDate BETWEEN ? AND ? AND reservationStatus = ? GROUP BY checkOutDate";
 
         for (LocalDate date = initialDate; !date.isAfter(finalDate); date = date.plusDays(1)) {
             reports.put(date, 0.0);
@@ -146,7 +145,7 @@ public class SqliteReservationDao implements ReservationDao {
                 LocalDate checkOutDate = LocalDate.parse(rs.getString("checkOutDate"), formatter);
                 double paymentValue = rs.getDouble("paymentValue");
 
-                reports.put(checkOutDate, reports.getOrDefault(checkOutDate, 0.0) + paymentValue);
+                reports.put(checkOutDate, paymentValue);
             }
         } catch (SQLException e) {
             e.printStackTrace();
