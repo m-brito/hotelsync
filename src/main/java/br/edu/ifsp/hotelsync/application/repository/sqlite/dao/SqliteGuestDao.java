@@ -142,7 +142,7 @@ public class SqliteGuestDao implements GuestDao {
         Map<Long, Guest> guests = new LinkedHashMap<>();
 
         try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
-            stmt.setString(1, name.toUpperCase());
+            stmt.setString(1, "%" + name.toUpperCase() + "%");
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Guest guest = resultSetToEntity(rs);
