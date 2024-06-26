@@ -252,6 +252,24 @@ public class SqliteReservationDao implements ReservationDao {
     }
 
     @Override
+    public Map<Long, Reservation> findAllByOwner(String name) {
+        String sql = "SELECT r.* FROM Reservation r INNER JOIN Guest g ON r.ownerId = g.id WHERE g.name LIKE ?";
+        Map<Long, Reservation> reservations = new HashMap<>();
+
+        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
+            stmt.setString(1, "%" + name + "%");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Reservation reservation = resultSetToEntity(rs);
+                reservations.put(reservation.getId(), reservation);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reservations;
+    }
+
+    @Override
     public Reservation resultSetToEntity(ResultSet resultSet) throws SQLException {
         long id = resultSet.getLong("id");
         LocalDate startDate = resultSet.getString("startDate") != null ? LocalDate.parse(resultSet.getString("startDate"), formatter) : null;
