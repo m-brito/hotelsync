@@ -127,6 +127,15 @@ public class RoomManagementController {
             new NavigationHandler();
 
     @FXML
+    public void handleImageClick(MouseEvent mouseEvent) {
+        Map<Long, Room> rooms = findAllRoomByNumberUseCase.findAllByNumber(
+                new FindAllRoomByNumberUseCase.RequestModel(Integer.parseInt(searchRoom.getText())));
+        searchRoom.setText("");
+        tableData.clear();
+        tableData.addAll(rooms.values());
+    }
+
+    @FXML
     void handleExit(ActionEvent event) {
         new ExitHandler().handleExit(event);
     }
@@ -163,14 +172,5 @@ public class RoomManagementController {
 
     public void handleUpdateRoom(ActionEvent actionEvent) throws IOException {
         showProductInMode(UIMode.UPDATE);
-    }
-
-    @FXML
-    public void handleImageClick(MouseEvent mouseEvent) {
-        Map<Long, Room> rooms = findAllRoomByNumberUseCase.findAllByNumber(
-                new FindAllRoomByNumberUseCase.RequestModel(Integer.parseInt(searchRoom.getText())));
-        searchRoom.setText("");
-        tableData.clear();
-        tableData.addAll(rooms.values());
     }
 }

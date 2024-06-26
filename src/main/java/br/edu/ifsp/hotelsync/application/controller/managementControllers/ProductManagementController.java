@@ -94,6 +94,15 @@ public class ProductManagementController {
         }
     }
 
+    @FXML
+    public void handleImageClick(MouseEvent mouseEvent) {
+        Map<Long, Product> products = findAllProductByNameUseCase.findAllByName(
+                new FindAllProductByNameUseCase.RequestModel(searchProduct.getText()));
+        searchProduct.setText("");
+        tableData.clear();
+        tableData.addAll(products.values());
+    }
+
     public void populateTable() {
         Map<Long, Product> products = findAllProductUseCase.findAll();
         tableData.clear();
@@ -138,15 +147,5 @@ public class ProductManagementController {
     @FXML
     public void handleUpdateProduct(ActionEvent actionEvent) throws IOException {
         showProductInMode(UIMode.UPDATE);
-    }
-
-    @FXML
-    public void handleImageClick(MouseEvent mouseEvent) {
-        Map<Long, Product> products = findAllProductByNameUseCase.findAllByName(
-                new FindAllProductByNameUseCase.RequestModel(searchProduct.getText()));
-        searchProduct.setText("");
-        System.out.println(products.size());
-        tableData.clear();
-        tableData.addAll(products.values());
     }
 }

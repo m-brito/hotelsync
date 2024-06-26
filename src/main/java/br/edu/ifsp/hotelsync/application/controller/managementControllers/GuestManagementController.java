@@ -156,6 +156,15 @@ public class GuestManagementController {
     }
 
     @FXML
+    public void handleImageClick(MouseEvent mouseEvent) {
+        Map<Long, Guest> guests = findAllOwnerByNameUseCase.findAllByName(
+                new FindAllOwnerByNameUseCase.RequestModel(searchGuest.getText()));
+        searchGuest.setText("");
+        tableData.clear();
+        tableData.addAll(guests.values());
+    }
+
+    @FXML
     public void handleUpdateGuest(ActionEvent actionEvent) throws IOException {
         showGuestInMode(UIMode.UPDATE);
     }
@@ -193,14 +202,5 @@ public class GuestManagementController {
     @FXML
     public void handleCreateGuest(ActionEvent actionEvent) throws IOException {
         navHandler.navigateToGuestPage();
-    }
-
-    @FXML
-    public void handleImageClick(MouseEvent mouseEvent) {
-        Map<Long, Guest> guests = findAllOwnerByNameUseCase.findAllByName(
-                new FindAllOwnerByNameUseCase.RequestModel(searchGuest.getText()));
-        searchGuest.setText("");
-        tableData.clear();
-        tableData.addAll(guests.values());
     }
 }
