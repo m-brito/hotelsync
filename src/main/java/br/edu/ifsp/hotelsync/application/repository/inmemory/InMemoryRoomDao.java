@@ -51,7 +51,7 @@ public class InMemoryRoomDao implements RoomDao {
     }
 
     @Override
-    public Map<Long, Room> findAllByNumber(int number) {
+    public Map<Long, Room> findAllByNumber(String number) {
         return Map.of();
     }
 

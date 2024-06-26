@@ -106,7 +106,7 @@ public class SqliteRoomDao implements RoomDao {
     }
 
     @Override
-    public Map<Long, Room> findAllByNumber(int number) {
+    public Map<Long, Room> findAllByNumber(String number) {
         String sql = "SELECT * FROM Room WHERE number LIKE ?";
         Map<Long, Room> rooms = new HashMap<>();
         try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {

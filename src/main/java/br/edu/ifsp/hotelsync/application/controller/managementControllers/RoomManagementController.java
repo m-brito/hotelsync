@@ -1,6 +1,7 @@
 package br.edu.ifsp.hotelsync.application.controller.managementControllers;
 
 import br.edu.ifsp.hotelsync.application.controller.RoomController;
+import br.edu.ifsp.hotelsync.application.util.AlertHelper;
 import br.edu.ifsp.hotelsync.application.util.ExitHandler;
 import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
 import br.edu.ifsp.hotelsync.application.util.UIMode;
@@ -22,6 +23,7 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.Objects;
 
 import static br.edu.ifsp.hotelsync.application.main.Main.*;
 
@@ -126,11 +128,27 @@ public class RoomManagementController {
 
     @FXML
     public void handleImageClick(MouseEvent mouseEvent) {
-        Map<Long, Room> rooms = findAllRoomByNumberUseCase.findAllByNumber(
-                new FindAllRoomByNumberUseCase.RequestModel(Integer.parseInt(searchRoom.getText())));
-        searchRoom.setText("");
-        tableData.clear();
-        tableData.addAll(rooms.values());
+        if(isNumeric(searchRoom.getText()) || Objects.equals(searchRoom.getText(), "")) {
+            Map<Long, Room> rooms = findAllRoomByNumberUseCase.findAllByNumber(
+                    new FindAllRoomByNumberUseCase.RequestModel(searchRoom.getText()));
+            searchRoom.setText("");
+            tableData.clear();
+            tableData.addAll(rooms.values());
+        } else {
+            AlertHelper.showErrorAlert("Warning", "Warning", "It must be a number");
+        }
+    }
+
+    public static boolean isNumeric(String str) {
+        if (str == null) {
+            return false;
+        }
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     @FXML
