@@ -139,17 +139,6 @@ public class SqliteRoomDao implements RoomDao {
     }
 
     @Override
-    public void deleteByKey(Long id) {
-        String sql = "DELETE FROM Room WHERE id = ?";
-        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
-            stmt.setLong(1, id);
-            stmt.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
     public Room resultSetToEntity(ResultSet resultSet) throws SQLException {
         long id = resultSet.getLong("id");
         int number = resultSet.getInt("number");

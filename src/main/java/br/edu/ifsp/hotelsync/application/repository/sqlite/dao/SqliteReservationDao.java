@@ -257,17 +257,6 @@ public class SqliteReservationDao implements ReservationDao {
     }
 
     @Override
-    public void deleteByKey(Long id) {
-        String sql = "DELETE FROM Reservation WHERE id = ?";
-        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
-            stmt.setLong(1, id);
-            stmt.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
     public Reservation resultSetToEntity(ResultSet resultSet) throws SQLException {
         long id = resultSet.getLong("id");
         LocalDate startDate = resultSet.getString("startDate") != null ? LocalDate.parse(resultSet.getString("startDate"), formatter) : null;
