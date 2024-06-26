@@ -6,18 +6,22 @@ import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
 import br.edu.ifsp.hotelsync.application.util.UIMode;
 import br.edu.ifsp.hotelsync.application.view.Home;
 import br.edu.ifsp.hotelsync.domain.entities.product.Product;
+import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
+import br.edu.ifsp.hotelsync.domain.usecases.product.find.FindAllProductByNameUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.reservation.find.FindAllReservationByOwnerUseCase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.util.Map;
 
-import static br.edu.ifsp.hotelsync.application.main.Main.findAllProductUseCase;
+import static br.edu.ifsp.hotelsync.application.main.Main.*;
 
 public class ProductManagementController {
     @FXML
@@ -134,5 +138,15 @@ public class ProductManagementController {
     @FXML
     public void handleUpdateProduct(ActionEvent actionEvent) throws IOException {
         showProductInMode(UIMode.UPDATE);
+    }
+
+    @FXML
+    public void handleImageClick(MouseEvent mouseEvent) {
+        Map<Long, Product> products = findAllProductByNameUseCase.findAllByName(
+                new FindAllProductByNameUseCase.RequestModel(searchProduct.getText()));
+        searchProduct.setText("");
+        System.out.println(products.size());
+        tableData.clear();
+        tableData.addAll(products.values());
     }
 }
