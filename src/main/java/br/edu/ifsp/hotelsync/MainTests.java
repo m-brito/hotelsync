@@ -61,7 +61,7 @@ public class MainTests {
 
         CreateGuestUseCase createGuestUseCase = new CreateGuestUseCaseImpl(guestDao);
         CreateProductUseCase createProductUseCase = new CreateProductUseCaseImpl(productDao);
-        CreateReservationUseCase createReservationUseCase = new CreateReservationUseCaseImpl(reservationDao);
+        CreateReservationUseCase createReservationUseCase = new CreateReservationUseCaseImpl(reservationDao,roomDao);
         CreateRoomUseCase createRoomUseCase = new CreateRoomUseCaseImpl(roomDao);
         CreateDailyOccupationReportUseCase createDailyOccupationReportUseCase = new CreateDailyOccupationReportUseCase(roomDao, reservationDao);
         CheckInUseCaseImpl checkInUseCase = new CheckInUseCaseImpl(reservationDao, roomDao);

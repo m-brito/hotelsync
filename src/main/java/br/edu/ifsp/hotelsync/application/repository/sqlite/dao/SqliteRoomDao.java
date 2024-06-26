@@ -90,6 +90,21 @@ public class SqliteRoomDao implements RoomDao {
     }
 
     @Override
+    public boolean existsByNumber(int number) {
+        String sql = "SELECT count(*) FROM Room WHERE number = ?";
+        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
+            stmt.setInt(1, number);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
     public Map<Long, Room> findAll() {
         String sql = "SELECT * FROM Room";
         Map<Long, Room> rooms = new HashMap<>();

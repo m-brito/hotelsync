@@ -112,7 +112,7 @@ public class Main {
         updateProductUseCase = new UpdateProductUseCaseImpl(productDao);
 
         ReservationDao reservationDao = new SqliteReservationDao();
-        createReservationUseCase = new CreateReservationUseCaseImpl(reservationDao);
+        createReservationUseCase = new CreateReservationUseCaseImpl(reservationDao,roomDao);
         findAllReservationUseCase = new FindAllReservationUseCaseImpl(reservationDao);
         findOneReservationUseCase = new FindOneReservationUseCaseImpl(reservationDao);
         addConsumedProductUseCase = new AddConsumedProductUseCaseImpl(productDao, reservationDao);

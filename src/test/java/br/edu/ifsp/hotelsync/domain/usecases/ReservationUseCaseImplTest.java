@@ -7,6 +7,7 @@ import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
 import br.edu.ifsp.hotelsync.domain.entities.room.Room;
 import br.edu.ifsp.hotelsync.domain.entities.room.RoomCategory;
 import br.edu.ifsp.hotelsync.domain.persistence.dao.ReservationDao;
+import br.edu.ifsp.hotelsync.domain.persistence.dao.RoomDao;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.create.CreateReservationUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.create.CreateReservationUseCaseImpl;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.find.FindOneReservationUseCase;
@@ -38,6 +39,8 @@ class ReservationUseCaseImplTest {
     @Mock
     ReservationDao repository;
     @Mock
+    RoomDao roomRepository;
+    @Mock
     Guest owner;
     @Mock
     Room room;
@@ -52,7 +55,7 @@ class ReservationUseCaseImplTest {
 
         @BeforeEach
         void setUp(){
-            sut = new CreateReservationUseCaseImpl(repository);
+            sut = new CreateReservationUseCaseImpl(repository, roomRepository);
             beginOfReservation = LocalDate.now();
 
             endDate = beginOfReservation.plusDays(faker.number().numberBetween(1, 5));
@@ -66,12 +69,15 @@ class ReservationUseCaseImplTest {
             @DisplayName("Reservation is valid")
             public void createValidReservation(){
 
+
                 CreateReservationUseCase.RequestModel request = new CreateReservationUseCase.RequestModel(
                         beginOfReservation,
                         endDate,
                         owner,
                         room
                 );
+
+                when(roomRepository.existsByKey(any())).thenReturn(true);
 
                 sut.createReservation(request);
                 verify(repository).save(any());
