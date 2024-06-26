@@ -15,7 +15,7 @@ public interface Dao<K, T>{
     boolean existsByKey(K id);
 
     Map<K, T> findAll();
-    
+
     T resultSetToEntity(ResultSet resultSet) throws SQLException;
 }
 
