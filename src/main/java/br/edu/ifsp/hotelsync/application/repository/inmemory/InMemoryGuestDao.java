@@ -55,4 +55,9 @@ public class InMemoryGuestDao implements GuestDao {
     public Map<Long, Guest> findAllOwners() {
         return Map.of();
     }
+
+    @Override
+    public Map<Long, Guest> findAllOwnersByName(String name) {
+        return Map.of();
+    }
 }

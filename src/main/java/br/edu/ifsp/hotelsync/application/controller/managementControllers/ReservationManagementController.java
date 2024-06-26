@@ -1,14 +1,11 @@
 package br.edu.ifsp.hotelsync.application.controller.managementControllers;
 
-import br.edu.ifsp.hotelsync.application.controller.ProductController;
 import br.edu.ifsp.hotelsync.application.controller.ReservationController;
-import br.edu.ifsp.hotelsync.application.main.Main;
 import br.edu.ifsp.hotelsync.application.util.*;
 import br.edu.ifsp.hotelsync.application.view.Home;
-import br.edu.ifsp.hotelsync.domain.entities.product.Product;
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Payment;
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
-import br.edu.ifsp.hotelsync.domain.entities.reservation.ReservationStatus;
+import br.edu.ifsp.hotelsync.domain.usecases.reservation.find.FindAllReservationByOwnerUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.CheckInUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.CheckOutUseCase;
 import javafx.beans.property.SimpleStringProperty;
@@ -17,14 +14,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Pair;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
 
@@ -162,41 +159,6 @@ public class ReservationManagementController {
     private final NavigationHandler navHandler =
             new NavigationHandler();
 
-    @FXML
-    void handleExit(ActionEvent event) {
-        new ExitHandler().handleExit(event);
-    }
-
-    @FXML
-    void handleGuestPage(ActionEvent event) throws IOException{
-        navHandler.navigateToGuestManagementPage();
-    }
-
-    @FXML
-    void handleProductPage(ActionEvent actionEvent) throws IOException {
-        navHandler.navigateToProductManagementPage();
-    }
-
-    @FXML
-    void handleReportPage(ActionEvent event) throws IOException {
-        navHandler.navigateToReportPage();
-    }
-
-    @FXML
-    void handleReservationPage(ActionEvent event) throws IOException {
-        navHandler.navigateToReservationManagementPage();
-    }
-
-    @FXML
-    void handleRoomPage(ActionEvent event) throws IOException {
-        navHandler.navigateToRoomManagementPage();
-    }
-
-    @FXML
-    void handleCreateReservation(ActionEvent event) throws IOException {
-        navHandler.navigateToReservationPage();
-    }
-
     public void handleUpdateReservation(ActionEvent actionEvent) throws IOException {
         Reservation selectedItem = tableReservation.getSelectionModel().getSelectedItem();
         if (selectedItem == null) {
@@ -257,6 +219,51 @@ public class ReservationManagementController {
                 }
             });
         }
+    }
+
+    @FXML
+    public void handleImageClick(MouseEvent mouseEvent) {
+        Map<Long, Reservation> reservations = findAllReservationByOwnerUseCase.findAllByOwner(
+                new FindAllReservationByOwnerUseCase.RequestModel(searchReservation.getText())
+        );
+        searchReservation.setText("");
+        tableData.clear();
+        tableData.addAll(reservations.values());
+    }
+
+    @FXML
+    void handleExit(ActionEvent event) {
+        new ExitHandler().handleExit(event);
+    }
+
+    @FXML
+    void handleGuestPage(ActionEvent event) throws IOException{
+        navHandler.navigateToGuestManagementPage();
+    }
+
+    @FXML
+    void handleProductPage(ActionEvent actionEvent) throws IOException {
+        navHandler.navigateToProductManagementPage();
+    }
+
+    @FXML
+    void handleReportPage(ActionEvent event) throws IOException {
+        navHandler.navigateToReportPage();
+    }
+
+    @FXML
+    void handleReservationPage(ActionEvent event) throws IOException {
+        navHandler.navigateToReservationManagementPage();
+    }
+
+    @FXML
+    void handleRoomPage(ActionEvent event) throws IOException {
+        navHandler.navigateToRoomManagementPage();
+    }
+
+    @FXML
+    void handleCreateReservation(ActionEvent event) throws IOException {
+        navHandler.navigateToReservationPage();
     }
 }
 

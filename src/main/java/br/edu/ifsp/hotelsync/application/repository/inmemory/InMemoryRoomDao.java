@@ -51,6 +51,11 @@ public class InMemoryRoomDao implements RoomDao {
     }
 
     @Override
+    public Map<Long, Room> findAllByNumber(String number) {
+        return Map.of();
+    }
+
+    @Override
     public Room resultSetToEntity(ResultSet resultSet) throws SQLException {
         return null;
     }

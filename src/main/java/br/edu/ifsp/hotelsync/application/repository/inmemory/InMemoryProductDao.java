@@ -51,4 +51,9 @@ public class InMemoryProductDao implements ProductDao {
     public List<ConsumedProduct> findAllByIdReservation(Long id) {
         return List.of();
     }
+
+    @Override
+    public Map<Long, Product> findAllByName(String name) {
+        return Map.of();
+    }
 }

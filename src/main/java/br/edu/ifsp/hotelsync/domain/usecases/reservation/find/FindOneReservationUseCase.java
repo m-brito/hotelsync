@@ -1,6 +1,5 @@
 package br.edu.ifsp.hotelsync.domain.usecases.reservation.find;
 
-
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
 
 public interface FindOneReservationUseCase {

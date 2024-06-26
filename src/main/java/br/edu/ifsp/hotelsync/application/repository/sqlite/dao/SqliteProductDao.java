@@ -97,6 +97,24 @@ public class SqliteProductDao implements ProductDao {
     }
 
     @Override
+    public Map<Long, Product> findAllByName(String name) {
+        String sql = "SELECT * FROM Product p WHERE UPPER(p.description) LIKE ?";
+        Map<Long, Product> products = new HashMap<>();
+
+        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
+            stmt.setString(1, "%" + name.toUpperCase() + "%");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Product product = resultSetToEntity(rs);
+                products.put(product.getId(), product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return products;
+    }
+
+    @Override
     public List<ConsumedProduct> findAllByIdReservation(Long id) {
         List<ConsumedProduct> consumedProducts = new ArrayList<>();
         String sql = "SELECT p.*, cp.quantity FROM Product p JOIN ConsumedProduct cp ON p.id = cp.productId WHERE cp.reservationId = ?";

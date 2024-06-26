@@ -1,7 +1,6 @@
 package br.edu.ifsp.hotelsync.domain.persistence.dao;
 
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
-import br.edu.ifsp.hotelsync.domain.entities.room.Room;
 import br.edu.ifsp.hotelsync.domain.persistence.util.Dao;
 import br.edu.ifsp.hotelsync.domain.entities.report.records.CheckInReport;
 import br.edu.ifsp.hotelsync.domain.entities.report.records.CheckOutReport;
@@ -9,7 +8,7 @@ import br.edu.ifsp.hotelsync.domain.entities.report.records.DailyOccupationRepor
 import br.edu.ifsp.hotelsync.domain.entities.report.records.FinancialReport;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Map;
 
 public interface ReservationDao extends Dao<Long, Reservation> {
     DailyOccupationReport getDailyOccupationReport(LocalDate initialDate, LocalDate finalDate, RoomDao roomRepository);
@@ -20,4 +19,5 @@ public interface ReservationDao extends Dao<Long, Reservation> {
 
     FinancialReport getFinancialReport(LocalDate initialDate, LocalDate finalDate);
 
+    Map<Long, Reservation> findAllByOwner(String name);
 }

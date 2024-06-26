@@ -48,6 +48,11 @@ public class InMemoryReservationDao implements ReservationDao {
     }
 
     @Override
+    public Map<Long, Reservation> findAllByOwner(String name) {
+        return Map.copyOf(reservations);
+    }
+
+    @Override
     public Reservation resultSetToEntity(ResultSet resultSet) throws SQLException {
         return null;
     }
