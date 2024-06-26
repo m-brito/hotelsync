@@ -106,6 +106,23 @@ public class SqliteRoomDao implements RoomDao {
     }
 
     @Override
+    public Map<Long, Room> findAllByNumber(int number) {
+        String sql = "SELECT * FROM Room WHERE number LIKE ?";
+        Map<Long, Room> rooms = new HashMap<>();
+        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
+            stmt.setString(1, "%" + number + "%");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Room room = resultSetToEntity(rs);
+                rooms.put(room.getId(), room);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rooms;
+    }
+
+    @Override
     public Map<Long, Room> findAllAvailable(LocalDate startDate, LocalDate endDate) {
         String sql = """
                 SELECT *
