@@ -137,6 +137,24 @@ public class SqliteGuestDao implements GuestDao {
     }
 
     @Override
+    public Map<Long, Guest> findAllOwnersByName(String name) {
+        String sql = "SELECT * FROM Guest WHERE phone != '' AND city != '' AND road != '' AND state != '' AND cep != '' AND district != '' AND UPPER(name) LIKE ?";
+        Map<Long, Guest> guests = new LinkedHashMap<>();
+
+        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
+            stmt.setString(1, name.toUpperCase());
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Guest guest = resultSetToEntity(rs);
+                guests.put(guest.getId(), guest);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return guests;
+    }
+
+    @Override
     public List<Guest> findAllByIdReservation(Long id) {
         List<Guest> guests = new ArrayList<>();
         String sql = "SELECT g.* FROM Guest g JOIN GuestReservation gr ON g.id = gr.guestId WHERE gr.reservationId = ?";
