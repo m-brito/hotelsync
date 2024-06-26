@@ -64,4 +64,9 @@ public class InMemoryRoomDao implements RoomDao {
     public int getTotalRooms() {
         return rooms.size();
     }
+
+    @Override
+    public boolean existsByNumber(int number) {
+        return rooms.values().stream().anyMatch(room -> room.getNumber() == number);
+    }
 }

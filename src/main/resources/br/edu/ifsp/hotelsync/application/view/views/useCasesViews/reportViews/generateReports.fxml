@@ -133,7 +133,7 @@
                   <Insets left="35.0" />
                </padding>
             </Button>
-            <Button id="createRoomButton" fx:id="dailyOcuppationButton" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="423.0" layoutY="535.0" mnemonicParsing="false" onAction="#handleDailyOcuppationReport" prefHeight="42.0" prefWidth="201.0" style="-fx-background-color: #181818;" stylesheets="@../../../css/home.css" text="Daily Occupation Report">
+            <Button id="createRoomButton" fx:id="dailyOccupationButton" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="22.0" layoutX="423.0" layoutY="535.0" mnemonicParsing="false" onAction="#handleDailyOcuppationReport" prefHeight="42.0" prefWidth="201.0" style="-fx-background-color: #181818;" stylesheets="@../../../css/home.css" text="Daily Occupation Report">
                <padding>
                   <Insets left="35.0" />
                </padding>
