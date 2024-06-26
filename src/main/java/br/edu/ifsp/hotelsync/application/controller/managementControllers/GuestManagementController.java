@@ -7,9 +7,7 @@ import br.edu.ifsp.hotelsync.application.util.NavigationHandler;
 import br.edu.ifsp.hotelsync.application.util.UIMode;
 import br.edu.ifsp.hotelsync.application.view.Home;
 import br.edu.ifsp.hotelsync.domain.entities.guest.Guest;
-import br.edu.ifsp.hotelsync.domain.entities.product.Product;
 import br.edu.ifsp.hotelsync.domain.usecases.guest.find.FindAllOwnerByNameUseCase;
-import br.edu.ifsp.hotelsync.domain.usecases.product.find.FindAllProductByNameUseCase;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,7 +19,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.Map;
 
 import static br.edu.ifsp.hotelsync.application.main.Main.*;

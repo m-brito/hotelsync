@@ -1,14 +1,10 @@
 package br.edu.ifsp.hotelsync.application.controller.managementControllers;
 
-import br.edu.ifsp.hotelsync.application.controller.ProductController;
 import br.edu.ifsp.hotelsync.application.controller.ReservationController;
-import br.edu.ifsp.hotelsync.application.main.Main;
 import br.edu.ifsp.hotelsync.application.util.*;
 import br.edu.ifsp.hotelsync.application.view.Home;
-import br.edu.ifsp.hotelsync.domain.entities.product.Product;
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Payment;
 import br.edu.ifsp.hotelsync.domain.entities.reservation.Reservation;
-import br.edu.ifsp.hotelsync.domain.entities.reservation.ReservationStatus;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.find.FindAllReservationByOwnerUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.CheckInUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.reservation.update.interfaces.CheckOutUseCase;
@@ -20,18 +16,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.util.Pair;
 
-import java.awt.*;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 
 import static br.edu.ifsp.hotelsync.application.main.Main.*;
