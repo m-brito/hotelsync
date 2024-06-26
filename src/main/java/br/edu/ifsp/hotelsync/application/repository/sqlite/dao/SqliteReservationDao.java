@@ -34,16 +34,11 @@ public class SqliteReservationDao implements ReservationDao {
         }
 
         String sql = """
-                    SELECT date, (COUNT(*) * 100.0 / (SELECT COUNT(*) FROM Room)) AS occupancy_percentage
-                    FROM (
-                        SELECT checkInDate AS date
-                        FROM Reservation
-                        WHERE checkInDate BETWEEN ? AND ?
-                        AND checkOutDate IS NULL
-                        OR checkInDate BETWEEN ? AND ? AND checkOutDate BETWEEN checkInDate+1 AND ?
-                    ) AS dates
-                    GROUP BY date
-                    ORDER BY date;
+                    SELECT checkInDate, checkOutDate
+                    FROM Reservation
+                    WHERE checkInDate BETWEEN ? AND ?
+                    AND checkOutDate IS NULL
+                    OR checkInDate BETWEEN ? AND ? AND checkOutDate BETWEEN checkInDate+1 AND ?
                 """;
 
         try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
