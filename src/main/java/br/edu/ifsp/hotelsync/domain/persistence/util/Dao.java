@@ -15,9 +15,7 @@ public interface Dao<K, T>{
     boolean existsByKey(K id);
 
     Map<K, T> findAll();
-
-    void deleteByKey(K id);
-
+    
     T resultSetToEntity(ResultSet resultSet) throws SQLException;
 }
 
