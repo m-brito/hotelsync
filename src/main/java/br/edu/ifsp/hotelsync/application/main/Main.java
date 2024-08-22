@@ -34,6 +34,20 @@ import br.edu.ifsp.hotelsync.domain.usecases.room.create.CreateRoomUseCaseImpl;
 import br.edu.ifsp.hotelsync.domain.usecases.room.find.*;
 import br.edu.ifsp.hotelsync.domain.usecases.room.update.UpdateRoomUseCase;
 import br.edu.ifsp.hotelsync.domain.usecases.room.update.UpdateRoomUseCaseImpl;
+import br.edu.ifsp.hotelsync.domain.usecases.guest.find.FindAllGuestUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.guest.find.FindAllOwnerUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.guest.find.FindAllOwnerByNameUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.guest.find.FindOneGuestUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.product.find.FindAllProductUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.product.find.FindAllProductByNameUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.product.find.FindOneProductUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.reservation.find.FindAllReservationUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.reservation.find.FindAllReservationByOwnerUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.reservation.find.FindOneReservationUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.room.find.FindAllRoomUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.room.find.FindAllRoomByNumberUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.room.find.FindAllAvailableRoomUseCase;
+import br.edu.ifsp.hotelsync.domain.usecases.room.find.FindOneRoomUseCase;
 
 public class Main {
     public static CreateGuestUseCase createGuestUseCase;
